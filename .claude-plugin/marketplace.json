@@ -12,9 +12,14 @@
       "name": "ai-design",
       "source": "./plugins/ai-design",
       "description": "polish-writing and polish-ui skills, the bundled design system \"Clear\", and a style check after every edit.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "category": "productivity",
-      "tags": ["writing", "ui", "design-system", "style"]
+      "tags": [
+        "writing",
+        "ui",
+        "design-system",
+        "style"
+      ]
     }
   ]
 }

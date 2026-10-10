@@ -10,6 +10,8 @@ AI가 쓴 글과 AI가 만든 화면에 남는 흔적을 걸러 내는 도구 �
 | 디자인 시스템 Clear | 라이트(흰 바탕, 파란 강조색 하나)와 다크(그래파이트) 토큰, `ds-` 컴포넌트, 복사 버튼, 테마 전환 |
 | 스타일 검사 | 규칙 약 55개(한국어·영어 글, UI 마크업). 표준 라이브러리만 쓰는 Python 스크립트 하나. 수정 직후 훅, 명령줄, pre-commit, CI에서 같은 규칙으로 동작 |
 
+**소개 페이지:** https://jungrok5.github.io/ai-design/ (이 레포의 디자인 시스템과 글 기준으로 만들었습니다. 원본은 [site/](site/))
+
 기준 전문은 [docs/standard.md](docs/standard.md)에 있습니다. 컴포넌트 예시는 [examples/index.html](examples/index.html)을
 브라우저로 열어 확인합니다.
 

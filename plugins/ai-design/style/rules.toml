@@ -77,7 +77,7 @@ id = "ko-chatbot-residue"
 lang = "ko"
 severity = "error"
 pattern = '도움이\s?되(셨|었)(길|으면)|궁금한\s?점이\s?있으시면\s?언제든|좋은\s?질문|물론입니다!'
-message = "챗봇 말투가 남았어요"
+message = "챗봇 말투가 남음"
 suggest = "지우세요"
 
 [[rule]]
