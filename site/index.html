@@ -3,90 +3,65 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ai-design: 글과 화면의 AI 티를 걸러 내는 스킬과 검사</title>
-<meta name="description" content="Claude Code 플러그인, pre-commit 훅, 명령줄 검사로 글과 화면에 남는 AI 흔적을 걸러 냅니다. 기본 디자인 시스템 Clear 포함.">
+<title>ai-design: AI 티 나는 글과 화면을 찾는 검사기와 스킬</title>
+<meta name="description" content="과장 수식어, 번역투, 보라색 그라데이션처럼 AI가 쓴 티를 내는 표현을 줄 번호와 함께 찾는 검사기와 Claude Code 스킬입니다.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="design/tokens.css">
 <link rel="stylesheet" href="design/components.css">
 <script src="design/theme.js"></script>
 <style>
-/* ai-design's own page, built only from its design system "Clear". Tokens only; layout: top bar, two-column hero,
-   sections as a side column (number, title, lead) and a main column, separated by whitespace and hairlines. */
-body{font-size:17px}
-.container{max-width:1200px;margin:0 auto;padding-inline:var(--space-5)}
+/* ai-design's own page, built only from its design system "Clear". Sample inputs and outputs are inserted by
+   site/build.sh from site/samples/, so what the page shows is what the checker printed. */
+.container{max-width:1160px;margin:0 auto;padding-inline:var(--space-5)}
+.narrow{max-width:760px}
 @media (max-width:719px){.container{padding-inline:var(--space-4)}}
 
 .bar{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:var(--border)}
-.bar .container{display:flex;align-items:center;gap:var(--space-6);min-height:64px}
-.brand{font-family:var(--font-mono);font-weight:500;font-size:16px;color:var(--fg);text-decoration:none;white-space:nowrap}
+.bar .container{display:flex;align-items:center;gap:var(--space-6);min-height:60px}
+.brand{font-family:var(--font-mono);font-weight:500;color:var(--fg);text-decoration:none}
 .bar nav{display:flex;gap:var(--space-5)}
-.bar nav a{color:var(--muted);text-decoration:none;font-size:15px;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}
+.bar nav a{color:var(--muted);text-decoration:none;font-size:var(--text-s);min-height:44px;display:inline-flex;align-items:center}
 .bar nav a:hover{color:var(--fg)}
-.bar-actions{margin-left:auto;display:flex;gap:var(--space-2);flex:none}
-@media (max-width:960px){.bar nav{display:none}}
-@media (max-width:480px){.bar-actions a.ds-btn{display:none}}
+.bar-actions{margin-left:auto;display:flex;gap:var(--space-2)}
+@media (max-width:900px){.bar nav{display:none}}
 
-.hero{padding:var(--space-8) 0 var(--space-7);border-bottom:var(--border)}
-.hero .container{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--space-8);align-items:start}
-@media (max-width:960px){.hero .container{grid-template-columns:minmax(0,1fr);gap:var(--space-6)}}
-.hero-copy{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-5);min-width:0}
-.hero h1{font-size:clamp(34px,4.6vw,52px);line-height:1.2;letter-spacing:-.025em}
-.hero .ds-lede{font-size:19px;line-height:1.75}
-.facts{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-5);margin:0;padding:0;list-style:none;font-size:15px;color:var(--muted)}
-.facts b{color:var(--fg);font-variant-numeric:tabular-nums}
-.label{font-size:14px;font-weight:700;margin-bottom:var(--space-2)}
-.hero-steps .cap{font-size:14px;font-weight:700;color:var(--subtle);margin-bottom:var(--space-2)}
-.hero-steps .ds-steps > li{padding:14px 0}
-.hero-steps h3{font-size:17px;font-weight:500}
-.hero-steps .is-human h3{font-weight:700}
+.hero{padding:var(--space-8) 0 var(--space-7)}
+.hero .container{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:var(--space-7);align-items:start}
+@media (max-width:960px){.hero .container{grid-template-columns:minmax(0,1fr)}}
+.copy{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-5);min-width:0}
+.hero h1{font-size:var(--text-h1);line-height:1.2;letter-spacing:-.025em}
+.req{font-size:var(--text-s);color:var(--muted)}
+.cap{font-size:var(--text-s);font-weight:700;color:var(--subtle);margin-bottom:var(--space-2)}
+.io{display:grid;gap:var(--space-4);min-width:0}
+.sample{margin:0;background:var(--surface);border:var(--border);border-radius:var(--radius-l);padding:var(--space-4);
+  font:var(--text-s)/1.7 var(--font-mono);white-space:pre-wrap;overflow-wrap:anywhere}
 
-.sec{padding:var(--space-8) 0;border-bottom:var(--border);scroll-margin-top:64px}
-.sec .container{display:grid;grid-template-columns:280px minmax(0,1fr);gap:var(--space-7)}
-@media (max-width:960px){.sec .container{grid-template-columns:minmax(0,1fr);gap:var(--space-5)}}
-.sec-side{display:grid;gap:var(--space-3);align-content:start;position:sticky;top:96px}
-@media (max-width:960px){.sec-side{position:static}}
-.num{font-family:var(--font-mono);font-size:14px;color:var(--accent)}
-.sec-side h2{font-size:30px;line-height:1.3}
-.sec-side p{color:var(--muted);font-size:16px}
-.sec-main{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-6);min-width:0}
-.sec-main > p{max-width:var(--measure)}
-.sec-main > h3{font-size:21px;margin-top:var(--space-4)}
-.sec-main > h3 + p{margin-top:calc(-1 * var(--space-3))}
+section.block{padding:var(--space-7) 0;border-top:var(--border);scroll-margin-top:60px}
+.block h2{font-size:var(--text-h2);margin-bottom:var(--space-4)}
+.block .container > p, .prose p{max-width:var(--measure)}
+.prose{display:grid;gap:var(--space-4)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-6);align-items:start}
+@media (max-width:900px){.split{grid-template-columns:minmax(0,1fr)}}
+.stack{display:grid;gap:var(--space-4);min-width:0}
 
-.parts{list-style:none;margin:0;padding:0}
-.parts li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:var(--space-4);padding:var(--space-5) 0;border-bottom:var(--border)}
-.parts li:first-child{padding-top:0}
-.parts li:last-child{border-bottom:0}
-.parts .n{font-size:32px;font-weight:700;line-height:1;color:var(--line-strong)}
-.parts h3{font-size:20px;margin-bottom:var(--space-1)}
-.parts p{color:var(--muted)}
-.parts .files{margin-top:var(--space-2);font-family:var(--font-mono);font-size:13.5px;color:var(--subtle);overflow-wrap:anywhere}
+.ways{margin:0;display:grid;gap:0}
+.ways > div{display:grid;grid-template-columns:200px minmax(0,1fr);gap:var(--space-2) var(--space-5);padding:var(--space-4) 0;border-top:var(--border)}
+@media (max-width:719px){.ways > div{grid-template-columns:minmax(0,1fr)}}
+.ways dt{font-weight:700}
+.ways dd{margin:0;display:grid;gap:var(--space-3);min-width:0}
 
-.ds-table{font-size:16px;min-width:620px}
-.ds-table th,.ds-table td{padding:14px 24px 14px 0}
-.ds-table thead th{font-size:14px}
-.ds-table code{white-space:nowrap}
-.before{color:var(--danger)}
-.after{color:var(--ok)}
-
-.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--space-4)}
-.sw{display:grid;gap:var(--space-2);font-size:14px;color:var(--muted)}
-.sw span{height:56px;border-radius:var(--radius-m);border:var(--border)}
-.sw code{font-size:13px}
-.demo{display:grid;gap:var(--space-4);padding:var(--space-5);border-radius:var(--radius-l);background:var(--surface)}
-.row{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center}
-
-footer{padding:var(--space-6) 0 var(--space-8);font-size:var(--text-s);color:var(--subtle)}
+.limits{margin:0;padding-left:1.2em;display:grid;gap:var(--space-3);max-width:var(--measure)}
+footer{padding:var(--space-6) 0 var(--space-8);border-top:var(--border);font-size:var(--text-s);color:var(--subtle)}
 </style>
 </head>
 <body>
 <header class="bar">
   <div class="container">
     <a class="brand" href="#top">ai-design</a>
-    <nav aria-label="주요 절"><a href="#parts">구성</a><a href="#install">설치</a><a href="#writing">글 기준</a><a href="#ui">화면 기준</a><a href="#rules">검사 규칙</a></nav>
+    <nav aria-label="페이지 목차"><a href="#why">만든 이유</a><a href="#ui">화면 검사</a><a href="#install">설치</a><a href="#limits">한계</a></nav>
     <div class="bar-actions">
       <button class="ds-btn theme-toggle" type="button" aria-pressed="false">다크 모드</button>
-      <a class="ds-btn" href="https://github.com/jungrok5/ai-design">GitHub에서 보기</a>
+      <a class="ds-btn" href="https://github.com/jungrok5/ai-design">GitHub</a>
     </div>
   </div>
 </header>
@@ -94,192 +69,123 @@ footer{padding:var(--space-6) 0 var(--space-8);font-size:var(--text-s);color:var
 <main lang="ko" id="top">
 <section class="hero">
   <div class="container">
-    <div class="hero-copy">
-      <h1>글과 화면에 남는 AI 흔적을 수정 직후에 걸러 냅니다</h1>
-      <p class="ds-lede">AI가 쓴 글과 만든 화면은 내용이 정확해도 과장된 수식어, 번역투, 보라색 그라데이션 같은 흔적으로 드러납니다. ai-design은 이 흔적을 규칙으로 검사하고, 규칙으로 판단할 수 없는 부분은 두 스킬이 맡습니다. 어느 프로젝트에나 붙일 수 있습니다.</p>
-      <ul class="facts">
-        <li>스킬 <b>2</b></li><li>검사 규칙 <b>57</b></li><li>Python 표준 라이브러리만 사용</li><li>MIT</li>
-      </ul>
+    <div class="copy">
+      <h1>AI 티 나는 표현을 찾아 줄 번호와 함께 알립니다</h1>
+      <p class="ds-lede">과장 수식어, 번역투, 보라색 그라데이션처럼 AI가 쓴 티를 내는 표현을 정규식 규칙으로 검사합니다. Claude Code에서는 파일을 고칠 때마다 결과가 AI에게 전달됩니다. AI는 출력을 보고 같은 턴에서 고칩니다. 규칙으로 판단할 수 없는 문맥은 스킬 두 개(<code>polish-writing</code>, <code>polish-ui</code>)가 맡습니다.</p>
+      <p class="req">필요한 것: Python 3.11 이상. 검사 대상: Markdown, HTML, CSS, JSX/TSX, Vue, Svelte. 라이선스: MIT.</p>
       <div>
-        <div class="label">Claude Code에 설치</div>
+        <div class="cap">Claude Code에 설치</div>
         <div class="ds-cmd"><pre>claude plugin marketplace add jungrok5/ai-design
 claude plugin install ai-design@ai-design</pre><button type="button">복사</button></div>
       </div>
     </div>
-    <div class="hero-steps">
-      <div class="cap">파일을 수정할 때마다 일어나는 일</div>
-      <ol class="ds-steps">
-        <li><div><h3>AI가 글이나 화면 파일을 수정</h3></div></li>
-        <li><div><h3>훅이 규칙 57개로 검사, 약 0.1초</h3></div></li>
-        <li><div><h3>위반 내용을 AI에게 반환, 차단하지 않음</h3></div></li>
-        <li><div><h3>AI가 그 자리에서 수정</h3></div></li>
-        <li class="is-human"><div><h3>의도한 표현은 사람이 예외로 표시</h3></div><span class="ds-who">사람</span></li>
-        <li><div><h3>커밋과 PR에서 pre-commit과 CI가 같은 규칙으로 재검사</h3></div></li>
-      </ol>
+    <div class="io">
+      <div>
+        <div class="cap">입력: draft.md</div>
+<!-- style-ignore-start -->
+<pre class="sample"><!--SAMPLE:draft.md--></pre>
+<!-- style-ignore-end -->
+      </div>
+      <div>
+        <div class="cap">실제 출력</div>
+<pre class="ds-output"><span class="ds-prompt">$ python3 style_check.py draft.md</span>
+<!--OUTPUT:draft--></pre>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="sec" id="parts">
-  <div class="container">
-    <div class="sec-side">
-      <span class="num">01</span>
-      <h2>구성</h2>
-      <p>기계로 판별할 수 있는 것은 검사 규칙으로, 판단은 스킬로 나눴습니다. 규칙이 잡는 내용을 스킬에 다시 적지 않습니다.</p>
+<section class="block" id="why">
+  <div class="container narrow prose">
+    <h2>만든 이유</h2>
+    <p><!-- style-ignore: quotes the phrases that started this --> 팀 템플릿 레포 <a href="https://github.com/jungrok5/ai-code-collaboration-best-practices">ai-code-collaboration-best-practices</a>의 문서와 해설 페이지를 AI 도구로 쓰다 보니, 리뷰 때마다 같은 지적이 반복됐습니다. 문서에 해요체와 합니다체가 섞이고, "일이 흘러가요" 같은 문장이 들어가고, 카드 왼쪽에 색 띠가 붙었습니다.</p>
+    <p>반복된 지적 가운데 정규식으로 잡히는 것은 규칙으로 옮겼습니다. 문맥을 봐야 하는 지적은 스킬 문서에 적었습니다. 다른 프로젝트에서도 쓰려고 2026년 10월 이 레포로 분리했습니다. 아직 첫 버전이고, 위 템플릿 레포에서만 써 봤습니다.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container split">
+    <div class="prose">
+      <h2>Claude Code 안에서의 순서</h2>
+      <p>훅은 수정을 막지 않습니다. 결과를 AI에게 알리기만 하고, 고칠지는 AI와 사람이 정합니다. 일부러 인용한 나쁜 예시는 그 줄에 <code>style-ignore</code>를 표시합니다.</p>
+      <p>5–18 KB 파일 하나를 검사하는 데 0.07–0.11초가 걸렸습니다(4코어 클라우드 VM, Python 3.13, 5회 실행의 중앙값).</p>
     </div>
-    <div class="sec-main">
-      <ol class="parts">
-        <li><span class="n">1</span><div><h3>polish-writing 스킬</h3><p>한국어·영어 글을 다듬습니다. 문서는 합니다체 하나로 쓰고, 사실과 숫자를 지어내지 않으며, 내용에 맞는 형식(문단, 명령, 도식, 표)을 고릅니다.</p><div class="files">plugins/ai-design/skills/polish-writing/SKILL.md</div></div></li>
-        <li><span class="n">2</span><div><h3>polish-ui 스킬</h3><p>화면 작업을 디자인 시스템에서 시작합니다. 프로젝트에 토큰이 있으면 그것을, 없으면 Clear를 씁니다. 접근성과 한글 타이포그래피 최소 기준을 지킵니다.</p><div class="files">plugins/ai-design/skills/polish-ui/SKILL.md</div></div></li>
-        <li><span class="n">3</span><div><h3>디자인 시스템 Clear</h3><p>라이트와 다크 토큰, <code>ds-</code> 컴포넌트, 복사 버튼, 테마 전환입니다. 이 페이지도 Clear만으로 만들었습니다.</p><div class="files">plugins/ai-design/skills/polish-ui/design/</div></div></li>
-        <li><span class="n">4</span><div><h3>스타일 검사</h3><p>스크립트 하나가 규칙 57개를 검사합니다. Claude Code 훅, pre-commit, 명령줄, CI에서 같은 규칙으로 동작합니다.</p><div class="files">plugins/ai-design/style/style_check.py · rules.toml</div></div></li>
-      </ol>
+    <ol class="ds-steps">
+      <li><div><h3>AI가 글이나 화면 파일을 수정</h3></div></li>
+      <li><div><h3>PostToolUse 훅이 <code>style_check.py</code> 실행</h3></div></li>
+      <li><div><h3>위반 위치와 고칠 방향을 AI에게 전달</h3></div></li>
+      <li><div><h3>AI가 같은 턴에서 수정</h3></div></li>
+      <li class="is-human"><div><h3>의도한 표현이면 사람이 <code>style-ignore</code> 표시</h3></div><span class="ds-who">사람</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="block" id="ui">
+  <div class="container stack">
+    <h2>화면 코드도 같은 방식으로 검사합니다</h2>
+    <p>AI 코딩 도구가 자주 만드는 첫 화면을 그대로 넣은 결과입니다. 검사기는 색과 모양을 고르지 않습니다. 고를 때는 <code>polish-ui</code> 스킬이 프로젝트의 디자인 토큰을 먼저 찾고, 토큰이 없으면 이 레포의 기본 디자인 시스템 Clear를 씁니다. 이 페이지도 Clear의 토큰과 컴포넌트만 씁니다(<a href="https://github.com/jungrok5/ai-design/blob/main/site/index.html">소스</a>).</p>
+    <div class="split">
+      <div>
+        <div class="cap">입력: card.html</div>
+<!-- style-ignore-start -->
+<pre class="sample"><!--SAMPLE:card.html--></pre>
+<!-- style-ignore-end -->
+      </div>
+      <div>
+        <div class="cap">실제 출력</div>
+<pre class="ds-output"><span class="ds-prompt">$ python3 style_check.py card.html</span>
+<!--OUTPUT:card--></pre>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="sec" id="install">
-  <div class="container">
-    <div class="sec-side">
-      <span class="num">02</span>
-      <h2>설치</h2>
-      <p>쓰는 도구에 맞는 방법 하나를 고릅니다. 팀 프로젝트라면 Claude Code 등록과 pre-commit을 함께 쓰면 사람의 커밋과 다른 AI 도구의 변경도 같은 기준으로 검사됩니다.</p>
-    </div>
-    <div class="sec-main">
-      <h3>Claude Code, 팀 전체에 자동 적용</h3>
-      <p>프로젝트의 <code>.claude/settings.json</code>에 등록하면 팀원이 레포를 열 때 플러그인이 켜집니다.</p>
-      <div class="ds-cmd"><pre>{
+<section class="block" id="install">
+  <div class="container stack">
+    <h2>설치</h2>
+    <p>팀 프로젝트라면 Claude Code 등록과 pre-commit을 같이 씁니다. pre-commit은 사람이 한 커밋과 다른 AI 도구가 만든 변경도 검사합니다.</p>
+    <dl class="ways">
+      <div><dt>Claude Code, 팀 전체</dt><dd><span>프로젝트의 <code>.claude/settings.json</code>에 등록하면 팀원이 레포를 열 때 플러그인이 켜집니다.</span>
+<div class="ds-cmd"><pre>{
   "extraKnownMarketplaces": {
     "ai-design": { "source": { "source": "github", "repo": "jungrok5/ai-design" } }
   },
   "enabledPlugins": { "ai-design@ai-design": true }
-}</pre><button type="button">복사</button></div>
-      <h3>pre-commit</h3>
-      <p><code>.pre-commit-config.yaml</code>에 추가합니다. Python 3.11 이상이 필요하고, <code>rev</code>는 1.0.0 커밋입니다.</p>
-      <div class="ds-cmd"><pre>- repo: https://github.com/jungrok5/ai-design
-  rev: d8c880fc9e08c0edc6c8850873009e22776c5200
+}</pre><button type="button">복사</button></div></dd></div>
+      <div><dt>pre-commit</dt><dd><span><code>.pre-commit-config.yaml</code>에 추가합니다. <code>rev</code>는 고정할 커밋 SHA입니다. 최신 값은 <code>pre-commit autoupdate</code>로 받습니다.</span>
+<div class="ds-cmd"><pre>- repo: https://github.com/jungrok5/ai-design
+  rev: <!--REV-->
   hooks:
-    - id: ai-design-style</pre><button type="button">복사</button></div>
-      <h3>명령줄과 CI</h3>
-      <p><code>error</code>가 있으면 종료 코드 1을 돌려주므로 CI 단계로 그대로 씁니다.</p>
-      <div class="ds-cmd"><pre>git clone --depth 1 https://github.com/jungrok5/ai-design ~/.ai-design
-python3 ~/.ai-design/plugins/ai-design/style/style_check.py README.md docs/*.md</pre><button type="button">복사</button></div>
-      <h3>Cursor, Copilot 등 다른 도구</h3>
-      <div class="ds-table-wrap"><table class="ds-table">
-        <thead><tr><th>도구</th><th>복사할 파일</th><th>위치</th></tr></thead>
-        <tbody>
-          <tr><td>AGENTS.md를 읽는 도구</td><td><a href="https://github.com/jungrok5/ai-design/blob/main/adapters/AGENTS.snippet.md"><code>adapters/AGENTS.snippet.md</code></a></td><td>프로젝트 <code>AGENTS.md</code>에 붙여 넣기</td></tr>
-          <tr><td>Cursor</td><td><a href="https://github.com/jungrok5/ai-design/blob/main/adapters/cursor/ai-design.mdc"><code>adapters/cursor/ai-design.mdc</code></a></td><td><code>.cursor/rules/</code></td></tr>
-          <tr><td>GitHub Copilot</td><td><a href="https://github.com/jungrok5/ai-design/blob/main/adapters/copilot/ai-design.instructions.md"><code>adapters/copilot/ai-design.instructions.md</code></a></td><td><code>.github/instructions/</code></td></tr>
-        </tbody>
-      </table></div>
-    </div>
+    - id: ai-design-style</pre><button type="button">복사</button></div></dd></div>
+      <div><dt>명령줄, CI</dt><dd><span><code>error</code>가 하나라도 있으면 종료 코드 1을 돌려줍니다.</span>
+<div class="ds-cmd"><pre>git clone --depth 1 https://github.com/jungrok5/ai-design ~/.ai-design
+python3 ~/.ai-design/plugins/ai-design/style/style_check.py README.md docs/*.md</pre><button type="button">복사</button></div></dd></div>
+      <div><dt>Cursor, Copilot, AGENTS.md</dt><dd><span><a href="https://github.com/jungrok5/ai-design/tree/main/adapters">adapters/</a>의 규칙 파일을 각 도구의 규칙 폴더에 복사합니다. 이 도구들에는 수정 직후 훅이 없으므로 pre-commit과 함께 씁니다.</span></dd></div>
+    </dl>
   </div>
 </section>
 
-<section class="sec" id="writing">
-  <div class="container">
-    <div class="sec-side">
-      <span class="num">03</span>
-      <h2>글 기준</h2>
-      <p>문서는 합니다체 하나로, 목록과 표는 개조식으로 씁니다. 칭찬하는 형용사는 숫자, 조건, 동작으로 바꾸고, 바꿀 수 없으면 지웁니다.</p>
-    </div>
-    <div class="sec-main">
-      <!-- style-ignore-start -->
-      <div class="ds-table-wrap"><table class="ds-table">
-        <thead><tr><th>전</th><th>후</th><th>걸리는 규칙</th></tr></thead>
-        <tbody>
-          <tr><td class="before">혁신적인 AI 기반 분석으로 브랜드 경쟁력을 강화하세요</td><td class="after">URL을 입력하면 AI 검색 답변에 해당 사이트가 몇 번 등장하는지 보여 줍니다</td><td><code>ko-hype</code></td></tr>
-          <tr><td class="before">이 API를 통해 결제 정보를 조회할 수 있습니다</td><td class="after">이 API로 결제 정보를 조회합니다</td><td><code>ko-tonghae</code></td></tr>
-          <tr><td class="before">결론적으로 Redis는 최적의 선택입니다</td><td class="after">Redis는 읽기 응답이 1 ms 이하이므로 세션 저장소로 사용합니다</td><td><code>ko-closing-formula</code></td></tr>
-          <tr><td class="before">라벨만 붙이면 일이 알아서 흘러가요</td><td class="after">라벨을 지정하면 워크플로가 상태를 변경하고 구현을 시작합니다</td><td><code>ko-personify</code>, <code>ko-haeyo</code></td></tr>
-          <tr><td class="before">걱정하지 마세요, 어렵지 않아요</td><td class="after">(삭제)</td><td><code>ko-reader-talk</code></td></tr>
-        </tbody>
-      </table></div>
-      <!-- style-ignore-end -->
-      <h3>내용 형식</h3>
-      <p>같은 사실을 문단, 표, 도식에 반복하지 않습니다. 내용의 종류가 형식을 정합니다.</p>
-      <div class="ds-table-wrap"><table class="ds-table">
-        <thead><tr><th>내용</th><th>형식</th></tr></thead>
-        <tbody>
-          <tr><td>이유와 설명</td><td>짧은 문단</td></tr>
-          <tr><td>독자가 실행할 것</td><td>복사 버튼이 있는 명령 블록</td></tr>
-          <tr><td>3단계 이상의 순서, 행위자가 둘 이상인 흐름</td><td>도식 먼저, 문단은 조건과 예외만</td></tr>
-          <tr><td>비교와 기준</td><td>표</td></tr>
-        </tbody>
-      </table></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="ui">
-  <div class="container">
-    <div class="sec-side">
-      <span class="num">04</span>
-      <h2>화면 기준</h2>
-      <p>AI가 만든 화면이 서로 비슷해 보이는 이유는 매번 기본값에서 색과 모양을 새로 정하기 때문입니다. 그래서 화면은 토큰과 컴포넌트에서 시작합니다.</p>
-    </div>
-    <div class="sec-main">
-      <div class="swatches">
-        <div class="sw"><span style="background:var(--bg)"></span><code>--bg</code></div>
-        <div class="sw"><span style="background:var(--fg)"></span><code>--fg</code></div>
-        <div class="sw"><span style="background:var(--accent)"></span><code>--accent</code></div>
-        <div class="sw"><span style="background:var(--accent-soft)"></span><code>--accent-soft</code></div>
-        <div class="sw"><span style="background:var(--surface)"></span><code>--surface</code></div>
-        <div class="sw"><span style="background:var(--code-bg)"></span><code>--code-bg</code></div>
-      </div>
-      <p>위 색은 지금 테마의 값입니다. 상단의 다크 모드 버튼을 누르면 그래파이트 값으로 바뀝니다.</p>
-      <div class="demo">
-        <div class="row"><button class="ds-btn ds-btn--primary" type="button">API 키 발급</button><button class="ds-btn" type="button">취소</button></div>
-        <div class="row"><span class="ds-badge">기본</span><span class="ds-badge ds-badge--accent">사람</span><span class="ds-badge ds-badge--ok">통과</span><span class="ds-badge ds-badge--warn">경고</span><span class="ds-badge ds-badge--danger">차단</span></div>
-        <div class="ds-note"><b>메모</b><span>놓치면 안 되는 한 가지만 적습니다. 그림자와 옆 색 띠 없이 바탕색으로 구분합니다.</span></div>
-      </div>
-      <!-- style-ignore-start -->
-      <div class="ds-table-wrap"><table class="ds-table">
-        <thead><tr><th>하지 않는 것</th><th>대신 하는 것</th></tr></thead>
-        <tbody>
-          <tr><td>보라·남색 그라데이션, 글자에 그라데이션</td><td>강조색 하나를 동작과 상태에만</td></tr>
-          <tr><td>모든 곳에 큰 모서리와 같은 그림자</td><td>크기별 모서리 6·8·10 px, 1 px 선</td></tr>
-          <tr><td>카드 왼쪽의 색 세로 띠</td><td>테두리, 바탕 단계, 제목으로 구분</td></tr>
-          <tr><td>이모지 아이콘, 모든 링크 끝의 화살표</td><td>SVG 아이콘, 동작을 말하는 라벨</td></tr>
-          <tr><td>토큰 밖의 색상값과 글꼴 지정</td><td><code>var(--accent)</code>, <code>var(--font-sans)</code></td></tr>
-        </tbody>
-      </table></div>
-      <!-- style-ignore-end -->
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="rules">
-  <div class="container">
-    <div class="sec-side">
-      <span class="num">05</span>
-      <h2>검사 규칙</h2>
-      <p><code>error</code>는 거의 항상 잘못된 표현이라 실패로 처리하고, <code>warning</code>은 맥락을 보고 판단하도록 알림만 표시합니다.</p>
-    </div>
-    <div class="sec-main">
-      <div class="ds-table-wrap"><table class="ds-table">
-        <thead><tr><th>대상</th><th>error</th><th>warning</th><th>예</th></tr></thead>
-        <tbody>
-          <tr><td>한국어 글</td><td>13</td><td>13</td><td>과장 수식어, 번역투, 해요체 혼용, 의인화, 독자에게 말 걸기</td></tr>
-          <tr><td>영어 글</td><td>8</td><td>4</td><td>sales language, AI vocabulary, stock closers</td></tr>
-          <tr><td>언어 공통</td><td>1</td><td>1</td><td>목록·제목 앞 이모지, 대시 남용</td></tr>
-          <tr><td>UI 마크업</td><td>5</td><td>12</td><td>보라 그라데이션, 그라데이션 글자, 확대 차단, 토큰 밖 색상값</td></tr>
-        </tbody>
-      </table></div>
-      <h3>프로젝트별 조정</h3>
-      <p>프로젝트 루트의 <code>.style/rules.toml</code>에 같은 형식으로 규칙을 추가하거나 끕니다. 해요체를 쓰기로 한 제품 화면은 다음처럼 해요체 규칙만 끄고, 한 문서 안의 문체 혼용 검사는 유지합니다.</p>
-      <div class="ds-cmd"><pre>[[rule]]
+<section class="block" id="limits">
+  <div class="container narrow prose">
+    <h2>한계</h2>
+    <ul class="limits">
+      <li>정규식이라 문맥을 모릅니다. "~을 통해"가 자연스러운 문장도 있어서 이런 규칙은 경고로만 둡니다.</li>
+      <li>일부 규칙은 한 파일에 여러 번 나올 때만 알립니다(<code>max_per_file</code>). 예를 들어 "~을 통해"는 세 번째부터 경고합니다.</li>
+      <li>문장을 검사할 뿐 페이지 구성은 보지 않습니다. 모든 절이 같은 틀이거나 같은 사실을 반복하는 문제는 스킬 지침과 사람의 리뷰로 잡습니다.</li>
+      <li>한국어 규칙은 합니다체 문서를 기준으로 합니다. 해요체를 쓰는 제품 화면은 <code>ko-haeyo</code> 규칙을 꺼야 합니다.</li>
+      <li>영어 규칙은 <!--COUNT:en-->개로 한국어(<!--COUNT:ko-->개)보다 적습니다. 영어 문서만 있는 레포에서는 잡는 범위가 좁습니다.</li>
+      <li>광고 문구처럼 의도적으로 수사를 쓰는 글에는 맞지 않습니다.</li>
+    </ul>
+    <p>규칙을 끄거나 추가할 때는 프로젝트 루트의 <code>.style/rules.toml</code>에 플러그인의 <code>rules.toml</code>과 같은 형식으로 적습니다. 현재 규칙은 <!--COUNT:all-->개이고, 전체 목록은 <code>style_check.py --list-rules</code>로 확인합니다.</p>
+    <div class="ds-cmd"><pre>[[rule]]
 id = "ko-haeyo"
 severity = "off"</pre><button type="button">복사</button></div>
-      <p>전체 목록은 <code>style_check.py --list-rules</code>로 확인합니다. 기준 전문은 <a href="https://github.com/jungrok5/ai-design/blob/main/docs/standard.md">docs/standard.md</a>에 있습니다.</p>
-    </div>
   </div>
 </section>
 </main>
 
 <footer>
-  <div class="container">MIT · <a href="https://github.com/jungrok5/ai-design">github.com/jungrok5/ai-design</a> · 참고한 자료와 라이선스는 <a href="https://github.com/jungrok5/ai-design/blob/main/plugins/ai-design/THIRD_PARTY_NOTICES.md">THIRD_PARTY_NOTICES.md</a></div>
+  <div class="container">jungrok5 · MIT · <a href="https://github.com/jungrok5/ai-design">github.com/jungrok5/ai-design</a> · 기준 전문: <a href="https://github.com/jungrok5/ai-design/blob/main/docs/standard.md">docs/standard.md</a> · 참고 자료와 라이선스: <a href="https://github.com/jungrok5/ai-design/blob/main/plugins/ai-design/THIRD_PARTY_NOTICES.md">THIRD_PARTY_NOTICES.md</a></div>
 </footer>
 <script src="design/copy.js"></script>
 </body>

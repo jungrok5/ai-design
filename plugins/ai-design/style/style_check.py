@@ -135,8 +135,9 @@ def check_file(path: Path, rules: list[Rule]) -> list[dict]:
         if rule.max_per_file and len(hits) <= rule.max_per_file:
             continue
         if rule.max_per_file:
+            total = len(hits)  # style-ignore lines are already left out
             hits = hits[:1]
-            hits[0]["message"] += f" ({len(list(rule.pattern.finditer(body)))}회, 기준 {rule.max_per_file}회)"
+            hits[0]["message"] += f" ({total}회, 기준 {rule.max_per_file}회)"
         findings += hits
     return sorted(findings, key=lambda f: (f["file"], f["line"], f["col"]))
 

@@ -51,6 +51,31 @@ class StyleCheck(unittest.TestCase):
         self.assertEqual(r.returncode, 0)
         self.assertIn("additionalContext", json.loads(r.stdout)["hookSpecificOutput"])
 
+    def test_structure_level_korean_tells(self):
+        out = run("t.md", "# 소개\n\n이 도구는 어느 프로젝트에나 붙일 수 있습니다.\n"
+                  "화면이 비슷해 보이는 이유는 기본값을 쓰기 때문입니다.\n").stdout
+        self.assertIn("ko-universal-claim", out)
+        self.assertIn("ko-reason-cleft", out)
+        ok = run("ok.md", "# 원인\n\n실패한 이유를 로그에서 확인합니다. 어느 쪽을 고를지 표로 비교합니다.\n"
+                 "읽기는 캐시에서, 쓰기는 DB에서 처리합니다.\n").stdout
+        for rule in ("ko-universal-claim", "ko-reason-cleft", "ko-paired-contrast"):
+            self.assertNotIn(rule, ok)
+
+    def test_frequency_rules_need_repeats(self):
+        once = run("a.md", "# 메일\n\n필터가 스팸 메일을 걸러 냅니다.\n").stdout
+        self.assertNotIn("ko-metaphor-verb", once)
+        twice = run("b.md", "# 소개\n\nAI 티를 걸러 냅니다.\n흔적을 걸러 내는 도구입니다.\n").stdout
+        self.assertIn("ko-metaphor-verb", twice)
+
+    def test_decorative_section_numbers(self):
+        html = "".join(f'<section><span class="num">0{i}</span><h2>t</h2></section>' for i in range(1, 5))
+        self.assertIn("ui-section-number", run("s.html", html).stdout)
+        self.assertNotIn("ui-section-number", run("t.html", "<td>01</td><span>09:00</span>").stdout)
+
+    def test_ignored_lines_are_not_counted(self):
+        body = "# 예\n\n" + "".join(f"<!-- style-ignore --> 이 API를 통해 {i}\n" for i in range(5)) + "이 API를 통해 조회합니다.\n"
+        self.assertNotIn("ko-tonghae", run("i.md", body).stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

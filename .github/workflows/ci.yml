@@ -17,3 +17,5 @@ jobs:
         run: python3 -m unittest discover -s tests -v
       - name: Style check on this repo
         run: python3 plugins/ai-design/style/style_check.py README.md docs/*.md examples/*.html site/*.html adapters/*.md plugins/ai-design/skills/*/SKILL.md plugins/ai-design/skills/polish-ui/design/*
+      - name: Build the page (fills real checker output; fails on unfilled placeholders)
+        run: python3 site/build.py

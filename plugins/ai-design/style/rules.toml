@@ -240,6 +240,50 @@ pattern = '걱정하지\s?마세요|어렵지\s?않(아요|습니다)|한번\s?�
 message = "독자에게 말을 거는 문장"
 suggest = "삭제하고 바로 내용으로 들어갑니다"
 
+# Added from an adversarial review of the ai-design page (structure-level tells in Korean prose).
+[[rule]]
+id = "ko-metaphor-verb"
+lang = "ko"
+severity = "warning"
+pattern = '(걸러|덜어|녹여|담아|짚어)\s?(내|냅|낸|냈|낼)|덜어\s?(줍|주는|드립|드리)|(담았|녹였)습니다|녹아\s?있'
+message = "동작을 비유 동사로 표현 ('걸러 냅니다', '덜어 줍니다', '담았습니다')"
+suggest = "도구가 실제로 하는 동작을 씁니다 (걸러 냅니다 → 검사하고 위치를 보고합니다)"
+max_per_file = 1
+
+[[rule]]
+id = "ko-universal-claim"
+lang = "ko"
+severity = "warning"
+pattern = '어느\s?\S+(에나|에서나|이든|든지)\s|어디(에나|서나|든)\s|어떤\s?\S+(에도|에서도)\s(붙|쓸|동작|적용|사용)'
+message = "근거 없는 범용 주장 ('어느 프로젝트에나')"
+suggest = "실제 조건을 씁니다 (Python 3.11 이상, .md·.html·.tsx 파일)"
+
+[[rule]]
+id = "ko-reason-cleft"
+lang = "ko"
+severity = "warning"
+pattern = '(이유|까닭)는\s[^.?!\n]{1,100}?때문(입니다|이다|이에요)[.]'
+message = "'~하는 이유는 ~때문입니다' 설명 구문"
+suggest = "원인을 주어로 바로 씁니다 (기본값을 매번 새로 정해서 화면이 비슷해집니다). 근거 없는 인과면 삭제합니다"
+
+[[rule]]
+id = "ko-paired-contrast"
+lang = "ko"
+severity = "warning"
+pattern = '(?<![가-힣])[가-힣A-Za-z]+(은|는)\s[^,.\n]{1,30}?(으로|로|에만|만),\s[^,.\n]{0,15}?[가-힣A-Za-z]+(은|는|이면|으면)\s[^,.\n]{1,30}?(으로|로|에만|만)\s'
+message = "'X는 A로, Y는 B로' 대칭 대구 반복"
+suggest = "한 문장에 한 사실만 쓰거나 표로 옮깁니다"
+max_per_file = 1
+
+[[rule]]
+id = "ko-just-one"
+lang = "ko"
+severity = "warning"
+pattern = '(?<=[가-힣A-Za-z0-9)])(?<!중)\s(하나|한\s가지)(로|가|를|만|뿐|입니다|\s|[.,)])'
+message = "'X 하나' 단일성 강조 반복"
+suggest = "수가 중요할 때만 남기고 나머지는 지웁니다 (합니다체 하나로 씁니다 → 합니다체로 씁니다)"
+max_per_file = 4
+
 # ───────────────────────── English prose ─────────────────────────
 
 [[rule]]
@@ -489,3 +533,20 @@ severity = "warning"
 pattern = '(?<![\w-])font-family\s*:\s*(?!\s*(?:var\(|inherit|initial|unset))'
 message = "Font stack outside the design tokens"
 suggest = "font-family: var(--font-sans) or var(--font-mono)"
+
+[[rule]]
+id = "ui-section-number"
+kind = "markup"
+severity = "warning"
+pattern = '<(span|div|p|small|b|strong|em|i)\b[^>]*>\s*0[1-9]\.?\s*</\1>|<(span|div)\b[^>]*class="(num|number|index|n)"[^>]*>\s*\d{1,2}\.?\s*</\2>'
+message = "순서가 아닌 절·항목에 붙인 번호 (01, 02 …)"
+suggest = "번호를 지웁니다. 실제 순서면 ds-steps를 씁니다"
+max_per_file = 2
+
+[[rule]]
+id = "ui-table-min-width"
+kind = "markup"
+severity = "warning"
+pattern = 'table[^{}]*\{[^}]*min-width:\s*([4-9]\d{2}|\d{4,})px'
+message = "Table with a fixed min-width wider than a phone screen"
+suggest = "turn a two-column table into a list (<dl>), or let it wrap; never wider than 375 px by force"

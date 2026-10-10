@@ -45,12 +45,23 @@ shadow on everything; ALL-CAPS eyebrow labels over every heading; `01 / 02 / 03`
 Each is fine once, for a reason. Banning one default is not enough: do not swap it for the next default — decide
 from the content.
 
+For a tool or product page, the first visual is the product's real output captured from an actual run (a CLI report,
+a screen), not a list or diagram describing it. Show a design system applied to the product's own content, next to
+what it replaces; a swatch grid and a row of sample buttons and badges is a showroom, not evidence. No stat strip of
+counts under the hero: state a number once, where it is evidence.
+
 ## 3. Layout and type
 
 - Layout follows content: tables for comparisons and specs, code next to its explanation, steps only for sequences.
 - Korean text: `lang="ko"`, `word-break: keep-all` with `overflow-wrap: anywhere` for long URLs and code,
   body line-height about 1.6–1.8, fonts from the type tokens. Numbers in tables: `font-variant-numeric: tabular-nums`.
 - Sentence-case headings. Spend boldness in one place per page.
+- Do not stamp every section with the same frame (side rail + number + heading + lead + body). Choose each section's
+  layout from its content; if three sections in a row share one layout, change one.
+- A table with two short columns is a list (`<dl>`). Never force a table wider than a 375 px screen; let it wrap or
+  stack.
+- Do not tell states apart by color alone (before/after, pass/fail): add a symbol or a label (WCAG 1.4.1).
+- Font sizes come from the type scale tokens; one-pixel steps (16, 17, 19, 20, 21) blur the hierarchy.
 
 ## 4. Quality floor (not optional)
 
