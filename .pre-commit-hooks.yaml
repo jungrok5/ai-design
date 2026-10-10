@@ -1,6 +1,6 @@
 # Use from another repo's .pre-commit-config.yaml:
 #   - repo: https://github.com/jungrok5/ai-design
-#     rev: v1.0.0
+#     rev: <commit SHA or tag>
 #     hooks: [{ id: ai-design-style }]
 - id: ai-design-style
   name: Writing and UI style (AI tone / AI look)

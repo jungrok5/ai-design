@@ -44,10 +44,12 @@ Python 3.11 이상이 필요합니다.
 
 ```yaml
 - repo: https://github.com/jungrok5/ai-design
-  rev: v1.0.0
+  rev: d8c880fc9e08c0edc6c8850873009e22776c5200  # 1.0.0
   hooks:
     - id: ai-design-style
 ```
+
+`rev`는 1.0.0 커밋입니다. 새 버전은 `pre-commit autoupdate`로 받습니다.
 
 ### 명령줄과 CI
 
