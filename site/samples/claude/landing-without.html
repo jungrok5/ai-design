@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>shipit — 명령 하나로 스테이징 배포</title>
+  <meta name="description" content="shipit은 명령 하나(shipit deploy staging)로 스테이징에 배포하는 사내 배포 도구입니다.">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased">
+
+  <header class="max-w-4xl mx-auto px-4 py-5 flex items-center justify-between">
+    <span class="font-bold text-lg tracking-tight">shipit</span>
+    <span class="text-xs rounded-full border border-slate-300 dark:border-slate-700 px-3 py-1 text-slate-600 dark:text-slate-400">사내 배포 도구</span>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4">
+
+    <!-- Hero -->
+    <section class="py-16 sm:py-24">
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+        스테이징 배포,<br>명령 하나면 끝.
+      </h1>
+      <p class="mt-6 text-lg text-slate-600 dark:text-slate-400 max-w-xl">
+        shipit은 사내 배포 도구입니다. 수동으로 평균 25분 걸리던 배포를 평균 4분으로 줄였습니다.
+      </p>
+      <div class="mt-8 rounded-xl bg-slate-900 text-slate-100 px-5 py-4 font-mono text-sm sm:text-base flex items-center justify-between gap-4 max-w-md">
+        <code><span class="text-slate-500 select-none">$ </span>shipit deploy staging</code>
+        <button data-copy="shipit deploy staging" class="copy shrink-0 text-xs rounded-md border border-slate-600 px-2.5 py-1 hover:bg-slate-800">복사</button>
+      </div>
+    </section>
+
+    <!-- Numbers -->
+    <section class="py-12 border-t border-slate-200 dark:border-slate-800">
+      <h2 class="text-2xl font-bold">배포 시간 비교</h2>
+      <div class="mt-8 space-y-5" role="img" aria-label="수동 배포 평균 25분, shipit 평균 4분">
+        <div>
+          <div class="flex justify-between text-sm mb-1.5"><span>수동 배포</span><span class="font-semibold">평균 25분</span></div>
+          <div class="h-4 rounded bg-slate-200 dark:bg-slate-800"><div class="h-4 rounded bg-slate-500" style="width:100%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5"><span>shipit</span><span class="font-semibold">평균 4분</span></div>
+          <div class="h-4 rounded bg-slate-200 dark:bg-slate-800"><div class="h-4 rounded bg-indigo-600" style="width:16%"></div></div>
+        </div>
+      </div>
+      <p class="mt-5 text-sm text-slate-500">2026년 3분기 사내 측정, 배포 212건 기준.</p>
+    </section>
+
+    <!-- Usage -->
+    <section class="py-12 border-t border-slate-200 dark:border-slate-800">
+      <h2 class="text-2xl font-bold">사용법</h2>
+      <ol class="mt-8 grid gap-4 sm:grid-cols-3">
+        <li class="rounded-xl border border-slate-200 dark:border-slate-800 p-5">
+          <div class="text-xs font-semibold text-indigo-600 dark:text-indigo-400">1 · 설치</div>
+          <div class="mt-3 rounded-lg bg-slate-900 text-slate-100 px-3 py-2 font-mono text-xs break-all">brew install acme/tap/shipit</div>
+        </li>
+        <li class="rounded-xl border border-slate-200 dark:border-slate-800 p-5">
+          <div class="text-xs font-semibold text-indigo-600 dark:text-indigo-400">2 · 배포</div>
+          <div class="mt-3 rounded-lg bg-slate-900 text-slate-100 px-3 py-2 font-mono text-xs">shipit deploy staging</div>
+        </li>
+        <li class="rounded-xl border border-slate-200 dark:border-slate-800 p-5">
+          <div class="text-xs font-semibold text-indigo-600 dark:text-indigo-400">3 · 문제가 생기면 롤백</div>
+          <div class="mt-3 rounded-lg bg-slate-900 text-slate-100 px-3 py-2 font-mono text-xs">shipit rollback</div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Requirements -->
+    <section class="py-12 border-t border-slate-200 dark:border-slate-800">
+      <h2 class="text-2xl font-bold">필요 조건</h2>
+      <ul class="mt-6 space-y-2 text-slate-700 dark:text-slate-300">
+        <li class="flex gap-2"><span aria-hidden="true">✓</span> Kubernetes 1.28 이상</li>
+        <li class="flex gap-2"><span aria-hidden="true">✓</span> kubectl 로그인 상태</li>
+      </ul>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 border-t border-slate-200 dark:border-slate-800 text-center">
+      <h2 class="text-3xl font-bold">지금 설치해 보세요</h2>
+      <div class="mt-6 mx-auto rounded-xl bg-slate-900 text-slate-100 px-5 py-4 font-mono text-sm flex items-center justify-between gap-4 max-w-md text-left">
+        <code><span class="text-slate-500 select-none">$ </span>brew install acme/tap/shipit</code>
+        <button data-copy="brew install acme/tap/shipit" class="copy shrink-0 text-xs rounded-md border border-slate-600 px-2.5 py-1 hover:bg-slate-800">복사</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="max-w-4xl mx-auto px-4 py-8 text-xs text-slate-500">
+    shipit · 사내 배포 도구
+  </footer>
+
+  <script>
+    document.querySelectorAll('.copy').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var done = function () {
+          btn.textContent = '복사됨';
+          setTimeout(function () { btn.textContent = '복사'; }, 1500);
+        };
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(btn.dataset.copy).then(done, function () {});
+        }
+      });
+    });
+  </script>
+</body>
+</html>

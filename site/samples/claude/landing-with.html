@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shipit - 명령 하나로 스테이징 배포</title>
+<meta name="description" content="shipit은 `shipit deploy staging` 명령 하나로 스테이징에 배포하는 사내 배포 도구입니다. 평균 배포 시간은 수동 25분에서 4분으로 줄었습니다.">
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --surface: #f4f6f5;
+  --text: #15191a;
+  --text-muted: #4a5457;
+  --line: #d5dbd9;
+  --accent: #0a6b58;
+  --accent-text: #ffffff;
+  --term-bg: #12181a;
+  --term-text: #e6eceb;
+  --term-muted: #9aa7a9;
+  --term-accent: #6fdcc2;
+  --term-line: #2c383b;
+  --term-hover: #1d282b;
+  --bar-muted: #8a9596;
+
+  --font-sans: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "D2Coding", Menlo, Consolas, monospace;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: clamp(2rem, 5vw, 3rem);
+  --radius: 6px;
+  --gutter: 16px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1415;
+    --surface: #182022;
+    --text: #e9efee;
+    --text-muted: #a3b0b2;
+    --line: #2d393b;
+    --accent: #6fdcc2;
+    --accent-text: #0b1311;
+    --bar-muted: #77878a;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 1.75;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 var(--gutter); }
+header.top { padding: 20px 0; }
+.brand { font-family: var(--font-mono); font-weight: 700; font-size: var(--fs-lg); letter-spacing: -0.01em; }
+h1 { font-size: var(--fs-2xl); line-height: 1.25; margin: 48px 0 16px; letter-spacing: -0.02em; }
+h2 { font-size: var(--fs-xl); line-height: 1.3; margin: 0 0 12px; letter-spacing: -0.01em; }
+p { margin: 0 0 16px; }
+.lead { font-size: var(--fs-lg); color: var(--text-muted); max-width: 36em; }
+section { padding: 56px 0 0; }
+code { font-family: var(--font-mono); font-size: 0.92em; background: var(--surface); padding: 2px 6px; border-radius: 4px; }
+
+/* terminal blocks */
+.term {
+  background: var(--term-bg);
+  color: var(--term-text);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 8px;
+}
+.term pre { margin: 0; padding: 14px 16px; overflow-x: auto; flex: 1; white-space: pre; }
+.term .prompt { color: var(--term-muted); user-select: none; }
+.term .cmd { color: var(--term-accent); }
+.copy {
+  font: inherit;
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  color: var(--term-text);
+  background: transparent;
+  border: 0;
+  border-left: 1px solid var(--term-line);
+  padding: 0 16px;
+  min-width: 64px;
+  min-height: 44px;
+  cursor: pointer;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.copy:hover { background: var(--term-hover); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.term .copy:focus-visible { outline-color: var(--term-accent); outline-offset: -3px; }
+.hero-note { font-size: var(--fs-sm); color: var(--text-muted); margin-top: 8px; }
+
+/* time comparison */
+.bars { margin: 24px 0 8px; display: grid; gap: 14px; }
+.bar-row { display: grid; grid-template-columns: 5.5rem 1fr; gap: 12px; align-items: center; }
+.bar-label { font-size: var(--fs-sm); color: var(--text-muted); }
+.bar-track { display: flex; align-items: center; gap: 10px; }
+.bar { height: 28px; border-radius: 3px; background: var(--bar-muted); flex: none; }
+.bar.ship { background: var(--accent); }
+.bar-value { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+.source { font-size: var(--fs-sm); color: var(--text-muted); }
+
+/* requirements */
+dl.req { margin: 16px 0 0; display: grid; grid-template-columns: max-content 1fr; gap: 10px 24px; border-top: 1px solid var(--line); padding-top: 16px; }
+dl.req dt { font-weight: 700; }
+dl.req dd { margin: 0; color: var(--text-muted); }
+@media (max-width: 480px) {
+  dl.req { grid-template-columns: 1fr; gap: 2px; }
+  dl.req dd { margin-bottom: 10px; }
+  .bar-row { grid-template-columns: 1fr; gap: 4px; }
+}
+.step-label { font-size: var(--fs-sm); color: var(--text-muted); margin: 24px 0 6px; }
+footer { margin-top: 72px; padding: 24px 0 48px; border-top: 1px solid var(--line); color: var(--text-muted); font-size: var(--fs-sm); }
+@media (prefers-reduced-motion: no-preference) {
+  .copy { transition: background 150ms ease-out; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><span class="brand">shipit</span></header>
+
+  <main>
+    <h1>스테이징 배포, 명령 하나로 끝냅니다</h1>
+    <p class="lead">shipit은 사내 배포 도구입니다. 수동으로 평균 25분 걸리던 스테이징 배포를 평균 4분에 마칩니다.</p>
+
+    <div class="term">
+      <pre><span class="prompt">$ </span><span class="cmd">shipit deploy staging</span></pre>
+      <button class="copy" type="button" data-copy="shipit deploy staging" aria-label="배포 명령 복사">복사</button>
+    </div>
+    <p class="hero-note">잘못 배포했다면 <code>shipit rollback</code>으로 되돌립니다.</p>
+
+    <section aria-labelledby="time">
+      <h2 id="time">배포 한 건당 21분 단축</h2>
+      <div class="bars" role="img" aria-label="평균 배포 시간 비교. 수동 25분, shipit 4분.">
+        <div class="bar-row">
+          <span class="bar-label">수동</span>
+          <span class="bar-track"><span class="bar" style="width:min(100%, calc((100% - 5rem) * 1))"></span><span class="bar-value">25분</span></span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">shipit</span>
+          <span class="bar-track"><span class="bar ship" style="width:calc((100% - 5rem) * 0.16)"></span><span class="bar-value">4분</span></span>
+        </div>
+      </div>
+      <p class="source">2026년 3분기 사내 측정, 배포 212건 기준 평균입니다.</p>
+    </section>
+
+    <section aria-labelledby="start">
+      <h2 id="start">설치와 사용</h2>
+      <p class="step-label">설치</p>
+      <div class="term">
+        <pre><span class="prompt">$ </span><span class="cmd">brew install acme/tap/shipit</span></pre>
+        <button class="copy" type="button" data-copy="brew install acme/tap/shipit" aria-label="설치 명령 복사">복사</button>
+      </div>
+      <p class="step-label">스테이징에 배포</p>
+      <div class="term">
+        <pre><span class="prompt">$ </span><span class="cmd">shipit deploy staging</span></pre>
+        <button class="copy" type="button" data-copy="shipit deploy staging" aria-label="배포 명령 복사">복사</button>
+      </div>
+      <p class="step-label">롤백</p>
+      <div class="term">
+        <pre><span class="prompt">$ </span><span class="cmd">shipit rollback</span></pre>
+        <button class="copy" type="button" data-copy="shipit rollback" aria-label="롤백 명령 복사">복사</button>
+      </div>
+    </section>
+
+    <section aria-labelledby="req">
+      <h2 id="req">사용 전에 확인할 것</h2>
+      <p>아래 두 조건을 모두 만족해야 합니다.</p>
+      <dl class="req">
+        <dt>Kubernetes</dt><dd>1.28 이상</dd>
+        <dt>kubectl</dt><dd>로그인된 상태</dd>
+      </dl>
+    </section>
+  </main>
+
+  <footer>shipit 사내 배포 도구 · 시간 수치는 2026년 3분기 사내 측정(배포 212건) 기준입니다.</footer>
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var text = btn.getAttribute('data-copy');
+    var done = function () {
+      btn.textContent = '복사됨';
+      setTimeout(function () { btn.textContent = '복사'; }, 1500);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () {});
+    }
+  });
+});
+</script>
+</body>
+</html>

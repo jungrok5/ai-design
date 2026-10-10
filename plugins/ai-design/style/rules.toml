@@ -49,6 +49,30 @@ message = "의미 부풀리기"
 suggest = "삭제 또는 구체적인 결과(날짜, 수치)로 교체"
 
 [[rule]]
+id = "ko-question-heading"
+lang = "ko"
+severity = "warning"
+pattern = '(?m)^#{1,6}\s(?!\[)[^\n]*[가-힣][^\n]*(\?|인가|일까|할까)\s*$'
+message = "질문형 제목 (FAQ가 아닌 절)"
+suggest = "그 절이 말하는 사실을 제목으로 (예: '얼마나 빨라졌나요?' → '배포 시간')"
+
+[[rule]]
+id = "ko-slogan"
+lang = "ko"
+severity = "warning"
+pattern = '(?:이)?면\s?(?:끝|충분|그만|OK)(?:입니다|이에요|이다)?[.!]?(?=\s|$)'
+message = "슬로건형 끝맺음 ('~면 끝')"
+suggest = "주어와 동사가 있는 문장 (예: '명령 하나로 배포합니다')"
+
+[[rule]]
+id = "ko-cta-now"
+lang = "ko"
+severity = "warning"
+pattern = '지금\s?(?:바로\s?)?[가-힣]+\s?(?:보세요|하세요)'
+message = "재촉하는 행동 유도 문구"
+suggest = "버튼과 링크는 누르면 일어나는 일 (예: 'shipit 설치')"
+
+[[rule]]
 id = "ko-now-is-the-time"
 lang = "ko"
 severity = "error"
@@ -61,14 +85,14 @@ id = "ko-double-passive"
 lang = "ko"
 severity = "error"
 pattern = '되어(지|집|진|져)|지게\s?(됩니다|돼요|된다)'
-message = "이중 피동"
+message = "이중 피동, 또는 '~지게 됩니다' 우회"
 suggest = "됩니다 / 누가 하는지 주어 명시"
 
 [[rule]]
 id = "ko-ni-isseoseo"
 lang = "ko"
 severity = "error"
-pattern = '(?<![안속위밑곳])에\s?있어서?\s'  # "파일 안에 있어서"(=because it is in) is fine
+pattern = '(?<![안속위밑곳뒤앞옆치래부])에\s?있어서?\s'  # "파일 안에 / 위치에 / 인터페이스 뒤에 있어"(=because it is in) is fine
 message = "번역투 '~에 있어(서)'"
 suggest = "~에서, ~할 때"
 
@@ -194,7 +218,7 @@ max_per_file = 3
 id = "ko-emoji-marker"
 lang = "any"
 severity = "error"
-pattern = '(?m)^\s*([-*+]|#{1,6}|\d+\.)\s*[\U0001F300-\U0001FAFF☀-➿⭐]'
+pattern = '(?m)^[ \t]*([-*+]|#{1,6}|\d+\.)\s*[\U0001F300-\U0001FAFF☀-➿⭐]'
 message = "목록·제목 앞 이모지"
 suggest = "이모지 삭제 (상태 표시가 꼭 필요하면 표의 열로)"
 
@@ -228,7 +252,7 @@ suggest = "문서체로 교체 또는 삭제"
 id = "ko-personify"
 lang = "ko"
 severity = "error"
-pattern = '흘러가|알아서\s?(챙|처리|해)|일이\s?(돌아|굴러)|척척|술술|뚝딱'
+pattern = '(일|작업|업무)[이가]\s?(\S+\s)?흘러[가갑간갈]|알아서\s?(챙|처리|해)|일이\s?(돌아|굴러)|척척|술술|뚝딱'  # "데이터가 흘러가는" (data flow) is a technical term
 message = "일·도구를 사람처럼 쓰는 구어 표현"
 suggest = "주체와 동작 명시 (예: 워크플로가 라벨을 변경합니다)"
 
@@ -254,7 +278,7 @@ max_per_file = 1
 id = "ko-universal-claim"
 lang = "ko"
 severity = "warning"
-pattern = '어느\s?\S+(에나|에서나|이든|든지)\s|어디(에나|서나|든)\s|어떤\s?\S+(에도|에서도)\s(붙|쓸|동작|적용|사용)'
+pattern = '어느\s?(프로젝트|팀|환경|회사|조직|서비스|제품|언어|도구|코드베이스|레포)(에나|에서나|이든|든지)|어디(에나|서나|든)\s?(붙|쓸|적용|도입)|어떤\s?(프로젝트|팀|환경|조직|서비스|제품|코드베이스|레포)(에도|에서도)\s?(붙|쓸|동작|적용|사용)'  # scope inside a system ("트리의 어느 위치에서나") is a fact
 message = "근거 없는 범용 주장 ('어느 프로젝트에나')"
 suggest = "실제 전제 조건으로 교체 (Python 3.11 이상, .md·.html·.tsx 파일)"
 
@@ -263,6 +287,7 @@ id = "ko-reason-cleft"
 lang = "ko"
 severity = "warning"
 pattern = '(이유|까닭)는\s[^.?!\n]{1,100}?때문(입니다|이다|이에요)[.]'
+max_per_file = 2  # once or twice reads naturally in human docs; the tell is the repeated frame
 message = "'~하는 이유는 ~때문입니다' 설명 구문"
 suggest = "원인을 주어로 바로 서술 (기본값을 매번 새로 정해서 화면이 비슷해집니다), 근거 없는 인과는 삭제"
 
@@ -290,7 +315,7 @@ max_per_file = 4
 id = "en-ai-vocabulary"
 lang = "en"
 severity = "error"
-pattern = '\b(delve|tapestry|testament to|intricacies|meticulous(ly)?|showcas(e|es|ing)|underscor(e|es|ing)|pivotal|garner(s|ed)?|bolster(s|ed)?|vibrant|interplay)\b'
+pattern = '\b(delve|tapestry|testament to|intricacies|meticulous(ly)?|showcas(e|es|ing)|underscor(e|es|ing)|pivotal|garner(s|ed)?|bolster(s|ed)?|vibrant|interplay|leverag(e|es|ed|ing)|synerg(y|ies|istic))\b'
 message = "AI vocabulary"
 suggest = "plain verb or the fact itself"
 
@@ -298,7 +323,7 @@ suggest = "plain verb or the fact itself"
 id = "en-hype"
 lang = "en"
 severity = "error"
-pattern = '\b(seamless(ly)?|cutting-edge|game-?chang(er|ing)|revolutioniz\w*|unleash\w*|supercharg\w*|best-in-class|world-class|next-gen(eration)?|unlock the (power|potential))\b'
+pattern = '\b(seamless(ly)?|cutting-edge|game-?chang(er|ing)|revolutioniz\w*|unleash\w*|supercharg\w*|best-in-class|world-class|next-gen(eration)?|unlock the (power|potential)|state-of-the-art|empower(s|ing)?)\b'
 message = "Sales language"
 suggest = "say what the user can do, with a number if you have one"
 
@@ -341,6 +366,22 @@ severity = "error"
 pattern = '\bplays an? (key|crucial|pivotal|vital) role|\bstands as an?\b|setting the stage for|the future looks bright'
 message = "Significance inflation"
 suggest = "state what changed, with a date or number"
+
+[[rule]]
+id = "en-filler-preface"
+lang = "en"
+severity = "error"
+pattern = "(?i)\\bit(?: is|'s) (important|worth|crucial|essential) (to note|noting|to remember|to mention)\\b|\\bit should be noted that\\b"
+message = "Filler preface"
+suggest = "cut it; state the point"
+
+[[rule]]
+id = "en-buzzword"
+lang = "en"
+severity = "warning"
+pattern = '\b(robust|holistic|comprehensive|streamlin(e|es|ed|ing)|elevat(e|es|ing) your)\b'
+message = "Buzzword that names no property"
+suggest = "the property itself: what it survives, covers or removes"
 
 [[rule]]
 id = "en-stacked-hedge"
@@ -393,6 +434,14 @@ suggest = "쉼표, 콜론, 괄호 / comma, colon, parentheses"
 max_per_file = 4
 
 # ───────────────────────── UI markup (HTML/CSS/JSX/TSX) ─────────────────────────
+
+[[rule]]
+id = "ui-default-accent"
+kind = "markup"
+severity = "warning"
+pattern = '\b(?:text|bg|border|ring|outline|decoration|fill|stroke|accent)-(?:indigo|violet|purple)-\d{2,3}\b'
+message = "Tailwind indigo/violet used as the accent (the AI default)"
+suggest = "the product's accent token"
 
 [[rule]]
 id = "ui-purple-gradient"

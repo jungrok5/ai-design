@@ -64,6 +64,10 @@ A page can pass every rule and still read as generated. Before you finish, read 
   When parts and a total appear together, the parts add up to the total. Do not call a made-up sample "real" or "typical".
 - **Scope is the real precondition.** Replace `어느 프로젝트에나`, `모든`, `항상` with what is actually required. A tool
   page also says when not to use it and what it gets wrong.
+- **Headings and endings state facts.** A section heading names what the section says (`배포 시간`, `배포 한 건당 21분
+  단축`), not a question the reader did not ask (`얼마나 빨라졌나요?`, `왜 X인가`) unless the page is an FAQ. No slogan
+  fragments (`명령 하나면 끝.`) and no closing nudge (`지금 설치해 보세요`); a page ends on its last fact or the one
+  command to run. These came from comparing real Claude Code runs with and without this skill.
 - **Say each point once.** A section does not open by restating its heading, and a later section repeats an earlier
   fact only to add something new. If a steps list or diagram shows a flow, the hero lead and the section text do not
   narrate the same flow again.

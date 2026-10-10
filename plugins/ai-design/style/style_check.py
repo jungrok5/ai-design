@@ -1,10 +1,19 @@
 #!/usr/bin/env python3
 """ai-design style check: flags the AI tone in prose and the AI look in UI code. Deterministic, stdlib only.
 
-  style_check.py FILE...            report findings (exit 1 if any `error`, 0 otherwise)
-  style_check.py --hook             PostToolUse hook mode: read the hook JSON on stdin, check the edited file,
-                                    and hand findings back to the agent as context (never blocks the edit)
-  style_check.py --list-rules       print the rule table
+  style_check.py PATH...                 check files; a directory is searched for supported files
+  style_check.py - --stdin-name pr.md    check text from stdin (e.g. a PR body), typed by the given name
+  style_check.py --hook                  PostToolUse hook mode: read the hook JSON on stdin, check the edited file and
+                                         hand findings on the edited lines back to the agent (never blocks the edit)
+  style_check.py --list-rules            print the rule table
+
+Options:
+  --format text|github|json   text (default); github = workflow annotations for pull requests; json
+  --warn-only                 always exit 0 (for a first rollout in CI)
+  --baseline FILE             ignore findings recorded in FILE; --write-baseline FILE records the current ones
+
+Exit codes: 0 no error-level findings (or --warn-only), 1 at least one error, 2 usage problem (missing path,
+unsupported file, nothing checked, Python older than 3.11).
 
 Rules live next to this file in rules.toml. A repository can add or override rules in `.style/rules.toml`
 (same format; a rule with an existing id replaces it, `severity = "off"` disables it).
@@ -16,6 +25,7 @@ Skip a line with `style-ignore` anywhere on it (e.g. `<!-- style-ignore -->`), o
 """
 from __future__ import annotations
 
+import bisect
 import json
 import os
 import re
@@ -103,20 +113,28 @@ def ignored_lines(text: str) -> set[int]:
     return out
 
 
+def supported(path: Path) -> bool:
+    return path.suffix.lower() in PROSE_EXT | MARKUP_EXT
+
+
 def check_file(path: Path, rules: list[Rule]) -> list[dict]:
-    ext = path.suffix.lower()
-    if ext not in PROSE_EXT | MARKUP_EXT or not path.is_file():
+    if not supported(path) or not path.is_file():
         return []
     try:
         text = path.read_text(encoding="utf-8")
     except (UnicodeDecodeError, OSError):
         return []
+    return check_text(path, text, rules)
+
+
+def check_text(path: Path, text: str, rules: list[Rule]) -> list[dict]:
+    ext = path.suffix.lower()
     skip = ignored_lines(text)
     if "style-ignore-file" in text[:500]:
         return []
     views = {"markup": text if ext in MARKUP_EXT else None, "prose": prose_of(path, text) if ext in PROSE_EXT else None}
     has_ko = bool(HANGUL.search(views["prose"] or ""))
-    findings = []
+    findings, starts = [], {}
     for rule in rules:
         if rule.kind == "register":
             findings += register_mix(path, views["prose"], rule, skip) if has_ko else []
@@ -124,18 +142,21 @@ def check_file(path: Path, rules: list[Rule]) -> list[dict]:
         body = views.get(rule.kind)
         if body is None or (rule.lang == "ko" and not has_ko):
             continue
+        if body not in starts:  # offsets of each line start, so a match position maps to its line in O(log n)
+            starts[body] = [0] + [i + 1 for i, c in enumerate(body) if c == "\n"]
+        line_starts = starts[body]
         hits, seen_lines, total = [], set(), 0
         has_hit = "hit" in rule.pattern.groupindex  # a (?P<hit>…) group narrows what is reported
         for m in rule.pattern.finditer(body):
             start = m.start("hit") if has_hit and m.group("hit") is not None else m.start()
-            line = body.count("\n", 0, start) + 1
+            line = bisect.bisect_right(line_starts, start)
             if line in skip:
                 continue
             total += 1  # max_per_file counts every occurrence outside style-ignore lines
             if line in seen_lines:  # but each rule is reported once per line
                 continue
             seen_lines.add(line)
-            col = start - (body.rfind("\n", 0, start) + 1) + 1
+            col = start - line_starts[line - 1] + 1
             text = m.group("hit") if has_hit and m.group("hit") is not None else m.group(0)
             hits.append({"file": str(path), "line": line, "col": col, "rule": rule.id, "severity": rule.severity,
                          "match": text.strip()[:60], "message": rule.message, "suggest": rule.suggest})
@@ -149,7 +170,8 @@ def check_file(path: Path, rules: list[Rule]) -> list[dict]:
 
 
 FORMAL = re.compile(r"(니다|니까)[.?!]")
-POLITE = re.compile(r"[가-힣](?<!니)요[.?!]")
+# "~하세요." / "~주세요." is the usual way to give an instruction inside 합니다체 docs, so it does not count as 해요체.
+POLITE = re.compile(r"[가-힣](?<!니)(?<!세)요[.?!]|세요\?")
 PLAIN = re.compile(r"[가-힣](?<!니)다[.!]")
 REGISTERS = {"합니다체": FORMAL, "해요체": POLITE, "한다체": PLAIN}
 
@@ -181,27 +203,107 @@ def fmt(f: dict) -> str:
     return s + (f" → {f['suggest']}" if f["suggest"] else "")
 
 
+def edited_lines(path: Path, tool_input: dict) -> set[int] | None:
+    """Line numbers the edit touched, or None for a whole-file write (then every line counts)."""
+    news = [e.get("new_string", "") for e in tool_input.get("edits", [])] or [tool_input.get("new_string")]
+    news = [n for n in news if n]
+    if not news:
+        return None
+    try:
+        text = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return None
+    lines: set[int] = set()
+    for new in news:
+        at = text.find(new)
+        if at < 0:
+            continue
+        first = text.count("\n", 0, at) + 1
+        lines.update(range(first - 1, first + new.count("\n") + 2))  # the edit plus one line of context each side
+    return lines or None
+
+
 def hook_mode(rules: list[Rule]) -> int:
     try:
         payload = json.load(sys.stdin)
     except ValueError:
         return 0
-    path = (payload.get("tool_input") or {}).get("file_path") or ""
-    if not path:
+    tool_input = payload.get("tool_input") or {}
+    path = Path(tool_input.get("file_path") or "")
+    if not str(path) or not supported(path):
         return 0
-    findings = check_file(Path(path), rules)
+    findings = check_file(path, rules)
+    touched = edited_lines(path, tool_input)
+    if touched is not None:
+        findings = [f for f in findings if f["line"] in touched]
     if not findings:
-        return 0
+        return 0  # nothing is sent to the agent, so a clean edit costs no tokens
     shown = findings[:15]
     lines = [fmt(f) for f in shown] + ([f"… and {len(findings) - len(shown)} more"] if len(findings) > len(shown) else [])
-    context = ("ai-design style check (github.com/jungrok5/ai-design, docs/standard.md) found AI-tone/AI-look patterns in the file you "
-               "just edited. Fix the ones that are real in this context (keep facts, names and code unchanged); leave "
-               "deliberate quotes with a `style-ignore` marker.\n" + "\n".join(lines))
+    context = ("ai-design style check (github.com/jungrok5/ai-design, docs/standard.md) found AI-tone/AI-look patterns in the "
+               "lines you just wrote. Fix the ones that are real in this context, only in those lines (keep facts, names and "
+               "code unchanged; do not rewrite text you were not asked to touch); leave deliberate quotes with a "
+               "`style-ignore` marker.\n" + "\n".join(lines))
     print(json.dumps({"hookSpecificOutput": {"hookEventName": "PostToolUse", "additionalContext": context}}, ensure_ascii=False))
     return 0
 
 
+def expand(paths: list[str]) -> tuple[list[Path], list[str]]:
+    """Files to check and usage problems. Directories are searched; hidden and vendored folders are skipped."""
+    files, problems = [], []
+    for a in paths:
+        p = Path(a)
+        if p.is_dir():
+            found = sorted(f for f in p.rglob("*") if f.is_file() and supported(f)
+                           and not any(part.startswith(".") or part in ("node_modules", "vendor", "dist", "build")
+                                       for part in f.relative_to(p).parts[:-1]))
+            files += found
+        elif not p.exists():
+            problems.append(f"{a}: no such file (an unexpanded glob? quote-free shells need globstar for **)")
+        elif not supported(p):
+            problems.append(f"{a}: not a supported file type ({', '.join(sorted(PROSE_EXT | MARKUP_EXT))})")
+        else:
+            files.append(p)
+    return files, problems
+
+
+def fingerprint(f: dict) -> str:
+    return f"{f['file']}\t{f['rule']}\t{f['match']}"
+
+
+def report(findings: list[dict], form: str) -> None:
+    if form == "json":
+        print(json.dumps(findings, ensure_ascii=False, indent=1))
+        return
+    for f in findings:
+        if form == "github":
+            level = "error" if f["severity"] == "error" else "warning"
+            msg = f"[{f['rule']}] {f['match']}: {f['message']}" + (f" → {f['suggest']}" if f["suggest"] else "")
+            msg = msg.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+            print(f"::{level} file={f['file']},line={f['line']},col={f['col']}::{msg}")
+        else:
+            print(fmt(f))
+
+
+def take(argv: list[str], flag: str) -> str | None:
+    if flag in argv:
+        i = argv.index(flag)
+        if i + 1 >= len(argv):
+            sys.exit(f"style_check: {flag} needs a value")
+        value = argv[i + 1]
+        del argv[i:i + 2]
+        return value
+    return None
+
+
 def main(argv: list[str]) -> int:
+    argv = list(argv)
+    if not argv or argv[0] in ("-h", "--help"):
+        print(__doc__)
+        return 0 if argv else 2
+    if tomllib is None:
+        print("style_check: Python 3.11 or newer is required (tomllib); nothing was checked", file=sys.stderr)
+        return 0 if argv[:1] == ["--hook"] else 2
     rules = load_rules()
     if argv[:1] == ["--hook"]:
         return hook_mode(rules)
@@ -209,18 +311,65 @@ def main(argv: list[str]) -> int:
         for r in sorted(rules, key=lambda r: (r.kind, r.lang, r.id)):
             print(f"{r.severity:7} {r.kind:6} {r.lang:3} {r.id:28} {r.message}")
         return 0
-    if not argv:
-        print(__doc__)
+    form = take(argv, "--format") or "text"
+    if form not in ("text", "github", "json"):
+        print(f"style_check: unknown --format {form}", file=sys.stderr)
         return 2
-    findings = []
-    for a in argv:
-        findings += check_file(Path(a), rules)
-    for f in findings:
-        print(fmt(f))
+    stdin_name = take(argv, "--stdin-name") or "stdin.md"
+    baseline, write_baseline = take(argv, "--baseline"), take(argv, "--write-baseline")
+    warn_only = "--warn-only" in argv
+    argv = [a for a in argv if a != "--warn-only"]
+    unknown = [a for a in argv if a.startswith("--")]
+    if unknown:
+        print(f"style_check: unknown option {unknown[0]} (see --help)", file=sys.stderr)
+        return 2
+
+    findings, checked = [], 0
+    if "-" in argv:
+        argv.remove("-")
+        if not supported(Path(stdin_name)):
+            print(f"style_check: --stdin-name {stdin_name} is not a supported file type", file=sys.stderr)
+            return 2
+        findings += check_text(Path(stdin_name), sys.stdin.read(), rules)
+        checked += 1
+    files, problems = expand(argv)
+    for msg in problems:
+        print(f"style_check: {msg}", file=sys.stderr)
+    for f in files:
+        findings += check_file(f, rules)
+    checked += len(files)
+    if not checked:
+        print("style_check: nothing was checked", file=sys.stderr)
+        return 2
+
+    if write_baseline:
+        Path(write_baseline).write_text("\n".join(sorted(fingerprint(f) for f in findings)) + "\n", encoding="utf-8")
+        print(f"style: wrote {len(findings)} finding(s) to {write_baseline}", file=sys.stderr)
+        return 0
+    known = 0
+    if baseline:
+        base = Path(baseline).read_text(encoding="utf-8").splitlines() if Path(baseline).is_file() else []
+        remaining = {}
+        for b in base:
+            remaining[b] = remaining.get(b, 0) + 1
+        kept = []
+        for f in findings:
+            k = fingerprint(f)
+            if remaining.get(k):
+                remaining[k] -= 1
+                known += 1
+            else:
+                kept.append(f)
+        findings = kept
+
+    report(findings, form)
     errors = sum(f["severity"] == "error" for f in findings)
     warnings = len(findings) - errors
-    print(f"style: {errors} error(s), {warnings} warning(s) in {len(argv)} file(s)", file=sys.stderr)
-    return 1 if errors else 0
+    extra = f", {known} known (baseline)" if baseline else ""
+    print(f"style: {errors} error(s), {warnings} warning(s) in {checked} file(s){extra}", file=sys.stderr)
+    if problems:
+        return 2  # a path that was asked for but not checked must not pass silently, even with --warn-only
+    return 0 if warn_only else (1 if errors else 0)
 
 
 if __name__ == "__main__":

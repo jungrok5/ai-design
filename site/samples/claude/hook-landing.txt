@@ -1,0 +1,3 @@
+ai-design style check (github.com/jungrok5/ai-design, docs/standard.md) found AI-tone/AI-look patterns in the lines you just wrote. Fix the ones that are real in this context, only in those lines (keep facts, names and code unchanged; do not rewrite text you were not asked to touch); leave deliberate quotes with a `style-ignore` marker.
+index.html:92:3 warning [ui-raw-color] "border-left: 1px solid #2c383b" — Raw color outside the design tokens → var(--token) from the design system (default: polish-ui/design/tokens.css in ai-design); add a token if none fits
+index.html:99:15 warning [ui-raw-color] "background: #1d282b" — Raw color outside the design tokens → var(--token) from the design system (default: polish-ui/design/tokens.css in ai-design); add a token if none fits

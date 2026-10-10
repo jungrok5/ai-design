@@ -4,7 +4,7 @@ name: Pages
 on:
   push:
     branches: [main]
-    paths: ["site/**", "plugins/ai-design/skills/polish-ui/design/**", ".github/workflows/pages.yml"]
+    paths: ["site/**", "plugins/ai-design/**", "CHANGELOG.md", ".github/workflows/pages.yml"]
   workflow_dispatch:
 permissions:
   contents: read
@@ -24,6 +24,8 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0  # build.py resolves the rev recorded in CHANGELOG.md
       - name: Style check the page
         run: python3 plugins/ai-design/style/style_check.py site/index.html
       - name: Build

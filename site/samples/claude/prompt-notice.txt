@@ -1,0 +1,6 @@
+사내 개발자 블로그에 올릴 shipit 출시 공지 글을 announcement.md로 써 줘. 알려진 사실은 다음이 전부야.
+- shipit: 사내 배포 도구. 명령 하나(`shipit deploy staging`)로 스테이징에 배포
+- 배포 시간: 수동 평균 25분 → shipit 평균 4분 (2026년 3분기 사내 측정, 배포 212건)
+- 필요 조건: Kubernetes 1.28 이상, kubectl 로그인
+- 설치: `brew install acme/tap/shipit`, 롤백: `shipit rollback`
+- 문의: #platform 채널

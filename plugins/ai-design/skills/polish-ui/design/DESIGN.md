@@ -37,6 +37,7 @@ The writing standard (docs/standard.md §1-1) decides the form; this table says 
 | 2+ actors or branches | `.ds-figure` with a Mermaid diagram or element-built diagram | diagram before the prose that explains it |
 | Comparison, list of facts | `.ds-table` in `.ds-table-wrap` | header row in `--subtle`, no zebra stripes |
 | Grouping | `.ds-panel` (`--sunk` for a quieter group) | do not nest panels |
+| Long secondary content (full output, prompt, extra examples) | `<details class="ds-details">` with a one-line `<summary>` | the page reads complete with every one closed |
 | A remark that must not be missed | `.ds-note` (`--warn`, `--danger`) | at most one per section |
 | State, owner, kind | `.ds-badge` (`--accent`, `--ok`, `--warn`, `--danger`) | color means state, never decoration |
 | The one main action | `.ds-btn--primary` | one per view; others `.ds-btn` |

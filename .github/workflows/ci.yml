@@ -11,11 +11,27 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - name: Validate JSON manifests
-        run: for f in .claude-plugin/marketplace.json plugins/ai-design/.claude-plugin/plugin.json plugins/ai-design/hooks/hooks.json; do python3 -m json.tool "$f" > /dev/null; done
+        with:
+          fetch-depth: 0  # build.py resolves the rev recorded in CHANGELOG.md
+      - name: Validate JSON manifests and versions
+        run: |
+          for f in .claude-plugin/marketplace.json plugins/ai-design/.claude-plugin/plugin.json plugins/ai-design/hooks/hooks.json; do python3 -m json.tool "$f" > /dev/null; done
+          python3 - <<'EOF'
+          import json, re
+          m = json.load(open(".claude-plugin/marketplace.json"))
+          p = json.load(open("plugins/ai-design/.claude-plugin/plugin.json"))
+          versions = {"plugin.json": p["version"], "marketplace": m["version"], "marketplace entry": m["plugins"][0]["version"]}
+          top = re.search(r"^## (\d+\.\d+\.\d+)", open("CHANGELOG.md", encoding="utf-8").read(), re.M).group(1)
+          versions["CHANGELOG"] = top
+          assert len(set(versions.values())) == 1, versions
+          EOF
       - name: Style check tests
         run: python3 -m unittest discover -s tests -v
       - name: Style check on this repo
-        run: python3 plugins/ai-design/style/style_check.py README.md docs/*.md examples/*.html site/*.html adapters/*.md plugins/ai-design/skills/*/SKILL.md plugins/ai-design/skills/polish-ui/design/*
+        run: python3 plugins/ai-design/style/style_check.py README.md CHANGELOG.md docs examples site/index.html adapters plugins/ai-design/skills
+      - name: The GitHub Action on this change (annotations only)
+        uses: ./
+        with:
+          warn-only: "true"
       - name: Build the page (fills real checker output; fails on unfilled placeholders)
         run: python3 site/build.py

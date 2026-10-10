@@ -1,0 +1,61 @@
+name: ai-design style check
+description: Flag the AI tone in prose and the AI look in UI code on the files a pull request changed.
+author: jungrok5
+branding:
+  icon: check-square
+  color: blue
+
+inputs:
+  paths:
+    description: >-
+      Files or directories to check, space separated. Empty (the default) means the files this pull request or push
+      changed, limited to supported types.
+    required: false
+    default: ""
+  warn-only:
+    description: Report findings as annotations but never fail the job (for the first rollout week).
+    required: false
+    default: "false"
+  baseline:
+    description: Path to a baseline file written with --write-baseline; findings recorded there are not reported.
+    required: false
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - name: Check writing and UI style
+      shell: bash
+      env:
+        PATHS: ${{ inputs.paths }}
+        WARN_ONLY: ${{ inputs.warn-only }}
+        BASELINE: ${{ inputs.baseline }}
+        CHECK: ${{ github.action_path }}/plugins/ai-design/style/style_check.py
+        EVENT: ${{ github.event_name }}
+        BEFORE: ${{ github.event.before }}
+        PR_BASE: ${{ github.event.pull_request.base.sha }}
+      run: |
+        set -euo pipefail
+        args=(--format github)
+        [ "$WARN_ONLY" = "true" ] && args+=(--warn-only)
+        [ -n "$BASELINE" ] && args+=(--baseline "$BASELINE")
+        if [ -n "$PATHS" ]; then
+          read -r -a files <<<"$PATHS"
+        else
+          # The pull_request checkout is a merge commit: its first parent is the base, so the diff is the PR's own change.
+          if [ "$EVENT" = "pull_request" ] || [ "$EVENT" = "pull_request_target" ]; then
+            git rev-parse -q --verify HEAD^2 >/dev/null 2>&1 || git fetch -q --no-tags --deepen=1 origin "$GITHUB_SHA" || true
+            if git rev-parse -q --verify HEAD^2 >/dev/null 2>&1; then base=HEAD^1; else
+              git fetch -q --no-tags --depth=1 origin "$PR_BASE"; base=$PR_BASE; fi
+          elif [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ]; then
+            git fetch -q --no-tags --depth=1 origin "$BEFORE"; base=$BEFORE
+          else
+            echo "style: no base commit to diff against; set the paths input"; exit 0
+          fi
+          mapfile -t files < <(git diff --name-only --diff-filter=d "$base" HEAD \
+            | grep -E '\.(md|mdx|markdown|txt|html?|css|scss|jsx|tsx|vue|svelte|astro)$' || true)
+        fi
+        if [ "${#files[@]}" -eq 0 ]; then
+          echo "style: no changed files of a supported type"; exit 0
+        fi
+        python3 "$CHECK" "${args[@]}" "${files[@]}"
