@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>ai-design share image source</title>
+<!-- Source for ../img/og.png (1200x630), rendered by render.mjs. Uses the design system "Clear" and the two real
+     screenshots from site/img/ (same request and facts, Claude Code alone vs with ai-design, 2026-10-10). -->
+<link rel="stylesheet" href="../../plugins/ai-design/skills/polish-ui/design/tokens.css">
+<link rel="stylesheet" href="../../plugins/ai-design/skills/polish-ui/design/components.css">
+<style>
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  .card { box-sizing: border-box; width: 1200px; height: 630px; padding: var(--space-7) var(--space-8); display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-7); align-items: center; background: var(--bg); }
+  .name { font-family: var(--font-mono); font-size: 26px; font-weight: 500; color: var(--accent); }
+  .name span { color: var(--subtle); font-family: var(--font-sans); font-weight: 400; font-size: 22px; }
+  h1 { font-size: 46px; margin-top: var(--space-4); line-height: 1.25; letter-spacing: -0.02em; }
+  .sub { margin-top: var(--space-5); font-size: 22px; color: var(--muted); line-height: 1.55; }
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  .shot { border: var(--border); border-radius: var(--radius-l); overflow: hidden; height: 420px; background: var(--surface); }
+  .shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .cap { font-size: 18px; color: var(--subtle); margin-bottom: var(--space-2); }
+</style>
+</head>
+<body>
+<div class="card">
+  <div>
+    <div class="name">ai-design <span>· Claude Code 플러그인</span></div>
+    <h1>Claude Code가 쓰는 글과 화면에서 AI 티를 줄입니다</h1>
+    <p class="sub">글쓰기·화면 지침과 수정 직후 검사.<br>같은 요청으로 만든 랜딩 페이지 비교.</p>
+  </div>
+  <div class="shots">
+    <div><div class="cap">Claude Code만</div><div class="shot"><img src="../img/landing-without.png" alt=""></div></div>
+    <div><div class="cap">ai-design 설치 후</div><div class="shot"><img src="../img/landing-with.png" alt=""></div></div>
+  </div>
+</div>
+</body>
+</html>
