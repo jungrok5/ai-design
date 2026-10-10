@@ -3,7 +3,7 @@
 버전은 `plugins/ai-design/.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`에 같은 값으로 기록합니다.
 태그 대신 커밋 SHA를 적어 두므로 pre-commit과 GitHub Action에서는 이 SHA를 `rev`나 `uses`에 고정해 씁니다.
 
-## 1.3.0
+## 1.3.0 (`c1e0dc9`)
 
 - 검사기 명령줄:
   - 없는 경로, 지원하지 않는 파일, 검사한 파일이 없는 경우를 종료 코드 2로 처리. 따옴표 없이 넘긴 `**` glob이
