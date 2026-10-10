@@ -61,16 +61,21 @@ A page can pass every rule and still read as generated. Before you finish, read 
   threshold, a flag), say so next to it.
 - **Numbers carry their source.** Give a measurement its condition (`5 KB 파일 하나에 약 0.1초`, measured how). A count
   that changes with the code (rules, tests, files) appears once, and every document in the repo states the same value.
+  When parts and a total appear together, the parts add up to the total. Do not call a made-up sample "real" or "typical".
 - **Scope is the real precondition.** Replace `어느 프로젝트에나`, `모든`, `항상` with what is actually required. A tool
   page also says when not to use it and what it gets wrong.
 - **Say each point once.** A section does not open by restating its heading, and a later section repeats an earlier
-  fact only to add something new.
+  fact only to add something new. If a steps list or diagram shows a flow, the hero lead and the section text do not
+  narrate the same flow again.
 - **Break the stamp.** If three sections share one frame (number, heading, lead, body) or three sentences share one
-  shape (`X는 A로, Y는 B로`), change the form of at least one; let the content set the number of items.
+  shape (`X는 A로, Y는 B로`), change the form of at least one; let the content set the number of items. Splitting a
+  paired sentence into two matching short sentences is the same stamp. Do not run three or more short sentences in a
+  row; join a cause and its result in one sentence. Lists of exactly three examples need a reason to be three.
 - **Literal verbs, one subject.** Name what the thing does (`검사합니다`, `알립니다`, `막습니다`), not a metaphor
   (`걸러 냅니다`, `덜어 줍니다`). Keep one subject per sentence; do not start with the product and end with something else.
-- **One name per concept.** Do not rotate synonyms (흔적 / AI 티 / 신호) to avoid repetition. An internal name (a theme
-  or code name) gets a plain noun the first time.
+- **One name per concept, one concept per name.** Do not rotate synonyms (흔적 / AI 티, 결과 / 출력) to avoid
+  repetition, and do not use one word for two actors (the AI that wrote the text and the AI that fixes it). An internal
+  name (a theme or code name) gets a plain noun the first time.
 - **Say who made it and why**, when the reader will ask: one honest paragraph from facts you have, never invented.
 
 ## Output

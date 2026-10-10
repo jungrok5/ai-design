@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ai-design: AI 티 나는 글과 화면을 찾는 검사기와 스킬</title>
-<meta name="description" content="과장 수식어, 번역투, 보라색 그라데이션처럼 AI가 쓴 티를 내는 표현을 줄 번호와 함께 찾는 검사기와 Claude Code 스킬입니다.">
+<title>ai-design: AI 티 나는 글과 화면 코드를 찾는 검사기</title>
+<meta name="description" content="AI 도구가 쓴 글과 화면 코드에서 과장 수식어나 보라색 그라데이션 같은 표현을 찾아 파일과 줄 번호를 출력하는 검사기와 Claude Code 스킬입니다.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="design/tokens.css">
 <link rel="stylesheet" href="design/components.css">
@@ -13,7 +13,6 @@
 /* ai-design's own page, built only from its design system "Clear". Sample inputs and outputs are inserted by
    site/build.sh from site/samples/, so what the page shows is what the checker printed. */
 .container{max-width:1160px;margin:0 auto;padding-inline:var(--space-5)}
-.narrow{max-width:760px}
 @media (max-width:719px){.container{padding-inline:var(--space-4)}}
 
 .bar{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:var(--border)}
@@ -31,7 +30,7 @@
 .copy{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--space-5);min-width:0}
 .hero h1{font-size:var(--text-h1);line-height:1.2;letter-spacing:-.025em}
 .req{font-size:var(--text-s);color:var(--muted)}
-.cap{font-size:var(--text-s);font-weight:700;color:var(--subtle);margin-bottom:var(--space-2)}
+.cap{font-size:var(--text-s);color:var(--subtle);margin-bottom:var(--space-2)}
 .io{display:grid;gap:var(--space-4);min-width:0}
 .sample{margin:0;background:var(--surface);border:var(--border);border-radius:var(--radius-l);padding:var(--space-4);
   font:var(--text-s)/1.7 var(--font-mono);white-space:pre-wrap;overflow-wrap:anywhere}
@@ -40,6 +39,7 @@ section.block{padding:var(--space-7) 0;border-top:var(--border);scroll-margin-to
 .block h2{font-size:var(--text-h2);margin-bottom:var(--space-4)}
 .block .container > p, .prose p{max-width:var(--measure)}
 .prose{display:grid;gap:var(--space-4)}
+.prose > *{max-width:760px}
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-6);align-items:start}
 @media (max-width:900px){.split{grid-template-columns:minmax(0,1fr)}}
 .stack{display:grid;gap:var(--space-4);min-width:0}
@@ -71,7 +71,7 @@ footer{padding:var(--space-6) 0 var(--space-8);border-top:var(--border);font-siz
   <div class="container">
     <div class="copy">
       <h1>AI 티 나는 표현을 찾아 줄 번호와 함께 알립니다</h1>
-      <p class="ds-lede">과장 수식어, 번역투, 보라색 그라데이션처럼 AI가 쓴 티를 내는 표현을 정규식 규칙으로 검사합니다. Claude Code에서는 파일을 고칠 때마다 결과가 AI에게 전달됩니다. AI는 출력을 보고 같은 턴에서 고칩니다. 규칙으로 판단할 수 없는 문맥은 스킬 두 개(<code>polish-writing</code>, <code>polish-ui</code>)가 맡습니다.</p>
+      <p class="ds-lede">AI 도구가 쓴 글과 화면 코드에서 과장 수식어나 보라색 그라데이션 같은 표현을 정규식 규칙으로 찾고, 파일과 줄 번호, 고칠 방향을 출력합니다. 규칙으로 판단할 수 없는 문맥은 Claude Code 스킬 두 개(<code>polish-writing</code>, <code>polish-ui</code>)에 지침으로 적었습니다.</p>
       <p class="req">필요한 것: Python 3.11 이상. 검사 대상: Markdown, HTML, CSS, JSX/TSX, Vue, Svelte. 라이선스: MIT.</p>
       <div>
         <div class="cap">Claude Code에 설치</div>
@@ -96,10 +96,10 @@ claude plugin install ai-design@ai-design</pre><button type="button">복사</but
 </section>
 
 <section class="block" id="why">
-  <div class="container narrow prose">
+  <div class="container prose">
     <h2>만든 이유</h2>
-    <p><!-- style-ignore: quotes the phrases that started this --> 팀 템플릿 레포 <a href="https://github.com/jungrok5/ai-code-collaboration-best-practices">ai-code-collaboration-best-practices</a>의 문서와 해설 페이지를 AI 도구로 쓰다 보니, 리뷰 때마다 같은 지적이 반복됐습니다. 문서에 해요체와 합니다체가 섞이고, "일이 흘러가요" 같은 문장이 들어가고, 카드 왼쪽에 색 띠가 붙었습니다.</p>
-    <p>반복된 지적 가운데 정규식으로 잡히는 것은 규칙으로 옮겼습니다. 문맥을 봐야 하는 지적은 스킬 문서에 적었습니다. 다른 프로젝트에서도 쓰려고 2026년 10월 이 레포로 분리했습니다. 아직 첫 버전이고, 위 템플릿 레포에서만 써 봤습니다.</p>
+    <p><!-- style-ignore: quotes the phrase that started this --> 팀 템플릿 레포 <a href="https://github.com/jungrok5/ai-code-collaboration-best-practices">ai-code-collaboration-best-practices</a>의 문서를 AI 도구로 쓰면서 리뷰 때 같은 지적을 반복했습니다. 가장 많이 고친 것은 합니다체 문서에 섞인 해요체 문장과 "일이 흘러가요"처럼 일을 사람처럼 쓴 문장이었습니다.</p>
+    <p>정규식으로 잡히는 지적은 규칙으로 만들고 판단이 필요한 지적은 스킬 문서에 지침으로 적어 두었다가, 다른 프로젝트에서도 쓰려고 2026년 10월 이 레포로 분리했습니다. 아직 첫 버전이며 위 템플릿 레포와 이 레포에서만 써 봤습니다.</p>
   </div>
 </section>
 
@@ -107,15 +107,15 @@ claude plugin install ai-design@ai-design</pre><button type="button">복사</but
   <div class="container split">
     <div class="prose">
       <h2>Claude Code 안에서의 순서</h2>
-      <p>훅은 수정을 막지 않습니다. 결과를 AI에게 알리기만 하고, 고칠지는 AI와 사람이 정합니다. 일부러 인용한 나쁜 예시는 그 줄에 <code>style-ignore</code>를 표시합니다.</p>
-      <p>5–18 KB 파일 하나를 검사하는 데 0.07–0.11초가 걸렸습니다(4코어 클라우드 VM, Python 3.13, 5회 실행의 중앙값).</p>
+      <p>훅은 수정을 막지 않으므로 일부러 인용한 나쁜 예시도 그대로 저장됩니다. 그런 줄에는 <code>style-ignore</code>를 표시해 다음 검사에서 빠지게 합니다.</p>
+      <p>파일마다 5회씩 실행한 중앙값은 5–18 KB 파일에서 0.07–0.11초였습니다(4코어 클라우드 VM, Python 3.13).</p>
     </div>
     <ol class="ds-steps">
-      <li><div><h3>AI가 글이나 화면 파일을 수정</h3></div></li>
-      <li><div><h3>PostToolUse 훅이 <code>style_check.py</code> 실행</h3></div></li>
-      <li><div><h3>위반 위치와 고칠 방향을 AI에게 전달</h3></div></li>
-      <li><div><h3>AI가 같은 턴에서 수정</h3></div></li>
-      <li class="is-human"><div><h3>의도한 표현이면 사람이 <code>style-ignore</code> 표시</h3></div><span class="ds-who">사람</span></li>
+      <li><span>Claude가 글이나 화면 파일을 수정</span></li>
+      <li><span>PostToolUse 훅이 <code>style_check.py</code> 실행</span></li>
+      <li><span>검사 결과를 Claude에게 전달</span></li>
+      <li><span>Claude가 같은 턴에서 수정</span></li>
+      <li class="is-human"><span>의도한 표현이면 사람이 <code>style-ignore</code> 표시</span><span class="ds-who">사람</span></li>
     </ol>
   </div>
 </section>
@@ -123,7 +123,7 @@ claude plugin install ai-design@ai-design</pre><button type="button">복사</but
 <section class="block" id="ui">
   <div class="container stack">
     <h2>화면 코드도 같은 방식으로 검사합니다</h2>
-    <p>AI 코딩 도구가 자주 만드는 첫 화면을 그대로 넣은 결과입니다. 검사기는 색과 모양을 고르지 않습니다. 고를 때는 <code>polish-ui</code> 스킬이 프로젝트의 디자인 토큰을 먼저 찾고, 토큰이 없으면 이 레포의 기본 디자인 시스템 Clear를 씁니다. 이 페이지도 Clear의 토큰과 컴포넌트만 씁니다(<a href="https://github.com/jungrok5/ai-design/blob/main/site/index.html">소스</a>).</p>
+    <p>AI 코딩 도구의 기본값에서 흔히 보이는 패턴을 다섯 줄에 모은 예제입니다. 색과 모양을 고를 때는 <code>polish-ui</code> 스킬이 프로젝트의 디자인 토큰을 먼저 찾고, 토큰이 없으면 이 레포의 기본 디자인 시스템 Clear를 씁니다. 이 페이지의 색, 글꼴, 간격은 Clear 토큰입니다(<a href="https://github.com/jungrok5/ai-design/blob/main/site/index.html">소스</a>).</p>
     <div class="split">
       <div>
         <div class="cap">입력: card.html</div>
@@ -160,23 +160,23 @@ claude plugin install ai-design@ai-design</pre><button type="button">복사</but
       <div><dt>명령줄, CI</dt><dd><span><code>error</code>가 하나라도 있으면 종료 코드 1을 돌려줍니다.</span>
 <div class="ds-cmd"><pre>git clone --depth 1 https://github.com/jungrok5/ai-design ~/.ai-design
 python3 ~/.ai-design/plugins/ai-design/style/style_check.py README.md docs/*.md</pre><button type="button">복사</button></div></dd></div>
-      <div><dt>Cursor, Copilot, AGENTS.md</dt><dd><span><a href="https://github.com/jungrok5/ai-design/tree/main/adapters">adapters/</a>의 규칙 파일을 각 도구의 규칙 폴더에 복사합니다. 이 도구들에는 수정 직후 훅이 없으므로 pre-commit과 함께 씁니다.</span></dd></div>
+      <div><dt>Cursor, Copilot, AGENTS.md</dt><dd><span><a href="https://github.com/jungrok5/ai-design/tree/main/adapters">adapters/</a>의 규칙 파일을 각 도구의 규칙 폴더에 복사합니다. 이 도구들에는 수정 직후 검사가 없습니다.</span></dd></div>
     </dl>
   </div>
 </section>
 
 <section class="block" id="limits">
-  <div class="container narrow prose">
+  <div class="container prose">
     <h2>한계</h2>
     <ul class="limits">
       <li>정규식이라 문맥을 모릅니다. "~을 통해"가 자연스러운 문장도 있어서 이런 규칙은 경고로만 둡니다.</li>
       <li>일부 규칙은 한 파일에 여러 번 나올 때만 알립니다(<code>max_per_file</code>). 예를 들어 "~을 통해"는 세 번째부터 경고합니다.</li>
-      <li>문장을 검사할 뿐 페이지 구성은 보지 않습니다. 모든 절이 같은 틀이거나 같은 사실을 반복하는 문제는 스킬 지침과 사람의 리뷰로 잡습니다.</li>
+      <li>문장만 검사합니다. 페이지 전체 구성(섹션 반복, 사실 중복)은 검사하지 않습니다.</li>
       <li>한국어 규칙은 합니다체 문서를 기준으로 합니다. 해요체를 쓰는 제품 화면은 <code>ko-haeyo</code> 규칙을 꺼야 합니다.</li>
-      <li>영어 규칙은 <!--COUNT:en-->개로 한국어(<!--COUNT:ko-->개)보다 적습니다. 영어 문서만 있는 레포에서는 잡는 범위가 좁습니다.</li>
+      <li>영어 규칙은 <!--COUNT:en-->개로 한국어 <!--COUNT:ko-->개보다 적어, 영어 문서만 있는 레포에서는 잡는 범위가 좁습니다.</li>
       <li>광고 문구처럼 의도적으로 수사를 쓰는 글에는 맞지 않습니다.</li>
     </ul>
-    <p>규칙을 끄거나 추가할 때는 프로젝트 루트의 <code>.style/rules.toml</code>에 플러그인의 <code>rules.toml</code>과 같은 형식으로 적습니다. 현재 규칙은 <!--COUNT:all-->개이고, 전체 목록은 <code>style_check.py --list-rules</code>로 확인합니다.</p>
+    <p>규칙을 끄거나 추가할 때는 프로젝트 루트의 <code>.style/rules.toml</code>에 플러그인의 <code>rules.toml</code>과 같은 형식으로 적습니다. 현재 규칙은 한국어 <!--COUNT:ko-->개, 영어 <!--COUNT:en-->개, 언어 공통 <!--COUNT:any-->개, 화면 코드 <!--COUNT:ui-->개로 모두 <!--COUNT:all-->개이고, 전체 목록은 <code>style_check.py --list-rules</code>로 확인합니다.</p>
     <div class="ds-cmd"><pre>[[rule]]
 id = "ko-haeyo"
 severity = "off"</pre><button type="button">복사</button></div>

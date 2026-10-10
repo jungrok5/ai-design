@@ -76,6 +76,15 @@ class StyleCheck(unittest.TestCase):
         body = "# 예\n\n" + "".join(f"<!-- style-ignore --> 이 API를 통해 {i}\n" for i in range(5)) + "이 API를 통해 조회합니다.\n"
         self.assertNotIn("ko-tonghae", run("i.md", body).stdout)
 
+    def test_korean_messages_use_one_register(self):
+        """The checker's own Korean messages and suggestions are noun phrases, never 해요체 or imperatives."""
+        import re
+        import tomllib
+        rules = tomllib.loads(CHECK.with_name("rules.toml").read_text(encoding="utf-8"))["rule"]
+        bad = [r["id"] for r in rules for key in ("message", "suggest")
+               if re.search(r"(세요|십시오|[가-힣]요)[ .)]*$|(세요|십시오)[ .,)]", r.get(key, ""))]
+        self.assertEqual(bad, [])
+
 
 if __name__ == "__main__":
     unittest.main()

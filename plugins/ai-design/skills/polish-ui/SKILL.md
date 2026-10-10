@@ -60,6 +60,8 @@ counts under the hero: state a number once, where it is evidence.
   layout from its content; if three sections in a row share one layout, change one.
 - A table with two short columns is a list (`<dl>`). Never force a table wider than a 375 px screen; let it wrap or
   stack.
+- Keep one left edge: a narrow section narrows its max-width but stays on the same left line as the wide ones.
+- A list item with no body is plain text, not a heading; headings mark sections, not every line.
 - Do not tell states apart by color alone (before/after, pass/fail): add a symbol or a label (WCAG 1.4.1).
 - Font sizes come from the type scale tokens; one-pixel steps (16, 17, 19, 20, 21) blur the hierarchy.
 

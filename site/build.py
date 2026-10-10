@@ -3,7 +3,7 @@
 The page source (site/index.html) has placeholders that are filled here, so nothing on the page is typed by hand:
   <!--SAMPLE:name-->  the sample input from site/samples/name (escaped)
   <!--OUTPUT:stem-->  what style_check.py printed for that sample, run now, plus its exit code
-  <!--COUNT:all|ko|en-->  number of rules from --list-rules
+  <!--COUNT:all|ko|en|any|ui-->  number of rules from --list-rules
   <!--REV-->          the commit being built (a valid pre-commit rev)
 """
 import html
@@ -26,15 +26,19 @@ def run_sample(name: str) -> str:
     lines = []
     for line in (r.stdout + r.stderr).splitlines():
         cls = "ds-err" if " error [" in line else "ds-warn" if " warning [" in line else "ds-prompt"
-        lines.append(f'<span class="{cls}">{html.escape(line)}</span>')
+        loc = re.match(r"^(\S+:\d+:\d+) (.*)$", line)  # gray file:line:col, colored finding
+        body = f'<span class="ds-prompt">{html.escape(loc.group(1))}</span> {html.escape(loc.group(2))}' if loc else html.escape(line)
+        lines.append(f'<span class="{cls}">{body}</span>')
     lines.append(f'<span class="ds-prompt">exit {r.returncode}</span>')
     return "\n".join(lines)
 
 
 def rule_counts() -> dict:
     rows = subprocess.run([sys.executable, str(CHECK), "--list-rules"], capture_output=True, text=True).stdout.splitlines()
-    langs = [r.split()[2] for r in rows if r.strip()]
-    return {"all": len(langs), "ko": langs.count("ko"), "en": langs.count("en")}
+    rows = [r.split() for r in rows if r.strip()]
+    kinds = [(r[1], r[2]) for r in rows]
+    return {"all": len(rows), "ko": sum(lang == "ko" for _, lang in kinds), "en": sum(lang == "en" for _, lang in kinds),
+            "any": sum(kind == "prose" and lang == "any" for kind, lang in kinds), "ui": sum(kind == "markup" for kind, _ in kinds)}
 
 
 def main() -> None:

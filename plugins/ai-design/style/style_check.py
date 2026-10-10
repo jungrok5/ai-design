@@ -124,18 +124,24 @@ def check_file(path: Path, rules: list[Rule]) -> list[dict]:
         body = views.get(rule.kind)
         if body is None or (rule.lang == "ko" and not has_ko):
             continue
-        hits = []
+        hits, seen_lines, total = [], set(), 0
+        has_hit = "hit" in rule.pattern.groupindex  # a (?P<hit>…) group narrows what is reported
         for m in rule.pattern.finditer(body):
-            line = body.count("\n", 0, m.start()) + 1
+            start = m.start("hit") if has_hit and m.group("hit") is not None else m.start()
+            line = body.count("\n", 0, start) + 1
             if line in skip:
                 continue
-            col = m.start() - (body.rfind("\n", 0, m.start()) + 1) + 1
+            total += 1  # max_per_file counts every occurrence outside style-ignore lines
+            if line in seen_lines:  # but each rule is reported once per line
+                continue
+            seen_lines.add(line)
+            col = start - (body.rfind("\n", 0, start) + 1) + 1
+            text = m.group("hit") if has_hit and m.group("hit") is not None else m.group(0)
             hits.append({"file": str(path), "line": line, "col": col, "rule": rule.id, "severity": rule.severity,
-                         "match": m.group(0).strip()[:60], "message": rule.message, "suggest": rule.suggest})
-        if rule.max_per_file and len(hits) <= rule.max_per_file:
+                         "match": text.strip()[:60], "message": rule.message, "suggest": rule.suggest})
+        if rule.max_per_file and total <= rule.max_per_file:
             continue
         if rule.max_per_file:
-            total = len(hits)  # style-ignore lines are already left out
             hits = hits[:1]
             hits[0]["message"] += f" ({total}회, 기준 {rule.max_per_file}회)"
         findings += hits
