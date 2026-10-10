@@ -1,0 +1,10 @@
+# Use from another repo's .pre-commit-config.yaml:
+#   - repo: https://github.com/jungrok5/ai-design
+#     rev: v1.0.0
+#     hooks: [{ id: ai-design-style }]
+- id: ai-design-style
+  name: Writing and UI style (AI tone / AI look)
+  description: Flags the AI tone in prose and the AI look in UI code (ai-design rules). Needs Python 3.11+.
+  entry: plugins/ai-design/style/style_check.py
+  language: script
+  files: \.(md|mdx|html?|css|scss|jsx|tsx|vue|svelte|astro)$

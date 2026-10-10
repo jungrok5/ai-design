@@ -1,0 +1,20 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
+  "name": "ai-design",
+  "version": "1.0.0",
+  "description": "Writing and visual style skills, a style check and a default design system for any project.",
+  "owner": {
+    "name": "jungrok5",
+    "url": "https://github.com/jungrok5/ai-design"
+  },
+  "plugins": [
+    {
+      "name": "ai-design",
+      "source": "./plugins/ai-design",
+      "description": "polish-writing and polish-ui skills, the bundled design system \"Clear\", and a style check after every edit.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": ["writing", "ui", "design-system", "style"]
+    }
+  ]
+}

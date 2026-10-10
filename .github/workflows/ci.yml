@@ -1,0 +1,19 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Validate JSON manifests
+        run: for f in .claude-plugin/marketplace.json plugins/ai-design/.claude-plugin/plugin.json plugins/ai-design/hooks/hooks.json; do python3 -m json.tool "$f" > /dev/null; done
+      - name: Style check tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Style check on this repo
+        run: python3 plugins/ai-design/style/style_check.py README.md docs/*.md examples/*.html adapters/*.md plugins/ai-design/skills/*/SKILL.md plugins/ai-design/skills/polish-ui/design/*
