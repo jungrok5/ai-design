@@ -43,6 +43,10 @@ section.block{padding:var(--space-7) 0;border-top:var(--border);scroll-margin-to
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-6);align-items:start}
 @media (max-width:900px){.split{grid-template-columns:minmax(0,1fr)}}
 .stack{display:grid;gap:var(--space-4);min-width:0}
+.block h3.sub{font-size:var(--text-h3);margin-top:var(--space-5)}
+.preview{border:var(--border);border-radius:var(--radius-l);padding:var(--space-5)}
+.preview .hero{padding:0;display:grid;gap:var(--space-3);justify-items:start}
+.preview h1{font-size:var(--text-h2)}
 
 .ways{margin:0;display:grid;gap:0}
 .ways > div{display:grid;grid-template-columns:200px minmax(0,1fr);gap:var(--space-2) var(--space-5);padding:var(--space-4) 0;border-top:var(--border)}
@@ -58,7 +62,7 @@ footer{padding:var(--space-6) 0 var(--space-8);border-top:var(--border);font-siz
 <header class="bar">
   <div class="container">
     <a class="brand" href="#top">ai-design</a>
-    <nav aria-label="페이지 목차"><a href="#why">만든 이유</a><a href="#ui">화면 검사</a><a href="#install">설치</a><a href="#limits">한계</a></nav>
+    <nav aria-label="페이지 목차"><a href="#compare">사용 전후</a><a href="#install">설치</a><a href="#limits">한계</a></nav>
     <div class="bar-actions">
       <button class="ds-btn theme-toggle" type="button" aria-pressed="false">다크 모드</button>
       <a class="ds-btn" href="https://github.com/jungrok5/ai-design">GitHub</a>
@@ -95,13 +99,6 @@ claude plugin install ai-design@ai-design</pre><button type="button">복사</but
   </div>
 </section>
 
-<section class="block" id="why">
-  <div class="container prose">
-    <h2>만든 이유</h2>
-    <p><!-- style-ignore: quotes the phrase that started this --> 팀 템플릿 레포 <a href="https://github.com/jungrok5/ai-code-collaboration-best-practices">ai-code-collaboration-best-practices</a>의 문서를 AI 도구로 쓰면서 리뷰 때 같은 지적을 반복했습니다. 가장 많이 고친 것은 합니다체 문서에 섞인 해요체 문장과 "일이 흘러가요"처럼 일을 사람처럼 쓴 문장이었습니다.</p>
-    <p>정규식으로 잡히는 지적은 규칙으로 만들고 판단이 필요한 지적은 스킬 문서에 지침으로 적어 두었다가, 다른 프로젝트에서도 쓰려고 2026년 10월 이 레포로 분리했습니다. 아직 첫 버전이며 위 템플릿 레포와 이 레포에서만 써 봤습니다.</p>
-  </div>
-</section>
 
 <section class="block">
   <div class="container split">
@@ -120,23 +117,51 @@ claude plugin install ai-design@ai-design</pre><button type="button">복사</but
   </div>
 </section>
 
-<section class="block" id="ui">
+<section class="block" id="compare">
   <div class="container stack">
-    <h2>화면 코드도 같은 방식으로 검사합니다</h2>
-    <p>AI 코딩 도구의 기본값에서 흔히 보이는 패턴을 다섯 줄에 모은 예제입니다. 색과 모양을 고를 때는 <code>polish-ui</code> 스킬이 프로젝트의 디자인 토큰을 먼저 찾고, 토큰이 없으면 이 레포의 기본 디자인 시스템 Clear를 씁니다. 이 페이지의 색, 글꼴, 간격은 Clear 토큰입니다(<a href="https://github.com/jungrok5/ai-design/blob/main/site/index.html">소스</a>).</p>
+    <h2>사용 전후</h2>
+    <p>같은 사실을 고치기 전과 후로 나란히 놓고 둘 다 검사했습니다. "후"는 <code>polish-writing</code>과 <code>polish-ui</code>의 지침대로 다시 쓴 것이며, 원문에 주어진 제품 사실만 썼습니다.</p>
+
+    <h3 class="sub">글: 랜딩 페이지 소개 문단</h3>
+    <p class="req">주어진 제품 사실: URL을 입력하면 ChatGPT, Perplexity, Gemini 답변에 사이트가 인용되는지 검사하고 고칠 항목을 알려 줌.</p>
     <div class="split">
-      <div>
-        <div class="cap">입력: card.html</div>
+      <div class="stack">
+        <div class="cap">전: landing-before.md</div>
 <!-- style-ignore-start -->
-<pre class="sample"><!--SAMPLE:card.html--></pre>
+<pre class="sample"><!--SAMPLE:landing-before.md--></pre>
 <!-- style-ignore-end -->
+<pre class="ds-output"><span class="ds-prompt">$ python3 style_check.py landing-before.md</span>
+<!--OUTPUT:landing-before--></pre>
       </div>
-      <div>
-        <div class="cap">실제 출력</div>
-<pre class="ds-output"><span class="ds-prompt">$ python3 style_check.py card.html</span>
-<!--OUTPUT:card--></pre>
+      <div class="stack">
+        <div class="cap">후: landing-after.md</div>
+<pre class="sample"><!--SAMPLE:landing-after.md--></pre>
+<pre class="ds-output"><span class="ds-prompt">$ python3 style_check.py landing-after.md</span>
+<!--OUTPUT:landing-after--></pre>
       </div>
     </div>
+
+    <h3 class="sub">화면 코드: 제품 첫 화면</h3>
+    <p class="req">주어진 제품 사실: 읽기 지연 1 ms 미만(p99, 단일 노드 벤치마크), 명령 예시 <code>SET user:1 "kim"</code>.</p>
+    <div class="split">
+      <div class="stack">
+        <div class="cap">전: card-before.html</div>
+<!-- style-ignore-start -->
+<pre class="sample"><!--SAMPLE:card-before.html--></pre>
+<!-- style-ignore-end -->
+<pre class="ds-output"><span class="ds-prompt">$ python3 style_check.py card-before.html</span>
+<!--OUTPUT:card-before--></pre>
+      </div>
+      <div class="stack">
+        <div class="cap">후: card-after.html</div>
+<pre class="sample"><!--SAMPLE:card-after.html--></pre>
+<pre class="ds-output"><span class="ds-prompt">$ python3 style_check.py card-after.html</span>
+<!--OUTPUT:card-after--></pre>
+        <div class="cap">후 화면을 Clear로 그린 모습</div>
+        <div class="preview" inert><!--RAW:card-after.html--></div>
+      </div>
+    </div>
+    <p>검사기는 표현을 찾을 뿐 색과 모양을 고르지 않습니다. 색과 모양은 <code>polish-ui</code> 스킬이 프로젝트의 디자인 토큰에서 고르고, 토큰이 없으면 기본 디자인 시스템 Clear를 씁니다. 이 페이지의 색, 글꼴, 간격도 Clear 토큰입니다(<a href="https://github.com/jungrok5/ai-design/blob/main/site/index.html">소스</a>).</p>
   </div>
 </section>
 

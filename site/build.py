@@ -2,6 +2,7 @@
 
 The page source (site/index.html) has placeholders that are filled here, so nothing on the page is typed by hand:
   <!--SAMPLE:name-->  the sample input from site/samples/name (escaped)
+  <!--RAW:name-->     the sample as live markup (only for samples built from Clear components)
   <!--OUTPUT:stem-->  what style_check.py printed for that sample, run now, plus its exit code
   <!--COUNT:all|ko|en|any|ui-->  number of rules from --list-rules
   <!--REV-->          the commit being built (a valid pre-commit rev)
@@ -44,13 +45,14 @@ def rule_counts() -> dict:
 def main() -> None:
     page = (ROOT / "site/index.html").read_text(encoding="utf-8")
     page = re.sub(r"<!--SAMPLE:([\w.-]+)-->", lambda m: html.escape((SAMPLES / m.group(1)).read_text(encoding="utf-8").rstrip("\n")), page)
+    page = re.sub(r"<!--RAW:([\w.-]+)-->", lambda m: (SAMPLES / m.group(1)).read_text(encoding="utf-8"), page)
     names = {p.stem: p.name for p in SAMPLES.iterdir()}
     page = re.sub(r"<!--OUTPUT:([\w-]+)-->", lambda m: run_sample(names[m.group(1)]), page)
     counts = rule_counts()
     page = re.sub(r"<!--COUNT:(\w+)-->", lambda m: str(counts[m.group(1)]), page)
     rev = os.environ.get("GITHUB_SHA") or subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True).stdout.strip()
     page = page.replace("<!--REV-->", rev)
-    left = re.findall(r"<!--(SAMPLE|OUTPUT|COUNT|REV)[^>]*-->", page)
+    left = re.findall(r"<!--(SAMPLE|OUTPUT|COUNT|REV|RAW)[^>]*-->", page)
     if left:
         sys.exit(f"build.py: unfilled placeholders {left}")
     shutil.rmtree(OUT, ignore_errors=True)
