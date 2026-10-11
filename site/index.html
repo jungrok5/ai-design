@@ -361,7 +361,7 @@ severity = "off"</pre><button type="button">복사</button></div>
   <div class="container stack">
     <h2>한계</h2>
     <ul class="limits">
-      <li>정규식이라 문맥을 모릅니다. 자연스러운 경우가 많은 규칙은 warning으로 두었습니다. 일부는 한 파일에 여러 번 나올 때만 보고합니다(<code>max_per_file</code>).</li>
+      <li>정규식이라 문맥을 모릅니다. 자연스러운 경우가 많은 규칙은 warning으로 두었습니다. 일부는 한 파일에 여러 번 나오거나 1,000단어당 일정 횟수를 넘을 때만 보고합니다(<code>max_per_file</code>, <code>max_per_1k</code>).</li>
       <li>문장 단위로만 검사합니다. 섹션 반복이나 같은 사실의 중복 같은 페이지 구성은 지침 스킬에만 적혀 있습니다.</li>
       <li>사용 전후 비교는 작업마다 한 번씩 실행한 결과입니다. 같은 요청도 실행할 때마다 결과가 달라집니다. 비교 뒤에 그 결과에서 본 표현을 잡는 규칙 4개(<code>ko-question-heading</code>, <code>ko-slogan</code>, <code>ko-cta-now</code>, <code>ui-default-accent</code>)를 추가했으므로, 비교에 붙은 검사 결과는 독립적인 근거가 아닙니다.</li>
     </ul>

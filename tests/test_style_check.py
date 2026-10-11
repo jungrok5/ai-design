@@ -114,6 +114,16 @@ class StyleCheck(unittest.TestCase):
     def test_double_passive_past_tense(self):
         self.assertIn("ko-double-passive", run("p.md", "# t\n\n문서가 작성되어졌다.\n").stdout)
 
+    def test_density_threshold_spares_long_files(self):
+        # 1.5.1: en-filler-words and dash-overuse count per 1,000 words, so a long doc is not flagged for its length.
+        filler = "We just need the cache. " * 5
+        self.assertIn("en-filler-words", run("s.md", "# t\n\n" + filler + "\n").stdout)
+        long_text = "# t\n\n" + filler + "\n\n" + "The worker reads each record from the queue and writes it. " * 200 + "\n"
+        self.assertNotIn("en-filler-words", run("l.md", long_text).stdout)
+        dashes = "Cache it \u2014 then ship it. " * 6
+        self.assertIn("dash-overuse", run("d.md", "# t\n\n" + dashes + "\n").stdout)
+        self.assertNotIn("dash-overuse", run("e.md", "# t\n\n" + dashes + "\n\n" + "The worker writes each record. " * 200 + "\n").stdout)
+
     def test_structure_level_korean_tells(self):
         out = run("t.md", "# 소개\n\n이 도구는 어느 프로젝트에나 붙일 수 있습니다.\n"
                   "화면이 비슷해 보이는 이유는 기본값을 쓰기 때문입니다.\n"

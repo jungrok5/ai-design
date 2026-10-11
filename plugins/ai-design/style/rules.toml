@@ -8,6 +8,8 @@
 #           markup  = raw HTML/CSS/JSX/TSX/Vue/Svelte source
 #           register= Korean speech level mixing (합니다체 vs 해요체) in one file
 # max_per_file: report only when the pattern occurs more often than this in one file.
+# max_per_1k:   and more often than this per 1,000 words (English words, Korean eojeol), so long files are not
+#               flagged just for being long.
 #
 # Pattern ideas are adapted from MIT/Apache-2.0 sources (blader/humanizer, epoko77-ai/im-not-ai,
 # DaleSeo/korean-skills, vercel-labs/writing-guidelines and web-interface-guidelines, anthropics/skills
@@ -615,6 +617,7 @@ pattern = '\b(easily|simply|just|very|really)\b'
 message = "Filler word"
 suggest = "delete"
 max_per_file = 3
+max_per_1k = 4  # 1.5.1: human English docs 25% -> 6%, AI-written columns still 3/8 (docs/measurement.md)
 
 [[rule]]
 id = "en-vague-authority"
@@ -813,6 +816,7 @@ pattern = '(?<!\|) [—–] (?!\|)'  # a dash alone in a table cell means "none"
 message = "Em/en dash used as punctuation"
 suggest = "쉼표, 콜론, 괄호 / comma, colon, parentheses"
 max_per_file = 4
+max_per_1k = 8  # 1.5.1: human English docs 23% -> 3%, Korean 5% -> 2%
 
 # ───────────────────────── UI markup (HTML/CSS/JSX/TSX) ─────────────────────────
 

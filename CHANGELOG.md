@@ -3,6 +3,13 @@
 버전은 `plugins/ai-design/.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`에 같은 값으로 기록합니다.
 태그 대신 커밋 SHA를 적어 두므로 pre-commit과 GitHub Action에서는 이 SHA를 `rev`나 `uses`에 고정해 씁니다.
 
+## 1.5.1
+
+- 규칙 옵션 `max_per_1k`: 1,000단어당 이 횟수를 넘을 때만 보고. 긴 파일이 길다는 이유로 보고되지 않음
+- `en-filler-words`(1,000단어당 4회)와 `dash-overuse`(8회)에 적용. 시험용 사람 영어 문서에서 보고 비율이 각각
+  26.0%에서 3.3%, 27.3%에서 4.0%로 줄었고 AI가 쓴 칼럼에서의 보고는 그대로
+  ([docs/measurement.md](docs/measurement.md#오픈소스-검출기의-패턴))
+
 ## 1.5.0 (`dd0ea88`)
 
 <!-- style-ignore-start -->

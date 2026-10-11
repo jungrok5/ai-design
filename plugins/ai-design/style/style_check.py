@@ -42,6 +42,7 @@ HERE = Path(__file__).resolve().parent
 PROSE_EXT = {".md", ".mdx", ".markdown", ".txt", ".html", ".htm"}
 MARKUP_EXT = {".html", ".htm", ".css", ".scss", ".jsx", ".tsx", ".vue", ".svelte", ".astro"}
 HANGUL = re.compile(r"[가-힣]")
+WORD = re.compile(r"[A-Za-z]+|[가-힣]+")  # English words and Korean eojeol-ish runs, for max_per_1k
 
 
 @dataclass
@@ -54,6 +55,7 @@ class Rule:
     message: str
     suggest: str = ""
     max_per_file: int = 0  # >0: only report when the pattern occurs more than this many times in the file
+    max_per_1k: float = 0  # >0: and more than this many times per 1,000 words, so long files are not flagged for length
 
 
 def load_rules() -> list[Rule]:
@@ -75,7 +77,8 @@ def load_rules() -> list[Rule]:
         flags = re.IGNORECASE if r.get("ignore_case", r.get("lang") == "en") else 0
         rules.append(Rule(id=r["id"], kind=r.get("kind", "prose"), lang=r.get("lang", "any"),
                           severity=r.get("severity", "warning"), pattern=re.compile(r["pattern"], flags),
-                          message=r["message"], suggest=r.get("suggest", ""), max_per_file=int(r.get("max_per_file", 0))))
+                          message=r["message"], suggest=r.get("suggest", ""), max_per_file=int(r.get("max_per_file", 0)),
+                          max_per_1k=float(r.get("max_per_1k", 0))))
     return rules
 
 
@@ -160,11 +163,16 @@ def check_text(path: Path, text: str, rules: list[Rule]) -> list[dict]:
             text = m.group("hit") if has_hit and m.group("hit") is not None else m.group(0)
             hits.append({"file": str(path), "line": line, "col": col, "rule": rule.id, "severity": rule.severity,
                          "match": text.strip()[:60], "message": rule.message, "suggest": rule.suggest})
-        if rule.max_per_file and total <= rule.max_per_file:
+        limit = rule.max_per_file
+        if rule.max_per_1k:
+            words = len(WORD.findall(body))
+            limit = max(limit, int(rule.max_per_1k * words / 1000))
+        if limit and total <= limit:
             continue
-        if rule.max_per_file:
+        if limit:
             hits = hits[:1]
-            hits[0]["message"] += f" ({total}회, 기준 {rule.max_per_file}회)"
+            per = f", 1,000단어당 {rule.max_per_1k:g}회" if rule.max_per_1k else ""
+            hits[0]["message"] += f" ({total}회, 기준 {limit}회{per})"
         findings += hits
     return sorted(findings, key=lambda f: (f["file"], f["line"], f["col"]))
 
