@@ -1,0 +1,692 @@
+[
+ {
+  "id": "react.-00",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/reference/react-dom/server/renderToPipeableStream.md",
+  "title": "renderToPipeableStream",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "react.-01",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/community/acknowledgements.md",
+  "title": "Acknowledgements",
+  "kind": "a page of the official React documentation",
+  "words": 250,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "react.-02",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/blog/2022/03/08/react-18-upgrade-guide.md",
+  "title": "How to Upgrade to React 18",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "react.-03",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/learn/sharing-state-between-components.md",
+  "title": "Sharing State Between Components",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "react.-04",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/learn/removing-effect-dependencies.md",
+  "title": "Removing Effect Dependencies",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "react.-05",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/learn/react-compiler/incremental-adoption.md",
+  "title": "Incremental Adoption",
+  "kind": "a page of the official React documentation",
+  "words": 654,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "react.-06",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/learn/adding-interactivity.md",
+  "title": "Adding Interactivity",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "react.-07",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/blog/2026/09/09/react-19-3.md",
+  "title": "React 19.3",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "react.-08",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/reference/rsc/server-functions.md",
+  "title": "Server Functions",
+  "kind": "a page of the official React documentation",
+  "words": 622,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "react.-09",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/reference/react-dom/client/createRoot.md",
+  "title": "createRoot",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "react.-10",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/blog/2025/10/16/react-conf-2025-recap.md",
+  "title": "React Conf 2025 Recap",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "react.-11",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/reference/react-dom/components/textarea.md",
+  "title": "",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "react.-12",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/reference/react/hooks.md",
+  "title": "Built-in React Hooks",
+  "kind": "a page of the official React documentation",
+  "words": 599,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "react.-13",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/blog/2022/06/15/react-labs-what-we-have-been-working-on-june-2022.md",
+  "title": "React Labs: What We've Been Working On – June 2022",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "react.-14",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/blog/2022/03/29/react-v18.md",
+  "title": "React v18.0",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "react.-15",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/blog/2025/12/03/critical-security-vulnerability-in-react-server-components.md",
+  "title": "Critical Security Vulnerability in React Server Components",
+  "kind": "a page of the official React documentation",
+  "words": 777,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "react.-16",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/learn/queueing-a-series-of-state-updates.md",
+  "title": "Queueing a Series of State Updates",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "react.-17",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/learn/react-compiler/introduction.md",
+  "title": "Introduction",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "react.-18",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/reference/react/useRef.md",
+  "title": "useRef",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "react.-19",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/reference/react-dom/flushSync.md",
+  "title": "flushSync",
+  "kind": "a page of the official React documentation",
+  "words": 616,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "react.-20",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/versions.md",
+  "title": "React Versions",
+  "kind": "a page of the official React documentation",
+  "words": 608,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "react.-21",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/reference/react-dom/components/img.md",
+  "title": "",
+  "kind": "a page of the official React documentation",
+  "words": 709,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "react.-22",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/learn/managing-state.md",
+  "title": "Managing State",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "react.-23",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/reference/rsc/use-client.md",
+  "title": "'use client'",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "react.-24",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/reference/react/forwardRef.md",
+  "title": "forwardRef",
+  "kind": "a page of the official React documentation",
+  "words": 860,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "react.-25",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/learn/react-compiler/debugging.md",
+  "title": "Debugging and Troubleshooting",
+  "kind": "a page of the official React documentation",
+  "words": 597,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "react.-26",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/reference/react/use.md",
+  "title": "use",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "react.-27",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/reference/react-dom/components/style.md",
+  "title": "style",
+  "kind": "a page of the official React documentation",
+  "words": 440,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "react.-28",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/learn/state-a-components-memory.md",
+  "title": "State: A Component's Memory",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "react.-29",
+  "repo": "react.dev",
+  "path": "react.dev/CONTRIBUTING.md",
+  "title": "Contributing",
+  "kind": "a page of the official React documentation",
+  "words": 678,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "react.-30",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/learn/describing-the-ui.md",
+  "title": "Describing the UI",
+  "kind": "a page of the official React documentation",
+  "words": 900,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "react.-31",
+  "repo": "react.dev",
+  "path": "react.dev/src/content/reference/react-dom/static/resumeAndPrerender.md",
+  "title": "resumeAndPrerender",
+  "kind": "a page of the official React documentation",
+  "words": 423,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "es-too-00",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ai-integration.md",
+  "title": "AI Integration",
+  "kind": "a page of the API reference of a JavaScript utility library",
+  "words": 256,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "es-too-01",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/reference/string/dedent.md",
+  "title": "dedent",
+  "kind": "a page of the API reference of a JavaScript utility library",
+  "words": 271,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "es-too-02",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/AGENTS.md",
+  "title": "es-toolkit LLM coding agent instructions",
+  "kind": "a page of the API reference of a JavaScript utility library",
+  "words": 759,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "es-too-03",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/browser-support.md",
+  "title": "Browser Support",
+  "kind": "a page of the API reference of a JavaScript utility library",
+  "words": 357,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "es-too-04",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/CHANGELOG.md",
+  "title": "es-toolkit Changelog",
+  "kind": "a page of the API reference of a JavaScript utility library",
+  "words": 900,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "mdn-co-00",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/core/scripting/event_bubbling/index.md",
+  "title": "Event bubbling",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "mdn-co-01",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/core/scripting/arrays/index.md",
+  "title": "Arrays",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "mdn-co-02",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/extensions/performance/multimedia/index.md",
+  "title": "Multimedia: Images",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "mdn-co-03",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/core/scripting/conditionals/index.md",
+  "title": "Making decisions in your code — conditionals",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "mdn-co-04",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/extensions/forms/ui_pseudo-classes/index.md",
+  "title": "UI pseudo-classes",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "mdn-co-05",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/extensions/forms/html5_input_types/index.md",
+  "title": "The HTML5 input types",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "mdn-co-06",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/web/css/guides/grid_layout/grid_lanes/index.md",
+  "title": "Grid lanes layout",
+  "kind": "a page of the MDN Web Docs",
+  "words": 298,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "mdn-co-07",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/core/styling_basics/test_your_skills/values/index.md",
+  "title": "Test your skills: Values and units",
+  "kind": "a page of the MDN Web Docs",
+  "words": 330,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "mdn-co-08",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/web/javascript/reference/global_objects/array/reverse/index.md",
+  "title": "Array.prototype.reverse()",
+  "kind": "a page of the MDN Web Docs",
+  "words": 351,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "mdn-co-09",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/core/css_layout/legacy_layout_methods/index.md",
+  "title": "Legacy layout methods",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "mdn-co-10",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/web/javascript/guide/modules/index.md",
+  "title": "JavaScript modules",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "mdn-co-11",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/extensions/server-side/express_nodejs/forms/index.md",
+  "title": "Express Tutorial Part 6: Working with forms",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "mdn-co-12",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/getting_started/your_first_website/styling_the_content/index.md",
+  "title": "CSS: Styling the content",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "mdn-co-13",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/core/scripting/return_values/index.md",
+  "title": "Function return values",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "mdn-co-14",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/extensions/performance/measuring_performance/index.md",
+  "title": "Measuring performance",
+  "kind": "a page of the MDN Web Docs",
+  "words": 824,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "mdn-co-15",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/core/frameworks_libraries/react_getting_started/index.md",
+  "title": "Getting started with React",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "mdn-co-16",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/howto/solve_css_problems/css_faq/index.md",
+  "title": "CSS FAQ",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "mdn-co-17",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/extensions/advanced_javascript_objects/object_building_practice/index.md",
+  "title": "Object building practice",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "mdn-co-18",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/web/javascript/reference/global_objects/index.md",
+  "title": "Standard built-in objects",
+  "kind": "a page of the MDN Web Docs",
+  "words": 325,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "mdn-co-19",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/web/http/guides/client_hints/index.md",
+  "title": "HTTP Client hints",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "mdn-co-20",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/web/css/guides/grid_layout/subgrid/index.md",
+  "title": "Subgrid",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "mdn-co-21",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/extensions/forms/your_first_form/index.md",
+  "title": "Your first form",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "mdn-co-22",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/howto/tools_and_setup/what_are_browser_developer_tools/index.md",
+  "title": "What are browser developer tools?",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "mdn-co-23",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/core/structuring_content/structuring_a_page_of_content/index.md",
+  "title": "Challenge: Structuring a page of content",
+  "kind": "a page of the MDN Web Docs",
+  "words": 643,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "mdn-co-24",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/web/javascript/guide/functions/index.md",
+  "title": "Functions",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "mdn-co-25",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/core/frameworks_libraries/index.md",
+  "title": "JavaScript frameworks and libraries",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "mdn-co-26",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/core/css_layout/media_queries/index.md",
+  "title": "Media query fundamentals",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "mdn-co-27",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/web/http/guides/iframe_credentialless/index.md",
+  "title": "IFrame credentialless",
+  "kind": "a page of the MDN Web Docs",
+  "words": 582,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "mdn-co-28",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/core/styling_basics/getting_started/index.md",
+  "title": "Getting started with CSS",
+  "kind": "a page of the MDN Web Docs",
+  "words": 900,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "mdn-co-29",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/web/javascript/reference/global_objects/array/findindex/index.md",
+  "title": "Array.prototype.findIndex()",
+  "kind": "a page of the MDN Web Docs",
+  "words": 410,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "mdn-co-30",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/extensions/advanced_javascript_objects/index.md",
+  "title": "Advanced JavaScript objects",
+  "kind": "a page of the MDN Web Docs",
+  "words": 427,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "mdn-co-31",
+  "repo": "mdn-content",
+  "path": "mdn-content/files/en-us/learn_web_development/core/styling_basics/home_color_scheme_search/index.md",
+  "title": "Challenge: Styling a home color scheme search app",
+  "kind": "a page of the MDN Web Docs",
+  "words": 543,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ }
+]

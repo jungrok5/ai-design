@@ -3,6 +3,23 @@
 버전은 `plugins/ai-design/.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`에 같은 값으로 기록합니다.
 태그 대신 커밋 SHA를 적어 두므로 pre-commit과 GitHub Action에서는 이 SHA를 `rev`나 `uses`에 고정해 씁니다.
 
+## 1.5.0
+
+<!-- style-ignore-start -->
+- 다른 AI 문체 검출 도구 11곳(MIT, Apache-2.0)의 패턴을 측정해서 사람 글을 잘못 보고하지 않는 것만 경고 규칙으로 추가
+  ([docs/measurement.md](docs/measurement.md#오픈소스-검출기의-패턴)):
+  - 한국어 20개: 칼럼·보도자료 상투구("그 어느 때보다", "가능성을 열어준다", "과제도 남아 있다", "~다는 분석이다",
+    "회의를 가졌다", "## 결론: …" 헤딩 등)
+  - 영어 22개: "It's not X, it's Y", "The question isn't X", "Here's the catch", "The result?", "Feel free to reach
+    out", "Absolutely!", "To be honest", "marks a pivotal moment", "the evolving landscape" 등
+  - 기술 문서 시험용에서 사람 문서 보고는 한국어 0/139, 영어 2/150. 칼럼 형식 AI 글에서는 영어 5/8, 한국어 2/8편을 보고
+- `ko-double-passive`가 "되어졌다"도 보고
+<!-- style-ignore-end -->
+- 넣지 않은 후보와 이유, 영어 비교 묶음(react.dev, es-toolkit, MDN), 칼럼 형식 AI 글:
+  [research/oss-patterns/](research/oss-patterns/), [research/ai-vs-human/en/](research/ai-vs-human/en/)
+- 기존 영어 규칙이 영어 기술 문서에서 AI 글보다 사람 글을 더 많이 보고한다는 측정 결과 기록(시험용 AI 0/13, 사람 65/150)
+- `polish-writing` 스킬과 어댑터의 규칙 요약에 위 표현 추가
+
 ## 1.4.0 (`6c5ce60`)
 
 <!-- style-ignore-start -->

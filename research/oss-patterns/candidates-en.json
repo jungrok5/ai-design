@@ -1,0 +1,3191 @@
+[
+ {
+  "sources": [
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:484",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/structures.md:19",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:61",
+    "license": "MIT"
+   },
+   {
+    "repo": "aaazzam/dslop",
+    "file": "src/patterns.rs:342",
+    "license": "Apache-2.0"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/NotJustScaffold.yml:18",
+    "license": "MIT"
+   },
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/NegParallel.yml:6",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/BinaryContrast.yml:13",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "js/regexes-stage1.js:56",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ContrastiveFormulas.yml:7",
+    "license": "MIT"
+   }
+  ],
+  "category": "contrast-scaffold",
+  "description": "'not just/only/merely X but Y' escalation (the negated half names something nobody claimed).",
+  "pattern": "\\bnot (?:just|merely|simply)\\b[^.!?\\n]{1,80}?\\s+but\\b|\\bnot only\\b[^.!?\\n]{1,80}?,?\\s+but also\\b|\\bnot (?:just|only|merely)\\b[^.!?\\n]{1,60}?[,;—–]\\s*(?:it['’]?s|it is|they['’]?re|they are|but)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "It's not just a linter, it's a platform.",
+   "The tool is not only fast but also reliable.",
+   "This is not merely a refactor but a rewrite."
+  ],
+  "negatives": [
+   "Do not simply copy the file; edit the config first.",
+   "If the key is not set, but the file exists, use the file."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-not-just-but",
+  "suggested_message": "'not just X but Y' escalation",
+  "suggested_fix": "State Y directly; drop the negated half.",
+  "train_ai_docs": 0,
+  "train_human_docs": 25,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "aaazzam/dslop",
+    "file": "src/patterns.rs:169",
+    "license": "Apache-2.0"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/AntitheticalPair.yml:18",
+    "license": "MIT"
+   },
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/NegParallel.yml:7",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/BinaryContrast.yml:14",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:570",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "js/regexes-stage1.js:29",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/structures.md:15",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:61",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ContrastiveFormulas.yml:8",
+    "license": "MIT"
+   }
+  ],
+  "category": "contrast-scaffold",
+  "description": "Sentence-initial 'It's not X, it's Y' / 'This isn't X. It's Y.' reframe (comma, semicolon, dash or full stop between the halves). Anchored at a sentence start so 'If it's not installed, it is skipped' does not match; expect some false positives on real doc contrasts, so keep it a warning.",
+  "pattern": "(?m)(?:^\\s*(?:[-*>]\\s+)?|(?<=[.!?]\\s))(?:(?:it|this|that)(?:['’]s| is) not|(?:it|this|that) isn['’]?t)\\b[^.!?\\n;]{1,60}?[,;:—–.]\\s*(?:it|this|that)(?:['’]s| is)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "It's not a framework, it's a toolkit.",
+   "This isn't a bug. It's a feature.",
+   "That is not magic; it is configuration."
+  ],
+  "negatives": [
+   "If it's not installed, it is skipped.",
+   "It is not supported on Windows; use WSL."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-its-not-x-its-y",
+  "suggested_message": "'It's not X, it's Y' reframe",
+  "suggested_fix": "State what it is; drop the negation.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-its-not-x-its-y"
+ },
+ {
+  "sources": [
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/structures.md:9",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/NotJustScaffold.yml:18",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "js/regexes-stage2.js:51",
+    "license": "MIT"
+   }
+  ],
+  "category": "contrast-scaffold",
+  "description": "'Not because X. Because Y' / 'not because X, but because Y' telegraphed reversal.",
+  "pattern": "\\bnot because\\b[^.!?\\n]{1,80}?(?:,\\s*but\\s+because\\b|[.;—–]\\s*(?:it['’]?s\\s+)?because\\b)",
+  "words_not_yet_covered": null,
+  "positives": [
+   "We moved it, not because it was slow, but because it was fragile.",
+   "It's not because the API is slow. It's because the cache is cold."
+  ],
+  "negatives": [
+   "The build failed, not because of the tests.",
+   "Retries are off because the endpoint is idempotent."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-not-because",
+  "suggested_message": "'not because X, but because Y' reversal",
+  "suggested_fix": "Give the real reason once.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-not-because"
+ },
+ {
+  "sources": [
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/structures.md:11",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/BinaryContrast.yml:15",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:54",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/FalseDepthReframe.yml:41",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:99",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AffirmativeFormulas.yml:68",
+    "license": "MIT"
+   }
+  ],
+  "category": "contrast-scaffold",
+  "description": "'The problem/question/issue isn't X. It's Y.' reframe that relocates the question instead of answering it.",
+  "pattern": "\\bthe (?:real |actual )?(?:question|problem|issue|point|goal|challenge|answer) (?:is|was)(?:n['’]t| not)\\b[^.!?\\n]{1,60}[.,;—–]\\s*(?:it['’]?s|it is|the)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "The problem isn't the model. It's the data.",
+   "The question is not whether to cache, it's where."
+  ],
+  "negatives": [
+   "The issue is not reproducible on Linux, per the report.",
+   "The problem is a race in the worker pool."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-question-isnt-reframe",
+  "suggested_message": "'The problem isn't X, it's Y' reframe",
+  "suggested_fix": "Say what the problem is.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-question-isnt-reframe"
+ },
+ {
+  "sources": [
+   {
+    "repo": "aaazzam/dslop",
+    "file": "src/patterns.rs:314",
+    "license": "Apache-2.0"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/structures.md:23",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/StackedAnaphora.yml:15",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ContrastiveNegation.yml:20",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:78",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:74",
+    "license": "MIT"
+   }
+  ],
+  "category": "contrast-scaffold",
+  "description": "Negative listing: 'No X. No Y. No Z.' or 'Not a X. Not a Y.' before the real claim (rhetorical striptease).",
+  "pattern": "(?m)(?:^\\s*(?:[-*>]\\s+)?|(?<=[.!?]\\s))(?:no|not (?:a|an|the)) [a-z-]+(?: [a-z-]+){0,2}[.,;]\\s+(?:no|not (?:a|an|the)) \\w",
+  "words_not_yet_covered": null,
+  "positives": [
+   "No setup. No config. No lock-in.",
+   "No servers, no queues, no cron jobs.",
+   "Not a framework. Not a library. A toolkit."
+  ],
+  "negatives": [
+   "No such file or directory. Check the path.",
+   "If no match is found, no output is written.",
+   "No changes were detected, so nothing was built."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-negative-listing",
+  "suggested_message": "Negative listing ('No X. No Y.')",
+  "suggested_fix": "State what it is.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-negative-listing"
+ },
+ {
+  "sources": [
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:29",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/CadenceFragment.yml:53",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:78",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AffirmativeFormulas.yml:59",
+    "license": "MIT"
+   },
+   {
+    "repo": "aaazzam/dslop",
+    "file": "src/patterns.rs:476",
+    "license": "Apache-2.0"
+   }
+  ],
+  "category": "emphasis-crutch",
+  "description": "Mic-drop closers and emphasis fragments ('That's the whole point.', 'Full stop.', 'Read that again.').",
+  "pattern": "\\bthat['’]?s (?:the whole|the entire|exactly the|the real|the only) (?:point|idea|thing|trick|story|job|argument|fix|premise|win|difference)\\b|\\bthat['’]?s it\\.\\s+that['’]?s\\b|[.!?]\\s+(?:full stop|period|every single time)\\.|\\bread that again\\b|\\blet me say that again\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "That's the whole point.",
+   "Caching helps. Full stop.",
+   "Read that again."
+  ],
+  "negatives": [
+   "That's the only place the token is stored.",
+   "Set the retention period in days."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-mic-drop-fragment",
+  "suggested_message": "Emphasis fragment",
+  "suggested_fix": "Cut it, or add the missing fact.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-mic-drop-fragment"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:452",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:453",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/structures.md:54",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:80",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/OpeningCliches.yml:64",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/OpeningCliches.yml:26",
+    "license": "MIT"
+   }
+  ],
+  "category": "rhetorical-setup",
+  "description": "Rhetorical set-ups that announce an insight: 'You might be wondering', 'Picture this', 'What if I told you', 'Think about it:', 'The obvious question is'.",
+  "pattern": "\\byou (?:might|may) be wondering\\b|\\byou['’]re probably wondering\\b|\\bhave you ever (?:wondered|found yourself)\\b|\\bpicture this\\b|\\bimagine a world (?:where|in which)\\b|\\bwhat if i told you\\b|\\bthink about it:|\\bthe obvious question is\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "You might be wondering why this matters.",
+   "Picture this: a server at 3 a.m.",
+   "What if I told you the cache was the problem?",
+   "Think about it: every request pays twice."
+  ],
+  "negatives": [
+   "Picture files are stored in the media directory.",
+   "Think about it later when sizing the pool."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-rhetorical-setup",
+  "suggested_message": "Rhetorical set-up",
+  "suggested_fix": "Make the point instead of staging it.",
+  "train_ai_docs": 0,
+  "train_human_docs": 3,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:90",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:80",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AffirmativeFormulas.yml:98",
+    "license": "MIT"
+   }
+  ],
+  "category": "rhetorical-setup",
+  "description": "Casual meta-asides: 'Plot twist:', 'Spoiler alert', 'Hot take'.",
+  "pattern": "\\b(?:plot twist|spoiler alert|hot take)\\s*[:!—-]|\\bspoiler:\\s",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Plot twist: the bug was in the test.",
+   "Spoiler alert: it still fails."
+  ],
+  "negatives": [
+   "The plot of the data is shown in Figure 2.",
+   "Hot swapping is not supported."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-plot-twist",
+  "suggested_message": "Meta aside ('Plot twist:')",
+  "suggested_fix": "Cut the aside and state the fact.",
+  "train_ai_docs": 0,
+  "train_human_docs": 1,
+  "decision": "rejected: the one human hit is a legitimate use"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/RhetoricalSelfAnswer.yml:8",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:435",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/structures.md:123",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:80",
+    "license": "MIT"
+   }
+  ],
+  "category": "rhetorical-setup",
+  "description": "Self-answered rhetorical question at a sentence start: 'The result? Faster builds.'",
+  "pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))the (?:result|outcome|answer|solution|catch|problem|issue|reason|reality|truth|worst part|best part|irony|twist|takeaway|lesson|upside|downside|difference|payoff)\\?\\s+\\w",
+  "words_not_yet_covered": null,
+  "positives": [
+   "The result? Faster builds.",
+   "Done well, this is simple. The catch? It needs a restart."
+  ],
+  "negatives": [
+   "What is the result? See the output below.",
+   "Is the cache warm? Check the logs."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-rhetorical-self-answer",
+  "suggested_message": "Self-answered question",
+  "suggested_fix": "State the answer as a sentence.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-rhetorical-self-answer"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/LabelAndExplain.yml:26",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:60",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/LabelAndExplain.yml:27",
+    "license": "MIT"
+   }
+  ],
+  "category": "rhetorical-setup",
+  "description": "'The catch: …', 'The kicker: …' labelled reveal after a colon.",
+  "pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))the (?:catch|kicker|upshot|payoff|twist|punchline|secret|takeaway|bottom line|irony|surprise|best part|worst part)\\s*:\\s",
+  "words_not_yet_covered": null,
+  "positives": [
+   "The catch: it only works offline.",
+   "Fine. The kicker: the cache never expires."
+  ],
+  "negatives": [
+   "The takeaway is in the next section.",
+   "Note: the cache is cleared on restart."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-colon-reveal-label",
+  "suggested_message": "Colon reveal",
+  "suggested_fix": "Write a plain sentence.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "rejected: only 2 independent sources"
+ },
+ {
+  "sources": [
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/ColonDrumroll.yml:34",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/FigurativeIdioms.yml:103",
+    "license": "MIT"
+   }
+  ],
+  "category": "rhetorical-setup",
+  "description": "'The answer is simple: …' / 'It all comes down to one thing: …' announcement before a colon.",
+  "pattern": "\\bthe (?:answer|reason|problem|difference|catch|upshot|issue|question|point|trick|fix) is (?:simple|straightforward|this|obvious)\\s*:|\\b(?:comes?|boils?|boiled|came) down to (?:one|a single|this|two|three)(?: \\w+)?\\s*:",
+  "words_not_yet_covered": null,
+  "positives": [
+   "The answer is simple: use a queue.",
+   "It all comes down to one thing: latency."
+  ],
+  "negatives": [
+   "The reason is this configuration key.",
+   "Things come down to the wire sometimes."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-colon-drumroll",
+  "suggested_message": "Colon drumroll",
+  "suggested_fix": "Give the answer without the announcement.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "rejected: fewer than 3 independent sources"
+ },
+ {
+  "sources": [
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:123",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:125",
+    "license": "MIT"
+   }
+  ],
+  "category": "vague-claim",
+  "description": "Vague declaratives that announce importance without naming the thing ('The implications are significant', 'The stakes are high').",
+  "pattern": "\\bthe (?:implications|stakes|consequences|reasons|results|costs|risks|challenges|reality) (?:are|is) (?:significant|high|real|clear|profound|enormous|structural|substantial|serious|staggering|far-reaching)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "The implications are significant.",
+   "The stakes are high.",
+   "The reasons are structural."
+  ],
+  "negatives": [
+   "The risks are listed below.",
+   "The stakes were defined in the config."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-vague-declarative",
+  "suggested_message": "Vague declarative",
+  "suggested_fix": "Name the specific implication, risk or reason.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "rejected: fewer than 3 independent sources"
+ },
+ {
+  "sources": [
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/structures.md:77",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/structures.md:78",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:32",
+    "license": "MIT"
+   }
+  ],
+  "category": "vague-claim",
+  "description": "Inanimate subjects doing human verbs ('The data tells us', 'The market rewards').",
+  "pattern": "\\bthe (?:data|numbers|evidence|metrics|results) (?:tell|tells|show|shows|reveal|reveals) us\\b|\\bthe (?:culture|market|decision|conversation) (?:shifts|emerges|rewards|moves toward)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "The data tells us that users churn early.",
+   "The market rewards speed.",
+   "In time the culture shifts."
+  ],
+  "negatives": [
+   "The data show a clear trend.",
+   "The metrics show up in the dashboard."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-false-agency",
+  "suggested_message": "False agency",
+  "suggested_fix": "Name the person who reads, decides or does it.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "rejected: only 2 independent sources"
+ },
+ {
+  "sources": [
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/OpenerCliche.yml:14",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:78",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:50",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:432",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/OpeningCliches.yml:16",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:342",
+    "license": "MIT"
+   }
+  ],
+  "category": "opener-cliche",
+  "description": "Era/world openers beyond the ones already caught: 'In today's world/market/landscape', 'In an era of', 'In a world where', 'Since the dawn of', 'Throughout history', 'Gone are the days'.",
+  "pattern": "\\bin today['’]?s (?:world|market|marketplace|landscape|economy|climate|environment|era|age|society|business|workplace|technology)\\b|\\bin (?:an|the) (?:era|age) (?:of|where|in which)\\b|\\bin a world (?:of|where|in which)\\b|\\bin this day and age\\b|\\bsince the dawn of\\b|\\bthroughout history\\b|\\bfrom time immemorial\\b|\\bgone are the days\\b|\\bin the (?:world|landscape) of\\b|\\bas technology continues to (?:evolve|advance)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "In today's world, teams ship daily.",
+   "In an era of microservices, deploys multiply.",
+   "Since the dawn of computing, developers have argued about tabs.",
+   "Gone are the days of manual deploys."
+  ],
+  "negatives": [
+   "In today's build, the flag is on.",
+   "The age of a record is stored in days."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-era-openers-more",
+  "suggested_message": "Era opener",
+  "suggested_fix": "Cut the opener; start with the fact.",
+  "train_ai_docs": 0,
+  "train_human_docs": 2,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:81",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/SlopVocab.yml:31",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:50",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/OpeningCliches.yml:25",
+    "license": "MIT"
+   }
+  ],
+  "category": "opener-cliche",
+  "description": "'When it comes to X' filler frame. Human writers use it too, so treat as a repeat-count warning.",
+  "pattern": "\\bwhen it comes to\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "When it comes to caching, defaults matter.",
+   "Be careful when it comes to retries."
+  ],
+  "negatives": [
+   "The request comes to the load balancer first.",
+   "It comes down to the config."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-when-it-comes-to",
+  "suggested_message": "'When it comes to' frame",
+  "suggested_fix": "Name the subject directly ('For caching, ...').",
+  "train_ai_docs": 0,
+  "train_human_docs": 6,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:430",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:80",
+    "license": "MIT"
+   },
+   {
+    "repo": "aaazzam/dslop",
+    "file": "src/patterns.rs:243",
+    "license": "Apache-2.0"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/HollowCloser.yml:9",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/Recap.yml:10",
+    "license": "MIT"
+   },
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/Cliche.yml:7",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ConclusionMarkers.yml:10",
+    "license": "MIT"
+   }
+  ],
+  "category": "closer",
+  "description": "Closers beyond 'In conclusion/In summary/Ultimately': 'To sum up', 'All in all', 'At the end of the day', 'The bottom line is', 'Overall,' at line start.",
+  "pattern": "(?m)^\\s*overall,|\\b(?:to sum up|to wrap up|to summari[sz]e|to conclude|in closing|all in all|when all is said and done|the bottom line is|in the final analysis|at the end of the day|by way of conclusion|taking everything into account)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "To sum up, the cache is fast.",
+   "All in all, it works.",
+   "At the end of the day, latency matters.",
+   "The bottom line is simple."
+  ],
+  "negatives": [
+   "Overall length is capped at 255 bytes.",
+   "The parser stops at the end of the file."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-closer-more",
+  "suggested_message": "Stock closer",
+  "suggested_fix": "End on the last concrete fact.",
+  "train_ai_docs": 1,
+  "train_human_docs": 10,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/AssistantCloser.yml:11",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/AssistantOpener.yml:22",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Human/Closers.yml:13",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Human/Openers.yml:13",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ClosingPleasantries.yml:33",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ClosingPleasantries.yml:45",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:498",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:499",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:319",
+    "license": "MIT"
+   }
+  ],
+  "category": "chatbot-residue",
+  "description": "Assistant-style offers and sign-offs beyond 'I hope this helps/let me know if you': 'Feel free to ask/reach out', \"Don't hesitate to\", 'If you have any further questions', 'Is there anything else I can', \"I'd be happy to help\".",
+  "pattern": "\\bfeel free to (?:ask|reach out|contact|let me know)\\b|\\bdon['’]?t hesitate to (?:ask|reach out|contact)\\b|\\bif you have any (?:other|further|additional|more) questions\\b|\\bis there anything else (?:i|we) (?:can|could)\\b|\\b(?:i['’]d|i would) be (?:happy|glad) to (?:help|assist)\\b|\\bhappy to help\\b|\\bhope (?:this|that) (?:clarifies|was helpful)\\b|\\bhopefully this helps\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Feel free to reach out if anything is unclear.",
+   "If you have any further questions, ask.",
+   "I'd be happy to help with that.",
+   "Is there anything else I can clarify?"
+  ],
+  "negatives": [
+   "Feel free to override this default in the config.",
+   "If you have any questions, open an issue."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-chatbot-offer-closers",
+  "suggested_message": "Assistant sign-off",
+  "suggested_fix": "Delete; end on the content.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-chatbot-signoff"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:532",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:536",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Human/Openers.yml:15",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:328",
+    "license": "MIT"
+   }
+  ],
+  "category": "chatbot-residue",
+  "description": "Model self-disclosure and knowledge-cutoff leftovers ('As an AI language model', 'up to my last training update', 'I cannot browse').",
+  "pattern": "\\bas an ai\\b|\\bas a (?:large )?language model\\b|\\bup to my (?:last )?(?:knowledge|training)|\\bas of my (?:last |knowledge )?(?:cutoff|training)|\\bi (?:cannot|can['’]t) browse\\b|\\bi don['’]t have (?:personal|access to real-time)\\b|\\bi['’]m just an? ai\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "As an AI language model, I cannot browse the web.",
+   "Up to my last training update, v2 was current.",
+   "I'm just an AI and cannot verify that."
+  ],
+  "negatives": [
+   "The AI model is loaded at startup.",
+   "Use the SDK as a client library."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-ai-disclosure",
+  "suggested_message": "AI disclosure residue",
+  "suggested_fix": "Delete.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-ai-disclosure"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:514",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/AssistantOpener.yml:22",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Human/Openers.yml:10",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Human/Openers.yml:17",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/SycophancyMarkers.yml:22",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/SycophancyMarkers.yml:8",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:319",
+    "license": "MIT"
+   }
+  ],
+  "category": "chatbot-residue",
+  "description": "Assistant openers/affirmations beyond 'Great question/Certainly!': 'Absolutely!', 'Of course!', \"You're absolutely right\", 'excellent question', 'Thank you for your question'.",
+  "pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))(?:absolutely|of course|sure thing)!|\\byou['’]re absolutely right\\b|\\b(?:excellent|fantastic|wonderful|insightful|thoughtful) question\\b|\\bthank you for (?:your|the) question\\b|\\bi['’]m glad you asked\\b|\\b(?:that['’]s|what) an? (?:great|excellent|fantastic|wonderful|interesting) (?:question|idea|point)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Absolutely! Here is the fix.",
+   "You're absolutely right.",
+   "That's an excellent question.",
+   "Thank you for your question."
+  ],
+  "negatives": [
+   "Of course, this is optional.",
+   "The result is absolutely deterministic."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-assistant-opener",
+  "suggested_message": "Assistant opener",
+  "suggested_fix": "Delete; start with the answer.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-assistant-opener"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ListIntroductions.yml:7",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ListIntroductions.yml:9",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:319",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:460",
+    "license": "MIT"
+   }
+  ],
+  "category": "chatbot-residue",
+  "description": "Announcing a list or overview instead of giving it: 'Here is a breakdown of', 'Below you'll find', \"Here's everything you need to know\".",
+  "pattern": "\\bhere(?:['’]s| is) (?:a|an) (?:quick |brief )?(?:breakdown|overview|summary|rundown) of\\b|\\bbelow you(?:['’]ll| will) find\\b|\\bhere(?:['’]s| is) everything you need to know\\b|\\bthe following (?:sections?|guide|tutorial|walkthrough) will\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Here's a breakdown of the options.",
+   "Below you'll find the settings.",
+   "Here is a quick overview of the flow.",
+   "Here's everything you need to know about retries."
+  ],
+  "negatives": [
+   "Here is the config file.",
+   "The breakdown field holds the cost split."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-ai-list-intro",
+  "suggested_message": "List/overview announcement",
+  "suggested_fix": "Present the content directly.",
+  "train_ai_docs": 0,
+  "train_human_docs": 2,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:440",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:95",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:97",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Direct/Preamble.yml:8",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:50",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/OpeningCliches.yml:35",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/OpeningCliches.yml:40",
+    "license": "MIT"
+   }
+  ],
+  "category": "meta-commentary",
+  "description": "Writing about the document: 'In this article, we'll…', 'By the end of this guide', 'The rest of this essay', 'This guide will walk you through'.",
+  "pattern": "\\bin this (?:article|post|guide|tutorial|section|blog post|essay|document|chapter),? (?:we|i)(?:['’]ll| will| are going to|['’]re going to)\\b|\\bby the end of this (?:article|guide|post|tutorial|section)\\b|\\bthe rest of this (?:essay|article|post|guide)\\b|\\bthis (?:article|guide|post|tutorial) will (?:walk you through|explore)\\b|\\bwelcome to this (?:guide|overview|exploration|deep dive)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "In this article, we'll explore caching.",
+   "By the end of this guide you will know the API.",
+   "The rest of this essay explains why.",
+   "This guide will walk you through the setup."
+  ],
+  "negatives": [
+   "In this section we describe the schema.",
+   "This guide shows how to configure TLS."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-in-this-article",
+  "suggested_message": "Document-narration opener",
+  "suggested_fix": "Delete; start with the content.",
+  "train_ai_docs": 2,
+  "train_human_docs": 76,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:445",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:446",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/FillerTransition.yml:17",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:98",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/SelfReference.yml:7",
+    "license": "MIT"
+   }
+  ],
+  "category": "meta-commentary",
+  "description": "Back-references to the text itself: 'As mentioned earlier', 'as we discussed above', \"as we'll see\". Human docs cross-reference too, so use a repeat count.",
+  "pattern": "\\bas (?:we |i )?(?:previously |already |briefly )?(?:mentioned|discussed|noted|stated|described|outlined|covered|explained|saw|explored) (?:above|earlier|before|previously)\\b|\\bas (?:i|we) mentioned\\b|\\bas mentioned (?:above|earlier|before|previously)\\b|\\bas we['’]ll (?:see|explore|discuss)\\b|\\bas we saw\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "As mentioned earlier, the cache is shared.",
+   "As we'll see, the lock is held briefly.",
+   "As we discussed above, retries are capped."
+  ],
+  "negatives": [
+   "See the section above for details.",
+   "The mentioned parameter is optional."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-as-mentioned-earlier",
+  "suggested_message": "Self-referential back-reference",
+  "suggested_fix": "Link to the section or restate the fact once.",
+  "train_ai_docs": 0,
+  "train_human_docs": 49,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "aaazzam/dslop",
+    "file": "src/patterns.rs:268",
+    "license": "Apache-2.0"
+   },
+   {
+    "repo": "aaazzam/dslop",
+    "file": "src/patterns.rs:243",
+    "license": "Apache-2.0"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/AnnouncedNoteworthiness.yml:45",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/SlopVocab.yml:32",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Direct/Hedging.yml:8",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:79",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:426",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/HedgingPhrases.yml:35",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/HedgingPhrases.yml:37",
+    "license": "MIT"
+   }
+  ],
+  "category": "filler-preface",
+  "description": "'Worth noting' family not caught by en-filler-preface: \"it's also worth noting\", 'worth mentioning', 'needless to say', 'it goes without saying', 'it bears mentioning', \"it's important to understand\".",
+  "pattern": "\\b(?:it['’]?s |it is )?(?:also |further |especially )worth (?:noting|mentioning|flagging|emphasi[sz]ing|stating|highlighting|pointing out)\\b|\\bworth (?:mentioning|flagging|pointing out|stating|spelling out)\\b|\\bit bears (?:mentioning|repeating|noting)\\b|\\bneedless to say\\b|\\bit goes without saying\\b|\\bit(?:['’]s| is) important to (?:understand|recognize|consider|keep in mind|acknowledge|emphasize|highlight)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "It's also worth noting that the cache is shared.",
+   "Needless to say, tests must pass.",
+   "It goes without saying that backups matter.",
+   "It is important to understand the lock order."
+  ],
+  "negatives": [
+   "It is important to run the migration first.",
+   "Nothing here is worth the cost."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-worth-noting-more",
+  "suggested_message": "Announced noteworthiness",
+  "suggested_fix": "Delete the frame; make the point.",
+  "train_ai_docs": 0,
+  "train_human_docs": 15,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:12",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:83",
+    "license": "MIT"
+   },
+   {
+    "repo": "aaazzam/dslop",
+    "file": "src/patterns.rs:243",
+    "license": "Apache-2.0"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/ThroatClearing.yml:13",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/WithheldPayoff.yml:44",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AffirmativeFormulas.yml:89",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AffirmativeFormulas.yml:90",
+    "license": "MIT"
+   }
+  ],
+  "category": "throat-clearing",
+  "description": "Truth/reality announcements: 'The uncomfortable truth is', 'The hard truth', 'The reality is that', 'The truth is,'.",
+  "pattern": "\\bthe (?:uncomfortable|inconvenient|unglamorous|unsexy|brutal|hard|awkward|dirty|hidden|unspoken|honest|simple) (?:truth|reality|secret)\\b|\\bthe (?:truth|reality) is(?:,| that\\b)",
+  "words_not_yet_covered": null,
+  "positives": [
+   "The uncomfortable truth is that tests are slow.",
+   "The reality is that most builds fail.",
+   "The truth is, nobody reads the logs."
+  ],
+  "negatives": [
+   "The truth value is stored as a boolean.",
+   "The reality check passed."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-uncomfortable-truth",
+  "suggested_message": "Truth/reality announcement",
+  "suggested_fix": "State the fact.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-uncomfortable-truth"
+ },
+ {
+  "sources": [
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:15",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:18",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/PerformedCandor.yml:53",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/ThroatClearing.yml:11",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/ThroatClearing.yml:12",
+    "license": "MIT"
+   },
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/VirtueHonest.yml:7",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/FillerPhrases.yml:48",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:112",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Claude/Modifiers.yml:12",
+    "license": "MIT"
+   }
+  ],
+  "category": "throat-clearing",
+  "description": "Performed candor: 'Let me be clear/honest', \"I'll be honest\", 'To be honest', 'In all honesty', 'Truth be told', 'Real talk', sentence-initial 'Honestly,/Frankly,'.",
+  "pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))(?:honestly|frankly|candidly)\\s*[,?]|\\blet(?: me|['’]s) be (?:clear|honest|direct|blunt|frank|real)\\b|\\bi['’]ll be (?:honest|direct|blunt|frank)\\b|\\bto be (?:perfectly |brutally |completely |totally )?(?:honest|frank)\\b|\\bin all honesty\\b|\\bif i['’]m being (?:honest|frank)\\b|\\btruth be told\\b|\\breal talk\\b|\\bquite (?:frankly|honestly)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Let me be clear: this is breaking.",
+   "To be honest, I'd skip it.",
+   "In all honesty it is slow.",
+   "Honestly, the default is fine."
+  ],
+  "negatives": [
+   "The client is honest about its capacity.",
+   "Be clear about the units."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-performed-candor",
+  "suggested_message": "Performed candor",
+  "suggested_fix": "Cut; state the claim.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-performed-candor"
+ },
+ {
+  "sources": [
+   {
+    "repo": "aaazzam/dslop",
+    "file": "src/patterns.rs:268",
+    "license": "Apache-2.0"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/PerformedCandor.yml:53",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:125",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AffirmativeFormulas.yml:82",
+    "license": "MIT"
+   }
+  ],
+  "category": "throat-clearing",
+  "description": "Sentence-initial 'To be clear,' / 'To be fair,' framing.",
+  "pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))(?:and |but )?to be (?:clear|fair)\\s*[,:]",
+  "words_not_yet_covered": null,
+  "positives": [
+   "To be clear, this is a breaking change.",
+   "Fine. To be fair, the default is safe."
+  ],
+  "negatives": [
+   "The output must be clear before the next run.",
+   "It is fair to assume the cache is warm."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-to-be-clear",
+  "suggested_message": "'To be clear' frame",
+  "suggested_fix": "Cut it; state the point.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-to-be-clear"
+ },
+ {
+  "sources": [
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:8",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:20",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/AssistantOpener.yml:22",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/ThroatClearing.yml:10",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AffirmativeFormulas.yml:36",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:112",
+    "license": "MIT"
+   }
+  ],
+  "category": "throat-clearing",
+  "description": "Staged reveals with 'Here's…': 'Here's the catch/kicker/deal/truth', \"Here's what I mean\", \"Here's why this matters\", \"Here's what nobody tells you\" (the existing en-run-up only catches 'Here's the thing' and 'Here's what you need to know').",
+  "pattern": "\\bhere['’]?s (?:the )?(?:catch|deal|kicker|truth|reality|secret|problem though|tension|tradeoff|trade-off)\\b|\\bhere['’]?s what (?:i mean|most people|nobody|no one|everyone|many|few)\\b|\\bhere['’]?s why (?:this|that|it) matters\\b|\\bhere['’]?s what i find\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Here's the catch: it needs a restart.",
+   "Here's what I mean.",
+   "Here's why this matters.",
+   "Here's what most people miss."
+  ],
+  "negatives": [
+   "Here's the full config.",
+   "Here's an example:"
+  ],
+  "covered_by": null,
+  "suggest_id": "en-heres-the-catch",
+  "suggested_message": "Staged 'Here's…' reveal",
+  "suggested_fix": "Cut; state the point.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-heres-the-catch"
+ },
+ {
+  "sources": [
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/WithheldPayoff.yml:42",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/WithheldPayoff.yml:43",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/ThroatClearing.yml:14",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/ThroatClearing.yml:15",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/FalseExclusivity.yml:7",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/FalseExclusivity.yml:27",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/FalseExclusivity.yml:32",
+    "license": "MIT"
+   }
+  ],
+  "category": "throat-clearing",
+  "description": "False exclusivity / withheld payoff: 'Nobody talks about', \"Here's what nobody tells you\", 'What most people get wrong', 'The dirty secret', 'The elephant in the room'.",
+  "pattern": "\\b(?:nobody|no one) (?:talks about|is talking about|tells you|mentions|discusses|wants to (?:admit|hear|say))\\b|\\bwhat (?:most people|everyone|nobody|no one) (?:get|gets|miss|misses|overlook|overlooks|tells you|forget|forgets) ?(?:wrong)?\\b|\\bthe part (?:nobody|no one|everyone|most people)\\b|\\bthe (?:dirty|open|unspoken) secret\\b|\\bthe elephant in the room\\b|\\bthe quiet part\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Nobody talks about the migration cost.",
+   "Here's what nobody tells you about retries.",
+   "What most people get wrong is the timeout.",
+   "The dirty secret of CI is flaky tests."
+  ],
+  "negatives": [
+   "No one talks to the database directly; use the API.",
+   "Most people use the default timeout."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-nobody-talks-about",
+  "suggested_message": "False-exclusivity set-up",
+  "suggested_fix": "State the point.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-nobody-talks-about"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:428",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:433",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:507",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/WithheldPayoff.yml:41",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/NarrativePivots.yml:7",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/NarrativePivots.yml:18",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/Metacommentary.yml:97",
+    "license": "MIT"
+   }
+  ],
+  "category": "narrative-staging",
+  "description": "Fake narrative pivots: 'This is where things get interesting', 'Then something interesting happened', 'That changes everything', 'Something shifted'.",
+  "pattern": "\\bthis is where (?:things|it) gets? (?:interesting|weird|tricky|complicated|messy|fun)\\b|\\bwhere (?:it|this|that|things) gets? (?:interesting|weird|tricky|spicy|hairy)\\b|\\bthen something (?:interesting|unexpected|strange) happened\\b|\\b(?:that|this) (?:changes|changed) everything\\b|\\bsomething (?:shifted|clicked|snapped)\\b|\\beverything (?:changed|shifted|clicked)\\b|\\bthat['’]s when everything changed\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "This is where things get interesting.",
+   "Then something interesting happened.",
+   "That changes everything.",
+   "Something shifted."
+  ],
+  "negatives": [
+   "The index shifted after the insert.",
+   "This changes the default port."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-narrative-pivot",
+  "suggested_message": "Narrative pivot",
+  "suggested_fix": "State what happened.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-narrative-pivot"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/UrgencyInflation.yml:8",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/UrgencyInflation.yml:16",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:125",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:251",
+    "license": "MIT"
+   }
+  ],
+  "category": "significance-inflation",
+  "description": "Urgency inflation: 'cannot be overstated', 'more important than ever', 'the stakes have never been higher', 'at a crossroads', 'in an increasingly connected world'.",
+  "pattern": "\\b(?:cannot|can['’]t) be (?:overstated|understated|overemphasi[sz]ed|emphasi[sz]ed enough)\\b|\\bmore (?:important|critical|relevant|urgent|essential|vital|pressing) than ever\\b|\\bhas never been more (?:important|critical|urgent|relevant|essential|vital)\\b|\\bthe stakes (?:have never been|are|couldn['’]t be) (?:higher|enormous|immense)\\b|\\bat a (?:crossroads|critical juncture|pivotal moment|defining moment)\\b|\\bin an (?:increasingly|ever more) [\\w-]+ world\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "The importance of backups cannot be overstated.",
+   "Observability is more critical than ever.",
+   "We are at a critical juncture.",
+   "In an increasingly connected world, latency matters."
+  ],
+  "negatives": [
+   "The value cannot be negative.",
+   "Latency is higher than the baseline."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-urgency-inflation",
+  "suggested_message": "Urgency inflation",
+  "suggested_fix": "State the stakes with a number or consequence.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-urgency-inflation"
+ },
+ {
+  "sources": [
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:210",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/DespiteChallenges.yml:7",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:315",
+    "license": "MIT"
+   }
+  ],
+  "category": "significance-inflation",
+  "description": "'Despite these challenges…' / 'while challenges remain' formula.",
+  "pattern": "\\bdespite (?:these|its|the|this|facing|such) (?:challenges?|limitations|obstacles|hurdles|setbacks|drawbacks|concerns|numerous|significant)\\b|\\bwhile (?:significant |some |several )?challenges remain\\b|\\bchallenges notwithstanding\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Despite these challenges, the project continues.",
+   "While significant challenges remain, adoption grows."
+  ],
+  "negatives": [
+   "Despite the flag, the job still runs.",
+   "The challenge handler returns a nonce."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-despite-challenges",
+  "suggested_message": "Despite-challenges formula",
+  "suggested_fix": "Name the challenge and the outcome.",
+  "train_ai_docs": 0,
+  "train_human_docs": 1,
+  "decision": "rejected: the one human hit is a legitimate use"
+ },
+ {
+  "sources": [
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:210",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/Puffery.yml:10",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/SlopVocab.yml:36",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/SlopVocab.yml:52",
+    "license": "MIT"
+   },
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/CopulaInflation.yml:10",
+    "license": "MIT"
+   },
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/Cliche.yml:11",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AICompoundPhrases.yml:30",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/PromotionalPuffery.yml:60",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/Banned.yml:16",
+    "license": "MIT"
+   }
+  ],
+  "category": "significance-inflation",
+  "description": "Significance markers: 'marks a pivotal/significant moment', 'turning point', 'watershed moment', 'sea change', 'paradigm shift', 'tipping point', 'indelible mark', 'enduring legacy'. [Partial overlap with existing rule(s): en-ai-vocabulary.]",
+  "pattern": "\\b(?:marks?|marked|marking) (?:a|an|the) (?:pivotal|significant|crucial|key|major|defining|turning|watershed|historic)\\b|\\b(?:turning point|watershed moment|sea change|tipping point|paradigm shift)\\b|\\bindelible (?:mark|impact)\\b|\\b(?:enduring|lasting) (?:legacy|impact)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "The release marks a pivotal moment for the project.",
+   "This was a watershed moment for the team.",
+   "It left an indelible mark on the codebase.",
+   "A paradigm shift in testing."
+  ],
+  "negatives": [
+   "The marker marks a boundary in the log.",
+   "Set the tipping bucket threshold."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-marks-a-turning-point",
+  "suggested_message": "Significance inflation",
+  "suggested_fix": "State what changed, with a date or number.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-marks-a-turning-point"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AICompoundPhrases.yml:36",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AICompoundPhrases.yml:38",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AICompoundPhrases.yml:39",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ParticipialPadding.yml:69",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:210",
+    "license": "MIT"
+   }
+  ],
+  "category": "significance-inflation",
+  "description": "'Paves the way' / 'lays the groundwork' / 'sets the stage' (the existing en-inflation catches only 'setting the stage for').",
+  "pattern": "\\bpav(?:es|ed|ing) the way\\b|\\blay(?:s|ing)? the groundwork\\b|\\blaid the groundwork\\b|\\bsets? the stage for\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "This paves the way for faster builds.",
+   "The refactor lays the groundwork for plugins.",
+   "That sets the stage for the next release."
+  ],
+  "negatives": [
+   "The path is relative to the root.",
+   "Set the stage name in the pipeline file."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-paves-the-way",
+  "suggested_message": "Paves-the-way inflation",
+  "suggested_fix": "Say what it enables, concretely.",
+  "train_ai_docs": 0,
+  "train_human_docs": 3,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/SlopVocab.yml:23",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/Banned.yml:27",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/OpeningCliches.yml:10",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:210",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:312",
+    "license": "MIT"
+   }
+  ],
+  "category": "era-cliche",
+  "description": "'Ever-evolving/ever-changing', 'rapidly evolving', 'fast-paced world' hype modifiers (en-era-opener catches only 'ever-evolving landscape').",
+  "pattern": "\\bever[- ](?:evolving|changing|expanding|shifting)\\b|\\brapidly (?:evolving|changing)\\b|\\bfast[- ]paced (?:world|environment|landscape)\\b|\\bconstantly evolving\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "The ever-changing needs of users.",
+   "a rapidly evolving field",
+   "in a fast-paced world of tooling"
+  ],
+  "negatives": [
+   "The values evolve over time."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-ever-evolving",
+  "suggested_message": "Ever-evolving cliche",
+  "suggested_fix": "Say what changed and when.",
+  "train_ai_docs": 0,
+  "train_human_docs": 1,
+  "decision": "rejected: the one human hit is a legitimate use"
+ },
+ {
+  "sources": [
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:201",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:44",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/SlopVocab.yml:43",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/OpeningCliches.yml:14",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Human/Tics.yml:24",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:388",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:274",
+    "license": "MIT"
+   }
+  ],
+  "category": "ai-vocabulary",
+  "description": "Abstract 'landscape' (figurative): 'evolving/competitive/digital/regulatory landscape', 'landscape of X'. Plain 'landscape' (orientation, imagery) is deliberately not matched.",
+  "pattern": "\\b(?:evolving|competitive|digital|modern|business|technological|regulatory|shifting|changing|current|contemporary|rapidly changing) landscape\\b|\\blandscape of (?:the |modern |digital |technology|business|cloud|ai)",
+  "words_not_yet_covered": null,
+  "positives": [
+   "the evolving landscape of cloud security",
+   "a competitive landscape",
+   "the digital landscape"
+  ],
+  "negatives": [
+   "Use landscape orientation for the print layout.",
+   "The landscape image is cropped to 16:9."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-landscape-noun",
+  "suggested_message": "Abstract 'landscape'",
+  "suggested_fix": "Name the actual field or market.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-landscape-noun"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:379",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:41",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/SlopVocab.yml:17",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/OpeningCliches.yml:22",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:303",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Human/Tics.yml:23",
+    "license": "MIT"
+   }
+  ],
+  "category": "ai-vocabulary",
+  "description": "'Navigate the complexities/challenges/landscape/nuances' (figurative navigation).",
+  "pattern": "\\bnavigat(?:e|es|ed|ing) (?:the |this |these |an? )?(?:complexities|complexity|challenges|landscape|nuances|waters|maze|intricacies)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "navigate the complexities of modern tooling",
+   "to navigate this landscape",
+   "navigating the challenges of scale"
+  ],
+  "negatives": [
+   "Navigate to Settings and click Save.",
+   "The navigator panel lists the pages."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-navigate-complexities",
+  "suggested_message": "Figurative 'navigate'",
+  "suggested_fix": "Say what the reader actually does.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-navigate-complexities"
+ },
+ {
+  "sources": [
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:47",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:46",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/CorporateMetaphor.yml:11",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/CorporateMetaphor.yml:12",
+    "license": "MIT"
+   },
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/Cliche.yml:9",
+    "license": "MIT"
+   },
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/Cliche.yml:16",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AICompoundPhrases.yml:31",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AICompoundPhrases.yml:33",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:232",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:201",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Human/Tics.yml:22",
+    "license": "MIT"
+   }
+  ],
+  "category": "corporate-cliche",
+  "description": "Business-jargon idioms: deep dive, double down, circle back, lean into, touch base, low-hanging fruit, move the needle, north star, boil the ocean, thought leader, win-win, secret sauce, tip of the iceberg, perfect storm, in a nutshell, double-edged sword, bleeding-edge.",
+  "pattern": "\\b(?:deep[- ]dive|double(?:s|d)? down|circle back|circling back|lean(?:s|ed|ing)? into|touch(?:es|ed|ing)? base|low[- ]hanging fruit|mov(?:e|es|ed|ing) the needle|north star|boil(?:s|ed|ing)? the ocean|thought leader(?:s|ship)?|win-win|secret sauce|tip of the iceberg|perfect storm|in a nutshell|double-edged sword|bleeding[- ]edge)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Let's do a deep dive into the metrics.",
+   "We should circle back on this.",
+   "Fixing it is low-hanging fruit.",
+   "That is just the tip of the iceberg.",
+   "It is a double-edged sword."
+  ],
+  "negatives": [
+   "The iceberg catalog stores table metadata.",
+   "Touch the base directory to refresh its mtime."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-biz-jargon",
+  "suggested_message": "Business-jargon idiom",
+  "suggested_fix": "Say the literal thing.",
+  "train_ai_docs": 0,
+  "train_human_docs": 9,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list.json:566",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:337",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:245",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/FalseWarmth.yml:9",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:46",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AIAdjectiveNounPairs.yml:7",
+    "license": "MIT"
+   }
+  ],
+  "category": "ai-vocabulary",
+  "description": "AI-favoured evaluative adjectives that existing rules miss (multifaceted, paramount, unwavering, unparalleled, groundbreaking, transformative, unprecedented, nuanced, invaluable, noteworthy, quintessential, burgeoning, nascent, indelible, palpable, breathtaking, captivating, impactful, pioneering, visionary, insurmountable). Chosen from words appearing in at least two sources; words with plain technical meanings (robust, dynamic, scalable, granular, ubiquitous, comprehensive handled elsewhere) are left out.",
+  "pattern": "\\b(?:transformative|groundbreaking|insurmountable|quintessential|unprecedented|unparalleled|multifaceted|breathtaking|captivating|noteworthy|pioneering|invaluable|unwavering|unrivalled|burgeoning|visionary|impactful|paramount|indelible|unrivaled|palpable|nuanced|nascent)\\b",
+  "words_not_yet_covered": [
+   "multifaceted",
+   "paramount",
+   "unwavering",
+   "unparalleled",
+   "groundbreaking",
+   "transformative",
+   "unprecedented",
+   "nuanced",
+   "invaluable",
+   "noteworthy",
+   "quintessential",
+   "burgeoning",
+   "nascent",
+   "indelible",
+   "palpable",
+   "breathtaking",
+   "captivating",
+   "impactful",
+   "pioneering",
+   "visionary",
+   "insurmountable",
+   "unrivaled",
+   "unrivalled"
+  ],
+  "positives": [
+   "The result is a multifaceted problem.",
+   "Reliability is paramount.",
+   "Her unwavering commitment shows.",
+   "A groundbreaking release.",
+   "a nuanced view of caching"
+  ],
+  "negatives": [
+   "The unit tests cover the parser.",
+   "The scalable queue drains in order."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-ai-adjectives",
+  "suggested_message": "AI-favoured adjective",
+  "suggested_fix": "Replace with the measurable property, or cut.",
+  "train_ai_docs": 0,
+  "train_human_docs": 6,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list.json:1061",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:336",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:73",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:201",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/ConjunctiveAdverbOpener.yml:5",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:48",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/FormalTransitions.yml:38",
+    "license": "MIT"
+   }
+  ],
+  "category": "ai-vocabulary",
+  "description": "'crucial' and 'profound(ly)', 'vital' as intensifying adjectives. They appear in six sources but are ordinary English, so treat as a repeat-count (max_per_file) rule.",
+  "pattern": "\\b(?:profoundly|crucially|profound|crucial)\\b",
+  "words_not_yet_covered": [
+   "crucial",
+   "crucially",
+   "profound",
+   "profoundly"
+  ],
+  "positives": [
+   "This is a crucial step.",
+   "Profoundly important."
+  ],
+  "negatives": [
+   "The vitals endpoint returns CPU usage.",
+   "The cruise control script runs hourly."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-ai-adjectives-crucial",
+  "suggested_message": "Stock intensifying adjective",
+  "suggested_fix": "State why it matters, or use 'important'.",
+  "train_ai_docs": 0,
+  "train_human_docs": 8,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list.json:1174",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:378",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:245",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Human/Tics.yml:40",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/OverusedVocabulary.yml:156",
+    "license": "MIT"
+   }
+  ],
+  "category": "ai-vocabulary",
+  "description": "Essay-register verbs AI overuses (spearhead, elucidate, reimagine, catalyze, underpin, transcend, exemplify, epitomize, necessitate, exacerbate, perpetuate, imbue, engender, intertwine, permeate). 'Encapsulate', 'orchestrate' and 'harness' are excluded (technical meanings).",
+  "pattern": "\\b(?:necessitating|transcending|perpetuating|underpinning|spearheading|exacerbating|intertwining|necessitated|necessitates|exemplifying|reimagining|perpetuated|exacerbated|intertwines|spearheaded|transcended|epitomizing|exemplifies|underpinned|intertwined|elucidating|perpetuates|exemplified|necessitate|engendering|exacerbates|catalyzing|engendered|reimagined|elucidated|exacerbate|reimagines|spearheads|elucidates|permeating|transcends|epitomized|epitomizes|intertwine|perpetuate|catalyzed|epitomize|elucidate|permeated|spearhead|underpins|transcend|catalyzes|engenders|reimagine|exemplify|permeates|engender|permeate|catalyze|underpin|imbuing|imbues|imbued|imbue)\\b",
+  "words_not_yet_covered": [
+   "spearhead",
+   "spearheads",
+   "spearheaded",
+   "spearheading",
+   "elucidate",
+   "elucidates",
+   "elucidated",
+   "elucidating",
+   "reimagine",
+   "reimagines",
+   "reimagined",
+   "reimagining",
+   "catalyze",
+   "catalyzes",
+   "catalyzed",
+   "catalyzing",
+   "underpin",
+   "underpins",
+   "underpinned",
+   "underpinning",
+   "transcend",
+   "transcends",
+   "transcended",
+   "transcending",
+   "exemplify",
+   "exemplifies",
+   "exemplified",
+   "exemplifying",
+   "epitomize",
+   "epitomizes",
+   "epitomized",
+   "epitomizing",
+   "necessitate",
+   "necessitates",
+   "necessitated",
+   "necessitating",
+   "exacerbate",
+   "exacerbates",
+   "exacerbated",
+   "exacerbating",
+   "perpetuate",
+   "perpetuates",
+   "perpetuated",
+   "perpetuating",
+   "imbue",
+   "imbues",
+   "imbued",
+   "imbuing",
+   "engender",
+   "engenders",
+   "engendered",
+   "engendering",
+   "intertwine",
+   "intertwines",
+   "intertwined",
+   "intertwining",
+   "intertwined",
+   "intertwining",
+   "permeate",
+   "permeates",
+   "permeated",
+   "permeating"
+  ],
+  "positives": [
+   "We spearheaded the migration.",
+   "This elucidates the failure mode.",
+   "It exacerbates the problem.",
+   "Two systems intertwined."
+  ],
+  "negatives": [
+   "The decorator wraps the function.",
+   "The shell script orchestrates the build."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-ai-verbs-essay",
+  "suggested_message": "Essay-register verb",
+  "suggested_fix": "Use a plain verb (lead, explain, worsen, link).",
+  "train_ai_docs": 1,
+  "train_human_docs": 3,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list.json:463",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:397",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/SlopVocab.yml:19",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Human/Tics.yml:41",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/OverusedVocabulary.yml:142",
+    "license": "MIT"
+   }
+  ],
+  "category": "ai-vocabulary",
+  "description": "Flourish nouns: plethora, myriad, linchpin, pinnacle, odyssey, labyrinth(ine), crescendo, cacophony, 'cornerstone/beacon/symphony/kaleidoscope/mosaic/treasure trove/wellspring/bastion of', 'realm of'. Bare 'realm' (auth realm), 'beacon' (BLE beacon), 'nexus' (product name) are not matched. [Partial overlap with existing rule(s): en-era-opener.]",
+  "pattern": "\\b(?:plethora|myriad|linchpin|pinnacle|odyssey|labyrinth(?:ine)?|crescendo|cacophony)\\b|\\b(?:cornerstone|beacon|symphony|kaleidoscope|mosaic|treasure trove|wellspring|bastion) of\\b|\\brealm of\\b",
+  "words_not_yet_covered": [
+   "plethora",
+   "myriad",
+   "linchpin",
+   "pinnacle",
+   "odyssey",
+   "labyrinth",
+   "labyrinthine",
+   "crescendo",
+   "cacophony",
+   "cornerstone of",
+   "beacon of",
+   "symphony of",
+   "kaleidoscope of",
+   "mosaic of",
+   "treasure trove of",
+   "wellspring of",
+   "bastion of",
+   "realm of"
+  ],
+  "positives": [
+   "A plethora of options exists.",
+   "a myriad of settings",
+   "Caching is the cornerstone of the design.",
+   "a treasure trove of data",
+   "In the realm of parsing"
+  ],
+  "negatives": [
+   "The Kerberos realm is set in krb5.conf.",
+   "The BLE beacon advertises every second."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-ai-nouns-flourish",
+  "suggested_message": "Flourish noun",
+  "suggested_fix": "Name the thing plainly.",
+  "train_ai_docs": 0,
+  "train_human_docs": 4,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/SlopVocab.yml:45",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:345",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:236",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ParticipialPadding.yml:60",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ParticipialPadding.yml:61",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/Banned.yml:13",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:372",
+    "license": "MIT"
+   }
+  ],
+  "category": "ai-vocabulary",
+  "description": "'foster(ing) a sense/culture/community…' and 'cultivate a culture' (figurative growing).",
+  "pattern": "\\bfoster(?:s|ed|ing)? (?:a |an |the )?(?:sense|culture|collaboration|innovation|growth|community|environment|understanding|engagement|creativity|trust|dialogue|inclusion|connection)\\b|\\bcultivat(?:e|es|ed|ing) (?:a |an |the )?(?:sense|culture|environment|mindset|community)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "fostering a culture of ownership",
+   "It fosters collaboration.",
+   "cultivate a sense of trust"
+  ],
+  "negatives": [
+   "Foster City is in California.",
+   "The foster process is a child process."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-foster-culture",
+  "suggested_message": "Figurative 'foster/cultivate'",
+  "suggested_fix": "Say what the team does.",
+  "train_ai_docs": 0,
+  "train_human_docs": 1,
+  "decision": "rejected: the one human hit is a legitimate use"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:369",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/SlopVocab.yml:54",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/Banned.yml:25",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/OpeningCliches.yml:20",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/JourneyMetaphors.yml:39",
+    "license": "MIT"
+   }
+  ],
+  "category": "ai-vocabulary",
+  "description": "'embark on (a journey)', 'journey of discovery', 'every step of the way'.",
+  "pattern": "\\bembark(?:s|ed|ing)? (?:on|upon)\\b|\\bjourney of (?:discovery|a lifetime)\\b|\\bevery step of the way\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Let's embark on a journey through caching.",
+   "We embarked on a migration.",
+   "It supports you every step of the way."
+  ],
+  "negatives": [
+   "The embedded board boots from flash.",
+   "The user journey map is in Figma."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-embark-journey",
+  "suggested_message": "'Embark on' journey cliche",
+  "suggested_fix": "Say what you do.",
+  "train_ai_docs": 0,
+  "train_human_docs": 3,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list.json:1033",
+    "license": "MIT"
+   },
+   {
+    "repo": "aaazzam/dslop",
+    "file": "src/patterns.rs:218",
+    "license": "Apache-2.0"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/structures.md:134",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:201",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/RealityAdverb.yml:25",
+    "license": "MIT"
+   },
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/Adverb.yml:6",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:48",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ColloquialAssessments.yml:46",
+    "license": "MIT"
+   }
+  ],
+  "category": "filler-adverb",
+  "description": "Assertion adverbs that claim sincerity or depth (actually, literally, genuinely, truly, fundamentally, inherently, essentially, effectively, basically, quietly, deeply). Existing en-filler-words covers easily/simply/just/very/really only. Use with max_per_file; several are normal in speech.",
+  "pattern": "\\b(?:fundamentally|effectively|essentially|inherently|materially|inevitably|basically|literally|genuinely|actually|honestly|quietly|deeply|truly)\\b",
+  "words_not_yet_covered": [
+   "actually",
+   "literally",
+   "genuinely",
+   "truly",
+   "honestly",
+   "fundamentally",
+   "inherently",
+   "essentially",
+   "effectively",
+   "basically",
+   "quietly",
+   "deeply",
+   "inevitably",
+   "materially"
+  ],
+  "positives": [
+   "It actually works.",
+   "This is genuinely hard.",
+   "It is fundamentally different.",
+   "The cache quietly fails."
+  ],
+  "negatives": [
+   "The factually correct value is stored.",
+   "Truss members carry the load."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-reality-adverbs",
+  "suggested_message": "Assertion adverb",
+  "suggested_fix": "Delete; if it carries weight, state the concrete qualifier.",
+  "train_ai_docs": 8,
+  "train_human_docs": 159,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list.json:1061",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:402",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:71",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/HollowIntensifier.yml:5",
+    "license": "MIT"
+   },
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/Adverb.yml:33",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:48",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/FormalTransitions.yml:35",
+    "license": "MIT"
+   }
+  ],
+  "category": "filler-adverb",
+  "description": "Intensifying and evaluative adverbs: incredibly, extremely, utterly, profoundly, strikingly, remarkably, fascinatingly, surprisingly, interestingly, importantly, notably, crucially. 'highly' (highly available) and 'significantly' are excluded as technical.",
+  "pattern": "\\b(?:fascinatingly|interestingly|surprisingly|importantly|strikingly|incredibly|profoundly|remarkably|crucially|extremely|notably|utterly)\\b",
+  "words_not_yet_covered": [
+   "incredibly",
+   "extremely",
+   "utterly",
+   "profoundly",
+   "strikingly",
+   "remarkably",
+   "fascinatingly",
+   "surprisingly",
+   "interestingly",
+   "importantly",
+   "notably",
+   "crucially"
+  ],
+  "positives": [
+   "It is incredibly fast.",
+   "Interestingly, the cache is empty.",
+   "This is remarkably small."
+  ],
+  "negatives": [
+   "The service is highly available.",
+   "The value changed significantly."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-intensifier-adverbs",
+  "suggested_message": "Intensifier / evaluative adverb",
+  "suggested_fix": "Delete; give the number.",
+  "train_ai_docs": 0,
+  "train_human_docs": 37,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/ConjunctiveAdverbOpener.yml:5",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/FormalTransitions.yml:7",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:404",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:412",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list.json:1007",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:201",
+    "license": "MIT"
+   }
+  ],
+  "category": "transition",
+  "description": "Sentence-initial formal transitions with comma (Moreover, Furthermore, Additionally, Consequently, Subsequently, Nonetheless, Nevertheless, Conversely, Notably, Importantly, Crucially, Interestingly, Indeed). Count-based use is advisable.",
+  "pattern": "(?m)(?:^\\s*(?:[-*>]\\s+)?|(?<=[.!?]\\s))(?:moreover|furthermore|additionally|consequently|subsequently|nonetheless|nevertheless|conversely|notably|importantly|crucially|interestingly|indeed|accordingly),",
+  "words_not_yet_covered": [
+   "Moreover,",
+   "Furthermore,",
+   "Additionally,",
+   "Consequently,",
+   "Subsequently,",
+   "Nonetheless,",
+   "Nevertheless,",
+   "Conversely,",
+   "Notably,",
+   "Importantly,",
+   "Crucially,",
+   "Interestingly,",
+   "Indeed,"
+  ],
+  "positives": [
+   "Moreover, the cache is shared.",
+   "The build failed. Furthermore, the logs are empty.",
+   "Additionally, set the flag."
+  ],
+  "negatives": [
+   "Additionally configured values are merged.",
+   "Indeed.com is the job board."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-conjunctive-openers",
+  "suggested_message": "Formal sentence-opening transition",
+  "suggested_fix": "Use 'and', 'but', 'so', or drop it.",
+  "train_ai_docs": 0,
+  "train_human_docs": 40,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/SequencingMarkers.yml:6",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list.json:1186",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list.json:1391",
+    "license": "MIT"
+   }
+  ],
+  "category": "transition",
+  "description": "Ordinal sequencing adverbs at sentence start: Firstly / Secondly / Thirdly / Fourthly / Fifthly.",
+  "pattern": "(?m)(?:^\\s*(?:[-*>]\\s+)?|(?<=[.!?]\\s))(?:firstly|secondly|thirdly|fourthly|fifthly)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Firstly, install the package.",
+   "Secondly, set the token.",
+   "Thirdly, run the tests."
+  ],
+  "negatives": [
+   "First, install the package.",
+   "The first step is to run the tests."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-sequencing-markers",
+  "suggested_message": "Ordinal sequencing marker",
+  "suggested_fix": "Use 'First, Second, Third' or a list.",
+  "train_ai_docs": 0,
+  "train_human_docs": 2,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list.json:1159",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/InflatedWords.yml:26",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/FormalRegister.yml:8",
+    "license": "MIT"
+   }
+  ],
+  "category": "formal-register",
+  "description": "Formal verbs with plain equivalents: utilize, facilitate, commence, ascertain, endeavor (-our), elucidate, 'utilization' is excluded (CPU utilization).",
+  "pattern": "\\butiliz(?:e|es|ed|ing)\\b|\\bfacilitat(?:e|es|ed|ing)\\b|\\bcommenc(?:e|es|ed|ing)\\b|\\bascertain(?:s|ed|ing)?\\b|\\bendeavou?r(?:s|ed|ing)?\\b",
+  "words_not_yet_covered": [
+   "utilize",
+   "utilizes",
+   "utilized",
+   "utilizing",
+   "facilitate",
+   "facilitates",
+   "facilitated",
+   "facilitating",
+   "commence",
+   "commences",
+   "commenced",
+   "commencing",
+   "ascertain",
+   "endeavor",
+   "endeavour"
+  ],
+  "positives": [
+   "We utilize caching.",
+   "This facilitates reuse.",
+   "Builds commence at midnight.",
+   "We endeavor to fix it."
+  ],
+  "negatives": [
+   "CPU utilization is 40%.",
+   "The facility log is rotated."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-formal-verbs",
+  "suggested_message": "Formal verb",
+  "suggested_fix": "use / help / start / try.",
+  "train_ai_docs": 0,
+  "train_human_docs": 14,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/FillerPhrases.yml:11",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/FillerPhrases.yml:12",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:245",
+    "license": "MIT"
+   }
+  ],
+  "category": "filler-phrase",
+  "description": "Wordy quantity phrases: 'a multitude of', 'an abundance of', 'a diverse array of', 'a wide array of', 'an array of', 'countless', 'innumerable'. 'A wide range of' / 'a variety of' are too common in docs to include.",
+  "pattern": "\\ba (?:multitude|diverse array|wide array|rich array|vast array) of\\b|\\ban abundance of\\b|\\bcountless\\b|\\binnumerable\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "a multitude of options",
+   "a diverse array of tools",
+   "countless hours"
+  ],
+  "negatives": [
+   "The array of bytes is copied.",
+   "Counting the rows takes a while."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-plethora-variety",
+  "suggested_message": "Wordy quantity phrase",
+  "suggested_fix": "Give the count or say 'many'.",
+  "train_ai_docs": 0,
+  "train_human_docs": 2,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/FillerPhrases.yml:26",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/FillerPhrases.yml:23",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/WeakVerbs.yml:16",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/WeakVerbs.yml:20",
+    "license": "MIT"
+   }
+  ],
+  "category": "filler-phrase",
+  "description": "Wordy padding: 'due to the fact that', 'owing to the fact that', 'in light of the fact that', 'has/have the ability to', 'make(s)/made a decision', 'with a view to'.",
+  "pattern": "\\b(?:due|owing) to the fact that\\b|\\bin light of the fact that\\b|\\bha(?:s|ve|d) the ability to\\b|\\bmak(?:e|es|ing) a decision\\b|\\bmade a decision\\b|\\bwith a view to\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Due to the fact that the cache is cold, it is slow.",
+   "The team made a decision to ship.",
+   "It has the ability to retry."
+  ],
+  "negatives": [
+   "Due to a bug, the cache is cold.",
+   "The decision tree has depth 4."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-wordy-support-phrases",
+  "suggested_message": "Wordy padding",
+  "suggested_fix": "because / can / decided.",
+  "train_ai_docs": 0,
+  "train_human_docs": 3,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/HiddenVerb.yml:6",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/WeakVerbs.yml:16",
+    "license": "MIT"
+   }
+  ],
+  "category": "formal-register",
+  "description": "Hidden verbs: support verb + nominalization ('conduct an analysis', 'perform a validation', 'carry out the migration').",
+  "pattern": "\\b(?:conduct|perform|undertake|carry out|engage in)\\s+(?:a|an|the)\\s+\\w+(?:tion|sion|ment|ance|sis)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "We conduct an analysis of the logs.",
+   "Perform a validation of the input.",
+   "Carry out the migration first."
+  ],
+  "negatives": [
+   "Conduct electricity through the wire.",
+   "The performance tab shows the latency graph."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-hidden-verb",
+  "suggested_message": "Hidden verb (support verb + noun)",
+  "suggested_fix": "Use the direct verb: analyze, validate, migrate.",
+  "train_ai_docs": 1,
+  "train_human_docs": 2,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:520",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:521",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/VagueAttribution.yml:16",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/VagueAttribution.yml:20",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/Weasel.yml:11",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/Weasel.yml:12",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/VagueAttributions.yml:7",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/PromotionalPuffery.yml:42",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:254",
+    "license": "MIT"
+   }
+  ],
+  "category": "vague-claim",
+  "description": "Unnamed authority beyond en-vague-authority (which has experts/studies/research/industry reports + say/show/suggest/agree/believe): 'experts argue/warn/note/predict', 'critics argue', 'observers have noted', 'many believe', 'some argue', 'it is widely believed', 'widely regarded as', 'has been shown', 'studies have shown'.",
+  "pattern": "\\b(?:experts?|critics|observers|analysts|industry insiders) (?:argue|contend|warn|note|predict|claim|have (?:noted|argued|suggested|warned|cited))\\b|\\b(?:many|some) (?:people |experts |critics )?(?:believe|argue|would say|contend)\\b|\\bit is (?:widely|often|commonly|generally) (?:believed|said|thought|assumed)\\b|\\bwidely (?:regarded|recognized|recognised|considered|acknowledged) as\\b|\\b(?:studies|research|surveys|reports) (?:has |have )?(?:shown|indicated|demonstrated)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Experts argue that caching is overused.",
+   "Critics argue the API is unstable.",
+   "Many believe the default is unsafe.",
+   "It is widely believed that retries help.",
+   "Studies have shown that users leave."
+  ],
+  "negatives": [
+   "The expert panel meets on Friday."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-vague-attribution-more",
+  "suggested_message": "Vague attribution",
+  "suggested_fix": "Name the source or cut the claim.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-vague-attribution"
+ },
+ {
+  "sources": [
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/HedgeCascade.yml:8",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/StackedHedges.yml:12",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:171",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/Hedging.yml:13",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Direct/Hedging.yml:10",
+    "license": "MIT"
+   },
+   {
+    "repo": "aaazzam/dslop",
+    "file": "src/patterns.rs:218",
+    "license": "Apache-2.0"
+   },
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/Adverb.yml:29",
+    "license": "MIT"
+   }
+  ],
+  "category": "hedge",
+  "description": "Stacked hedges beyond 'could potentially / may possibly / might arguably': 'can/may/might potentially', 'could/might possibly', 'could perhaps', 'could conceivably', 'it could be argued', 'one could argue', 'arguably'.",
+  "pattern": "\\b(?:can|may|might|could) (?:potentially|possibly|conceivably)\\b|\\bcould perhaps\\b|\\b(?:it could|it can) be argued\\b|\\bone (?:could|might|may) argue\\b|\\barguably\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "It may potentially fail on Windows.",
+   "This might possibly work.",
+   "One could argue the default is wrong."
+  ],
+  "negatives": [
+   "Potentially destructive operations ask for confirmation.",
+   "The flag is argued as a string."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-hedge-possibly",
+  "suggested_message": "Stacked or reflexive hedge",
+  "suggested_fix": "One hedge at most, or give the evidence.",
+  "train_ai_docs": 0,
+  "train_human_docs": 22,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:236",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/SuperficialAnalysis.yml:10",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ParticipialPadding.yml:51",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/ParticipialPadding.yml:33",
+    "license": "MIT"
+   }
+  ],
+  "category": "participial-rider",
+  "description": "Trailing -ing riders beyond en-ing-rider: ', symbolizing/demonstrating/illustrating/cultivating/encompassing/contributing to/solidifying/cementing/reinforcing/paving the way'. ', thereby/thus <verb>ing'.",
+  "pattern": ",\\s+(?:symbolizing|demonstrating|illustrating|cultivating|encompassing|contributing to|solidifying|cementing|reinforcing|signali?ng|reaffirming|paving the way)\\b|,\\s+(?:thereby|thus)\\s+\\w+ing\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "The release shipped, demonstrating the team's focus.",
+   "It is configurable, thereby reducing risk.",
+   "The change merged, cementing the new API."
+  ],
+  "negatives": [
+   "Run the script, then check the output.",
+   "The tool demonstrates pagination in chapter 3."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-additional-ing-riders",
+  "suggested_message": "Trailing -ing rider",
+  "suggested_fix": "Cut it, or name the mechanism.",
+  "train_ai_docs": 0,
+  "train_human_docs": 12,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "sources": [
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:295",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/StrategyBuzzwords.yml:15",
+    "license": "MIT"
+   }
+  ],
+  "category": "corporate-cliche",
+  "description": "Strategy buzzwords: virtuous cycle, growth flywheel, flywheel effect, defensible/competitive moat.",
+  "pattern": "\\bvirtuous (?:cycle|circle)\\b|\\b(?:growth|data|content|virtuous|self-?reinforcing) flywheel\\b|\\bflywheel effect\\b|\\b(?:competitive|economic|defensible|durable) moats?\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "This creates a virtuous cycle.",
+   "a growth flywheel",
+   "building a defensible moat"
+  ],
+  "negatives": [
+   "The flywheel arm is machined steel.",
+   "Fill the moat with water."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-flywheel-buzz",
+  "suggested_message": "Strategy buzzword",
+  "suggested_fix": "Describe the actual feedback loop.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "rejected: fewer than 3 independent sources"
+ },
+ {
+  "sources": [
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AICompoundPhrases.yml:14",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:389",
+    "license": "MIT"
+   }
+  ],
+  "category": "ai-vocabulary",
+  "description": "'delicate balance / balancing act / dance' and 'complex interplay'.",
+  "pattern": "\\bdelicate (?:balance|balancing act|dance|interplay)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "a delicate balance between speed and safety",
+   "a delicate balancing act"
+  ],
+  "negatives": [
+   "Balance the load across nodes."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-delicate-balance",
+  "suggested_message": "Delicate-balance cliche",
+  "suggested_fix": "State the trade-off in terms.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "rejected: fewer than 3 independent sources"
+ },
+ {
+  "sources": [
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:340",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:396",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/SlopVocab.yml:56",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AICompoundPhrases.yml:44",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:201",
+    "license": "MIT"
+   }
+  ],
+  "category": "significance-inflation",
+  "description": "'serves as a (stark) reminder / testament / cautionary tale / beacon', 'stark reminder', 'sobering reminder'. [Partial overlap with existing rule(s): en-is-avoidance.]",
+  "pattern": "\\b(?:serves?|served|serving) as (?:a|an) (?:stark |powerful |poignant |timely |sobering |vivid |potent )?(?:reminder|testament|beacon|cautionary tale)\\b|\\b(?:stark|sobering) reminder\\b|\\bcautionary tale\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "It serves as a stark reminder of the risk.",
+   "The outage was a sobering reminder.",
+   "This serves as a cautionary tale."
+  ],
+  "negatives": [
+   "Send a reminder email on Friday."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-stark-reminder",
+  "suggested_message": "Reminder/testament inflation",
+  "suggested_fix": "State the fact.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-stark-reminder"
+ },
+ {
+  "sources": [
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:204",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:210",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/Puffery.yml:12",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AICompoundPhrases.yml:19",
+    "license": "MIT"
+   }
+  ],
+  "category": "significance-inflation",
+  "description": "'play(s/ed) a crucial/pivotal/vital/significant/critical/instrumental/integral role' beyond the 'plays a key|crucial|pivotal|vital role' already caught.",
+  "pattern": "\\b(?:play|plays|played|playing) an? (?:crucial|pivotal|vital|significant|critical|instrumental|integral|central|key) role\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Caching plays a critical role.",
+   "Logging played a significant role.",
+   "Tests play an integral role."
+  ],
+  "negatives": [
+   "The role is assigned in IAM.",
+   "Players choose a role at login."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-plays-role-more",
+  "suggested_message": "'Plays a … role' inflation",
+  "suggested_fix": "Say what it does.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as en-plays-role"
+ },
+ {
+  "sources": [
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:216",
+    "license": "MIT"
+   },
+   {
+    "repo": "sam-paech/slop-score",
+    "file": "data/slop_list_trigrams.json:412",
+    "license": "MIT"
+   }
+  ],
+  "category": "significance-inflation",
+  "description": "'extends/goes far beyond', 'far beyond mere/simple', 'move beyond simply'.",
+  "pattern": "\\b(?:extends?|extended|goes|going|stretches) far beyond\\b|\\bfar beyond (?:mere|simple|simply)\\b|\\b(?:goes|go|move|moving) beyond (?:mere|merely|simply)\\b",
+  "words_not_yet_covered": null,
+  "positives": [
+   "Its impact extends far beyond the codebase.",
+   "It goes beyond mere logging."
+  ],
+  "negatives": [
+   "The buffer extends beyond the page boundary."
+  ],
+  "covered_by": null,
+  "suggest_id": "en-far-beyond",
+  "suggested_message": "'Far beyond' inflation",
+  "suggested_fix": "State the actual scope.",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "rejected: fewer than 3 independent sources"
+ }
+]

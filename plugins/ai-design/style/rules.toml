@@ -84,7 +84,7 @@ suggest = "지금 하면 달라지는 점을 서술"
 id = "ko-double-passive"
 lang = "ko"
 severity = "error"
-pattern = '되어(지|집|진|져)|지게\s?(됩니다|돼요|된다)'
+pattern = '되어(지|집|진|져|졌)|지게\s?(됩니다|돼요|된다)'
 message = "이중 피동, 또는 '~지게 됩니다' 우회"
 suggest = "됩니다 / 누가 하는지 주어 명시"
 
@@ -344,6 +344,171 @@ message = "'X 하나' 단일성 강조 반복"
 suggest = "수가 중요할 때만 유지 (합니다체 하나로 씁니다 → 합니다체로 씁니다)"
 max_per_file = 4
 
+# Essay and news-commentary tells from epoko77-ai/im-not-ai (MIT; ai-tell-taxonomy.md, metrics_v2.py). On the
+# technical-docs comparison corpus (docs/measurement.md) none of these fired on 664 human docs; they target
+# columns, reports and announcements, the kind of text the essay probe in docs/measurement.md covers.
+
+[[rule]]
+id = "ko-meeting-gajida"
+lang = "ko"
+severity = "warning"
+pattern = '(?:회의|미팅|면담|인터뷰|토론)[을를]\s?(?:가졌|가지|가질|갖)'
+message = "'회의를 가지다' (have a meeting 직역)"
+suggest = "회의를 했다 / 열었다 / 만났다"
+
+[[rule]]
+id = "ko-ilueojida"
+lang = "ko"
+severity = "warning"
+pattern = '(?:논의|합의|협의|검토|결정|조정|협력|투자|거래)가\s?이루어(?:졌|진|지|집)'
+message = "'~가 이루어지다' 피동 우회"
+suggest = "능동 동사로 (합의했다 / 논의한다)"
+max_per_file = 2
+
+[[rule]]
+id = "ko-abstract-subject-verb"
+lang = "ko"
+severity = "warning"
+pattern = '(?:등장|출현|확산|부상|트렌드|혁신|흐름|변화)(?:은|는)\s[^.!?\n]{0,35}(?:보여줍니다|보여준다|보여줬다|시사합니다|시사한다|가져옵니다|가져온다|가져오고|일으킵니다|일으킨다|일으키며|말해줍니다|말해준다)'
+message = "추상 주어 + 만능 동사 (보여준다·가져온다)"
+suggest = "행위자를 주어로 (이 흐름으로 새 기회가 열린다)"
+
+[[rule]]
+id = "ko-evaluative-clear"
+lang = "ko"
+severity = "warning"
+pattern = '(?:점|사실|가치|의미|방향|효과|차이|필요성|결과)(?:은|는)\s?(?:명확|분명)(?:하다|합니다|하며|하고|해\s?보입니다|해\s?보인다|해졌다)'
+message = "'~는 명확하다·분명하다' 평가 술어"
+suggest = "명제를 바로 단언 (AI를 도입해야 한다)"
+
+[[rule]]
+id = "ko-foundation-formula"
+lang = "ko"
+severity = "warning"
+pattern = '(?:발판|토대|초석|주춧돌|교두보)[을를]\s?(?:마련|놓|다지)|활로[를을]\s?(?:열|연다|열었|열어)'
+message = "'발판·토대를 마련하다' 기반 마련 공식"
+suggest = "그 조치가 실제로 가능하게 하는 일을 서술"
+
+[[rule]]
+id = "ko-english-buzzword-hada"
+lang = "ko"
+severity = "warning"
+pattern = '\b(?:seamless|robust|holistic|scalable|leverag(?:e|ing)|cutting-edge)(?:하|한|해|하여|하는)'
+message = "영어 buzzword + 한국어 어미 (seamless하다·leverage하다)"
+suggest = "한국어로 풀기 (끊김 없는, 안정적인, 활용하여)"
+
+[[rule]]
+id = "ko-first-second-third"
+lang = "ko"
+severity = "warning"
+pattern = '첫째[,，]\s[^\n]{5,200}?둘째[,，]\s[^\n]{5,200}?셋째[,，]'
+message = "'첫째·둘째·셋째' 기계적 병렬 열거"
+suggest = "목록이나 산문으로 풀기 (우선·이어서·마지막으로 변주)"
+
+[[rule]]
+id = "ko-inline-numbering"
+lang = "ko"
+severity = "warning"
+pattern = '(?<!\d)1\)\s[^\n]{5,}?(?<!\d)2\)\s[^\n]{5,}?(?<!\d)3\)\s'
+message = "문장 속 '1) 2) 3)' 인라인 번호 매기기"
+suggest = "본문에 녹이거나 우선·다음으로"
+
+[[rule]]
+id = "ko-colon-subtitle-heading"
+lang = "ko"
+severity = "warning"
+pattern = '(?m)^#{1,6}\s+\**(?:서론|본론|결론|도입|개요|배경|핵심|요약|마무리)(?:\s?\d+)?\**[:：]\s*\S'
+message = "구조 라벨 + 콜론 부제 헤딩"
+suggest = "헤딩을 단일 명사구로"
+
+[[rule]]
+id = "ko-opens-possibility"
+lang = "ko"
+severity = "warning"
+pattern = '가능성을\s?열어\s?(?:준다|줍니다|주는|주었다|줬다)'
+message = "'가능성을 열어준다' hype 동사구"
+suggest = "무엇이 가능해지는지 서술"
+
+[[rule]]
+id = "ko-more-than-ever"
+lang = "ko"
+severity = "warning"
+pattern = '그\s?어느\s?때보다'
+message = "'그 어느 때보다' 최상급 상투구"
+suggest = "비교 대상을 숫자로"
+
+[[rule]]
+id = "ko-personified-subject"
+lang = "ko"
+severity = "warning"
+pattern = '(?:충돌|가성비|기술|시대|현실|역사|데이터|변화|질문|숫자|통계|혁신|위기|경쟁|등장|흐름|물결|AI|인공지능)(?:이|가)\s(?:[가-힣]{1,8}[을를]\s)?(?:던집니다|던진다|묻습니다|묻는다|부릅니다|부른다|증명합니다|증명한다|말해줍니다|말해준다|속삭입니다|속삭인다|외칩니다|외친다)'
+message = "추상 주어의 의인화 ('기술이 묻는다')"
+suggest = "사람·기관을 주어로, 또는 동사를 평이하게"
+
+[[rule]]
+id = "ko-leads-to-chain"
+lang = "ko"
+severity = "warning"
+pattern = '이는\s결국|결국[^.!?\n]{0,50}(?:으?로)\s?이어(?:진다|집니다)|에\s?직결(?:된다|됩니다|되는)'
+message = "'결국 ~로 이어진다 / ~에 직결된다' 인과 결산"
+suggest = "인과의 실제 경로를 쓰거나 단문으로 끊기"
+
+[[rule]]
+id = "ko-this-is-why"
+lang = "ko"
+severity = "warning"
+pattern = '[가-힣]\s?이유(?:다|이다)[.!]'
+message = "문장 끝 '~하는 이유다' 도치 결산"
+suggest = "순방향 단언 ('그래서 ~다')"
+
+[[rule]]
+id = "ko-empty-caveat"
+lang = "ko"
+severity = "warning"
+pattern = '(?:^|[.!?]\s+|\n)(?:(?:그러나|다만|하지만|물론)[,\s]+)?(?:과제|한계|숙제|아쉬운\s?점|우려|위험)(?:도|는)\s?(?:여전히\s)?(?:남아\s?있다|남아\s?있습니다|분명하다|분명합니다|있다|있습니다)[.]'
+message = "내용 없는 반론 문패 ('과제도 남아 있다')"
+suggest = "문패를 지우고 실제 과제를 첫 문장에"
+
+[[rule]]
+id = "ko-sensory-evaluation"
+lang = "ko"
+severity = "warning"
+pattern = '(?:진단|경고|분석|통계|현실|숫자|지적|전망)(?:은|는)\s?(?:서늘|아프|차갑|뜨겁|묵직|섬뜩)(?:하다|다|합니다|습니다)'
+message = "감각 술어 평가문 ('진단은 서늘하다')"
+suggest = "관용구나 구체 서술로"
+
+[[rule]]
+id = "ko-synonym-pair"
+lang = "ko"
+severity = "warning"
+pattern = '[가-힣]{2,6}고\s(?:[가-힣]{2,5}적인|꾸준한)\s(?:역할|접근|노력|방법|전략|기능|영향|변화)'
+message = "동의어 이중 수식 ('중요하고 핵심적인')"
+suggest = "수식어 하나만"
+
+[[rule]]
+id = "ko-role-and-function"
+lang = "ko"
+severity = "warning"
+pattern = '(?:역할과\s기능|기능과\s역할|의미와\s가치|가치와\s의미)'
+message = "동의어 병렬 명사 ('역할과 기능')"
+suggest = "하나만"
+
+[[rule]]
+id = "ko-hedge-double"
+lang = "ko"
+severity = "warning"
+pattern = '(?:가능성|여지|우려)(?:이|가)\s?있을\s?수\s?(?:도\s?)?있'
+message = "이중 완곡 ('가능성이 있을 수 있다')"
+suggest = "완곡 하나만"
+
+[[rule]]
+id = "ko-unattributed-verdict"
+lang = "ko"
+severity = "warning"
+pattern = '[다라]는\s?(?:분석|평가|관측|전망|지적|해석)(?:이다|입니다)[.]'
+message = "무주체 판정 종결 ('~다는 분석이다')"
+suggest = "출처가 있으면 출처를 앞에, 없으면 직접 서술"
+
 # ───────────────────────── English prose ─────────────────────────
 
 [[rule]]
@@ -458,6 +623,187 @@ severity = "warning"
 pattern = '\b(experts|studies|research|industry reports?) (say|show|suggest|agree|believe)'
 message = "Vague authority"
 suggest = "cite the source or cut"
+
+# Rhetorical tells that three or more of these MIT/Apache-2.0 detectors list independently: blader/humanizer,
+# hardikpandya/stop-slop, JMill/deslop, jdkato/voices, tbhb/vale-ai-tells, krishnasunkam/vale-ai-tells,
+# sam-paech/slop-score, tnguyen21/slop-guard-rs, aaazzam/dslop. Kept only if they fired on at most 1 of 649
+# human technical docs (docs/measurement.md). Patterns are ours.
+
+[[rule]]
+id = "en-its-not-x-its-y"
+lang = "en"
+severity = "warning"
+pattern = "(?m)(?:^\\s*(?:[-*>]\\s+)?|(?<=[.!?]\\s))(?:(?:it|this|that)(?:['’]s| is) not|(?:it|this|that) isn['’]?t)\\b[^.!?\\n;]{1,60}?[,;:—–.]\\s*(?:it|this|that)(?:['’]s| is)\\b"
+message = "'It's not X, it's Y' reframe"
+suggest = "state what it is; drop the negation"
+
+[[rule]]
+id = "en-not-because"
+lang = "en"
+severity = "warning"
+pattern = "\\bnot because\\b[^.!?\\n]{1,80}?(?:,\\s*but\\s+because\\b|[.;—–]\\s*(?:it['’]?s\\s+)?because\\b)"
+message = "'not because X, but because Y' reversal"
+suggest = "give the real reason once"
+
+[[rule]]
+id = "en-question-isnt-reframe"
+lang = "en"
+severity = "warning"
+pattern = "\\bthe (?:real |actual )?(?:question|problem|issue|point|goal|challenge|answer) (?:is|was)(?:n['’]t| not)\\b[^.!?\\n]{1,60}[.,;—–]\\s*(?:it['’]?s|it is|the)\\b"
+message = "'The problem isn't X, it's Y' reframe"
+suggest = "say what the problem is"
+
+[[rule]]
+id = "en-negative-listing"
+lang = "en"
+severity = "warning"
+pattern = '(?m)(?:^\s*(?:[-*>]\s+)?|(?<=[.!?]\s))(?:no|not (?:a|an|the)) [a-z-]+(?: [a-z-]+){0,2}[.,;]\s+(?:no|not (?:a|an|the)) \w'
+message = "Negative listing ('No X. No Y.')"
+suggest = "state what it is"
+
+[[rule]]
+id = "en-mic-drop-fragment"
+lang = "en"
+severity = "warning"
+pattern = "\\bthat['’]?s (?:the whole|the entire|exactly the|the real|the only) (?:point|idea|thing|trick|story|job|argument|fix|premise|win|difference)\\b|\\bthat['’]?s it\\.\\s+that['’]?s\\b|[.!?]\\s+(?:full stop|period|every single time)\\.|\\bread that again\\b|\\blet me say that again\\b"
+message = "Emphasis fragment"
+suggest = "cut it, or add the missing fact"
+
+[[rule]]
+id = "en-rhetorical-self-answer"
+lang = "en"
+severity = "warning"
+pattern = '(?m)(?:^\s*|(?<=[.!?]\s))the (?:result|outcome|answer|solution|catch|problem|issue|reason|reality|truth|worst part|best part|irony|twist|takeaway|lesson|upside|downside|difference|payoff)\?\s+\w'
+message = "Self-answered question"
+suggest = "state the answer as a sentence"
+
+[[rule]]
+id = "en-chatbot-signoff"
+lang = "en"
+severity = "warning"
+pattern = "\\bfeel free to (?:ask|reach out|contact|let me know)\\b|\\bdon['’]?t hesitate to (?:ask|reach out|contact)\\b|\\bif you have any (?:other|further|additional|more) questions\\b|\\bis there anything else (?:i|we) (?:can|could)\\b|\\b(?:i['’]d|i would) be (?:happy|glad) to (?:help|assist)\\b|\\bhappy to help\\b|\\bhope (?:this|that) (?:clarifies|was helpful)\\b|\\bhopefully this helps\\b"
+message = "Assistant sign-off"
+suggest = "delete; end on the content"
+
+[[rule]]
+id = "en-ai-disclosure"
+lang = "en"
+severity = "warning"
+pattern = "\\bas an ai\\b|\\bas a (?:large )?language model\\b|\\bup to my (?:last )?(?:knowledge|training)|\\bas of my (?:last |knowledge )?(?:cutoff|training)|\\bi (?:cannot|can['’]t) browse\\b|\\bi don['’]t have (?:personal|access to real-time)\\b|\\bi['’]m just an? ai\\b"
+message = "AI disclosure residue"
+suggest = "delete"
+
+[[rule]]
+id = "en-assistant-opener"
+lang = "en"
+severity = "warning"
+pattern = "(?m)(?:^\\s*|(?<=[.!?]\\s))(?:absolutely|of course|sure thing)!|\\byou['’]re absolutely right\\b|\\b(?:excellent|fantastic|wonderful|insightful|thoughtful) question\\b|\\bthank you for (?:your|the) question\\b|\\bi['’]m glad you asked\\b|\\b(?:that['’]s|what) an? (?:great|excellent|fantastic|wonderful|interesting) (?:question|idea|point)\\b"
+message = "Assistant opener"
+suggest = "delete; start with the answer"
+
+[[rule]]
+id = "en-uncomfortable-truth"
+lang = "en"
+severity = "warning"
+pattern = '\bthe (?:uncomfortable|inconvenient|unglamorous|unsexy|brutal|hard|awkward|dirty|hidden|unspoken|honest|simple) (?:truth|reality|secret)\b|\bthe (?:truth|reality) is(?:,| that\b)'
+message = "Truth/reality announcement"
+suggest = "state the fact"
+
+[[rule]]
+id = "en-performed-candor"
+lang = "en"
+severity = "warning"
+pattern = "(?m)(?:^\\s*|(?<=[.!?]\\s))(?:honestly|frankly|candidly)\\s*[,?]|\\blet(?: me|['’]s) be (?:clear|honest|direct|blunt|frank|real)\\b|\\bi['’]ll be (?:honest|direct|blunt|frank)\\b|\\bto be (?:perfectly |brutally |completely |totally )?(?:honest|frank)\\b|\\bin all honesty\\b|\\bif i['’]m being (?:honest|frank)\\b|\\btruth be told\\b|\\breal talk\\b|\\bquite (?:frankly|honestly)\\b"
+message = "Performed candor"
+suggest = "cut; state the claim"
+
+[[rule]]
+id = "en-to-be-clear"
+lang = "en"
+severity = "warning"
+pattern = '(?m)(?:^\s*|(?<=[.!?]\s))(?:and |but )?to be (?:clear|fair)\s*[,:]'
+message = "'To be clear' frame"
+suggest = "cut it; state the point"
+
+[[rule]]
+id = "en-heres-the-catch"
+lang = "en"
+severity = "warning"
+pattern = "\\bhere['’]?s (?:the )?(?:catch|deal|kicker|truth|reality|secret|problem though|tension|tradeoff|trade-off)\\b|\\bhere['’]?s what (?:i mean|most people|nobody|no one|everyone|many|few)\\b|\\bhere['’]?s why (?:this|that|it) matters\\b|\\bhere['’]?s what i find\\b"
+message = "Staged 'Here's…' reveal"
+suggest = "cut; state the point"
+
+[[rule]]
+id = "en-nobody-talks-about"
+lang = "en"
+severity = "warning"
+pattern = '\b(?:nobody|no one) (?:talks about|is talking about|tells you|mentions|discusses|wants to (?:admit|hear|say))\b|\bwhat (?:most people|everyone|nobody|no one) (?:get|gets|miss|misses|overlook|overlooks|tells you|forget|forgets) ?(?:wrong)?\b|\bthe part (?:nobody|no one|everyone|most people)\b|\bthe (?:dirty|open|unspoken) secret\b|\bthe elephant in the room\b|\bthe quiet part\b'
+message = "False-exclusivity set-up"
+suggest = "state the point"
+
+[[rule]]
+id = "en-narrative-pivot"
+lang = "en"
+severity = "warning"
+pattern = "\\bthis is where (?:things|it) gets? (?:interesting|weird|tricky|complicated|messy|fun)\\b|\\bwhere (?:it|this|that|things) gets? (?:interesting|weird|tricky|spicy|hairy)\\b|\\bthen something (?:interesting|unexpected|strange) happened\\b|\\b(?:that|this) (?:changes|changed) everything\\b|\\bsomething (?:shifted|clicked|snapped)\\b|\\beverything (?:changed|shifted|clicked)\\b|\\bthat['’]s when everything changed\\b"
+message = "Narrative pivot"
+suggest = "state what happened"
+
+[[rule]]
+id = "en-urgency-inflation"
+lang = "en"
+severity = "warning"
+pattern = "\\b(?:cannot|can['’]t) be (?:overstated|understated|overemphasi[sz]ed|emphasi[sz]ed enough)\\b|\\bmore (?:important|critical|relevant|urgent|essential|vital|pressing) than ever\\b|\\bhas never been more (?:important|critical|urgent|relevant|essential|vital)\\b|\\bthe stakes (?:have never been|are|couldn['’]t be) (?:higher|enormous|immense)\\b|\\bat a (?:crossroads|critical juncture|pivotal moment|defining moment)\\b|\\bin an (?:increasingly|ever more) [\\w-]+ world\\b"
+message = "Urgency inflation"
+suggest = "state the stakes with a number or consequence"
+
+[[rule]]
+id = "en-marks-a-turning-point"
+lang = "en"
+severity = "warning"
+pattern = '\b(?:marks?|marked|marking) (?:a|an|the) (?:pivotal|significant|crucial|key|major|defining|turning|watershed|historic)\b|\b(?:turning point|watershed moment|sea change|tipping point|paradigm shift)\b|\bindelible (?:mark|impact)\b|\b(?:enduring|lasting) (?:legacy|impact)\b'
+message = "Significance inflation"
+suggest = "state what changed, with a date or number"
+
+[[rule]]
+id = "en-landscape-noun"
+lang = "en"
+severity = "warning"
+pattern = '\b(?:evolving|competitive|digital|modern|business|technological|regulatory|shifting|changing|current|contemporary|rapidly changing) landscape\b|\blandscape of (?:the |modern |digital |technology|business|cloud|ai)'
+message = "Abstract 'landscape'"
+suggest = "name the actual field or market"
+
+[[rule]]
+id = "en-navigate-complexities"
+lang = "en"
+severity = "warning"
+pattern = '\bnavigat(?:e|es|ed|ing) (?:the |this |these |an? )?(?:complexities|complexity|challenges|landscape|nuances|waters|maze|intricacies)\b'
+message = "Figurative 'navigate'"
+suggest = "say what the reader actually does"
+
+[[rule]]
+id = "en-vague-attribution"
+lang = "en"
+severity = "warning"
+pattern = '\b(?:experts?|critics|observers|analysts|industry insiders) (?:argue|contend|warn|note|predict|claim|have (?:noted|argued|suggested|warned|cited))\b|\b(?:many|some) (?:people |experts |critics )?(?:believe|argue|would say|contend)\b|\bit is (?:widely|often|commonly|generally) (?:believed|said|thought|assumed)\b|\bwidely (?:regarded|recognized|recognised|considered|acknowledged) as\b|\b(?:studies|research|surveys|reports) (?:has |have )?(?:shown|indicated|demonstrated)\b'
+message = "Vague attribution"
+suggest = "name the source or cut the claim"
+
+[[rule]]
+id = "en-stark-reminder"
+lang = "en"
+severity = "warning"
+pattern = '\b(?:serves?|served|serving) as (?:a|an) (?:stark |powerful |poignant |timely |sobering |vivid |potent )?(?:reminder|testament|beacon|cautionary tale)\b|\b(?:stark|sobering) reminder\b|\bcautionary tale\b'
+message = "Reminder/testament inflation"
+suggest = "state the fact"
+
+[[rule]]
+id = "en-plays-role"
+lang = "en"
+severity = "warning"
+pattern = '\b(?:play|plays|played|playing) an? (?:crucial|pivotal|vital|significant|critical|instrumental|integral|central|key) role\b'
+message = "'Plays a … role' inflation"
+suggest = "say what it does"
 
 [[rule]]
 id = "dash-overuse"

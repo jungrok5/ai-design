@@ -39,7 +39,9 @@ regex cannot judge.
    (`~하시길 권합니다`, `~하는 편이 안전합니다`: state the condition and result instead), stock section headings
    (`체크리스트`, `핵심 포인트`: name what the section holds), summaries of what was just said
    (`결론적으로`, `In summary`), significance inflation (`시사하는 바가 크다`, `pivotal`), contrast theater
-   (`단순한 X를 넘어`, `It's not X, it's Y`), forced triplets, rhetorical questions, emoji markers, decorative bold.
+   (`단순한 X를 넘어`, `It's not X, it's Y`, `The question isn't X`), staged reveals (`Here's the catch`, `The result?`),
+   column clichés (`그 어느 때보다`, `가능성을 열어준다`, `과제도 남아 있다`, `~다는 분석이다`), assistant residue
+   (`Absolutely!`, `Feel free to reach out`), forced triplets, rhetorical questions, emoji markers, decorative bold.
 6. **Natural Korean.** Prefer verbs to nominalizations (`삭제 작업을 수행합니다` → `삭제합니다`), active voice with a real
    subject, and Korean particles over translationese (`~을 통해` → `~로`, `~에 있어서` → `~에서`, `~을 가지고 있다` →
    `~이 있다`). One term per concept; expand an abbreviation once on first use, e.g. `SSR(Server-Side Rendering)`.

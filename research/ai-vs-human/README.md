@@ -12,6 +12,7 @@
 | `candidates.tsv` | 학습용에서 찾은 후보 표현 132개와 AI·사람 문서 수 |
 | `results-*.txt` | 후보 추출, 학습용·시험용 측정, 새 규칙 4개 합계의 출력 |
 | `tools/` | `select.py`(주제 선정), `gen_one.sh`(문서 생성), `analyze.py`(후보 추출), `evaluate.py`(규칙 측정), `summarize.py`, `ctx.py`(후보 문맥 보기) |
+| `en/` | 같은 방식으로 만든 영어 비교 묶음(1.5.0). react.dev, es-toolkit, MDN 영어 문서 649개와 AI 문서 69개. `fetch-human.sh`, `tools/`(`select_en.py`, `gen_one_en.sh`, `splits_en.py`), 측정은 상위 `tools/evaluate.py` |
 
 사람 문서의 저작권은 각 출처에 있습니다. 이 폴더에는 경로와 커밋만 기록합니다. 재현 명령은
 [docs/measurement.md](../../docs/measurement.md#재현)에 있습니다.

@@ -12,7 +12,8 @@ https://github.com/jungrok5/ai-design/blob/main/docs/standard.md
 <!-- style-ignore-start -->
 - No hype adjectives, superlatives without a source, translationese (`~을 통해`, `~에 있어서`, `수행합니다`),
   personification, or sentences that talk to the reader. In English: no delve, leverage, seamless, cutting-edge,
-  "it is important to note", "In conclusion,".
+  "it is important to note", "In conclusion,", "It's not X, it's Y", "Here's the catch", "Feel free to reach out".
+  No column clichés (`그 어느 때보다`, `가능성을 열어준다`, `과제도 남아 있다`).
 <!-- style-ignore-end -->
 - Start with the fact and end on the last fact: no run-up, no recap, no forced groups of three, no count
   run-up (`변경은 세 가지입니다`), no advice voice (`~하시길 권합니다`, `~하는 편이 안전합니다`), no stock

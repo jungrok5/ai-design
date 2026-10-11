@@ -8,8 +8,16 @@ is copied verbatim.
 | Source | License | Used for |
 | --- | --- | --- |
 | [blader/humanizer](https://github.com/blader/humanizer) | MIT, © 2025 Siqi Chen | English AI-tone patterns, "do not add facts" rule |
-| [epoko77-ai/im-not-ai](https://github.com/epoko77-ai/im-not-ai) | MIT | Korean AI-tone taxonomy, do-not-change list |
+| [epoko77-ai/im-not-ai](https://github.com/epoko77-ai/im-not-ai) | MIT, © 2026 epoko77-ai | Korean AI-tone taxonomy, do-not-change list; 1.5.0 essay-tone rules (`ko-meeting-gajida` … `ko-unattributed-verdict`) |
 | [DaleSeo/korean-skills](https://github.com/DaleSeo/korean-skills) | MIT, © 2026 Dale Seo | Korean translationese and hype patterns |
+| [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | MIT, © 2025 Hardik Pandya | 1.5.0 English rhetorical-tell rules |
+| [JMill/deslop](https://github.com/JMill/deslop) | MIT, © 2026 JMill | 1.5.0 English rhetorical-tell rules |
+| [jdkato/voices](https://github.com/jdkato/voices) | MIT, © 2026 Joseph Kato | 1.5.0 English rhetorical-tell rules |
+| [tbhb/vale-ai-tells](https://github.com/tbhb/vale-ai-tells) | MIT, © 2025-2026 Tony Burns | 1.5.0 English rhetorical-tell rules |
+| [krishnasunkam/vale-ai-tells](https://github.com/krishnasunkam/vale-ai-tells) | MIT, © 2026 Krishna Sunkam | 1.5.0 English rhetorical-tell rules |
+| [sam-paech/slop-score](https://github.com/sam-paech/slop-score) | MIT, © 2025 Sam Paech | 1.5.0 English rhetorical-tell rules |
+| [tnguyen21/slop-guard-rs](https://github.com/tnguyen21/slop-guard-rs) | MIT, © 2026 Tommy Nguyen | 1.5.0 English rhetorical-tell rules |
+| [aaazzam/dslop](https://github.com/aaazzam/dslop) | Apache-2.0 | 1.5.0 English rhetorical-tell rules |
 | [amondnet/yoonmoon](https://github.com/amondnet/yoonmoon) | MIT, © 2026 Minsu Lee | Korean polishing workflow ideas |
 | [vercel-labs/writing-guidelines](https://github.com/vercel-labs/writing-guidelines) | MIT, © 2026 Vercel Labs | units, sentence-case headings, user-shaped titles |
 | [vercel-labs/web-interface-guidelines](https://github.com/vercel-labs/web-interface-guidelines) | MIT, © 2025 Vercel Labs | accessibility and interaction floor |

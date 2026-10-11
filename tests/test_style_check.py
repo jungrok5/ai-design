@@ -61,6 +61,59 @@ class StyleCheck(unittest.TestCase):
             self.assertIn(rule, run("b.md", bad).stdout, rule)
             self.assertNotIn(rule, run("o.md", ok).stdout, rule)
 
+    def test_rules_absorbed_from_open_source_detectors(self):
+        # 1.5.0: each rule catches the example its source lists and leaves a near-miss alone.
+        cases = {
+            "ko-meeting-gajida": ("어제 팀과 회의를 가졌다.\n", "회의를 열었다.\n"),
+            "ko-ilueojida": ("합의가 이루어졌다. 논의가 이루어지고 있다. 투자가 이루어집니다.\n", "꿈이 이루어졌다. 합의했다.\n"),
+            "ko-abstract-subject-verb": ("DeepSeek-V4의 등장은 오픈소스의 가능성을 보여줍니다.\n", "이 예제는 사용자 목록을 보여줍니다.\n"),
+            "ko-evaluative-clear": ("AI 도입이 필요하다는 점은 명확하다.\n", "분명히 말하지만 사실이 아니다.\n"),
+            "ko-foundation-formula": ("지능 강국으로 도약하는 발판을 마련할 수 있다.\n", "공항이 문을 열었다.\n"),
+            "ko-english-buzzword-hada": ("사용자에게 seamless하고 robust한 경험을 제공한다\n", "robust 성능을 측정한다.\n"),
+            "ko-first-second-third": ("첫째, AI 도구로 의사결정을 개선해야 합니다. 둘째, 클라우드로 확장성을 확보합니다. 셋째, 보안에 투자합니다.\n", "첫째 날은 설치를 합니다.\n"),
+            "ko-inline-numbering": ("1) 표준화된 인프라가 일반화되면서 학습 데이터 확보가 용이해졌다. 2) 도메인 특화 LLM이 성숙하면서 활용 범위가 넓어졌다. 3) 클라우드 GPU 단가가 하락했다.\n", "1) 첫 항목\n2) 둘째 항목\n3) 셋째 항목\n"),
+            "ko-colon-subtitle-heading": ("### **서론**: 제조업의 미래, AI에 달려있다\n", "## 설치: macOS\n"),
+            "ko-opens-possibility": ("새로운 서비스의 가능성을 열어준다.\n", "가능성을 검토한다.\n"),
+            "ko-more-than-ever": ("지금은 그 어느 때보다 중요한 시기다.\n", "어느 때나 가능하다.\n"),
+            "ko-personified-subject": ("두 지능의 충돌이 질문을 던집니다.\n", "사용자가 질문을 던진다.\n"),
+            "ko-leads-to-chain": ("이는 결국 지역 경제의 침체로 이어진다.\n", "오류로 이어지는 호출 경로를 추적한다.\n"),
+            "ko-this-is-why": ("이중구조를 더 벌려놓을 수 있다는 우려가 나오는 이유다.\n", "이유를 설명한다.\n"),
+            "ko-empty-caveat": ("그러나 과제도 남아 있다.\n", "남은 과제도 있습니다. 로그인 오류를 먼저 고친다.\n"),
+            "ko-sensory-evaluation": ("1부의 진단은 서늘하다.\n", "방 안 공기는 서늘하다.\n"),
+            "ko-synonym-pair": ("중요하고 핵심적인 역할\n", "작고 빠른 기능\n"),
+            "ko-role-and-function": ("핵심 도구로서의 역할과 기능\n", "역할과 권한을 설정한다.\n"),
+            "ko-hedge-double": ("오류가 생길 가능성이 있을 수 있다.\n", "가능성이 있다.\n"),
+            "ko-unattributed-verdict": ("수요가 시장을 떠받치고 있다는 분석이다.\n", "분석이 끝났다.\n"),
+            "en-its-not-x-its-y": ("It's not a framework, it's a toolkit.\n", "If it's not installed, it is skipped.\n"),
+            "en-not-because": ("We moved it, not because it was slow, but because it was fragile.\n", "The build failed, not because of the tests.\n"),
+            "en-question-isnt-reframe": ("The problem isn't the model. It's the data.\n", "The issue is not reproducible on Linux, per the report.\n"),
+            "en-negative-listing": ("No setup. No config. No lock-in.\n", "No such file or directory. Check the path.\n"),
+            "en-mic-drop-fragment": ("That's the whole point.\n", "That's the only place the token is stored.\n"),
+            "en-rhetorical-self-answer": ("The result? Faster builds.\n", "What is the result? See the output below.\n"),
+            "en-chatbot-signoff": ("Feel free to reach out if anything is unclear.\n", "Feel free to override this default in the config.\n"),
+            "en-ai-disclosure": ("As an AI language model, I cannot browse the web.\n", "The AI model is loaded at startup.\n"),
+            "en-assistant-opener": ("Absolutely! Here is the fix.\n", "Of course, this is optional.\n"),
+            "en-uncomfortable-truth": ("The uncomfortable truth is that tests are slow.\n", "The truth value is stored as a boolean.\n"),
+            "en-performed-candor": ("Let me be clear: this is breaking.\n", "The client is honest about its capacity.\n"),
+            "en-to-be-clear": ("To be clear, this is a breaking change.\n", "The output must be clear before the next run.\n"),
+            "en-heres-the-catch": ("Here's the catch: it needs a restart.\n", "Here's the full config.\n"),
+            "en-nobody-talks-about": ("Nobody talks about the migration cost.\n", "No one talks to the database directly; use the API.\n"),
+            "en-narrative-pivot": ("This is where things get interesting.\n", "The index shifted after the insert.\n"),
+            "en-urgency-inflation": ("The importance of backups cannot be overstated.\n", "The value cannot be negative.\n"),
+            "en-marks-a-turning-point": ("The release marks a pivotal moment for the project.\n", "The marker marks a boundary in the log.\n"),
+            "en-landscape-noun": ("the evolving landscape of cloud security\n", "Use landscape orientation for the print layout.\n"),
+            "en-navigate-complexities": ("navigate the complexities of modern tooling\n", "Navigate to Settings and click Save.\n"),
+            "en-vague-attribution": ("Experts argue that caching is overused.\n", "The expert panel meets on Friday.\n"),
+            "en-stark-reminder": ("It serves as a stark reminder of the risk.\n", "Send a reminder email on Friday.\n"),
+            "en-plays-role": ("Caching plays a critical role.\n", "The role is assigned in IAM.\n"),
+        }
+        for rule, (bad, ok) in cases.items():
+            self.assertIn(f"[{rule}]", run("b.md", "# t\n\n" + bad).stdout, rule)
+            self.assertNotIn(f"[{rule}]", run("o.md", "# t\n\n" + ok).stdout, rule)
+
+    def test_double_passive_past_tense(self):
+        self.assertIn("ko-double-passive", run("p.md", "# t\n\n문서가 작성되어졌다.\n").stdout)
+
     def test_structure_level_korean_tells(self):
         out = run("t.md", "# 소개\n\n이 도구는 어느 프로젝트에나 붙일 수 있습니다.\n"
                   "화면이 비슷해 보이는 이유는 기본값을 쓰기 때문입니다.\n"

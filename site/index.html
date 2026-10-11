@@ -316,6 +316,10 @@ severity = "off"</pre><button type="button">복사</button></div>
     </table></div>
     <!-- style-ignore-end -->
     <p>기존 규칙은 이 비교에서 AI 글보다 사람 글을 더 많이 보고했습니다(사람 71%, AI 57%). 사람 쪽 보고는 대부분 번역문의 번역투였습니다. 검사기는 AI 판별기가 아니라 문체 검사기입니다. 비교는 Claude 세 모델과 기술 문서에 한정됩니다. 방법과 한계는 <a href="https://github.com/jungrok5/ai-design/blob/main/docs/measurement.md#ai-글과-사람-글-비교">docs/measurement.md</a>, 데이터는 <a href="https://github.com/jungrok5/ai-design/tree/main/research/ai-vs-human">research/ai-vs-human/</a>에 있습니다.</p>
+    <h3>오픈소스 검출기의 패턴</h3>
+    <!-- style-ignore-start -->
+    <p>다른 AI 문체 검출 도구 11곳이 잡는 패턴 131개를 같은 비교 묶음에서 측정했습니다. 사람 문서를 거의 보고하지 않은 한국어 20개, 영어 22개만 1.5.0에서 경고 규칙으로 넣었습니다. 기술 문서 시험용에서 사람 문서 보고는 한국어 139개 중 0개, 영어 150개 중 2개였습니다. 기술 문서보다 이 패턴들이 노리는 칼럼 형식의 AI 글에서는 영어 8편 중 5편("It isn't X. It's Y", "The question isn't X"), 한국어 8편 중 2편을 보고했습니다. 나머지 후보는 사람 글도 자주 보고해서 넣지 않았습니다. 후보별 수와 이유는 <a href="https://github.com/jungrok5/ai-design/tree/main/research/oss-patterns">research/oss-patterns/</a>에 있습니다.</p>
+    <!-- style-ignore-end -->
   </div>
 </section>
 

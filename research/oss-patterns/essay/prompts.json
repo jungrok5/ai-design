@@ -1,0 +1,82 @@
+[
+ {
+  "id": "ko-00",
+  "model": "sonnet",
+  "prompt": "다음 주제로 블로그 칼럼을 한국어 마크다운으로 작성해 주세요. 분량은 본문 약 2000자입니다.\n\n주제: 원격 근무가 한국 기업 문화에 미치는 영향"
+ },
+ {
+  "id": "ko-01",
+  "model": "opus",
+  "prompt": "다음 주제로 블로그 칼럼을 한국어 마크다운으로 작성해 주세요. 분량은 본문 약 2000자입니다.\n\n주제: 생성형 AI 시대에 대학 교육이 바뀌어야 할 점"
+ },
+ {
+  "id": "ko-02",
+  "model": "sonnet",
+  "prompt": "다음 주제로 블로그 칼럼을 한국어 마크다운으로 작성해 주세요. 분량은 본문 약 2000자입니다.\n\n주제: 저출생 문제와 지방 소멸"
+ },
+ {
+  "id": "ko-03",
+  "model": "opus",
+  "prompt": "다음 주제로 블로그 칼럼을 한국어 마크다운으로 작성해 주세요. 분량은 본문 약 2000자입니다.\n\n주제: 전기차 보급 확대의 명암"
+ },
+ {
+  "id": "ko-04",
+  "model": "sonnet",
+  "prompt": "다음 주제로 블로그 칼럼을 한국어 마크다운으로 작성해 주세요. 분량은 본문 약 2000자입니다.\n\n주제: 소상공인을 위한 디지털 전환"
+ },
+ {
+  "id": "ko-05",
+  "model": "opus",
+  "prompt": "다음 주제로 블로그 칼럼을 한국어 마크다운으로 작성해 주세요. 분량은 본문 약 2000자입니다.\n\n주제: 청년 세대의 주거 문제"
+ },
+ {
+  "id": "ko-06",
+  "model": "sonnet",
+  "prompt": "다음 주제로 블로그 칼럼을 한국어 마크다운으로 작성해 주세요. 분량은 본문 약 2000자입니다.\n\n주제: K-콘텐츠의 세계화가 남긴 과제"
+ },
+ {
+  "id": "ko-07",
+  "model": "opus",
+  "prompt": "다음 주제로 블로그 칼럼을 한국어 마크다운으로 작성해 주세요. 분량은 본문 약 2000자입니다.\n\n주제: 기후 위기와 도시 계획"
+ },
+ {
+  "id": "en-00",
+  "model": "sonnet",
+  "prompt": "Write a blog column in English Markdown on the following topic. About 700 words.\n\nTopic: How remote work is reshaping company culture"
+ },
+ {
+  "id": "en-01",
+  "model": "opus",
+  "prompt": "Write a blog column in English Markdown on the following topic. About 700 words.\n\nTopic: What universities should change in the age of generative AI"
+ },
+ {
+  "id": "en-02",
+  "model": "sonnet",
+  "prompt": "Write a blog column in English Markdown on the following topic. About 700 words.\n\nTopic: The hidden costs of the creator economy"
+ },
+ {
+  "id": "en-03",
+  "model": "opus",
+  "prompt": "Write a blog column in English Markdown on the following topic. About 700 words.\n\nTopic: Why small businesses struggle with digital transformation"
+ },
+ {
+  "id": "en-04",
+  "model": "sonnet",
+  "prompt": "Write a blog column in English Markdown on the following topic. About 700 words.\n\nTopic: The future of electric vehicles in emerging markets"
+ },
+ {
+  "id": "en-05",
+  "model": "opus",
+  "prompt": "Write a blog column in English Markdown on the following topic. About 700 words.\n\nTopic: Housing affordability and young adults"
+ },
+ {
+  "id": "en-06",
+  "model": "sonnet",
+  "prompt": "Write a blog column in English Markdown on the following topic. About 700 words.\n\nTopic: What the streaming wars mean for independent film"
+ },
+ {
+  "id": "en-07",
+  "model": "opus",
+  "prompt": "Write a blog column in English Markdown on the following topic. About 700 words.\n\nTopic: Climate adaptation in coastal cities"
+ }
+]

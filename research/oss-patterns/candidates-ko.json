@@ -1,0 +1,2497 @@
+[
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:72-77",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "'~다는 점에서' 근거 제시(in the sense that). 기존 규칙은 '라는 점에서'만 잡고 가장 흔한 '~다는 점에서'는 놓친다.",
+  "label": "A-4 라는 점에서",
+  "pattern": "[가-힣]다는\\s?점에서",
+  "positives": [
+   "확장성이 뛰어나다는 점에서 의미가 있다.",
+   "비용이 낮다는 점에서 유리합니다."
+  ],
+  "negatives": [
+   "이 점에서 두 방식은 다릅니다.",
+   "반환 값이 없다는 사실을 확인합니다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-danuen-jeomeseo",
+  "suggested_message_ko": "'~다는 점에서' 근거 제시 번역투",
+  "suggested_fix_ko": "~해서, ~기 때문에로 풀기 (뛰어나서 의미가 있다)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "medium",
+  "source_examples": [
+   "확장성이 뛰어나다는 점에서 의미가 있다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "notes": "기존 ko-related-based 는 '라는 점에서'만 매칭한다. '~다는 점에서'는 대부분의 서술어에서 쓰이는 형태.",
+  "train_ai_docs": 2,
+  "train_human_docs": 10,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:84-87",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "'~을 바탕으로' 남발 (영어 based on). 기존 규칙은 '에 기반하여'만 잡는다.",
+  "label": "A-6 을 바탕으로",
+  "pattern": "[을를]\\s?바탕으로",
+  "positives": [
+   "사용자 데이터를 바탕으로 검증했다.",
+   "시장 조사를 바탕으로 결정했다."
+  ],
+  "negatives": [
+   "그는 바탕이 좋은 사람이다.",
+   "흰 바탕에 검은 글씨를 씁니다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-batangeuro",
+  "suggested_message_ko": "'~을 바탕으로' 반복",
+  "suggested_fix_ko": "~로, ~을 보고, ~에 따라",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 3,
+  "confidence": "low",
+  "source_examples": [
+   "사용자 데이터를 바탕으로 검증됐고"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "notes": "한 번은 정상 한국어. 문서당 3회 초과만 신호.",
+  "also_in": [
+   "DaleSeo_korean-skills:skills/humanizer/references/translation-ese-patterns.md:207"
+  ],
+  "train_ai_docs": 19,
+  "train_human_docs": 17,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/metrics_v2.py:206-240",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "추상 명사 목적어 + '가진다/가졌다/갖는다' light verb. 기존 ko-gajigo-itda 는 '가지고 있' 형태만 잡는다 (이 연구는 중요한 의미를 가진다).",
+  "label": "A-7 추상명사 + 가지다",
+  "pattern": "(?:의미|중요성|영향력|영향|가치|역할|의의|잠재력)[을를]\\s?(?:가진다|가집니다|가졌다|가졌습니다|가지는|가지며|가진|갖는다|갖습니다|갖는|갖는데)",
+  "positives": [
+   "이 연구는 중요한 의미를 가진다.",
+   "AI는 큰 영향력을 가졌다.",
+   "이 모델은 높은 가치를 갖습니다."
+  ],
+  "negatives": [
+   "의미를 찾는다.",
+   "아이를 가진 부모에게 혜택을 줍니다.",
+   "관심을 가지고 지켜봅니다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-gajida-abstract",
+  "suggested_message_ko": "추상 명사 + '가진다' (영어 have 직역)",
+  "suggested_fix_ko": "~이 크다 / ~하다로 (영향력이 크다, 의미가 있다)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "이 연구는 중요한 의미를 가진다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "nomadamas_k-skill:korean-humanizer/instruction.md:108-112"
+  ],
+  "train_ai_docs": 1,
+  "train_human_docs": 5,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/metrics_v2.py:206-240",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "have a meeting 직역 '회의/미팅을 가지다'.",
+  "label": "A-7 회의를 가지다",
+  "pattern": "(?:회의|미팅|면담|인터뷰|토론)[을를]\\s?(?:가졌|가지|가질|갖)",
+  "positives": [
+   "어제 팀과 회의를 가졌다.",
+   "내일 미팅을 가질 예정입니다."
+  ],
+  "negatives": [
+   "회의를 열었다.",
+   "회의를 마친 뒤 시간을 가졌다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-meeting-gajida",
+  "suggested_message_ko": "'회의를 가지다' (have a meeting 직역)",
+  "suggested_fix_ko": "회의를 했다 / 열었다 / 만났다",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "어제 팀과 회의를 가졌다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-meeting-gajida"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:96-100",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "이중 피동 과거형 '~되어졌다'. 기존 ko-double-passive 는 '되어지/되어진/되어집/되어져'만 잡고 '되어졌'은 놓친다.",
+  "label": "A-8 되어졌다",
+  "pattern": "되어졌",
+  "positives": [
+   "본 보고서는 작성되어졌습니다.",
+   "결정이 되어졌다."
+  ],
+  "negatives": [
+   "작성되었습니다.",
+   "결정되었다.",
+   "합의가 이루어졌다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-double-passive-past",
+  "suggested_message_ko": "이중 피동 과거형 '~되어졌다'",
+  "suggested_fix_ko": "~되었다 / 능동으로 (작성했습니다)",
+  "suggested_severity": "error",
+  "suggested_max_per_file": 0,
+  "confidence": "high",
+  "source_examples": [
+   "본 보고서는 작성되어졌습니다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "notes": "Dale/nomad 예시문 '작성되어졌다'가 기존 규칙에 걸리지 않는 것을 코드로 확인함.",
+  "also_in": [
+   "DaleSeo_korean-skills:skills/humanizer/examples/before-4.md:3",
+   "nomadamas_k-skill:korean-humanizer/instruction.md:114-118"
+  ],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "merged: extends ko-double-passive (되어졌)"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/metrics_v2.py:95-117",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "'보여지다/쓰여지다/놓여지다/잊혀지다/불려지다/열려지다' 등 -어지다 중복 피동 어휘.",
+  "label": "A-8 보여진다류",
+  "pattern": "(?:보여|쓰여|놓여|불려|잊혀|닫혀|열려|읽혀|나뉘어)(?:지|진|질|졌|집)",
+  "positives": [
+   "이 방법은 효과적이라고 보여지며",
+   "결과가 보여진다.",
+   "잊혀진 계절"
+  ],
+  "negatives": [
+   "화면에 보여 줍니다.",
+   "문이 열려 있다.",
+   "책상 위에 놓여 있다.",
+   "이름이 불려 나갔다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-double-passive-lexical",
+  "suggested_message_ko": "'보여지다·쓰여지다·잊혀지다' 이중 피동",
+  "suggested_fix_ko": "보이다 / 쓰이다 / 잊히다",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "high",
+  "source_examples": [
+   "이 방법은 효과적이라고 보여지며"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "nomadamas_k-skill:korean-humanizer/instruction.md:114-118"
+  ],
+  "train_ai_docs": 0,
+  "train_human_docs": 28,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:107-118",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "같은 '~할 수 있다'가 문서에서 4회+ 반복 (의학·법률·정책 제외). 밀도만 신호.",
+  "label": "A-10 할 수 있다 반복",
+  "pattern": "[가-힣]\\s?수\\s?있(?:다|습니다)[.]",
+  "positives": [
+   "효율을 높일 수 있다. 비용을 줄일 수 있다.",
+   "시간을 단축할 수 있습니다."
+  ],
+  "negatives": [
+   "수정할 수 없다.",
+   "수는 있지만 권장하지 않는다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-can-density",
+  "suggested_message_ko": "'~할 수 있다' 반복",
+  "suggested_fix_ko": "사실이면 단정 (높인다), 가능성이 정보일 때만 유지",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 5,
+  "confidence": "low",
+  "source_examples": [
+   "효율을 높일 수 있다. 비용을 줄일 수 있다. 시간을 단축할 수 있다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "notes": "기술 문서는 허용/능력 표현으로 '수 있습니다'를 많이 쓴다. 높은 max_per_file 필수.",
+  "train_ai_docs": 123,
+  "train_human_docs": 432,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:120-124",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "'~을 위해' 목적절 남발 (in order to).",
+  "label": "A-11 을 위해",
+  "pattern": "[을를]\\s?위(?:해|하여|한)\\s",
+  "positives": [
+   "고객 만족을 위해 노력한다.",
+   "비용 절감을 위해 구조조정을 했다."
+  ],
+  "negatives": [
+   "위해 요소를 제거합니다.",
+   "그는 가족에게 선물을 샀다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-wihae",
+  "suggested_message_ko": "'~을 위해' 목적절 반복",
+  "suggested_fix_ko": "~려고, ~도록, 명사+조사 직결",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 3,
+  "confidence": "low",
+  "source_examples": [
+   "고객 만족을 위해 노력한다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "DaleSeo_korean-skills:skills/humanizer/references/translation-ese-patterns.md:454"
+  ],
+  "train_ai_docs": 29,
+  "train_human_docs": 251,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:126-129",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "'합의가 이루어졌다' 류 자동화된 피동 '이루어지다'.",
+  "label": "A-12 이루어지다",
+  "pattern": "(?:논의|합의|협의|검토|결정|조정|협력|투자|거래)가\\s?이루어(?:졌|진|지|집)",
+  "positives": [
+   "합의가 이루어졌다.",
+   "논의가 이루어지고 있다.",
+   "투자가 이루어집니다."
+  ],
+  "negatives": [
+   "꿈이 이루어졌다.",
+   "합의했다.",
+   "결정되었다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-ilueojida",
+  "suggested_message_ko": "'~가 이루어지다' 피동 우회",
+  "suggested_fix_ko": "능동 동사로 (합의했다 / 논의한다)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "low",
+  "source_examples": [
+   "합의가 이루어졌다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-ilueojida"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:138-142",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "영어 and 처럼 '그리고'로 평문 연결. 문두 반복만 신호.",
+  "label": "A-14 문두 그리고",
+  "pattern": "(?:^|[.!?]\\s|\\n)그리고\\s",
+  "positives": [
+   "그는 보고했다. 그리고 자리에 앉았다."
+  ],
+  "negatives": [
+   "A 그리고 B를 지원합니다.",
+   "종료한 뒤 그리고 다시 시작한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-geurigo-open",
+  "suggested_message_ko": "문두 '그리고' 평문 연결",
+  "suggested_fix_ko": "-고 연결어미로 합치거나 삭제",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 3,
+  "confidence": "low",
+  "source_examples": [
+   "그는 보고했다. 그리고 자리에 앉았다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 2,
+  "train_human_docs": 86,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:144-153",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "사건·현상이 주어이고 술어가 보여준다·가져온다·시사한다·말해준다 (영어 The X shows/brings). 주어 어휘를 좁혀 기술 문서의 '예제는 ~를 보여줍니다'를 피한다.",
+  "label": "A-15 추상 주어 + 만능 동사",
+  "pattern": "(?:등장|출현|확산|부상|트렌드|혁신|흐름|변화)(?:은|는)\\s[^.!?\\n]{0,35}(?:보여줍니다|보여준다|보여줬다|시사합니다|시사한다|가져옵니다|가져온다|가져오고|일으킵니다|일으킨다|일으키며|말해줍니다|말해준다)",
+  "positives": [
+   "DeepSeek-V4의 등장은 오픈소스의 가능성을 보여줍니다.",
+   "이러한 트렌드는 새로운 기회를 가져오고, 지속적인 혁신은 산업 전반에 변화를 일으킨다.",
+   "이 흐름은 시장의 방향을 말해준다."
+  ],
+  "negatives": [
+   "이 예제는 사용자 목록을 보여줍니다.",
+   "변경 사항은 로그에 남습니다.",
+   "화면은 현재 상태를 보여준다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-abstract-subject-verb",
+  "suggested_message_ko": "추상 주어 + 만능 동사 (보여준다·가져온다)",
+  "suggested_fix_ko": "행위자를 주어로 (이 흐름으로 새 기회가 열린다)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "DeepSeek-V4의 등장은 오픈소스의 가능성을 보여줍니다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "DaleSeo_korean-skills:skills/humanizer/references/translation-ese-patterns.md:501-540"
+  ],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-abstract-subject-verb"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:207-223",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "'~에서의/~에로의/~으로의/~에의/~으로부터의/~로부터의'. 단순 '~의'는 비대상. 기술 문서의 '환경에서의 동작'도 걸리므로 밀도로 제한.",
+  "label": "A-19 이중 조사",
+  "pattern": "(?:에서의|에로의|으로의|에의|으로부터의|로부터의)",
+  "positives": [
+   "일터에서의 변화와 미래로의 도약을 위한 준비",
+   "시장으로부터의 압력이 커졌다.",
+   "밖으로의 이동이 늘었다."
+  ],
+  "negatives": [
+   "서울의 날씨는 맑다.",
+   "미래로 나아간다.",
+   "사용자의 요청을 처리합니다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-double-particle",
+  "suggested_message_ko": "이중 조사 '~에서의·~으로의'",
+  "suggested_fix_ko": "절·구로 풀기 (일터가 어떻게 바뀌고)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "medium",
+  "source_examples": [
+   "일터에서의 변화와 미래로의 도약을 위한 준비"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "nomadamas_k-skill:korean-humanizer/instruction.md:138-142"
+  ],
+  "train_ai_docs": 8,
+  "train_human_docs": 78,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:225-231",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "추세를 '심화되고 있다/커지고 있다'로 반복 (영어 진행 수동태). 추세 동사로 한정해 '실행되고 있습니다'류를 피한다.",
+  "label": "A-20 추세 피동 진행",
+  "pattern": "(?:심화|확대|증가|감소|확산|강화|가속화|악화|변화|진행)되고\\s?있|(?:커|높아|낮아|빨라|느려|늘어|줄어|좁아|넓어|깊어|나빠|많아|적어)지고\\s?있",
+  "positives": [
+   "경쟁은 심화되고 있다.",
+   "어려움이 커지고 있다.",
+   "격차가 확대되고 있습니다."
+  ],
+  "negatives": [
+   "서버가 실행되고 있습니다.",
+   "파일이 저장되고 있다.",
+   "요청을 처리하고 있다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-trend-progressive",
+  "suggested_message_ko": "추세 서술의 피동 진행 반복 ('~되고 있다')",
+  "suggested_fix_ko": "일부는 단정으로 (심해졌다, 커졌다)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "medium",
+  "source_examples": [
+   "경쟁은 심화되고 있다. 어려움이 커지고 있다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 4,
+  "train_human_docs": 4,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:239-252",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "평가 술어 얹기 '~라는 점은 명확하다 / 가치는 분명합니다'. 논증 없이 확신만 얹는다.",
+  "label": "A-22 ~은 명확하다",
+  "pattern": "(?:점|사실|가치|의미|방향|효과|차이|필요성|결과)(?:은|는)\\s?(?:명확|분명)(?:하다|합니다|하며|하고|해\\s?보입니다|해\\s?보인다|해졌다)",
+  "positives": [
+   "AI 도입이 필요하다는 점은 명확하다.",
+   "이 솔루션이 주는 가치는 분명합니다.",
+   "정책이 실패했다는 사실은 분명하다."
+  ],
+  "negatives": [
+   "분명히 말하지만 사실이 아니다.",
+   "입장을 분명히 했다.",
+   "오류 메시지가 명확합니다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-evaluative-clear",
+  "suggested_message_ko": "'~는 명확하다·분명하다' 평가 술어",
+  "suggested_fix_ko": "명제를 바로 단언 (AI를 도입해야 한다)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "AI 도입이 필요하다는 점은 명확하다.",
+   "이 솔루션이 주는 가치는 분명합니다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-evaluative-clear"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:254-270",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "'발판/토대/초석/교두보를 마련하다·놓다·다지다', '활로를 열다' 기반 마련 공식 (pave the way). 기존 ko-inflation 은 '지평'만 잡는다. '토대를 놓은 벤지오' 같은 과거 사실은 오탐 가능.",
+  "label": "A-23 발판·토대를 마련",
+  "pattern": "(?:발판|토대|초석|주춧돌|교두보)[을를]\\s?(?:마련|놓|다지)|활로[를을]\\s?(?:열|연다|열었|열어)",
+  "positives": [
+   "지능 강국으로 도약하는 발판을 마련할 수 있다.",
+   "모델을 개발할 토대를 마련한다.",
+   "새로운 활로를 열었다."
+  ],
+  "negatives": [
+   "공항이 문을 열었다.",
+   "주거 기반을 마련했다.",
+   "길을 열어 주었다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-foundation-formula",
+  "suggested_message_ko": "'발판·토대를 마련하다' 기반 마련 공식",
+  "suggested_fix_ko": "그 조치가 실제로 가능하게 하는 일을 서술",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "하드웨어 강국에서 지능 강국으로 도약하는 발판을 마련할 수 있다",
+   "중소기업도 데이터에 접근해 모델을 개발할 토대를 마련한다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-foundation-formula"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:272-287",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "'더 이상 X가 아니다' 재정의 골격 (no longer). 지원 중단 문서의 '더 이상 지원되지 않습니다'는 제외하려 '이/가 아니' 꼴만 잡는다.",
+  "label": "A-24 더 이상 A가 아니다",
+  "pattern": "더\\s?이상\\s[^.!?\\n]{0,20}?[이가]\\s?아(?:니(?:다|라|며|고|었|지)|닙니다)",
+  "positives": [
+   "모델 크기나 속도는 더 이상 핵심이 아니다.",
+   "속도는 더 이상 문제가 아닙니다."
+  ],
+  "negatives": [
+   "이 옵션은 v3부터 더 이상 지원되지 않습니다.",
+   "더 이상 아프지 않다.",
+   "더 이상 방법이 없다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-no-longer-redefine",
+  "suggested_message_ko": "'더 이상 ~이 아니다' 재정의 골격",
+  "suggested_fix_ko": "'이제 ~다' 또는 변화를 서술하는 동사로",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 1,
+  "confidence": "medium",
+  "source_examples": [
+   "모델 크기나 속도는 더 이상 핵심이 아니다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 5,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:291-295",
+  "license": "MIT",
+  "category": "영어 인용·용어",
+  "description": "한글 용어 뒤 괄호 영어 병기를 매번 반복. 문서당 5회 초과만 신호.",
+  "label": "B-1 한글(영어) 병기 반복",
+  "pattern": "[가-힣]{2,}\\s?\\((?:[A-Z]{2,6}|[A-Z][a-z]+(?:\\s[A-Za-z]+){0,3})\\)",
+  "positives": [
+   "인공지능(AI)은 거대언어모델(LLM)과 다르다.",
+   "거대언어모델(LLM)을 쓴다."
+  ],
+  "negatives": [
+   "함수(f)를 호출한다.",
+   "총 3개(a, b, c)입니다.",
+   "버전(v1.2)을 확인한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-parenthetical-english",
+  "suggested_message_ko": "괄호 영어 병기 반복",
+  "suggested_fix_ko": "첫 등장만 병기, 이후 한글만",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 5,
+  "confidence": "low",
+  "source_examples": [
+   "인공지능(AI)은 거대언어모델(LLM)과 다르다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 74,
+  "train_human_docs": 137,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:297-305",
+  "license": "MIT",
+  "category": "영어 인용·용어",
+  "description": "영어 buzzword에 한국어 어미를 붙인 'seamless하고 robust한'.",
+  "label": "B-2 영어 buzzword + 하다",
+  "pattern": "\\b(?:seamless|robust|holistic|scalable|leverag(?:e|ing)|cutting-edge)(?:하|한|해|하여|하는)",
+  "positives": [
+   "사용자에게 seamless하고 robust한 경험을 제공한다",
+   "이 framework를 leverage하여 구축한다."
+  ],
+  "negatives": [
+   "robust 성능을 측정한다.",
+   "scalable architecture를 설명한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-english-buzzword-hada",
+  "suggested_message_ko": "영어 buzzword + 한국어 어미 (seamless하다·leverage하다)",
+  "suggested_fix_ko": "한국어로 풀기 (끊김 없는, 안정적인, 활용하여)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "사용자에게 seamless하고 robust한 경험을 제공한다",
+   "이 framework를 leverage하여"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "nomadamas_k-skill:korean-humanizer/references/ai-tell-taxonomy.md:46"
+  ],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-english-buzzword-hada"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:312-317",
+  "license": "MIT",
+  "category": "영어 인용·용어",
+  "description": "'~라고 알려진/~로 일컬어지는' (known as / so-called).",
+  "label": "B-4 라고 알려진",
+  "pattern": "(?:라고|으?로)\\s?(?:알려진|알려져\\s?있|일컬어지|일컬어져)",
+  "positives": [
+   "'AGI'라고 알려진 범용 인공지능",
+   "수도로 알려져 있다.",
+   "신의 손으로 일컬어지는 기술"
+  ],
+  "negatives": [
+   "이 문제는 잘 알려진 버그입니다.",
+   "알려진 이슈 목록을 확인한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-known-as",
+  "suggested_message_ko": "'~라고 알려진 / ~로 알려져 있다'",
+  "suggested_fix_ko": "이름이나 출처를 직접 서술",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "low",
+  "source_examples": [
+   "'AGI'라고 알려진 범용 인공지능"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "nomadamas_k-skill:korean-humanizer/instruction.md:207-211"
+  ],
+  "train_ai_docs": 1,
+  "train_human_docs": 16,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:321-326",
+  "license": "MIT",
+  "category": "구조·서식",
+  "description": "'첫째, ~ 둘째, ~ 셋째, ~' 기계적 병렬 열거.",
+  "label": "C-1 첫째 둘째 셋째",
+  "pattern": "첫째[,，]\\s[^\\n]{5,200}?둘째[,，]\\s[^\\n]{5,200}?셋째[,，]",
+  "positives": [
+   "첫째, AI 도구로 의사결정을 개선해야 합니다. 둘째, 클라우드로 확장성을 확보합니다. 셋째, 보안에 투자합니다."
+  ],
+  "negatives": [
+   "첫째 날은 설치를 합니다.",
+   "둘째, 설정을 바꾼다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-first-second-third",
+  "suggested_message_ko": "'첫째·둘째·셋째' 기계적 병렬 열거",
+  "suggested_fix_ko": "목록이나 산문으로 풀기 (우선·이어서·마지막으로 변주)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "low",
+  "source_examples": [
+   "첫째, AI 도구에 기반하여 의사결정 프로세스를 개선해야 합니다. 둘째, 클라우드 인프라를 통해 확장성을 확보할 수 있습니다. 셋째, 보안 솔루션과 관련된 투자를 통해, 위험을 최소화할 수 있습니다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "DaleSeo_korean-skills:skills/humanizer/examples/before-3.md"
+  ],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-first-second-third"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:332-336",
+  "license": "MIT",
+  "category": "구조·서식",
+  "description": "도입/서론/본론/결론 도식적 절 제목이 2개 이상 (칼럼·에세이 한정).",
+  "label": "C-3 도식 헤딩",
+  "pattern": "(?m)^#{1,6}\\s*(?:도입|서론|본론|결론)\\s*$",
+  "positives": [
+   "## 서론\n\n내용.\n\n## 결론\n\n내용."
+  ],
+  "negatives": [
+   "## 설치\n\n내용.",
+   "## 결론 및 향후 과제\n\n내용."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-schematic-heading",
+  "suggested_message_ko": "도식적 절 제목 (서론·본론·결론)",
+  "suggested_fix_ko": "그 절이 말하는 사실을 제목으로",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 1,
+  "confidence": "low",
+  "source_examples": [
+   "## 서론\n\n내용.\n\n## 본론\n\n내용.\n\n## 결론\n\n내용."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "DaleSeo_korean-skills:skills/humanizer/examples/before-4.md:3,17"
+  ],
+  "train_ai_docs": 1,
+  "train_human_docs": 18,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:343-346",
+  "license": "MIT",
+  "category": "구조·서식",
+  "description": "문장 속에 박은 💡🚀✨🔥🎯📌🌟🔑🧠⚡ 류. 기존 ko-emoji-marker 는 목록·제목 머리의 이모지만 잡는다.",
+  "label": "C-5 본문 속 AI 이모지",
+  "pattern": "[💡🚀✨🔥🎯📌🌟🔑🧠⚡]",
+  "positives": [
+   "이 기능은 정말 편리합니다 🚀",
+   "핵심 포인트 💡를 놓치지 마세요."
+  ],
+  "negatives": [
+   "이모지 없는 문장입니다.",
+   "체크 표시 ✓ 와 ✅ 는 제외합니다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-emoji-inline",
+  "suggested_message_ko": "본문 속 장식 이모지",
+  "suggested_fix_ko": "이모지 삭제",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "이 기능은 정말 편리합니다 🚀"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "nomadamas_k-skill:korean-humanizer/instruction.md:169-173"
+  ],
+  "train_ai_docs": 26,
+  "train_human_docs": 6,
+  "decision": "rejected: every AI doc it hit was already flagged by ko-emoji-marker; adds 4 human false positives"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:348-351",
+  "license": "MIT",
+  "category": "구조·서식",
+  "description": "헤딩 아래 '이 섹션에서는 ~를 다룹니다' 안내문. 기존 ko-metadiscourse 는 '이번 글/문서'만 잡는다.",
+  "label": "C-6 이 섹션에서는 ~를 다룬다",
+  "pattern": "(?:이|본)\\s?(?:섹션|장|절|글|문서|페이지)에서는\\s[^.\\n]{0,60}(?:다룹니다|다룬다|살펴봅니다|살펴본다|알아봅니다|알아본다|소개합니다|소개한다|설명합니다|설명한다)",
+  "positives": [
+   "이 섹션에서는 배포 방법을 다룹니다.",
+   "이 문서에서는 설치 절차를 설명한다."
+  ],
+  "negatives": [
+   "이 문서에서는 v2 API를 사용합니다.",
+   "이 장에서 사용하는 용어는 다음과 같습니다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-section-preview",
+  "suggested_message_ko": "절 머리의 안내문 ('이 섹션에서는 ~를 다룹니다')",
+  "suggested_fix_ko": "삭제하고 바로 내용으로",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "이 섹션에서는 배포 방법을 다룬다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "notes": "ko-metadiscourse 는 '이번 (글|문서)에서는'만. '이 섹션/이 문서/이 장'은 비어 있음.",
+  "train_ai_docs": 7,
+  "train_human_docs": 28,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:359-373",
+  "license": "MIT",
+  "category": "구조·서식",
+  "description": "부정-긍정 대구 'A가 아니라 B' 반복 (사람 0.52 vs AI 6.3/1k어절, 12배, 전 모델 공통). 기존 ko-not-but 은 '뿐만 아니라'와 '단순한 X를 넘어'만 잡는다.",
+  "label": "C-8 A가 아니라 B",
+  "pattern": "[가이]\\s아니라\\s",
+  "positives": [
+   "비용이 아니라 속도가 문제다.",
+   "기계가 아니라 사람이 결정한다.",
+   "속도가 아니라 방향이며, 양이 아니라 질이다."
+  ],
+  "negatives": [
+   "뿐만 아니라 신뢰도도 높다.",
+   "이름이 아니라고 답했다.",
+   "아니라고 생각한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-not-a-but-b",
+  "suggested_message_ko": "'A가 아니라 B' 부정 대구 반복",
+  "suggested_fix_ko": "B를 직접 단언 (속도보다 방향이 중요하다), 대구는 한 번만",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "high",
+  "source_examples": [
+   "비용이 아니라 속도가 문제다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [
+   "ko-connective-comma"
+  ],
+  "notes": "본 레포 research 코퍼스에서 AI/사람 비율을 실측함 (corpus_probe 참고). 기술 문서의 '문자열이 아니라 숫자'도 걸리므로 max_per_file 필수.",
+  "also_in": [
+   "nomadamas_k-skill:korean-humanizer/references/ai-tell-taxonomy.md:54"
+  ],
+  "train_ai_docs": 28,
+  "train_human_docs": 66,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:359-373",
+  "license": "MIT",
+  "category": "구조·서식",
+  "description": "'독점인가, 확산인가' 질문 대구.",
+  "label": "C-8 A인가 B인가",
+  "pattern": "[가-힣]{1,10}(?:인가|일까|할까),\\s[^,.?\\n]{1,20}(?:인가|일까|할까)[?.]?",
+  "positives": [
+   "독점인가, 확산인가",
+   "기회일까, 위기일까?"
+  ],
+  "negatives": [
+   "이 값이 맞는가? 확인한다.",
+   "무엇이 문제인가"
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-a-inga-b-inga",
+  "suggested_message_ko": "'A인가, B인가' 질문 대구",
+  "suggested_fix_ko": "질문을 걷고 사실을 서술",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "독점인가, 확산인가"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 1,
+  "decision": "rejected: the one human hit is a legitimate use"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:359-373",
+  "license": "MIT",
+  "category": "구조·서식",
+  "description": "'~것은 아니다', '~이기보다', '~이기 이전에' 부정 대구 변종 (metrics_v2 antithesis 정규식).",
+  "label": "C-8 ~것은 아니다 / 이기보다",
+  "pattern": "이기보다|이기\\s?이전에|되기\\s?이전에|것은\\s아니(?:다|며|지만)",
+  "positives": [
+   "AI는 도구이기보다 파트너다.",
+   "이는 단순한 기능이 되기 이전에 철학이다.",
+   "모든 것은 아니다."
+  ],
+  "negatives": [
+   "이기는 팀을 만들었다.",
+   "기술이 중요하다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-antithesis-variants",
+  "suggested_message_ko": "부정 대구 변종 ('~이기보다', '~것은 아니다')",
+  "suggested_fix_ko": "한 번만 쓰고 나머지는 평서문으로",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 1,
+  "confidence": "low",
+  "source_examples": [
+   "AI는 도구이기보다 파트너다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "notes": "skills/humanize-korean/references/metrics_v2.py:664 에서 정규식 직접 인용",
+  "train_ai_docs": 1,
+  "train_human_docs": 20,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:375-379",
+  "license": "MIT",
+  "category": "구조·서식",
+  "description": "'1) ... 2) ... 3) ...' 한 문단 안 인라인 번호.",
+  "label": "C-9 숫자 괄호 인덱싱",
+  "pattern": "(?<!\\d)1\\)\\s[^\\n]{5,}?(?<!\\d)2\\)\\s[^\\n]{5,}?(?<!\\d)3\\)\\s",
+  "positives": [
+   "1) 표준화된 인프라가 일반화되면서 학습 데이터 확보가 용이해졌다. 2) 도메인 특화 LLM이 성숙하면서 활용 범위가 넓어졌다. 3) 클라우드 GPU 단가가 하락했다."
+  ],
+  "negatives": [
+   "1) 첫 항목\n2) 둘째 항목\n3) 셋째 항목",
+   "함수 f(1) 호출 후"
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-inline-numbering",
+  "suggested_message_ko": "문장 속 '1) 2) 3)' 인라인 번호 매기기",
+  "suggested_fix_ko": "본문에 녹이거나 우선·다음으로",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "low",
+  "source_examples": [
+   "1) 표준화된 인프라가 일반화되면서 학습 데이터 확보가 용이해졌다. 2) 도메인 특화 LLM이 성숙하면서 비정형 텍스트의 활용 범위가 넓어졌다. 3) 클라우드 GPU 단가가 크게 하락하면서 자체 학습이 정당화되었다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-inline-numbering"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:381-386",
+  "license": "MIT",
+  "category": "구조·서식",
+  "description": "'### **서론**: 제조업의 미래' 구조 라벨 + 콜론 + 부제 헤딩. 구조 라벨 어휘로 좁힘.",
+  "label": "C-10 서론: 부제 헤딩",
+  "pattern": "(?m)^#{1,6}\\s+\\**(?:서론|본론|결론|도입|개요|배경|핵심|요약|마무리)(?:\\s?\\d+)?\\**[:：]\\s*\\S",
+  "positives": [
+   "### **서론**: 제조업의 미래, AI에 달려있다",
+   "### **본론 1**: 빛과 그림자",
+   "## 결론: 다시 처음으로"
+  ],
+  "negatives": [
+   "## 설치: macOS",
+   "### 본론",
+   "서론: 본문 속 문장입니다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-colon-subtitle-heading",
+  "suggested_message_ko": "구조 라벨 + 콜론 부제 헤딩",
+  "suggested_fix_ko": "헤딩을 단일 명사구로",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "### **서론**: 제조업의 미래, AI에 달려있다",
+   "### **본론 1**: 빛과 그림자, 대기업과 중소기업의 디지털 격차"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-colon-subtitle-heading"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:388-393",
+  "license": "MIT",
+  "category": "구조·서식",
+  "description": "기존 ko-connective-comma 는 어간 한 글자 목록 뒤 고/며/면서/지만/는데/어서/아서만 잡는다. '낮아지면서,'처럼 목록에 없는 어간과 '해서/여서' 계열을 놓친다.",
+  "label": "C-11 연결어미 뒤 쉼표 (확장)",
+  "pattern": "[가-힣]{2,}(?:면서|지만|는데|아서|어서|여서|해서|니까),\\s",
+  "positives": [
+   "비용이 낮아지면서, 진입장벽이 사라졌다.",
+   "데이터를 확인해서, 결과를 반영했다."
+  ],
+  "negatives": [
+   "그러나, 결과는 다르다.",
+   "하지만 결과는 같다.",
+   "A, B, C를 지원한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-connective-comma-wide",
+  "suggested_message_ko": "연결어미 뒤 쉼표 (확장 어간)",
+  "suggested_fix_ko": "쉼표 삭제 또는 문장 분리",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 3,
+  "confidence": "medium",
+  "source_examples": [
+   "비용이 낮아지면서, 진입장벽이 사라졌다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 44,
+  "train_human_docs": 272,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:409-415",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "'요약하면/정리하면/종합하면/요컨대' 문두 결산. 기존 ko-closing-formula 는 '~자면' 꼴만 잡는다.",
+  "label": "D-1 요약하면·정리하면",
+  "pattern": "(?:^|[.!?]\\s|\\n)(?:요약하면|정리하면|종합하면|요컨대|한마디로\\s?말하면|한\\s?줄로\\s?요약하면)[,\\s]",
+  "positives": [
+   "요약하면 A는 B다.",
+   "정리하면, 성능이 두 배 늘었다.",
+   "비용이 늘었다. 요컨대 선택이 필요하다."
+  ],
+  "negatives": [
+   "파일을 정리하면 용량이 줄어든다.",
+   "요약하면서 시작한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-summary-opener",
+  "suggested_message_ko": "문두 결산어 ('요약하면·정리하면·요컨대')",
+  "suggested_fix_ko": "삭제하고 마지막 사실로 마무리",
+  "suggested_severity": "error",
+  "suggested_max_per_file": 0,
+  "confidence": "high",
+  "source_examples": [
+   "요약하면 A는 B다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "DaleSeo_korean-skills:skills/humanizer/references/vocabulary-patterns.md:378",
+   "nomadamas_k-skill:korean-humanizer/instruction.md:181"
+  ],
+  "train_ai_docs": 1,
+  "train_human_docs": 3,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:409-415",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "KatFish 결산 lexicon 4종 중 '따라서/그러므로/결과적으로' 문두 사용. 문서당 3회 초과만.",
+  "label": "D-1 따라서·그러므로 문두",
+  "pattern": "(?:^|[.!?]\\s|\\n)(?:따라서|그러므로|결과적으로)[,\\s]",
+  "positives": [
+   "이 방법은 효과적입니다. 따라서 신중하게 고려해야 합니다.",
+   "비용이 늘었다. 그러므로, 예산을 조정한다."
+  ],
+  "negatives": [
+   "A에 따라서 결과가 다르다.",
+   "순서에 따라서 처리한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-therefore-opener",
+  "suggested_message_ko": "문두 '따라서·그러므로' 결산",
+  "suggested_fix_ko": "인과가 자명하면 삭제, 필요하면 '그래서'",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 3,
+  "confidence": "low",
+  "source_examples": [
+   "이 방법은 효과적입니다. 따라서 신중하게 고려해야 합니다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 19,
+  "train_human_docs": 151,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:409-415",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "'~라고 할 수 있다 / ~라고 볼 수 있다 / ~에 다름 아니다 / ~라 하겠다' 단정 회피 결산.",
+  "label": "D-1 라고 할 수 있다",
+  "pattern": "라고\\s?(?:할|볼)\\s?수\\s?(?:있다|있습니다)|에\\s?다름\\s?아니|라\\s?하겠다|라\\s?할\\s?것이다",
+  "positives": [
+   "이는 성공적인 사례라고 할 수 있다.",
+   "이것은 혁명에 다름 아니다.",
+   "성공이라고 볼 수 있습니다."
+  ],
+  "negatives": [
+   "그렇게 할 수 있다.",
+   "성공이라 말한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-ragoh-hal-su",
+  "suggested_message_ko": "'~라고 할 수 있다' 단정 회피 결산",
+  "suggested_fix_ko": "사실이면 '~이다'로 (유보는 유지)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 1,
+  "confidence": "low",
+  "source_examples": [
+   "이는 성공적인 사례라고 할 수 있다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 9,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:417-423",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "기존 ko-inflation 이 못 잡는 형태: '무시할 수 없다·의미심장·그 의미가 적지 않다·방점을 찍다·괄목할 만한·기록적인 성과·크게 기여·의미가 크다'.",
+  "label": "D-2 의의 부풀리기 (확장)",
+  "pattern": "무시할\\s?수\\s?없|의미심장|그\\s?의미가\\s?적지\\s?않|방점을\\s?찍|괄목할\\s?만|기록적인\\s?성과|크게\\s?기여|의미가\\s?크(?:다|며|고|지|지만)",
+  "positives": [
+   "그 의미가 적지 않다.",
+   "의미심장하다.",
+   "무시할 수 없는 변화다.",
+   "개선에 방점을 찍는다.",
+   "괄목할 만한 성장을 이뤘다.",
+   "기록적인 성과를 거뒀다."
+  ],
+  "negatives": [
+   "의미를 정의한다.",
+   "큰 변화를 줄 수 없다.",
+   "성과가 있었다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-inflation-ext",
+  "suggested_message_ko": "의미 부풀리기 (확장)",
+  "suggested_fix_ko": "삭제하거나 구체 결과로 교체",
+  "suggested_severity": "error",
+  "suggested_max_per_file": 0,
+  "confidence": "high",
+  "source_examples": [
+   "그 의미가 적지 않다",
+   "의미심장하다",
+   "무시할 수 없다",
+   "~에 방점을 찍는다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "scripts/checks.py:69-76"
+  ],
+  "train_ai_docs": 0,
+  "train_human_docs": 2,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "scripts/checks.py:69-76",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "'~로 평가된다/평가받다' 무주체 평가.",
+  "label": "D-2 로 평가된다",
+  "pattern": "(?:으)?로\\s?평가(?:된다|됩니다|받는다|받습니다|받고|받아)",
+  "positives": [
+   "혁신적 사례로 평가된다.",
+   "업계에서 가장 정확한 도구로 평가받고 있다."
+  ],
+  "negatives": [
+   "평가 기준을 정한다.",
+   "점수로 매기지 않는다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-evaluated-as",
+  "suggested_message_ko": "'~로 평가된다' 무주체 평가",
+  "suggested_fix_ko": "누가 어떤 근거로 평가했는지 쓰거나 삭제",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "low",
+  "source_examples": [],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [
+   "ko-hype"
+  ],
+  "train_ai_docs": 0,
+  "train_human_docs": 6,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "scripts/checks.py:69-76",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "'중요한 역할을 한다/했다' 상투구 (checks.py 의 cliche 목록).",
+  "label": "D-2 중요한 역할을 한다",
+  "pattern": "(?:중요한|핵심적인|큰|결정적인)\\s?역할을\\s?(?:한다|했다|합니다|했습니다|할\\s)",
+  "positives": [
+   "AI는 중요한 역할을 한다.",
+   "캐시가 핵심적인 역할을 합니다."
+  ],
+  "negatives": [
+   "역할을 정의한다.",
+   "중요한 역할을 하는 모듈을 식별합니다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-important-role",
+  "suggested_message_ko": "'중요한 역할을 한다' 상투구",
+  "suggested_fix_ko": "그 역할이 무엇인지 동사로 (요청을 분산한다)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 1,
+  "confidence": "medium",
+  "source_examples": [
+   "AI는 중요한 역할을 한다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 4,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:417-423",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "'매우 중요하다/중요합니다' 의의 과장.",
+  "label": "D-2 매우 중요하다",
+  "pattern": "매우\\s?중요(?:하다|합니다|한\\s(?:요소|역할|과제|부분|문제|단계))",
+  "positives": [
+   "이 단계는 매우 중요합니다.",
+   "매우 중요한 과제다."
+  ],
+  "negatives": [
+   "중요한 변경이 있습니다.",
+   "중요도를 계산한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-very-important",
+  "suggested_message_ko": "'매우 중요하다' 의의 과장",
+  "suggested_fix_ko": "왜 중요한지 근거를 서술 (없으면 삭제)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 1,
+  "confidence": "low",
+  "source_examples": [
+   "이 단계는 매우 중요합니다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 8,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:425-429",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "'크게 세 가지로 나눌 수 있다 / 다음과 같은 특징을 가진다 / 다음과 같이 요약할 수 있다' 열거 도입. 기존 ko-count-runup 은 '~는 세 가지입니다'만.",
+  "label": "D-3 열거 도입",
+  "pattern": "크게\\s?(?:두|세|네|다섯|여섯)\\s?가지(?:로)?\\s?(?:나눌|분류|구분|요약)|다음과\\s?같은\\s?(?:특징|장점|이점|요소|특성)[을를]\\s?(?:가진다|가집니다|가지고|갖는다)|다음과\\s?같이\\s?(?:요약|정리)(?:할\\s?수|합니다|한다)",
+  "positives": [
+   "크게 세 가지로 나눌 수 있다.",
+   "다음과 같은 특징을 가진다.",
+   "다음과 같이 요약할 수 있다."
+  ],
+  "negatives": [
+   "다음과 같이 설정합니다.",
+   "다음과 같은 오류가 발생합니다.",
+   "세 가지 옵션이 있다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-enumeration-intro",
+  "suggested_message_ko": "열거 도입문 ('크게 세 가지로 나눌 수 있다')",
+  "suggested_fix_ko": "도입구를 지우고 첫 항목으로 시작",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "크게 세 가지로 나눌 수 있다",
+   "다음과 같은 특징을 가진다",
+   "다음과 같이 요약할 수 있다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 1,
+  "decision": "rejected: the one human hit is a legitimate use"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:431-446",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "'~의 가능성을 열어준다' hype 동사구. 기존 ko-inflation 은 '지평/새로운 장'만 잡는다.",
+  "label": "D-4 가능성을 열어준다",
+  "pattern": "가능성을\\s?열어\\s?(?:준다|줍니다|주는|주었다|줬다)",
+  "positives": [
+   "새로운 서비스의 가능성을 열어준다.",
+   "협업의 가능성을 열어 줍니다."
+  ],
+  "negatives": [
+   "가능성을 검토한다.",
+   "문을 열어 준다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-opens-possibility",
+  "suggested_message_ko": "'가능성을 열어준다' hype 동사구",
+  "suggested_fix_ko": "무엇이 가능해지는지 서술",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "새로운 서비스의 가능성을 열어준다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-opens-possibility"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "scripts/corruption_engine.py:235",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "'그 어느 때보다' 최상급 상투구 (corruption_engine 의 hype 주입 목록).",
+  "label": "D-4 그 어느 때보다",
+  "pattern": "그\\s?어느\\s?때보다",
+  "positives": [
+   "지금은 그 어느 때보다 중요한 시기다.",
+   "그 어느 때보다 빠르다."
+  ],
+  "negatives": [
+   "어느 때나 가능하다.",
+   "때보다 더 빠르다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-more-than-ever",
+  "suggested_message_ko": "'그 어느 때보다' 최상급 상투구",
+  "suggested_fix_ko": "비교 대상을 숫자로",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "지금은 그 어느 때보다 중요한 시기다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-more-than-ever"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:448-452",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "사건·기술·개념이 '묻는다·부른다·증명한다·던진다·말해준다'. 주어 어휘를 추상명사로 한정해 '사용자가 질문을 던진다'를 피한다.",
+  "label": "D-5 의인화 추상 주어",
+  "pattern": "(?:충돌|가성비|기술|시대|현실|역사|데이터|변화|질문|숫자|통계|혁신|위기|경쟁|등장|흐름|물결|AI|인공지능)(?:이|가)\\s(?:[가-힣]{1,8}[을를]\\s)?(?:던집니다|던진다|묻습니다|묻는다|부릅니다|부른다|증명합니다|증명한다|말해줍니다|말해준다|속삭입니다|속삭인다|외칩니다|외친다)",
+  "positives": [
+   "두 지능의 충돌이 질문을 던집니다.",
+   "기술이 묻는다.",
+   "시대가 부른다.",
+   "지능의 가성비가 증명합니다."
+  ],
+  "negatives": [
+   "사용자가 질문을 던진다.",
+   "학생이 묻는다.",
+   "데이터를 증명한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-personified-subject",
+  "suggested_message_ko": "추상 주어의 의인화 ('기술이 묻는다')",
+  "suggested_fix_ko": "사람·기관을 주어로, 또는 동사를 평이하게",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "두 지능의 충돌이 질문을 던집니다",
+   "지능의 가성비가 증명합니다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-personified-subject"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:454-458",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "한다체 결말 공식 '~할 때다/~할 시점이다/~할 순간이다'. 기존 ko-now-is-the-time 은 합니다체('입니다')만 잡는다.",
+  "label": "D-6 ~할 때다·시점이다",
+  "pattern": "\\s(?:때|시점|순간)(?:이다|다)[.!]|\\s순간(?:입니다|이에요)[.!]",
+  "positives": [
+   "조직은 구조적 한계를 극복해야 할 시점이다.",
+   "이제는 움직일 때다.",
+   "변화에 나서야 할 순간입니다."
+  ],
+  "negatives": [
+   "파일을 저장할 때 다음 옵션을 확인합니다.",
+   "실행할 때 다음 로그가 남는다.",
+   "읽을 때는 주의한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-time-to-plain",
+  "suggested_message_ko": "한다체 결말 공식 ('~할 때다·시점이다')",
+  "suggested_fix_ko": "지금 하면 달라지는 점을 서술",
+  "suggested_severity": "error",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "조직은 구조적 한계를 극복해야 할 시점이다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "notes": "'할 때다'가 문장 끝일 때만 걸리게 (?![가-힣]) 로 좁힘.",
+  "train_ai_docs": 0,
+  "train_human_docs": 2,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:460-464",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "따옴표로 감싼 대비 쌍을 'X에서 Y로 / X를 넘어 Y로' 로 잇는 변환 공식. 따옴표 안에 한글이 있을 때만.",
+  "label": "D-7 '무엇을'에서 '어떻게'로",
+  "pattern": "['‘“\"](?=[^'’”\"\\n]{0,20}[가-힣])[^'’”\"\\n]{1,20}['’”\"](?:에서|을\\s?넘어|를\\s?넘어)\\s?['‘“\"][^'’”\"\\n]{1,20}['’”\"](?:으)?로",
+  "positives": [
+   "'규모의 경쟁'에서 '전략의 경쟁'으로",
+   "‘지식 전달자’에서 ‘학습 조력자’로",
+   "'데이터 조회'를 넘어 '맞춤형 금융 비서'로"
+  ],
+  "negatives": [
+   "'dev'에서 'prod'로 전환합니다.",
+   "서울에서 부산으로 이동한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-transform-formula",
+  "suggested_message_ko": "'X에서 Y로' 따옴표 변환 공식",
+  "suggested_fix_ko": "직접 단언 (교사는 학생 곁에서 학습을 돕는다)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "high",
+  "source_examples": [
+   "'규모의 경쟁'에서 '전략의 경쟁'으로",
+   "'지식 전달자'에서 '학습 조력자'로",
+   "'무엇을'에서 '어떻게'로",
+   "'데이터 조회'를 넘어 '맞춤형 금융 비서'로"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 1,
+  "train_human_docs": 1,
+  "decision": "rejected: the one human hit is a legitimate use"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:466-472",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "명사 변종 '문제는/답은/의의는/요점은/차이는 ~라는 점이다·~는 점에 있다', 비교급 사다리 '더 심각한/뼈아픈 것은'. 기존 ko-cleft 가 못 잡는 부분.",
+  "label": "D-8 분열문 명사 변종 + ~는 점이다",
+  "pattern": "(?:(?:문제|의의|요점|답|해법|차이)(?:는|은)\\s[^.!?\\n]{2,60}[다라]는\\s?점(?:이다|입니다|에\\s?있))|(?:더\\s)?(?:심각한|뼈아픈|아쉬운|놀라운|우려스러운|안타까운)\\s?것은",
+  "positives": [
+   "문제는 양측이 합의에 이르는 경우가 거의 없다는 점이다.",
+   "의의는 표준화가 들쭉날쭉하다는 점에 있다.",
+   "더 뼈아픈 것은 비용이다."
+  ],
+  "negatives": [
+   "문제는 포트 충돌이다.",
+   "차이점은 표를 참고합니다.",
+   "답은 42다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-cleft-noun-jeom",
+  "suggested_message_ko": "분열문 명사 변종 ('문제는 ~라는 점이다')",
+  "suggested_fix_ko": "주어-서술 직결 (양측은 합의에 이르는 일이 거의 없다)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "문제는 양측이 합의에 이르는 경우가 거의 없다는 점이다.",
+   "의의는 표준화가 사업장별로 들쭉날쭉하다는 점에 있다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "nomadamas_k-skill:korean-humanizer/instruction.md:256-260"
+  ],
+  "train_ai_docs": 0,
+  "train_human_docs": 5,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:474-485",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "'결국 ~로 이어진다', '이는 결국', '~에 직결된다' 인과 결산 (사람 0건 vs AI 0.34/1k).",
+  "label": "D-9 결국 ~로 이어진다 / 직결된다",
+  "pattern": "이는\\s결국|결국[^.!?\\n]{0,50}(?:으?로)\\s?이어(?:진다|집니다)|에\\s?직결(?:된다|됩니다|되는)",
+  "positives": [
+   "이는 결국 지역 경제의 침체로 이어진다.",
+   "그 부담은 결국 소비자 가격 상승으로 이어집니다.",
+   "비용은 품질에 직결된다."
+  ],
+  "negatives": [
+   "오류로 이어지는 호출 경로를 추적한다.",
+   "이어서 설명합니다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-leads-to-chain",
+  "suggested_message_ko": "'결국 ~로 이어진다 / ~에 직결된다' 인과 결산",
+  "suggested_fix_ko": "인과의 실제 경로를 쓰거나 단문으로 끊기",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "이는 결국 지역 경제의 침체로 이어진다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-leads-to-chain"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:474-485",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "논리 결산용 문두 '결국' (사람의 '결국'은 서사 귀결뿐). 문서 2회부터.",
+  "label": "D-9 문두 결국",
+  "pattern": "(?:^|[.!?]\\s|\\n)결국[,\\s]",
+  "positives": [
+   "결국 비용은 소비자가 부담한다.",
+   "예산이 줄었다. 결국, 계획을 바꿨다."
+  ],
+  "negatives": [
+   "서버가 결국 종료되었다.",
+   "그는 결국 회사를 나갔다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-gyeolguk-open",
+  "suggested_message_ko": "문두 '결국' 결산",
+  "suggested_fix_ko": "삭제하거나 '그래서'",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 1,
+  "confidence": "low",
+  "source_examples": [
+   "결국 비용은 소비자가 부담한다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "notes": "'그는 결국 회사를 나갔다'처럼 주어 뒤의 서사용 결국은 문두가 아니므로 걸리지 않는다.",
+  "train_ai_docs": 0,
+  "train_human_docs": 12,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:487-493",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "문장 말미 '~하는 이유다' 도치 결산 (This is why 직역).",
+  "label": "D-10 ~하는 이유다",
+  "pattern": "[가-힣]\\s?이유(?:다|이다)[.!]",
+  "positives": [
+   "이중구조를 더 벌려놓을 수 있다는 우려가 나오는 이유다.",
+   "일률적인 도입이 현실적이지 않은 이유다.",
+   "이것이 변경이 필요한 이유이다."
+  ],
+  "negatives": [
+   "이유를 설명한다.",
+   "이유는 다음과 같습니다.",
+   "이것이 변경이 필요한 이유입니다.",
+   "이유 없이 실패한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-this-is-why",
+  "suggested_message_ko": "문장 끝 '~하는 이유다' 도치 결산",
+  "suggested_fix_ko": "순방향 단언 ('그래서 ~다')",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "high",
+  "source_examples": [
+   "이중구조를 더 벌려놓을 수 있다는 우려가 나오는 이유다.",
+   "일률적인 도입이 현실적이지 않은 이유다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 1,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-this-is-why"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:495-500",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "문두 '향후/중장기적으로/장기적으로는' 막연한 시간지평 (결말부에 몰림). 위치 판정은 불가해 밀도로만.",
+  "label": "D-11 문두 향후·중장기적으로",
+  "pattern": "(?:^|[.!?]\\s|\\n)(?:향후|중장기적으로는?|장기적으로는?)[,\\s]",
+  "positives": [
+   "향후 경쟁의 핵심은 강의 수가 아니라 질에 있다.",
+   "수요가 늘었다. 중장기적으로는 자동화가 핵심이 된다."
+  ],
+  "negatives": [
+   "변경 사항은 앞으로도 문서에 기록합니다.",
+   "그 뒤로 장기적인 변화가 없었다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-horizon-opener",
+  "suggested_message_ko": "문두 '향후·중장기적으로' 막연한 전망",
+  "suggested_fix_ko": "실제 시점·조건으로 교체하거나 시간어 삭제",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 1,
+  "confidence": "low",
+  "source_examples": [
+   "향후 경쟁의 핵심은 강의 수가 아니라 질에 있다.",
+   "중장기적으로는 자동화 수준 자체가 핵심 경쟁력이 되면서"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [
+   "ko-cleft"
+  ],
+  "train_ai_docs": 1,
+  "train_human_docs": 7,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:502-506",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "독립 문장 '과제도 남아 있다/한계도 분명하다/아쉬운 점도 있다' 빈 반론 문패.",
+  "label": "D-12 과제도 남아 있다",
+  "pattern": "(?:^|[.!?]\\s+|\\n)(?:(?:그러나|다만|하지만|물론)[,\\s]+)?(?:과제|한계|숙제|아쉬운\\s?점|우려|위험)(?:도|는)\\s?(?:여전히\\s)?(?:남아\\s?있다|남아\\s?있습니다|분명하다|분명합니다|있다|있습니다)[.]",
+  "positives": [
+   "그러나 과제도 남아 있다.",
+   "다만 한계도 분명하다.",
+   "아쉬운 점도 있다."
+  ],
+  "negatives": [
+   "남은 과제도 있습니다. 로그인 오류를 먼저 고친다.",
+   "과제는 다음 주까지 제출합니다.",
+   "안전 기준 정비도 과제로 남아 있다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-empty-caveat",
+  "suggested_message_ko": "내용 없는 반론 문패 ('과제도 남아 있다')",
+  "suggested_fix_ko": "문패를 지우고 실제 과제를 첫 문장에",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "high",
+  "source_examples": [
+   "그러나 과제도 남아 있다.",
+   "다만 한계도 분명하다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-empty-caveat"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:508-513",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "에세이 결말의 성찰 부사 '어쩌면 ~일 것이다' (장르 한정, 에세이 외에는 거의 안 나옴).",
+  "label": "D-13 어쩌면 ~일 것이다",
+  "pattern": "어쩌면[^.!?\\n]{1,60}(?:일|할|될|있을)\\s?(?:것이다|것입니다|지도\\s?모른다)",
+  "positives": [
+   "잘 사는 일은 어쩌면 잘 버리는 일의 다른 이름일 것이다.",
+   "어쩌면 그것이 답일지도 모른다."
+  ],
+  "negatives": [
+   "어쩌면 좋을까요?",
+   "어쩌면 이렇게 쉬울까."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-maybe-reflective",
+  "suggested_message_ko": "성찰 부사 '어쩌면 ~일 것이다'",
+  "suggested_fix_ko": "구체 서술로",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "low",
+  "source_examples": [
+   "잘 사는 일은 어쩌면 잘 버리는 일의 다른 이름일 것이다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 1,
+  "decision": "rejected: the one human hit is a legitimate use"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:515-533",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "사람 532편 실측 0건인 생성형 은유 어휘: 잠식·청사진·적신호·경고등·신호탄·움켜쥐다·뿌리내리다·짓누르다.",
+  "label": "D-14 사전 은유",
+  "pattern": "잠식|청사진|적신호|경고등|신호탄|움켜쥐|뿌리\\s?내리|뿌리를\\s?내리|짓누르|짓누른",
+  "positives": [
+   "부작용이 시장을 잠식하고",
+   "부담이 가계를 짓누른다.",
+   "새 청사진을 그렸다."
+  ],
+  "negatives": [
+   "점유율을 뺏는다.",
+   "경고가 표시된다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-generative-metaphor",
+  "suggested_message_ko": "생성형 은유 어휘 (잠식·청사진·적신호·짓누르다)",
+  "suggested_fix_ko": "명제로 직역 (점유율을 뺏는다)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "부작용이 시장을 잠식하고",
+   "부담이 가계를 짓누른다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "notes": "'청사진'은 기획 문서에서 정상 용례도 있어 warning 권장.",
+  "train_ai_docs": 0,
+  "train_human_docs": 1,
+  "decision": "rejected: the one human hit is a legitimate use"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:515-533",
+  "license": "MIT",
+  "category": "관용구·상투구",
+  "description": "추상명사에 감각 술어를 얹는 평가문: 진단은 서늘하다 / 경고는 아프다.",
+  "label": "D-14 감각 술어 평가문",
+  "pattern": "(?:진단|경고|분석|통계|현실|숫자|지적|전망)(?:은|는)\\s?(?:서늘|아프|차갑|뜨겁|묵직|섬뜩)(?:하다|다|합니다|습니다)",
+  "positives": [
+   "1부의 진단은 서늘하다.",
+   "3부의 경고는 아프다.",
+   "통계는 섬뜩합니다."
+  ],
+  "negatives": [
+   "방 안 공기는 서늘하다.",
+   "진단 결과를 표시합니다.",
+   "분석은 끝났다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-sensory-evaluation",
+  "suggested_message_ko": "감각 술어 평가문 ('진단은 서늘하다')",
+  "suggested_fix_ko": "관용구나 구체 서술로",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "1부의 진단은 서늘하다.",
+   "3부의 경고는 아프다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-sensory-evaluation"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:542-552",
+  "license": "MIT",
+  "category": "리듬·종결",
+  "description": "진행형 '~고 있다' 영어 be-ing 자동 매핑 (metrics progressive_aspect_rate). 문서 밀도만.",
+  "label": "E-2 ~고 있다 자동 매핑",
+  "pattern": "[가-힣]고\\s?있(?:다|습니다|으며|었다|었습니다)",
+  "positives": [
+   "이 보고서는 인공지능의 미래를 분석하고 있다.",
+   "시장이 성장하고 있습니다."
+  ],
+  "negatives": [
+   "고양이가 있다.",
+   "책이 있습니다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-progressive-density",
+  "suggested_message_ko": "진행형 '~고 있다' 반복",
+  "suggested_fix_ko": "단순 시제로 (읽고 있다 → 읽는다)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 5,
+  "confidence": "low",
+  "source_examples": [
+   "이 보고서는 인공지능의 미래를 분석하고 있다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 46,
+  "train_human_docs": 233,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:594-598",
+  "license": "MIT",
+  "category": "수식·중복",
+  "description": "'매우/대단히/극히/굉장히' 정도부사 중독. 문서당 3회 초과만.",
+  "label": "F-1 정도부사",
+  "pattern": "(?<![가-힣])(?:매우|대단히|극히|지극히|굉장히)\\s",
+  "positives": [
+   "매우 빠른 속도를 낸다.",
+   "대단히 효과적이다."
+  ],
+  "negatives": [
+   "매운 음식을 먹는다.",
+   "극장에서 영화를 본다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-degree-adverb",
+  "suggested_message_ko": "정도부사 남발 ('매우·대단히·극히')",
+  "suggested_fix_ko": "삭제하거나 구체 수치로",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 3,
+  "confidence": "low",
+  "source_examples": [
+   "매우 중요하다",
+   "대단히 효과적이다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 9,
+  "train_human_docs": 154,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:600-605",
+  "license": "MIT",
+  "category": "수식·중복",
+  "description": "'중요하고 핵심적인 역할 / 새롭고 혁신적인 접근 / 지속적이고 꾸준한 노력'.",
+  "label": "F-2 동의어 이중 수식",
+  "pattern": "[가-힣]{2,6}고\\s(?:[가-힣]{2,5}적인|꾸준한)\\s(?:역할|접근|노력|방법|전략|기능|영향|변화)",
+  "positives": [
+   "중요하고 핵심적인 역할",
+   "새롭고 혁신적인 접근",
+   "지속적이고 꾸준한 노력"
+  ],
+  "negatives": [
+   "작고 빠른 기능",
+   "빠르고 안전한 방법"
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-synonym-pair",
+  "suggested_message_ko": "동의어 이중 수식 ('중요하고 핵심적인')",
+  "suggested_fix_ko": "수식어 하나만",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "중요하고 핵심적인 역할",
+   "새롭고 혁신적인 접근",
+   "지속적이고 꾸준한 노력"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [
+   "ko-hype"
+  ],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-synonym-pair"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:607-611",
+  "license": "MIT",
+  "category": "수식·중복",
+  "description": "'역할과 기능 / 의미와 가치' 동의어 병렬 명사.",
+  "label": "F-3 기능+역할 복합구",
+  "pattern": "(?:역할과\\s기능|기능과\\s역할|의미와\\s가치|가치와\\s의미)",
+  "positives": [
+   "핵심 도구로서의 역할과 기능",
+   "문화유산의 의미와 가치"
+  ],
+  "negatives": [
+   "역할과 권한을 설정한다.",
+   "기능과 성능을 비교한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-role-and-function",
+  "suggested_message_ko": "동의어 병렬 명사 ('역할과 기능')",
+  "suggested_fix_ko": "하나만",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "~로서의 역할과 기능",
+   "~의 의미와 가치"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-role-and-function"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:622-628",
+  "license": "MIT",
+  "category": "수식·중복",
+  "description": "'전략적 함의/기술적 안정성/구조적 변화' 추상 체인 (문서 3회+).",
+  "label": "F-5 ~적 N 추상 체인",
+  "pattern": "(?:에이전트|전략|실천|구조|본질|근본|시스템|경제|기술|사회|정치|제도|체계)적\\s(?:자율성|안정성|자립|토대|접근|변화|함의|기반|한계|의미|영향|동력|차이|효과)",
+  "positives": [
+   "전략적 함의가 크다.",
+   "기술적 안정성을 확보한다.",
+   "구조적 변화를 일으킨다."
+  ],
+  "negatives": [
+   "기술적 부채를 갚는다.",
+   "경제적이다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-jeok-chain",
+  "suggested_message_ko": "'~적 N' 추상 체인",
+  "suggested_fix_ko": "명사+명사 또는 풀어쓰기 (전략 함의, 구조의 변화)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "low",
+  "source_examples": [
+   "에이전트적 자율성",
+   "기술적 안정성",
+   "경제적 자립",
+   "기술적 토대",
+   "시스템적 접근",
+   "구조적 변화"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "DaleSeo_korean-skills:skills/humanizer/references/vocabulary-patterns.md:466-511"
+  ],
+  "train_ai_docs": 1,
+  "train_human_docs": 1,
+  "decision": "rejected: the one human hit is a legitimate use"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:640-651",
+  "license": "MIT",
+  "category": "헤징",
+  "description": "'~것으로 보인다/판단된다/예상된다/여겨진다', '~인 듯하다'. 기존 ko-hedge-stack 은 합니다체만.",
+  "label": "G-1 추측 종결 (한다체)",
+  "pattern": "것으로\\s?(?:보인다|판단된다|예상된다|여겨진다|생각된다|추정된다|전망된다)|[다라]고\\s?여겨진다|인\\s?듯하다",
+  "positives": [
+   "수입이 증가한 것으로 판단된다.",
+   "효과가 있는 것으로 보인다.",
+   "이 방식은 안전하다고 여겨진다."
+  ],
+  "negatives": [
+   "화면에 보인다.",
+   "추정치를 계산한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-hedge-plain",
+  "suggested_message_ko": "추측 종결 반복 (한다체)",
+  "suggested_fix_ko": "확인한 사실은 단정, 모르는 것은 모른다고 명시",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "low",
+  "source_examples": [
+   "수입이 증가한 것으로 판단된다.",
+   "이 방식은 안전하다고 여겨진다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 3,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:653-661",
+  "license": "MIT",
+  "category": "헤징",
+  "description": "이중·삼중 완곡 '가능성이 있을 수 있다'.",
+  "label": "G-2 가능성이 있을 수 있다",
+  "pattern": "(?:가능성|여지|우려)(?:이|가)\\s?있을\\s?수\\s?(?:도\\s?)?있",
+  "positives": [
+   "오류가 생길 가능성이 있을 수 있다.",
+   "지연될 우려가 있을 수도 있다."
+  ],
+  "negatives": [
+   "가능성이 있다.",
+   "있을 수 없는 일이다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-hedge-double",
+  "suggested_message_ko": "이중 완곡 ('가능성이 있을 수 있다')",
+  "suggested_fix_ko": "완곡 하나만",
+  "suggested_severity": "error",
+  "suggested_max_per_file": 0,
+  "confidence": "high",
+  "source_examples": [
+   "~할 가능성이 있을 수 있다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-hedge-double"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:662-674",
+  "license": "MIT",
+  "category": "헤징",
+  "description": "균형·양면 어휘 '장점도 있지만 / 균형 잡힌 시각 / 신중하게 접근해야'. 근거 부족(hold) 표기됨.",
+  "label": "G-3 안전 균형 lexicon",
+  "pattern": "장점도\\s있지만|균형\\s?잡힌\\s?시각|신중하게\\s?접근",
+  "positives": [
+   "장점도 있지만 단점도 있다.",
+   "균형 잡힌 시각이 중요하다.",
+   "신중하게 접근해야 한다."
+  ],
+  "negatives": [
+   "장점을 표로 정리한다.",
+   "균형 트리를 사용한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-balance-lexicon",
+  "suggested_message_ko": "안전 균형 어휘 ('장점도 있지만·균형 잡힌 시각')",
+  "suggested_fix_ko": "한쪽 단언 또는 조건부 비교",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 1,
+  "confidence": "low",
+  "source_examples": [
+   "장점도 있지만 단점도 있다",
+   "균형 잡힌 시각이 중요하다",
+   "신중하게 접근해야 한다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "notes": "원 저장소도 실증 부족(hold)이라 명시. 사람 1건 vs AI 4건.",
+  "train_ai_docs": 0,
+  "train_human_docs": 1,
+  "decision": "rejected: the one human hit is a legitimate use"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:678-688",
+  "license": "MIT",
+  "category": "접속사",
+  "description": "문두 '또한/나아가/아울러/게다가/더욱이/더불어' 반복. 모델 의존·과업 의존 신호라 한 문서 3회 초과만.",
+  "label": "H-1 문두 접속사 밀집",
+  "pattern": "(?:^|[.!?]\\s|\\n)(?:또한|나아가|아울러|게다가|더욱이|더불어)[,\\s]",
+  "positives": [
+   "또한, 이 기능은 편리하다. 더불어, 속도도 빠르다. 나아가, 비용도 절감된다."
+  ],
+  "negatives": [
+   "게다가는 붙여 쓰지 않는다.",
+   "A도 B도 지원한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-additive-opener",
+  "suggested_message_ko": "문두 첨가 접속사 반복 ('또한·나아가·게다가')",
+  "suggested_fix_ko": "절반 삭제, 문장이 흐름을 잡게",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 3,
+  "confidence": "low",
+  "source_examples": [
+   "또한, 이 기능은 편리하다. 더불어, 속도도 빠르다. 나아가, 비용도 절감된다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "nomadamas_k-skill:korean-humanizer/instruction.md:246-252",
+   "DaleSeo_korean-skills:skills/humanizer/references/structure-patterns.md:100"
+  ],
+  "train_ai_docs": 21,
+  "train_human_docs": 169,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:695-708",
+  "license": "MIT",
+  "category": "접속사",
+  "description": "문두 '이는/이 점에서/이 관점에서/이 말은' 반복 (한 문서 3회 초과).",
+  "label": "H-3 이는 ~ 메타 진입",
+  "pattern": "(?:^|[.!?]\\s|\\n)(?:이는|이\\s점에서|이\\s관점에서(?:\\s보면)?|이\\s말은)[,\\s]",
+  "positives": [
+   "이 관점에서 보면 AI 시대 유망 직무도 다시 보인다.",
+   "비용이 늘었다. 이는 예산 문제다.",
+   "이 말은 병목이 인력이라는 뜻이다."
+  ],
+  "negatives": [
+   "이점에서 비교한다.",
+   "함수는 문자열을 반환한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-meta-entry",
+  "suggested_message_ko": "문두 '이는·이 점에서' 메타 진입 반복",
+  "suggested_fix_ko": "본 서술로 직진",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 3,
+  "confidence": "low",
+  "source_examples": [
+   "이 관점에서 보면 AI 시대 유망 직무도 다시 보인다",
+   "이 말은 결국 기술 도입보다 인력 전환이 더 큰 병목이 될 수 있다는 뜻이다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 8,
+  "train_human_docs": 152,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:709-715",
+  "license": "MIT",
+  "category": "접속사",
+  "description": "재정의 접속사 '즉' 남발 (문서당 2회 이하).",
+  "label": "H-4 즉",
+  "pattern": "(?<![가-힣])즉[,\\s]",
+  "positives": [
+   "AI 민주화, 즉 경제성 측면에서",
+   "값이 비었다. 즉, 오류다."
+  ],
+  "negatives": [
+   "즉시 반환한다.",
+   "곧 종료한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-jeuk",
+  "suggested_message_ko": "'즉' 남발",
+  "suggested_fix_ko": "곧·다시 말해로 변주하거나 생략",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "low",
+  "source_examples": [
+   "AI 민주화, 즉 경제성 측면에서"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 9,
+  "train_human_docs": 154,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:719-724",
+  "license": "MIT",
+  "category": "형식명사·결말",
+  "description": "'~한 것이다/~일 것이다/~할 것이다' 문장 종결 밀도 (미래 단정 포함). 사람이 2배 더 쓴다는 반대 실측이 있어 문서당 3회 초과만.",
+  "label": "I-1 ~것이다 종결 밀도",
+  "pattern": "것(?:이다|입니다)[.]",
+  "positives": [
+   "이번 정책으로 시장이 활성화될 것이다.",
+   "고용이 증가할 것입니다.",
+   "그는 늦을 것이다."
+  ],
+  "negatives": [
+   "것이라고 했다.",
+   "그것이 문제다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-geosida-ending",
+  "suggested_message_ko": "'~것이다' 종결 반복",
+  "suggested_fix_ko": "현재형 단정 (활성화된다)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 3,
+  "confidence": "low",
+  "source_examples": [
+   "이번 정책으로 시장이 활성화될 것이다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "notes": "원 저장소 실측은 사람 43.0 vs AI 20.4/1000문장으로 오히려 사람이 많음(기각 근거). 반복 밀도만 사용.",
+  "also_in": [
+   "DaleSeo_korean-skills:skills/humanizer/references/translation-ese-patterns.md:595-650",
+   "nomadamas_k-skill:korean-humanizer/instruction.md:256-260"
+  ],
+  "train_ai_docs": 34,
+  "train_human_docs": 293,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:726-733",
+  "license": "MIT",
+  "category": "형식명사·결말",
+  "description": "'주목할 점은', '핵심은 ~라는 점에 있다' 형식명사 강조.",
+  "label": "I-2 주목할 점은 / ~라는 점에 있다",
+  "pattern": "주목(?:할|해야\\s?할)\\s?(?:점|부분)(?:은|이)|[다라]는\\s?점에\\s?있(?:다|습니다)",
+  "positives": [
+   "주목할 점은 속도다.",
+   "핵심은 진입장벽이 낮아지고 있다는 점에 있다.",
+   "주목해야 할 부분은 비용이다."
+  ],
+  "negatives": [
+   "점을 찍는다.",
+   "방향에 있다.",
+   "목록에 있다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-noteworthy-point",
+  "suggested_message_ko": "형식명사 강조 ('주목할 점은·~라는 점에 있다')",
+  "suggested_fix_ko": "'X는 ~다' 직설로",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "핵심은 진입장벽이 빠르게 낮아지고 있다는 점에 있다",
+   "주목할 부분은 수익 모델이 정착되지 않았다는 점에 있다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [
+   "ko-cleft"
+  ],
+  "train_ai_docs": 0,
+  "train_human_docs": 3,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:735-743",
+  "license": "MIT",
+  "category": "형식명사·결말",
+  "description": "결말 단언 '~다는 것이다/~다는 뜻이다/~인 셈이다'. 용어 설명의 '~다는 뜻입니다'도 걸리므로 문서당 2회 초과만.",
+  "label": "I-3 ~다는 뜻이다 / 인 셈이다",
+  "pattern": "[다라]는\\s?(?:것이다|것입니다|뜻이다|뜻입니다)[.]|인\\s?셈(?:이다|입니다)",
+  "positives": [
+   "인력 전환이 더 큰 병목이 될 수 있다는 뜻이다.",
+   "변화가 크다는 것이다.",
+   "사실상 손해인 셈이다."
+  ],
+  "negatives": [
+   "그 값이라는 의미는 같다.",
+   "셈을 한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-meaning-ending",
+  "suggested_message_ko": "결말 단언 ('~다는 뜻이다·~인 셈이다')",
+  "suggested_fix_ko": "'~다'로 직접 종결",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "low",
+  "source_examples": [
+   "기술 도입보다 인력 전환이 더 큰 병목이 될 수 있다는 뜻이다.",
+   "변화가 크다는 것이다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 7,
+  "train_human_docs": 73,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:745-757",
+  "license": "MIT",
+  "category": "형식명사·결말",
+  "description": "'~할 필요가 있다' 권고 (원 저장소 표적은 당위로 끝나는 문단 반복). 문서당 2회 초과만.",
+  "label": "I-4 ~할 필요가 있다",
+  "pattern": "[가-힣]\\s필요가\\s?있(?:다|습니다)",
+  "positives": [
+   "AI 규제를 논의할 필요가 있다.",
+   "검토할 필요가 있습니다."
+  ],
+  "negatives": [
+   "필요가 없다.",
+   "필요한 경우 설정한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-need-to",
+  "suggested_message_ko": "'~할 필요가 있다' 권고 반복",
+  "suggested_fix_ko": "할 일을 바로 서술",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "low",
+  "source_examples": [
+   "AI 규제에 대해 논의할 필요가 있다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "nomadamas_k-skill:korean-humanizer/instruction.md:262-266"
+  ],
+  "train_ai_docs": 3,
+  "train_human_docs": 34,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:759-768",
+  "license": "MIT",
+  "category": "형식명사·결말",
+  "description": "'혁신/변화/전환이 필요하다' 추상 요구. 기존 ko-must-important 는 '~것이 중요'만.",
+  "label": "I-5 혁신이 필요하다",
+  "pattern": "(?:혁신|변화|전환|노력|투자|협력|논의)(?:이|가)\\s?필요(?:하다|합니다)",
+  "positives": [
+   "혁신이 필요하다.",
+   "변화가 필요합니다."
+  ],
+  "negatives": [
+   "투자 계획이 필요 없다.",
+   "노력이 필요하지 않다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-abstract-need",
+  "suggested_message_ko": "'혁신이 필요하다' 추상 요구",
+  "suggested_fix_ko": "누가 무엇을 해야 하는지 주어·동사로",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 1,
+  "confidence": "low",
+  "source_examples": [
+   "혁신이 필요하다",
+   "변화가 필요하다"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 2,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:778-783",
+  "license": "MIT",
+  "category": "형식명사·결말",
+  "description": "무주체 판정 종결 '~다는 분석이다/평가다/관측이다'.",
+  "label": "I-7 ~다는 분석이다",
+  "pattern": "[다라]는\\s?(?:분석|평가|관측|전망|지적|해석)(?:이다|입니다)[.]",
+  "positives": [
+   "수요가 시장을 떠받치고 있다는 분석이다.",
+   "성장세가 둔화된다는 전망이다."
+  ],
+  "negatives": [
+   "분석이 끝났다.",
+   "평가는 아래와 같다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-unattributed-verdict",
+  "suggested_message_ko": "무주체 판정 종결 ('~다는 분석이다')",
+  "suggested_fix_ko": "출처가 있으면 출처를 앞에, 없으면 직접 서술",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "medium",
+  "source_examples": [
+   "수요가 시장을 떠받치고 있다는 분석이다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "nomadamas_k-skill:korean-humanizer/instruction.md:207-211"
+  ],
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "decision": "adopted as ko-unattributed-verdict"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:811-815",
+  "license": "MIT",
+  "category": "시각 장식",
+  "description": "개념어를 따옴표로 감싸 강조 (한 문서 5회 초과). 직선 작은따옴표/곡선 작은따옴표 + 한글만.",
+  "label": "J-2 따옴표 강조",
+  "pattern": "['‘][가-힣][가-힣 ]{1,14}['’]",
+  "positives": [
+   "'옥석 가리기'",
+   "‘금융 슈퍼앱’이 뜬다."
+  ],
+  "negatives": [
+   "it's 괜찮다.",
+   "'abc'를 입력한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-quote-emphasis",
+  "suggested_message_ko": "따옴표 강조 남발",
+  "suggested_fix_ko": "진짜 인용만 남기고 평어로",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 4,
+  "confidence": "medium",
+  "source_examples": [
+   "'옥석 가리기'·'금융 슈퍼앱'·'데이터 피로감'·'규제 샌드박스'"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "nomadamas_k-skill:korean-humanizer/instruction.md:276-280"
+  ],
+  "train_ai_docs": 6,
+  "train_human_docs": 74,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/ai-tell-taxonomy.md:832-836",
+  "license": "MIT",
+  "category": "시각 장식",
+  "description": "'(이는 ~을 의미한다)' 괄호 부연 반복.",
+  "label": "J-4 괄호 부연",
+  "pattern": "\\(이는\\s[^)\\n]{3,60}\\)",
+  "positives": [
+   "(이는 비용 절감을 의미한다)",
+   "속도가 빨라졌다(이는 캐시 덕분이다)."
+  ],
+  "negatives": [
+   "(이름: 홍길동)",
+   "(자세한 내용은 아래)"
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-parenthetical-explain",
+  "suggested_message_ko": "괄호 부연 '(이는 ~을 의미한다)'",
+  "suggested_fix_ko": "본문화 또는 삭제",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 0,
+  "confidence": "low",
+  "source_examples": [
+   "(이는 ~을 의미한다)"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "train_ai_docs": 0,
+  "train_human_docs": 4,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "scripts/checks.py:64",
+  "license": "MIT",
+  "category": "기타",
+  "description": "'하였습니다/하였다' 격식 상향 (원 저장소는 윤문기가 주입하는 것을 막는 체크로 사용).",
+  "label": "하였 격식 상향",
+  "pattern": "하였(?:습니다|다|으며|고|음)",
+  "positives": [
+   "안정성을 개선하였습니다.",
+   "결과를 확인하였다."
+  ],
+  "negatives": [
+   "개선했습니다.",
+   "했다가 취소했다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-hayeot",
+  "suggested_message_ko": "'하였습니다' 격식 상향",
+  "suggested_fix_ko": "했습니다 / 합니다",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "low",
+  "source_examples": [
+   "안정성을 개선하였습니다."
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "epoko77-ai_im-not-ai:extras/skills/commit-ko/references/commit-lexicon.md:30-40"
+  ],
+  "train_ai_docs": 0,
+  "train_human_docs": 31,
+  "decision": "rejected: fires on human docs"
+ },
+ {
+  "source_repo": "epoko77-ai_im-not-ai",
+  "source_file": "skills/humanize-korean/references/metrics_v2.py:178-204",
+  "license": "MIT",
+  "category": "번역투",
+  "description": "무정물·추상명사에 복수 접미 '-들' 기계적 부착 (metrics_v2 의 _INANIMATE_DEUL_TOKENS 어휘). 원 저장소는 '지배 패턴 지목 금지, 관찰만'으로 hold 한 항목이라 밀도로만.",
+  "label": "A-17 무정물 -들",
+  "pattern": "(?:데이터|정보|결과|연구|아이디어|방법|의견|시스템|기술|사실|사례|이론|개념|현상|요소|원인|영향|변화|기능|조건|기준|관점|원리|서비스|옵션)들(?=[이가은는을를의에도과와로\\s.,])",
+  "positives": [
+   "기능들을 개선한다.",
+   "데이터들이 쌓인다.",
+   "여러 서비스들에서 쓴다."
+  ],
+  "negatives": [
+   "사람들이 모인다.",
+   "아이들이 논다.",
+   "기능을 개선한다."
+  ],
+  "covered_by": null,
+  "suggest_id": "ko-inanimate-deul",
+  "suggested_message_ko": "무정물 명사의 복수 '-들'",
+  "suggested_fix_ko": "맥락으로 복수가 분명하면 '-들' 삭제 (기능들을 → 기능을)",
+  "suggested_severity": "warning",
+  "suggested_max_per_file": 2,
+  "confidence": "low",
+  "source_examples": [
+   "기능들을 개선"
+  ],
+  "source_examples_not_matched": [],
+  "existing_rules_matching_positives": [],
+  "also_in": [
+   "DaleSeo_korean-skills:skills/humanizer/references/vocabulary-patterns.md:143-197",
+   "nomadamas_k-skill:korean-humanizer/instruction.md:126-130"
+  ],
+  "train_ai_docs": 9,
+  "train_human_docs": 143,
+  "decision": "rejected: fires on human docs"
+ }
+]
