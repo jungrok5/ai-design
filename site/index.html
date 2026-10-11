@@ -135,7 +135,7 @@ claude plugin install ai-design@ai-design</pre><button type="button">복사</but
 <pre class="ds-output"><!--SAMPLE:claude/hook-landing.txt--></pre>
 
     <h3>출시 공지 글</h3>
-    <p>같은 사실로 사내 블로그용 출시 공지를 요청했습니다. ai-design을 켠 쪽은 <code>polish-writing</code>을 읽었습니다. 아래 검사 결과는 1.3.0 검사기로 지금 다시 실행한 것입니다.</p>
+    <p>같은 사실로 사내 블로그용 출시 공지를 요청했습니다. ai-design을 켠 쪽은 <code>polish-writing</code>을 읽었습니다. 아래 검사 결과는 <!--VERSION--> 검사기로 페이지를 만들 때 다시 실행한 것입니다.</p>
     <div class="split">
       <div class="stack">
         <div class="cap">Claude Code만: notice-without.md</div>
@@ -291,7 +291,7 @@ severity = "off"</pre><button type="button">복사</button></div>
 <section class="block" id="measure">
   <div class="container stack">
     <h2>공개 문서에서 측정한 결과</h2>
-    <p>사람이 쓴 공개 한국어 문서 4곳(파일 1,187개, 약 21만 줄)에 1.3.0 검사기를 실행했습니다. 검사에는 모두 7.3초가 걸렸고 보고는 1,553건이었습니다. 이 측정은 사람의 글에서 무엇이 보고되는지를 보여 주며, AI가 쓴 글을 얼마나 잡는지는 알려 주지 않습니다.</p>
+    <p>사람이 쓴 공개 한국어 문서 4곳(파일 1,187개, 약 21만 줄)에 1.3.0 검사기를 실행했습니다. 검사에는 모두 7.3초가 걸렸고 보고는 1,553건이었습니다. 이 측정은 사람의 글에서 무엇이 보고되는지를 보여 줍니다.</p>
     <div class="ds-table-wrap"><table class="ds-table">
       <thead><tr><th scope="col">레포</th><th scope="col">파일</th><th scope="col">error</th><th scope="col">warning</th><th scope="col">가장 많은 보고</th></tr></thead>
       <tbody>
@@ -302,6 +302,20 @@ severity = "off"</pre><button type="button">복사</button></div>
       </tbody>
     </table></div>
     <p>규칙 23개에서 4건씩 뽑은 92건을 Claude가 문맥을 읽고 판정했습니다. 41건은 고치면 문장이 짧아지거나 정확해졌고, 44건은 규칙이 겨냥한 표현이지만 문서의 장르나 문체로 보아 그대로 둘 만했으며, 7건은 오탐이었습니다. 오탐 7건 중 6건과 측정에서 드러난 성능 문제는 1.3.0에서 고쳤습니다. 레포별 커밋, 규칙별 수, 판정 예시는 <a href="https://github.com/jungrok5/ai-design/blob/main/docs/measurement.md">docs/measurement.md</a>에 있습니다.</p>
+    <h3>AI 글과 사람 글 비교</h3>
+    <!-- style-ignore-start -->
+    <p>같은 제목 178개로 Claude Opus 5.5, Sonnet 5.5, Haiku 5.5가 쓴 문서와 사람이 쓴 문서를 비교했습니다. AI 글에만 자주 나온 표현 4가지를 1.4.0에서 경고 규칙으로 넣었고, 후보를 고를 때 쓰지 않은 시험용 문서에서 AI 문서 35개 중 9개(26%), 사람 문서 139개 중 2개(1.4%)에서 보고되었습니다.</p>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th scope="col">규칙</th><th scope="col">AI 문서</th><th scope="col">사람 문서</th><th scope="col">AI 문서의 예</th></tr></thead>
+      <tbody>
+        <tr><td><code>ko-hedged-advice</code></td><td>14%</td><td>1.4%</td><td>점진적으로 올리는 편이 안전합니다</td></tr>
+        <tr><td><code>ko-advise</code></td><td>6%</td><td>0%</td><td>한 번 더 확인하시길 권합니다</td></tr>
+        <tr><td><code>ko-template-heading</code></td><td>6%</td><td>0%</td><td>## 이달의 실무 체크리스트</td></tr>
+        <tr><td><code>ko-count-runup</code></td><td>6%</td><td>0%</td><td>눈여겨볼 변경은 세 가지입니다</td></tr>
+      </tbody>
+    </table></div>
+    <!-- style-ignore-end -->
+    <p>기존 규칙은 이 비교에서 AI 글보다 사람 글을 더 많이 보고했습니다(사람 71%, AI 57%). 사람 쪽 보고는 대부분 번역문의 번역투였습니다. 검사기는 AI 판별기가 아니라 문체 검사기입니다. 비교는 Claude 세 모델과 기술 문서에 한정됩니다. 방법과 한계는 <a href="https://github.com/jungrok5/ai-design/blob/main/docs/measurement.md#ai-글과-사람-글-비교">docs/measurement.md</a>, 데이터는 <a href="https://github.com/jungrok5/ai-design/tree/main/research/ai-vs-human">research/ai-vs-human/</a>에 있습니다.</p>
   </div>
 </section>
 

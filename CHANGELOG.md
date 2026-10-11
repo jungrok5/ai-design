@@ -3,7 +3,7 @@
 버전은 `plugins/ai-design/.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`에 같은 값으로 기록합니다.
 태그 대신 커밋 SHA를 적어 두므로 pre-commit과 GitHub Action에서는 이 SHA를 `rev`나 `uses`에 고정해 씁니다.
 
-## 1.4.0
+## 1.4.0 (`6c5ce60`)
 
 <!-- style-ignore-start -->
 - AI 글과 사람 글 비교에서 찾은 경고 규칙 4개([docs/measurement.md](docs/measurement.md#ai-글과-사람-글-비교)):
