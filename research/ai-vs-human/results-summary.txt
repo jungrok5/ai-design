@@ -1,0 +1,6 @@
+train 4 new rules                AI 48/143 = 34%   human 17/525 = 3.2%
+train 4 new + ko-emoji-marker    AI 55/143 = 38%   human 55/525 = 10.5%
+train per model (4 new rules): haiku 18/48, opus 14/48, sonnet 16/47
+test  4 new rules                AI 9/35 = 26%   human 2/139 = 1.4%
+test  4 new + ko-emoji-marker    AI 13/35 = 37%   human 11/139 = 7.9%
+test  per model (4 new rules): haiku 3/11, opus 3/12, sonnet 3/12

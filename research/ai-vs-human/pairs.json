@@ -1,0 +1,1782 @@
+[
+ {
+  "id": "ko.rea-00",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react-dom/server/resumeToPipeableStream.md",
+  "title": "resumeToPipeableStream",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 1741,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "ko.rea-01",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/learn/adding-interactivity.md",
+  "title": "상호작용 추가하기",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "ko.rea-02",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/blog/2022/03/29/react-v18.md",
+  "title": "React v18.0",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "ko.rea-03",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/learn/typescript.md",
+  "title": "TypeScript 사용하기",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "ko.rea-04",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/learn/separating-events-from-effects.md",
+  "title": "Effect에서 이벤트 분리하기",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "ko.rea-05",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/learn/render-and-commit.md",
+  "title": "렌더링 그리고 커밋",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "ko.rea-06",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/learn/escape-hatches.md",
+  "title": "탈출구",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "ko.rea-07",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/community/videos.md",
+  "title": "React 영상",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "ko.rea-08",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react-dom/components/form.md",
+  "title": "",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "ko.rea-09",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/blog/2026/02/24/the-react-foundation.md",
+  "title": "React 재단: Linux 재단이 후원하는 React의 새로운 보금자리",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 1390,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "ko.rea-10",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react-dom/index.md",
+  "title": "React DOM APIs",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 1374,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "ko.rea-11",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react/isValidElement.md",
+  "title": "isValidElement",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 1319,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "ko.rea-12",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/blog/2023/03/16/introducing-react-dev.md",
+  "title": "react.dev를 소개합니다",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "ko.rea-13",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/blog/2022/06/15/react-labs-what-we-have-been-working-on-june-2022.md",
+  "title": "React Labs: 그동안의 작업 – 2022년 6월",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "ko.rea-14",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/blog/index.md",
+  "title": "React 블로그",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "ko.rea-15",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/learn/referencing-values-with-refs.md",
+  "title": "Ref로 값 참조하기",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "ko.rea-16",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/learn/responding-to-events.md",
+  "title": "이벤트에 응답하기",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "ko.rea-17",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react-compiler/compilationMode.md",
+  "title": "compilationMode",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 1368,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "ko.rea-18",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react-dom/preinit.md",
+  "title": "preinit",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 1783,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "ko.rea-19",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/rules/rules-of-hooks.md",
+  "title": "Hook의 규칙",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 1063,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "ko.rea-20",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react-dom/components/script.md",
+  "title": "script",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 2232,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "ko.rea-21",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/learn/react-compiler/incremental-adoption.md",
+  "title": "점진적 도입",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 2712,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "ko.rea-22",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/rsc/server-functions.md",
+  "title": "서버 함수",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 2445,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "ko.rea-23",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react/index.md",
+  "title": "React 참고서 개요",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 1513,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "ko.rea-24",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/learn/removing-effect-dependencies.md",
+  "title": "Effect의 의존성 제거하기",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "ko.rea-25",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react/useContext.md",
+  "title": "useContext",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "ko.rea-26",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/learn/understanding-your-ui-as-a-tree.md",
+  "title": "트리로서 UI 이해하기",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "ko.rea-27",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/CONTRIBUTING.md",
+  "title": "기여하기",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 2524,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "ko.rea-28",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/learn/javascript-in-jsx-with-curly-braces.md",
+  "title": "중괄호가 있는 JSX 안에서 자바스크립트 사용하기",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "ko.rea-29",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react-dom/static/prerender.md",
+  "title": "prerender",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "ko.rea-30",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react/Profiler.md",
+  "title": "",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 2433,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "ko.rea-31",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react-dom/flushSync.md",
+  "title": "flushSync",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 2996,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "ko.rea-32",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/learn/installation.md",
+  "title": "설치하기",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 1321,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "ko.rea-33",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react-dom/server/renderToStaticMarkup.md",
+  "title": "renderToStaticMarkup",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 1086,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "ko.rea-34",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react/Component.md",
+  "title": "Component",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "ko.rea-35",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/rsc/use-client.md",
+  "title": "'use client'",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "ko.rea-36",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react-dom/server/renderToString.md",
+  "title": "renderToString",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 2453,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "ko.rea-37",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react/captureOwnerStack.md",
+  "title": "captureOwnerStack",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 1743,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "ko.rea-38",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/community/team.md",
+  "title": "팀 소개",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "ko.rea-39",
+  "repo": "ko.react.dev",
+  "path": "ko.react.dev/src/content/reference/react/ViewTransition.md",
+  "title": "",
+  "kind": "React 공식 문서의 한 페이지",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "es-too-00",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/reference/function/debounce.md",
+  "title": "debounce",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 825,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "es-too-01",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/fp/reference/flow.md",
+  "title": "flow (함수형 프로그래밍)",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 915,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "es-too-02",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/ai-integration.md",
+  "title": "AI 활용",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 1243,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "es-too-03",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/types/intro.md",
+  "title": "es-toolkit/types",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 2298,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "es-too-04",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/fp/intro.md",
+  "title": "es-toolkit/fp",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 1188,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "es-too-05",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/server/reference/exec.md",
+  "title": "exec",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 852,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "es-too-06",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/reference/util/serialize.md",
+  "title": "serialize",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 2430,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "es-too-07",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/compat/reference/string/template.md",
+  "title": "template (Lodash 호환성)",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 804,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "es-too-08",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/reference/util/hash.md",
+  "title": "hash",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 800,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "es-too-09",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/reference/function/retry.md",
+  "title": "retry",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 800,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "es-too-10",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/compat/reference/array/findIndex.md",
+  "title": "findIndex (Lodash 호환성)",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 800,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "es-too-11",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/fp/reference/pipe.md",
+  "title": "pipe (함수형 프로그래밍)",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 800,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "es-too-12",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/compat/reference/array/findLastIndex.md",
+  "title": "findLastIndex (Lodash 호환성)",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 800,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "es-too-13",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/reference/string/dedent.md",
+  "title": "dedent",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 957,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "es-too-14",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/browser-support.md",
+  "title": "브라우저 지원",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 1742,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "es-too-15",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/compat/intro.md",
+  "title": "es-toolkit/compat",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 1562,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "es-too-16",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/README-ko_kr.md",
+  "title": "es-toolkit &middot; [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/toss/es-toolkit/blob/main/LICENSE) [![codecov](https://codecov.io/gh/toss/es-toolkit/graph/badge.svg?token=8N5S3AR3C7)](https://codecov.io/gh/toss/es-toolkit) [![NPM badge](https://img.shields.io/npm/v/es-toolkit?logo=npm)](https://www.npmjs.com/package/es-toolkit) [![JSR badge](https://jsr.io/badges/@es-toolkit/es-toolkit)](https://jsr.io/@es-toolkit/es-toolkit) [![Discord Badge](https://discord.com/api/guilds/1281071127052943361/widget.png?style=shield)](https://discord.gg/vGXbVjP2nY)",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 1324,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "es-too-17",
+  "repo": "es-toolkit",
+  "path": "es-toolkit/docs/ko/fp/reference/flowAsync.md",
+  "title": "flowAsync (함수형 프로그래밍)",
+  "kind": "JavaScript 유틸리티 라이브러리의 API 문서 한 페이지",
+  "chars": 800,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-00",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2020-07.md",
+  "title": "2020-07",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "fe-new-01",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2022-07.md",
+  "title": "2022-07",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "fe-new-02",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2023-03.md",
+  "title": "2023-03",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-03",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2020-12.md",
+  "title": "2020-12",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 2509,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "fe-new-04",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2026-09.md",
+  "title": "2026-09",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "fe-new-05",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2021-02.md",
+  "title": "2021-02",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-06",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2024-02.md",
+  "title": "2024-02",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "fe-new-07",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2023-01.md",
+  "title": "2023-01",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "fe-new-08",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2024-12.md",
+  "title": "2024-12",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-09",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2023-12.md",
+  "title": "2023-12",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "fe-new-10",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2021-10.md",
+  "title": "2021-10",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "fe-new-11",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2024-01.md",
+  "title": "2024-01",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-12",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2023-11.md",
+  "title": "2023-11",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "fe-new-13",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2022-04.md",
+  "title": "2022-04",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "fe-new-14",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2022-12.md",
+  "title": "2022-12",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-15",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2020-11.md",
+  "title": "2020-11",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "fe-new-16",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2021-11.md",
+  "title": "2021-11",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 2699,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "fe-new-17",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2022-09.md",
+  "title": "2022-09",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-18",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2026-07.md",
+  "title": "2026-07",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "fe-new-19",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2026-06.md",
+  "title": "2026-06",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "fe-new-20",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2022-02.md",
+  "title": "2022-02",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-21",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2021-07.md",
+  "title": "2021-07",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "fe-new-22",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2023-06.md",
+  "title": "2023-06",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "fe-new-23",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2023-10.md",
+  "title": "2023-10",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-24",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2026-03.md",
+  "title": "2026-03",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "fe-new-25",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2021-04.md",
+  "title": "2021-04",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "fe-new-26",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2023-09.md",
+  "title": "2023-09",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-27",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2025-12.md",
+  "title": "2025-12",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "fe-new-28",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2024-03.md",
+  "title": "2024-03",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "fe-new-29",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2024-06.md",
+  "title": "2024-06",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-30",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2020-05.md",
+  "title": "2020-05",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 2855,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "fe-new-31",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2024-09.md",
+  "title": "2024-09",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "fe-new-32",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2020-04.md",
+  "title": "2020-04",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-33",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2024-07.md",
+  "title": "2024-07",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "fe-new-34",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2022-03.md",
+  "title": "2022-03",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "fe-new-35",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2025-01.md",
+  "title": "2025-01",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-36",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2020-06.md",
+  "title": "2020-06",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "fe-new-37",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2021-03.md",
+  "title": "2021-03",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "fe-new-38",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2023-02.md",
+  "title": "2023-02",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "fe-new-39",
+  "repo": "fe-news",
+  "path": "fe-news/issues/2025-11.md",
+  "title": "2025-11",
+  "kind": "프론트엔드 개발 소식을 모아 소개하는 월간 뉴스레터 한 호",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-00",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Operating System/Semaphore & Mutex.md",
+  "title": "Semaphore & Mutex",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1605,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "tech-i-01",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Language/[Java] 직렬화(Serialization).md",
+  "title": "[Java] 직렬화(Serialization)",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1511,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "tech-i-02",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Software Engineering/클린코드(Clean Code) & 시큐어코딩(Secure Coding).md",
+  "title": "클린코드(Clean Code) & 시큐어코딩(Secure Coding)",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 2496,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-03",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Operating System/Paging and Segmentation.md",
+  "title": "Paging and Segmentation",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1122,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "tech-i-04",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Web/React/React & Spring Boot 연동하여 환경 구축하기.md",
+  "title": "React & Spring Boot 연동하여 환경 구축하기",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "tech-i-05",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Web/Spring/[Spring Boot] Test Code.md",
+  "title": "[Spring Boot] Test Code",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1123,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-06",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Language/[Java] Java 8 정리.md",
+  "title": "[Java] Java 8 정리",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 881,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "tech-i-07",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Software Engineering/Object-Oriented Programming.md",
+  "title": "Object-Oriented Programming",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "tech-i-08",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Data Structure/Array.md",
+  "title": "Array",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1648,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-09",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Network/HTTP & HTTPS.md",
+  "title": "HTTP & HTTPS",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1789,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "tech-i-10",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Data Structure/Array vs ArrayList vs LinkedList.md",
+  "title": "Array vs ArrayList vs LinkedList",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1314,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "tech-i-11",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Database/저장 프로시저(Stored PROCEDURE).md",
+  "title": "저장 프로시저(Stored PROCEDURE)",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1062,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-12",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/New Technology/AI/Linear regression 실습.md",
+  "title": "X and Y data",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1407,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "tech-i-13",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/ETC/Git vs GitHub vs GitLab Flow.md",
+  "title": "Git vs GitHub vs GitLab Flow",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 2405,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "tech-i-14",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Design Pattern/Singleton Pattern.md",
+  "title": "Singleton Pattern",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 2162,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-15",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Web/Spring/[Spring Data JPA] 더티 체킹 (Dirty Checking).md",
+  "title": "[JPA] 더티 체킹 (Dirty Checking)",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1089,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "tech-i-16",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Web/Spring/Spring MVC.md",
+  "title": "Spring MVC Framework",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1249,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "tech-i-17",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/ETC/시사 상식.md",
+  "title": "시사 상식",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1851,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-18",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Web/인증방식.md",
+  "title": "인증방식",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 2753,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "tech-i-19",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Web/JWT(JSON Web Token).md",
+  "title": "JWT (JSON Web Token)",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 2188,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "tech-i-20",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Operating System/Process Management & PCB.md",
+  "title": "Process Management & PCB",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1275,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-21",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Operating System/Memory.md",
+  "title": "Memory",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "tech-i-22",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Database/Transaction Isolation Level.md",
+  "title": "Transaction Isolation Level",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1994,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "tech-i-23",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Web/Vue/Vue.js 라이프사이클 이해하기.md",
+  "title": "Vue.js 라이프사이클 이해하기",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 2000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-24",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Design Pattern/Composite Pattern.md",
+  "title": "Composite Pattern",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1236,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "tech-i-25",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Web/네이티브 앱 & 웹 앱 & 하이브리드 앱.md",
+  "title": "네이티브 앱 & 웹 앱 & 하이브리드 앱",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1079,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "tech-i-26",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Computer Architecture/ARM 프로세서.md",
+  "title": "ARM 프로세서",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1427,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-27",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/New Technology/AI/README.md",
+  "title": "README",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1367,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "tech-i-28",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Algorithm/Sort_Radix.md",
+  "title": "Sort_Radix",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1306,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "tech-i-29",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Computer Architecture/캐시 메모리(Cache Memory).md",
+  "title": "캐시 메모리(Cache Memory)",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 2314,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-30",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Data Structure/B Tree & B+ Tree.md",
+  "title": "B Tree & B+ Tree",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1344,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "tech-i-31",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Language/[C] 포인터(Pointer).md",
+  "title": "[C] 포인터(Pointer)",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 800,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "tech-i-32",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Data Structure/Binary Search Tree.md",
+  "title": "Binary Search Tree",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1014,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-33",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Language/[Javascript] 데이터 타입.md",
+  "title": "데이터 타입",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1479,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "tech-i-34",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Web/HTTP Request Methods.md",
+  "title": "HTTP Request Methods",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 985,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "tech-i-35",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Interview/Mock Test/GML Test (2019-10-03).md",
+  "title": "GML Test (2019-10-03)",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-36",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Algorithm/다익스트라(Dijkstra).md",
+  "title": "다익스트라(Dijkstra) 알고리즘",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 838,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "tech-i-37",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Operating System/Page Replacement Algorithm.md",
+  "title": "Page Replacement Algorithm",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1964,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "tech-i-38",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Computer Science/Operating System/PCB & Context Switcing.md",
+  "title": "PCB & Context Switcing",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1277,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "tech-i-39",
+  "repo": "tech-interview-for-developer",
+  "path": "tech-interview-for-developer/Language/[java] 자바 가상 머신(Java Virtual Machine).md",
+  "title": "[java] 자바 가상 머신(Java Virtual Machine)",
+  "kind": "개발자 기술 면접 대비 정리 노트",
+  "chars": 1744,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-00",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/deployment/index.md",
+  "title": "Django 튜토리얼 파트 11: Django 웹사이트 공개하기",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "transl-01",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/extensions/server-side/first_steps/web_frameworks/index.md",
+  "title": "Server-side web frameworks",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "transl-02",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/structuring_content/structuring_a_page_of_content/index.md",
+  "title": "콘텐츠 페이지 구조화",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 2761,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-03",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/getting_started/web_standards/how_the_web_works/index.md",
+  "title": "웹의 동작 방식",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "transl-04",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/javascript/reference/global_objects/array/flatmap/index.md",
+  "title": "Array.prototype.flatMap()",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 2122,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "transl-05",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/javascript/reference/global_objects/array/symbol.species/index.md",
+  "title": "Array[Symbol.species]",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 1049,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-06",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/accessibility/index.md",
+  "title": "접근성",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 2873,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "transl-07",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/http/guides/evolution_of_http/index.md",
+  "title": "HTTP의 진화",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "transl-08",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/index.md",
+  "title": "개발자를 위한 웹 기술",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 2157,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-09",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/scripting/conditionals/index.md",
+  "title": "판단 내리기 — 조건문",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "transl-10",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/javascript/reference/global_objects/array/tolocalestring/index.md",
+  "title": "Array.prototype.toLocaleString()",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 1675,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "transl-11",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/javascript/reference/global_objects/array/indexof/index.md",
+  "title": "Array.prototype.indexOf()",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 1298,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-12",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/extensions/testing/index.md",
+  "title": "교차 브라우저 테스팅",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 1865,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "transl-13",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/javascript/guide/grammar_and_types/index.md",
+  "title": "문법과 자료형",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "transl-14",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/styling_basics/basic_selectors/index.md",
+  "title": "CSS 선택자",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 2742,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-15",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/javascript/guide/iterators_and_generators/index.md",
+  "title": "반복기 및 생성기",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "transl-16",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/http/guides/caching/index.md",
+  "title": "HTTP 캐싱",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "transl-17",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/text_styling/index.md",
+  "title": "텍스트 스타일링",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 1224,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-18",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/scripting/build_your_own_function/index.md",
+  "title": "함수 만들기",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "transl-19",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/styling_basics/handling_different_text_directions/index.md",
+  "title": "텍스트 표시 방향 제어하기",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "transl-20",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/extensions/performance/index.md",
+  "title": "웹 성능",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-21",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/scripting/return_values/index.md",
+  "title": "함수 반환 값",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "transl-22",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/extensions/performance/what_is_web_performance/index.md",
+  "title": "웹 성능이란",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "transl-23",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/accessibility/css_and_javascript/index.md",
+  "title": "CSS와 JavaScript의 접근성 모범 사례",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-24",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/javascript/reference/global_objects/array/symbol.iterator/index.md",
+  "title": "Array.prototype[Symbol.iterator]()",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 1285,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "transl-25",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/javascript/reference/global_objects/array/includes/index.md",
+  "title": "Array.prototype.includes()",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 1411,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "transl-26",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/styling_basics/attribute_selectors/index.md",
+  "title": "속성 선택자",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-27",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/skeleton_website/index.md",
+  "title": "장고 튜토리얼 강좌 2 : 뼈대 사이트 만들기",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "transl-28",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/javascript/guide/introduction/index.md",
+  "title": "소개",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "transl-29",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/scripting/test_your_skills/functions/index.md",
+  "title": "실력을 평가해 보세요: 함수",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 2782,
+  "split": "test",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-30",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/testing/index.md",
+  "title": "Django 튜토리얼 파트 10: Django 웹 어플리케이션 테스트하기",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "transl-31",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/scripting/arrays/index.md",
+  "title": "배열(Arrays)",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "transl-32",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/index.md",
+  "title": "Web 개발 학습하기",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-33",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/styling_basics/images_media_forms/index.md",
+  "title": "이미지, 미디어 및 양식 요소",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "transl-34",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/http/guides/browser_detection_using_the_user_agent/index.md",
+  "title": "사용자 에이전트를 사용한 브라우저 감지",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "transl-35",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/web/javascript/reference/global_objects/array/findlastindex/index.md",
+  "title": "Array.prototype.findLastIndex()",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 1790,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-36",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/howto/web_mechanics/index.md",
+  "title": "웹 작동방식",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 884,
+  "split": "train",
+  "model": "claude-opus-5-5"
+ },
+ {
+  "id": "transl-37",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/scripting/variables/index.md",
+  "title": "필요한 정보를 저장하기 - 변수",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-sonnet-5-5"
+ },
+ {
+  "id": "transl-38",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/core/scripting/object_basics/index.md",
+  "title": "JavaScript 객체 기본",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "train",
+  "model": "claude-haiku-5-5"
+ },
+ {
+  "id": "transl-39",
+  "repo": "translated-content",
+  "path": "translated-content/files/ko/learn_web_development/extensions/advanced_javascript_objects/object_prototypes/index.md",
+  "title": "Object prototypes",
+  "kind": "MDN 웹 문서의 한 페이지",
+  "chars": 3000,
+  "split": "test",
+  "model": "claude-opus-5-5"
+ }
+]

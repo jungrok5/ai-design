@@ -35,7 +35,9 @@ regex cannot judge.
    (`1 ms`, `64 KB`, `50,000원`), a condition, or an action. If you cannot, delete the adjective.
 4. **Headlines say the user outcome; buttons say what happens next** (`API 키 발급`, `결제하기`, `Save changes`),
    never `시작하기`/`Submit` for everything. Errors say what happened and what to do, without apologizing.
-5. **Cut the scaffolding:** run-ups (`이제 ~을 알아보겠습니다`, `Let's dive in`), summaries of what was just said
+5. **Cut the scaffolding:** run-ups (`이제 ~을 알아보겠습니다`, `변경은 세 가지입니다`, `Let's dive in`), advice voice
+   (`~하시길 권합니다`, `~하는 편이 안전합니다`: state the condition and result instead), stock section headings
+   (`체크리스트`, `핵심 포인트`: name what the section holds), summaries of what was just said
    (`결론적으로`, `In summary`), significance inflation (`시사하는 바가 크다`, `pivotal`), contrast theater
    (`단순한 X를 넘어`, `It's not X, it's Y`), forced triplets, rhetorical questions, emoji markers, decorative bold.
 6. **Natural Korean.** Prefer verbs to nominalizations (`삭제 작업을 수행합니다` → `삭제합니다`), active voice with a real

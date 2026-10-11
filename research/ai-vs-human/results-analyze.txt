@@ -1,0 +1,61 @@
+AI train 143 docs, human train 525 docs -> 132 candidates (min_ai=10, ratio>=3.0)
+4.69  END1 체크리스트                   ai  13/143  human   0/525  haiku,opus,sonnet
+4.51  W 시그니처                       ai  11/143  human   0/525  haiku,opus,sonnet
+4.12  W 권합니다                       ai  21/143  human   1/525  haiku,opus,sonnet
+4.12  END1 권합니다                    ai  21/143  human   1/525  haiku,opus,sonnet
+3.81  W 골라                         ai  16/143  human   1/525  haiku,opus,sonnet
+3.76  END1 씁니다                     ai  24/143  human   2/525  haiku,opus,sonnet
+3.42  W 씁니다                        ai  24/143  human   3/525  haiku,opus,sonnet
+3.15  W 해 줍니다                      ai  14/143  human   2/525  haiku,opus,sonnet
+3.15  W 체크리스트                      ai  14/143  human   2/525  haiku,opus,sonnet
+3.15  END 해 줍니다                    ai  14/143  human   2/525  haiku,opus,sonnet
+2.99  W 가지입니다                      ai  12/143  human   2/525  haiku,opus,sonnet
+2.99  END1 개념                      ai  12/143  human   2/525  haiku,opus,sonnet
+2.99  END1 가지입니다                   ai  12/143  human   2/525  haiku,opus,sonnet
+2.89  W 쓰면                         ai  26/143  human   6/525  haiku,opus,sonnet
+2.82  W 점검                         ai  14/143  human   3/525  haiku,opus,sonnet
+2.82  START 정리                     ai  14/143  human   3/525  haiku,opus,sonnet
+2.80  W 실무에서는                      ai  10/143  human   2/525  haiku,opus,sonnet
+2.75  W 두면                         ai  20/143  human   5/525  haiku,opus,sonnet
+2.70  W 꾸준히                        ai  19/143  human   5/525  haiku,opus,sonnet
+2.56  W 보내                         ai  11/143  human   3/525  haiku,opus,sonnet
+2.46  W 패치                         ai  10/143  human   3/525  haiku,opus,sonnet
+2.46  START 동작                     ai  10/143  human   3/525  haiku,opus,sonnet
+2.42  W 알려                         ai  22/143  human   8/525  haiku,opus,sonnet
+2.42  START 프레임워크                  ai  22/143  human   8/525  haiku,opus,sonnet
+2.36  W CODE CODE 같은               ai  23/143  human   9/525  haiku,opus,sonnet
+2.36  W 실무                         ai  14/143  human   5/525  haiku,opus,sonnet
+2.29  START TypeScript             ai  31/143  human  14/525  haiku,opus,sonnet
+2.28  W 모아                         ai  13/143  human   5/525  haiku,sonnet
+2.28  W 노트                         ai  13/143  human   5/525  haiku,opus,sonnet
+2.28  END1 큽니다                     ai  13/143  human   5/525  haiku,opus,sonnet
+2.26  W 질문                         ai  25/143  human  11/525  haiku,opus,sonnet
+2.21  W 방향이                        ai  10/143  human   4/525  haiku,opus,sonnet
+2.21  W 둡니다                        ai  10/143  human   4/525  haiku,opus,sonnet
+2.21  END1 흐름                      ai  10/143  human   4/525  haiku,opus,sonnet
+2.21  END1 쓰입니다                    ai  10/143  human   4/525  haiku,opus,sonnet
+2.21  END1 둡니다                     ai  10/143  human   4/525  haiku,opus,sonnet
+2.21  W 출시                         ai  29/143  human  14/525  haiku,opus,sonnet
+2.20  W 한 번 더                      ai  20/143  human   9/525  haiku,opus,sonnet
+2.19  W 안전합니다                      ai  18/143  human   8/525  haiku,opus,sonnet
+2.19  END1 정리                      ai  18/143  human   8/525  haiku,opus,sonnet
+2.19  END1 안전합니다                   ai  18/143  human   8/525  haiku,opus,sonnet
+2.14  W 차이는                        ai  19/143  human   9/525  haiku,opus,sonnet
+2.11  W 큽니다                        ai  13/143  human   6/525  haiku,opus,sonnet
+2.10  W 주세요                        ai  34/143  human  19/525  haiku,opus,sonnet
+2.10  END1 주세요                     ai  34/143  human  19/525  haiku,opus,sonnet
+2.10  W 쓸 수 있습니다                   ai  20/143  human  10/525  haiku,opus,sonnet
+2.10  W 번 더                        ai  20/143  human  10/525  haiku,opus,sonnet
+2.09  W 릴리스                        ai  35/143  human  20/525  haiku,opus,sonnet
+2.09  W 쓰는                         ai  45/143  human  28/525  haiku,opus,sonnet
+2.01  W 쓰입니다                       ai  10/143  human   5/525  haiku,opus,sonnet
+2.01  START 핵심                     ai  20/143  human  11/525  haiku,opus,sonnet
+1.98  W 생태계                        ai  24/143  human  14/525  haiku,opus,sonnet
+1.97  W 성능 개선                      ai  13/143  human   7/525  haiku,opus,sonnet
+1.95  W 편이                         ai  19/143  human  11/525  haiku,opus,sonnet
+1.92  W 바꾸면                        ai  14/143  human   8/525  haiku,opus,sonnet
+1.92  W 기본으로                       ai  17/143  human  10/525  haiku,opus,sonnet
+1.88  W 포인트                        ai  12/143  human   7/525  haiku,opus,sonnet
+1.88  W 줄입니다                       ai  12/143  human   7/525  haiku,opus,sonnet
+1.88  END1 줄입니다                    ai  12/143  human   7/525  haiku,opus,sonnet
+1.86  W 팁                          ai  23/143  human  15/525  haiku,opus,sonnet

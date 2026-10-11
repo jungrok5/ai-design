@@ -51,6 +51,16 @@ class StyleCheck(unittest.TestCase):
         self.assertEqual(r.returncode, 0)
         self.assertIn("additionalContext", json.loads(r.stdout)["hookSpecificOutput"])
 
+    def test_rules_from_ai_vs_human_comparison(self):
+        # Each rule: a sentence Claude wrote in the comparison corpus is flagged, a human-docs phrasing is not.
+        cases = {"ko-advise": ("한 번 더 확인하시길 권합니다.\n", "업그레이드를 권장합니다. 이 방식을 추천합니다.\n"),
+                 "ko-template-heading": ("## 이달의 실무 체크리스트\n\n본문입니다.\n", "각 장에는 체크리스트가 포함되어 있습니다.\n"),
+                 "ko-count-runup": ("눈여겨볼 변경은 세 가지입니다.\n", "설정은 세 가지 방법으로 바꿉니다.\n"),
+                 "ko-hedged-advice": ("CI에서 먼저 돌려 보고 올리는 편이 안전합니다.\n", "기본값을 그대로 씁니다.\n")}
+        for rule, (bad, ok) in cases.items():
+            self.assertIn(rule, run("b.md", bad).stdout, rule)
+            self.assertNotIn(rule, run("o.md", ok).stdout, rule)
+
     def test_structure_level_korean_tells(self):
         out = run("t.md", "# 소개\n\n이 도구는 어느 프로젝트에나 붙일 수 있습니다.\n"
                   "화면이 비슷해 보이는 이유는 기본값을 쓰기 때문입니다.\n"

@@ -12,7 +12,9 @@ https://github.com/jungrok5/ai-design/blob/main/docs/standard.md
   personification, or sentences that talk to the reader. In English: no delve, leverage, seamless, cutting-edge,
   "it is important to note", "In conclusion,".
 <!-- style-ignore-end -->
-- Start with the fact and end on the last fact: no run-up, no recap, no forced groups of three.
+- Start with the fact and end on the last fact: no run-up, no recap, no forced groups of three, no count
+  run-up (`변경은 세 가지입니다`), no advice voice (`~하시길 권합니다`, `~하는 편이 안전합니다`), no stock
+  section headings (`체크리스트`, `핵심 포인트`).
 - Never add facts, numbers, names or quotes while polishing. Leave `[number needed]` where a number is missing.
 - Form follows content: explanation as short paragraphs, actions as copyable commands, flows with 3+ steps or
   2+ actors as a diagram, comparisons as tables.

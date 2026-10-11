@@ -1,0 +1,3322 @@
+[
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/CODE_OF_CONDUCT.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/CONTRIBUTING.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/README.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2021/06/08/the-plan-for-react-18.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2021/12/17/react-conf-2021-recap.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2022/03/08/react-18-upgrade-guide.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2022/03/29/react-v18.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2022/06/15/react-labs-what-we-have-been-working-on-june-2022.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2023/03/16/introducing-react-dev.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2023/05/03/react-canaries.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2024/02/15/react-labs-what-we-have-been-working-on-february-2024.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2024/04/25/react-19-upgrade-guide.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2024/05/22/react-conf-2024-recap.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2024/12/05/react-19.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2025/02/14/sunsetting-create-react-app.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2025/04/21/react-compiler-rc.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2025/04/23/react-labs-view-transitions-activity-and-more.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2025/10/01/react-19-2.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2025/10/07/introducing-the-react-foundation.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2025/10/07/react-compiler-1.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2025/10/16/react-conf-2025-recap.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/2026/02/24/the-react-foundation.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/blog/index.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/community/team.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/community/versioning-policy.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/community/videos.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/add-react-to-an-existing-project.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/adding-interactivity.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/build-a-react-app-from-scratch.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/choosing-the-state-structure.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/conditional-rendering.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/creating-a-react-app.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/describing-the-ui.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/editor-setup.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/escape-hatches.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/extracting-state-logic-into-a-reducer.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/importing-and-exporting-components.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/index.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/installation.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/javascript-in-jsx-with-curly-braces.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/keeping-components-pure.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/lifecycle-of-reactive-effects.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/managing-state.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/manipulating-the-dom-with-refs.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/passing-data-deeply-with-context.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/passing-props-to-a-component.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/preserving-and-resetting-state.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/queueing-a-series-of-state-updates.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/react-compiler/debugging.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/react-compiler/incremental-adoption.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/react-compiler/installation.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/react-compiler/introduction.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/react-developer-tools.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/reacting-to-input-with-state.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/referencing-values-with-refs.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/removing-effect-dependencies.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/render-and-commit.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/rendering-lists.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/responding-to-events.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/reusing-logic-with-custom-hooks.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/scaling-up-with-reducer-and-context.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/separating-events-from-effects.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/sharing-state-between-components.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/start-a-new-react-project.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/state-a-components-memory.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/state-as-a-snapshot.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/synchronizing-with-effects.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/thinking-in-react.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/tutorial-tic-tac-toe.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/typescript.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/understanding-your-ui-as-a-tree.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/updating-arrays-in-state.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/updating-objects-in-state.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/writing-markup-with-jsx.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/you-might-not-need-an-effect.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/learn/your-first-component.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/dev-tools/react-performance-tracks.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/eslint-plugin-react-hooks/index.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/eslint-plugin-react-hooks/lints/exhaustive-deps.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/eslint-plugin-react-hooks/lints/incompatible-library.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/eslint-plugin-react-hooks/lints/refs.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/eslint-plugin-react-hooks/lints/rules-of-hooks.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/eslint-plugin-react-hooks/lints/set-state-in-effect.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/Activity.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/Children.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/Component.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/Fragment.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/Profiler.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/PureComponent.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/StrictMode.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/Suspense.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/ViewTransition.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/act.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/addTransitionType.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/apis.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/cache.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/cacheSignal.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/captureOwnerStack.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/cloneElement.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/createContext.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/createElement.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/createFactory.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/createRef.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/experimental_taintObjectReference.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/experimental_taintUniqueValue.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/forwardRef.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/hooks.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/index.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/isValidElement.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/lazy.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/memo.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/startTransition.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/use.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useActionState.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useCallback.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useContext.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useDebugValue.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useDeferredValue.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useEffect.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useEffectEvent.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useId.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useImperativeHandle.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useInsertionEffect.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useLayoutEffect.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useMemo.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useOptimistic.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useReducer.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useRef.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useState.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useSyncExternalStore.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react/useTransition.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-compiler/compilationMode.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-compiler/compiling-libraries.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-compiler/configuration.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-compiler/directives/use-memo.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-compiler/directives/use-no-memo.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-compiler/directives.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-compiler/target.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/client/createRoot.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/client/hydrateRoot.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/components/common.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/components/form.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/components/index.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/components/input.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/components/link.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/components/meta.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/components/script.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/components/select.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/components/style.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/components/textarea.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/components/title.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/createPortal.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/flushSync.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/hooks/useFormStatus.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/index.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/preconnect.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/prefetchDNS.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/preinit.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/preinitModule.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/preload.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/preloadModule.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/server/renderToPipeableStream.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/server/renderToReadableStream.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/server/renderToStaticMarkup.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/server/renderToString.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/server/resume.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/server/resumeToPipeableStream.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/static/prerender.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/react-dom/static/prerenderToNodeStream.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/rsc/server-components.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/rsc/server-functions.md",
+"split": "test"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/rsc/use-client.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/rsc/use-server.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/rules/components-and-hooks-must-be-pure.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/rules/index.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/rules/react-calls-components-and-hooks.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/reference/rules/rules-of-hooks.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/warnings/invalid-hook-call-warning.md",
+"split": "train"
+},
+{
+"repo": "ko.react.dev",
+"path": "ko.react.dev/src/content/warnings/unknown-prop.md",
+"split": "train"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/README-ko_kr.md",
+"split": "train"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/ai-integration.md",
+"split": "train"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/browser-support.md",
+"split": "train"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/compat/intro.md",
+"split": "train"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/compat/reference/array/findIndex.md",
+"split": "train"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/compat/reference/array/findLastIndex.md",
+"split": "test"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/compat/reference/string/template.md",
+"split": "train"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/fp/intro.md",
+"split": "test"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/fp/reference/flow.md",
+"split": "train"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/fp/reference/flowAsync.md",
+"split": "train"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/fp/reference/pipe.md",
+"split": "test"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/reference/function/debounce.md",
+"split": "train"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/reference/function/retry.md",
+"split": "train"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/reference/string/dedent.md",
+"split": "test"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/reference/util/hash.md",
+"split": "train"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/reference/util/serialize.md",
+"split": "test"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/server/reference/exec.md",
+"split": "train"
+},
+{
+"repo": "es-toolkit",
+"path": "es-toolkit/docs/ko/types/intro.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/README.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2020-02.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2020-03.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2020-04.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2020-05.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2020-06.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2020-07.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2020-08.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2020-09.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2020-10.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2020-11.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2020-12.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2021-01.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2021-02.md",
+"split": "test"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2021-03.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2021-04.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2021-05.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2021-06.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2021-07.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2021-08.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2021-09.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2021-10.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2021-11.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2021-12.md",
+"split": "test"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2022-01.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2022-02.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2022-03.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2022-04.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2022-05.md",
+"split": "test"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2022-06.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2022-07.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2022-08.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2022-09.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2022-10.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2022-11.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2022-12.md",
+"split": "test"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2023-01.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2023-02.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2023-03.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2023-04.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2023-05.md",
+"split": "test"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2023-06.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2023-07.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2023-08.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2023-09.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2023-10.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2023-11.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2023-12.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2024-01.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2024-02.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2024-03.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2024-04.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2024-05.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2024-06.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2024-07.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2024-08.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2024-09.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2024-10.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2024-11.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2024-12.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2025-01.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2025-02.md",
+"split": "test"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2025-03.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2025-04.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2025-05.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2025-06.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2025-07.md",
+"split": "test"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2025-08.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2025-09.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2025-10.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2025-11.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2025-12.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2026-01.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2026-02.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2026-03.md",
+"split": "test"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2026-04.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2026-05.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2026-06.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2026-07.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2026-08.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2026-09.md",
+"split": "train"
+},
+{
+"repo": "fe-news",
+"path": "fe-news/issues/2026-10.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Algorithm/Hash Table 구현하기.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Algorithm/HeapSort.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Algorithm/MergeSort.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Algorithm/QuickSort.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Algorithm/README.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Algorithm/SAMSUNG Software PRO등급 준비.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Algorithm/Sort_Radix.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Algorithm/professional/프로 준비법.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Algorithm/다익스트라(Dijkstra).md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Algorithm/동적 계획법 (Dynamic Programming).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Algorithm/비트마스크(BitMask).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Computer Architecture/ARM 프로세서.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Computer Architecture/고정 소수점 & 부동 소수점.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Computer Architecture/중앙처리장치(CPU) 작동 원리.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Computer Architecture/캐시 메모리(Cache Memory).md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Computer Architecture/컴퓨터의 구성.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Computer Architecture/패리티 비트 & 해밍 코드.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Data Structure/Array vs ArrayList vs LinkedList.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Data Structure/Array.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Data Structure/B Tree & B+ Tree.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Data Structure/Binary Search Tree.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Data Structure/Hash.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Data Structure/Heap.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Data Structure/README.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Data Structure/Stack & Queue.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Data Structure/Tree.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Database/SQL Injection.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Database/SQL과 NOSQL의 차이.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Database/Transaction Isolation Level.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Database/Transaction.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Database/[DB] Index.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Database/저장 프로시저(Stored PROCEDURE).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Database/정규화(Normalization).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Network/HTTP & HTTPS.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Network/OSI 7 계층.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Network/TCP (흐름제어혼잡제어).md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Network/TLS HandShake.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Network/UDP.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Network/[Network] Blocking,Non-blocking & Synchronous,Asynchronous.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Network/대칭키 & 공개키.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Network/로드 밸런싱(Load Balancing).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/CPU Scheduling.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/DeadLock.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/File System.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/IPC(Inter Process Communication).md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/Interrupt.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/Memory.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/Operation System.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/PCB & Context Switcing.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/Page Replacement Algorithm.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/Paging and Segmentation.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/Process Management & PCB.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/Process vs Thread.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/Race Condition.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/Semaphore & Mutex.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Operating System/[OS] System Call (Fork Wait Exec).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Software Engineering/Clean Code & Refactoring.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Software Engineering/Fuctional Programming.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Software Engineering/Object-Oriented Programming.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Software Engineering/TDD(Test Driven Development).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Software Engineering/마이크로서비스 아키텍처(MSA).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Software Engineering/애자일(Agile).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Software Engineering/애자일(Agile)2.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Computer Science/Software Engineering/클린코드(Clean Code) & 시큐어코딩(Secure Coding).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Design Pattern/Adapter Pattern.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Design Pattern/Composite Pattern.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Design Pattern/Observer pattern.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Design Pattern/SOLID.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Design Pattern/Singleton Pattern.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/ETC/Collaborate with Git on Javascript and Node.js.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/ETC/Git Commit Message Convention.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/ETC/Git vs GitHub vs GitLab Flow.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/ETC/[인적성] 명제 추리 풀이법.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/ETC/반도체 개념정리.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/ETC/시사 상식.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Interview/Interview List.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Interview/Mock Test/GML Test (2019-10-03).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Interview/README.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Interview/[Java] Interview List.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[C] 구조체 메모리 크기 계산.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[C] 포인터(Pointer).md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[Java] Interned String in JAVA.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[Java] Java 8 정리.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[Java] 직렬화(Serialization).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[Java] 컴포지션(Composition).md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[Javascript] Closure.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[Javascript] ES2015+ 요약 정리.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[Javascript] 데이터 타입.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[c] C언어 컴파일 과정.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[java] Call by value와 Call by reference.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[java] Java에서의 Thread.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[java] Stream.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[java] 자바 가상 머신(Java Virtual Machine).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Language/[java] 자바 컴파일 과정.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Linux/Linux Basic Command.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/New Technology/AI/Linear regression 실습.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/New Technology/AI/README.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/New Technology/Big Data/DBSCAN 클러스터링 알고리즘.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/New Technology/IT Issues/AMD vs Intel.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/New Technology/IT Issues/[2019.08.07] 이메일 공격 증가로 보안업계 대응 비상.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/New Technology/IT Issues/[2019.08.08] IT 수다 정리.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/New Technology/IT Issues/[2019.08.20] Google, 크롬 브라우저에서 FTP 지원 중단 확정.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/README.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Seminar/2019 삼성전자 비전캠프.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Seminar/NHN 2019 OPEN TALK DAY.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/CSR & SSR.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/CSRF & XSS.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/DevOps/[AWS] 스프링 부트 배포 스크립트 생성.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/DevOps/[Travis CI] 프로젝트 연동하기.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/DevOps/시스템 규모 확장.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/HTTP Request Methods.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/JWT(JSON Web Token).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/Nuxt.js.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/OAuth.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/React/React & Spring Boot 연동하여 환경 구축하기.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/Spring/JPA.md",
+"split": "test"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/Spring/Spring MVC.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/Spring/Spring Security - Authentication and Authorization.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/Spring/[Spring Boot] Test Code.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/Spring/[Spring Data JPA] 더티 체킹 (Dirty Checking).md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/Vue/Vue CLI + Spring Boot 연동하여 환경 구축하기.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/Vue/Vue.js + Firebase로 이메일 회원가입로그인 구현.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/Vue/Vue.js + Firebase로 페이스북(facebook) 로그인 연동하기.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/Vue/Vue.js 라이프사이클 이해하기.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/Web Server와 WAS의 차이.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/[Travis CI] 프로젝트 연동하기.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/네이티브 앱 & 웹 앱 & 하이브리드 앱.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/브라우저 동작 방법.md",
+"split": "train"
+},
+{
+"repo": "tech-interview-for-developer",
+"path": "tech-interview-for-developer/Web/인증방식.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/accessibility/css_and_javascript/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/accessibility/html/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/accessibility/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/accessibility/what_is_accessibility/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/css_layout/flexbox/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/css_layout/floats/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/css_layout/fundamental_layout_comprehension/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/css_layout/grids/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/css_layout/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/css_layout/introduction/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/css_layout/legacy_layout_methods/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/css_layout/media_queries/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/css_layout/multiple-column_layout/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/css_layout/positioning/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/css_layout/responsive_design/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/css_layout/supporting_older_browsers/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/frameworks_libraries/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/frameworks_libraries/introduction/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/frameworks_libraries/main_features/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/frameworks_libraries/react_accessibility/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/frameworks_libraries/react_components/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/frameworks_libraries/react_getting_started/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/frameworks_libraries/react_interactivity_events_state/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/frameworks_libraries/react_interactivity_filtering_conditional_rendering/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/frameworks_libraries/react_resources/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/frameworks_libraries/react_todo_list_beginning/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/a_first_splash/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/arrays/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/build_your_own_function/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/conditionals/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/event_bubbling/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/events/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/functions/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/image_gallery/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/json/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/loops/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/math/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/network_requests/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/object_basics/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/return_values/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/silly_story_generator/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/strings/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/test_your_skills/conditionals/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/test_your_skills/events/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/test_your_skills/functions/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/test_your_skills/json/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/test_your_skills/loops/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/test_your_skills/variables/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/useful_string_methods/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/variables/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/what_is_javascript/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/scripting/what_went_wrong/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/advanced_text_features/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/basic_html_syntax/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/creating_links/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/general_embedding_technologies/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/headings_and_paragraphs/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/html_images/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/html_table_basics/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/including_vector_graphics_in_html/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/marking_up_a_letter/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/planet_data_table/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/structuring_a_page_of_content/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/table_accessibility/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/structuring_content/webpage_metadata/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/attribute_selectors/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/basic_selectors/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/box_model/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/cascade_layers/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/combinators/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/debugging_css/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/getting_started/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/handling_conflicts/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/handling_different_text_directions/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/images_media_forms/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/organizing/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/overflow/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/pseudo_classes_and_elements/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/sizing/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/styling_a_bio_page/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/tables/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/values_and_units/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/styling_basics/what_is_css/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/text_styling/fundamentals/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/text_styling/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/text_styling/styling_links/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/text_styling/styling_lists/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/text_styling/typesetting_a_homepage/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/text_styling/web_fonts/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/core/version_control/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/advanced_javascript_objects/classes_in_javascript/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/advanced_javascript_objects/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/advanced_javascript_objects/object-oriented_programming/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/advanced_javascript_objects/object_prototypes/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/async_js/implementing_a_promise-based_api/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/async_js/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/async_js/introducing/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/async_js/introducing_workers/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/async_js/promises/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/async_js/sequencing_animations/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/client-side_apis/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/client-side_tools/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/forms/basic_native_form_controls/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/forms/how_to_structure_a_web_form/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/forms/html5_input_types/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/forms/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/forms/your_first_form/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/performance/best_practices/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/performance/css/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/performance/html/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/performance/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/performance/measuring_performance/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/performance/multimedia/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/performance/perceived_performance/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/performance/video/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/performance/what_is_web_performance/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/performance/why_web_performance/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/admin_site/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/deployment/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/development_environment/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/forms/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/generic_views/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/home_page/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/introduction/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/models/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/sessions/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/skeleton_website/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/testing/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/django/tutorial_local_library_website/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/express_nodejs/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/first_steps/client-server_overview/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/first_steps/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/first_steps/introduction/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/first_steps/web_frameworks/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/server-side/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/extensions/testing/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/getting_started/environment_setup/dealing_with_files/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/getting_started/environment_setup/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/getting_started/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/getting_started/web_standards/how_the_web_works/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/getting_started/web_standards/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/getting_started/your_first_website/adding_interactivity/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/getting_started/your_first_website/creating_the_content/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/getting_started/your_first_website/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/getting_started/your_first_website/publishing_your_website/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/getting_started/your_first_website/styling_the_content/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/getting_started/your_first_website/what_will_your_website_look_like/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/howto/design_and_accessibility/thinking_before_coding/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/howto/solve_css_problems/generated_content/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/howto/solve_html_problems/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/howto/solve_javascript_problems/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/howto/tools_and_setup/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/howto/tools_and_setup/set_up_a_local_testing_server/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/howto/web_mechanics/how_does_the_internet_work/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/howto/web_mechanics/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/howto/web_mechanics/what_are_hyperlinks/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/howto/web_mechanics/what_is_a_domain_name/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/howto/web_mechanics/what_is_a_url/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/howto/web_mechanics/what_is_a_web_server/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/learn_web_development/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/css/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/authentication/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/browser_detection_using_the_user_agent/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/caching/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/compression/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/conditional_requests/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/connection_management_in_http_1.x/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/content_negotiation/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/cookies/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/cors/errors/corsmissingalloworigin/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/cors/errors/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/cors/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/csp/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/evolution_of_http/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/iframe_credentialless/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/messages/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/mime_types/common_types/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/mime_types/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/overview/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/protocol_upgrade_mechanism/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/range_requests/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/redirections/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/guides/session/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/http/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/closures/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/control_flow_and_error_handling/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/data_structures/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/enumerability_and_ownership_of_properties/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/equality_comparisons_and_sameness/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/expressions_and_operators/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/functions/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/grammar_and_types/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/indexed_collections/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/inheritance_and_the_prototype_chain/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/introduction/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/iterators_and_generators/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/keyed_collections/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/language_overview/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/loops_and_iteration/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/memory_management/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/meta_programming/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/modules/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/numbers_and_strings/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/regular_expressions/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/typed_arrays/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/using_promises/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/guide/working_with_objects/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/array/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/at/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/concat/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/copywithin/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/every/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/fill/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/filter/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/find/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/findindex/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/findlast/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/findlastindex/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/flat/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/flatmap/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/foreach/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/from/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/fromasync/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/includes/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/indexof/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/join/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/lastindexof/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/length/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/map/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/of/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/pop/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/push/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/reduce/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/reduceright/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/slice/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/some/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/sort/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/splice/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/symbol.iterator/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/symbol.species/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/symbol.unscopables/index.md",
+"split": "test"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/tolocalestring/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/tosorted/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/tospliced/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/tostring/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/values/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/array/with/index.md",
+"split": "train"
+},
+{
+"repo": "translated-content",
+"path": "translated-content/files/ko/web/javascript/reference/global_objects/index.md",
+"split": "train"
+}
+]

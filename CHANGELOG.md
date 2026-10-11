@@ -3,6 +3,17 @@
 버전은 `plugins/ai-design/.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`에 같은 값으로 기록합니다.
 태그 대신 커밋 SHA를 적어 두므로 pre-commit과 GitHub Action에서는 이 SHA를 `rev`나 `uses`에 고정해 씁니다.
 
+## 1.4.0
+
+<!-- style-ignore-start -->
+- AI 글과 사람 글 비교에서 찾은 경고 규칙 4개([docs/measurement.md](docs/measurement.md#ai-글과-사람-글-비교)):
+  `ko-advise`("~하시길 권합니다"), `ko-template-heading`(체크리스트·핵심 포인트 같은 절 제목),
+  `ko-count-runup`("변경은 세 가지입니다"), `ko-hedged-advice`("~하는 편이 안전합니다"). 같은 주제로 쓴 시험용
+  문서에서 AI 문서 26%, 사람 문서 1.4%에서 보고됨
+<!-- style-ignore-end -->
+- `polish-writing` 스킬과 Cursor, Copilot, AGENTS.md 어댑터의 규칙 요약에 위 표현 추가
+- 비교 데이터와 스크립트: [research/ai-vs-human/](research/ai-vs-human/)
+
 ## 1.3.0 (`c1e0dc9`)
 
 - 검사기 명령줄:

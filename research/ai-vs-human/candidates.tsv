@@ -1,0 +1,133 @@
+logodds	feature	ai_docs	human_docs	ai_rate	human_rate	models	sources
+4.69	END1 체크리스트	13	0	0.091	0.0010	haiku,opus,sonnet	3
+4.51	W 시그니처	11	0	0.077	0.0010	haiku,opus,sonnet	4
+4.12	W 권합니다	21	1	0.147	0.0029	haiku,opus,sonnet	3
+4.12	END1 권합니다	21	1	0.147	0.0029	haiku,opus,sonnet	3
+3.81	W 골라	16	1	0.112	0.0029	haiku,opus,sonnet	3
+3.76	END1 씁니다	24	2	0.168	0.0048	haiku,opus,sonnet	4
+3.42	W 씁니다	24	3	0.168	0.0067	haiku,opus,sonnet	4
+3.15	W 해 줍니다	14	2	0.098	0.0048	haiku,opus,sonnet	3
+3.15	W 체크리스트	14	2	0.098	0.0048	haiku,opus,sonnet	3
+3.15	END 해 줍니다	14	2	0.098	0.0048	haiku,opus,sonnet	3
+2.99	W 가지입니다	12	2	0.084	0.0048	haiku,opus,sonnet	4
+2.99	END1 개념	12	2	0.084	0.0048	haiku,opus,sonnet	3
+2.99	END1 가지입니다	12	2	0.084	0.0048	haiku,opus,sonnet	4
+2.89	W 쓰면	26	6	0.182	0.0124	haiku,opus,sonnet	5
+2.82	W 점검	14	3	0.098	0.0067	haiku,opus,sonnet	3
+2.82	START 정리	14	3	0.098	0.0067	haiku,opus,sonnet	3
+2.80	W 실무에서는	10	2	0.070	0.0048	haiku,opus,sonnet	3
+2.75	W 두면	20	5	0.140	0.0105	haiku,opus,sonnet	4
+2.70	W 꾸준히	19	5	0.133	0.0105	haiku,opus,sonnet	3
+2.56	W 보내	11	3	0.077	0.0067	haiku,opus,sonnet	4
+2.46	W 패치	10	3	0.070	0.0067	haiku,opus,sonnet	3
+2.46	START 동작	10	3	0.070	0.0067	haiku,opus,sonnet	3
+2.42	W 알려	22	8	0.154	0.0162	haiku,opus,sonnet	3
+2.42	START 프레임워크	22	8	0.154	0.0162	haiku,opus,sonnet	3
+2.36	W CODE CODE 같은	23	9	0.161	0.0181	haiku,opus,sonnet	4
+2.36	W 실무	14	5	0.098	0.0105	haiku,opus,sonnet	3
+2.29	START TypeScript	31	14	0.217	0.0276	haiku,opus,sonnet	3
+2.28	W 모아	13	5	0.091	0.0105	haiku,sonnet	5
+2.28	W 노트	13	5	0.091	0.0105	haiku,opus,sonnet	3
+2.28	END1 큽니다	13	5	0.091	0.0105	haiku,opus,sonnet	3
+2.26	W 질문	25	11	0.175	0.0219	haiku,opus,sonnet	3
+2.21	W 방향이	10	4	0.070	0.0086	haiku,opus,sonnet	3
+2.21	W 둡니다	10	4	0.070	0.0086	haiku,opus,sonnet	4
+2.21	END1 흐름	10	4	0.070	0.0086	haiku,opus,sonnet	4
+2.21	END1 쓰입니다	10	4	0.070	0.0086	haiku,opus,sonnet	5
+2.21	END1 둡니다	10	4	0.070	0.0086	haiku,opus,sonnet	4
+2.21	W 출시	29	14	0.203	0.0276	haiku,opus,sonnet	3
+2.20	W 한 번 더	20	9	0.140	0.0181	haiku,opus,sonnet	5
+2.19	W 안전합니다	18	8	0.126	0.0162	haiku,opus,sonnet	5
+2.19	END1 정리	18	8	0.126	0.0162	haiku,opus,sonnet	4
+2.19	END1 안전합니다	18	8	0.126	0.0162	haiku,opus,sonnet	5
+2.14	W 차이는	19	9	0.133	0.0181	haiku,opus,sonnet	3
+2.11	W 큽니다	13	6	0.091	0.0124	haiku,opus,sonnet	3
+2.10	W 주세요	34	19	0.238	0.0371	haiku,opus,sonnet	4
+2.10	END1 주세요	34	19	0.238	0.0371	haiku,opus,sonnet	4
+2.10	W 쓸 수 있습니다	20	10	0.140	0.0200	haiku,opus,sonnet	5
+2.10	W 번 더	20	10	0.140	0.0200	haiku,opus,sonnet	5
+2.09	W 릴리스	35	20	0.245	0.0390	haiku,opus,sonnet	3
+2.09	W 쓰는	45	28	0.315	0.0542	haiku,opus,sonnet	5
+2.01	W 쓰입니다	10	5	0.070	0.0105	haiku,opus,sonnet	5
+2.01	START 핵심	20	11	0.140	0.0219	haiku,opus,sonnet	4
+1.98	W 생태계	24	14	0.168	0.0276	haiku,opus,sonnet	3
+1.97	W 성능 개선	13	7	0.091	0.0143	haiku,opus,sonnet	3
+1.95	W 편이	19	11	0.133	0.0219	haiku,opus,sonnet	5
+1.92	W 바꾸면	14	8	0.098	0.0162	haiku,opus,sonnet	4
+1.92	W 기본으로	17	10	0.119	0.0200	haiku,opus,sonnet	4
+1.88	W 포인트	12	7	0.084	0.0143	haiku,opus,sonnet	3
+1.88	W 줄입니다	12	7	0.084	0.0143	haiku,opus,sonnet	4
+1.88	END1 줄입니다	12	7	0.084	0.0143	haiku,opus,sonnet	4
+1.86	W 팁	23	15	0.161	0.0295	haiku,opus,sonnet	4
+1.86	START 개요	23	15	0.161	0.0295	haiku,opus,sonnet	4
+1.84	W 쓰고	13	8	0.091	0.0162	haiku,opus,sonnet	4
+1.84	W 추가되었습니다	10	6	0.070	0.0124	haiku,opus,sonnet	3
+1.84	W 바꾸지	10	6	0.070	0.0124	haiku,opus,sonnet	4
+1.84	W 두는 것이	10	6	0.070	0.0124	haiku,opus	3
+1.84	END1 추가되었습니다	10	6	0.070	0.0124	haiku,opus,sonnet	3
+1.82	W 필요하면	17	11	0.119	0.0219	haiku,opus,sonnet	5
+1.82	W 안정	17	11	0.119	0.0219	haiku,opus,sonnet	3
+1.81	W 언제든	14	9	0.098	0.0181	haiku,opus,sonnet	3
+1.81	W 말고	14	9	0.098	0.0181	haiku,opus,sonnet	4
+1.81	START 주요	28	20	0.196	0.0390	haiku,opus,sonnet	5
+1.80	W 쓰지	18	12	0.126	0.0238	haiku,opus,sonnet	4
+1.78	START 상태	19	13	0.133	0.0257	haiku,opus,sonnet	4
+1.76	W 보여	16	11	0.112	0.0219	haiku,opus,sonnet	3
+1.73	W 줄어듭니다	13	9	0.091	0.0181	haiku,opus,sonnet	4
+1.73	END1 줄어듭니다	13	9	0.091	0.0181	haiku,opus,sonnet	4
+1.72	W 중심으로	18	13	0.126	0.0257	haiku,opus,sonnet	3
+1.70	W 쓸 수	33	27	0.231	0.0523	haiku,opus,sonnet	5
+1.69	W 범위가	15	11	0.105	0.0219	haiku,opus,sonnet	4
+1.67	W 자리	16	12	0.112	0.0238	haiku,opus,sonnet	3
+1.67	W 뒤	52	51	0.364	0.0979	haiku,opus,sonnet	5
+1.66	START 새	30	25	0.210	0.0485	haiku,opus,sonnet	4
+1.66	W 줄일 수 있습니다	17	13	0.119	0.0257	haiku,opus,sonnet	4
+1.65	W 두는	18	14	0.126	0.0276	haiku,opus,sonnet	3
+1.64	W 한 줄	12	9	0.084	0.0181	haiku,opus,sonnet	3
+1.64	W 두세요	12	9	0.084	0.0181	haiku,opus,sonnet	3
+1.64	END1 두세요	12	9	0.084	0.0181	haiku,opus,sonnet	3
+1.63	W 이어서	13	10	0.091	0.0200	haiku,opus,sonnet	5
+1.63	START 반대로	13	10	0.091	0.0200	haiku,opus,sonnet	4
+1.62	W 쓸	39	36	0.273	0.0694	haiku,opus,sonnet	5
+1.62	W 정리	28	24	0.196	0.0466	haiku,opus,sonnet	4
+1.62	END1 개요	26	22	0.182	0.0428	haiku,opus,sonnet	4
+1.58	W 공식	45	45	0.315	0.0865	haiku,opus,sonnet	4
+1.57	W 읽어	20	17	0.140	0.0333	haiku,opus,sonnet	3
+1.57	W 있게 해	10	8	0.070	0.0162	opus,sonnet	3
+1.57	W 수 있게 해	10	8	0.070	0.0162	opus,sonnet	3
+1.57	W 밖의	10	8	0.070	0.0162	haiku,opus,sonnet	4
+1.57	W 바뀌는	10	8	0.070	0.0162	haiku,opus,sonnet	4
+1.54	END CODE CODE	12	10	0.084	0.0200	haiku,opus,sonnet	5
+1.53	START 다만	33	32	0.231	0.0618	haiku,opus,sonnet	4
+1.52	START 보안	15	13	0.105	0.0257	haiku,opus,sonnet	4
+1.52	W 대표적인	18	16	0.126	0.0314	haiku,opus,sonnet	4
+1.51	W CODE 같은	39	40	0.273	0.0770	haiku,opus,sonnet	5
+1.49	W 다만	33	33	0.231	0.0637	haiku,opus,sonnet	4
+1.47	W 흐름	22	21	0.154	0.0409	haiku,opus,sonnet	4
+1.45	W 없으면 CODE	10	9	0.070	0.0181	haiku,opus,sonnet	3
+1.45	W 막을	10	9	0.070	0.0181	haiku,opus,sonnet	4
+1.45	START 관련	10	9	0.070	0.0181	haiku,opus,sonnet	3
+1.45	END1 팁	10	9	0.070	0.0181	haiku,opus,sonnet	4
+1.45	END1 사용법	10	9	0.070	0.0181	haiku,opus,sonnet	3
+1.45	W 구분	16	15	0.112	0.0295	haiku,opus,sonnet	4
+1.45	W 때 유용합니다	11	10	0.077	0.0200	haiku,opus,sonnet	4
+1.45	END 때 유용합니다	11	10	0.077	0.0200	haiku,opus,sonnet	4
+1.45	W 권장	12	11	0.084	0.0219	haiku,opus,sonnet	4
+1.45	START 타입	14	13	0.098	0.0257	haiku,opus,sonnet	3
+1.41	W 마이그레이션	20	20	0.140	0.0390	haiku,opus,sonnet	4
+1.40	W 서드파티	18	18	0.126	0.0352	haiku,opus,sonnet	5
+1.39	W 개요	28	30	0.196	0.0580	haiku,opus,sonnet	4
+1.36	W 화면이	12	12	0.084	0.0238	haiku,opus,sonnet	3
+1.35	W 바뀔	10	10	0.070	0.0200	haiku,opus,sonnet	3
+1.35	W 바뀌지	10	10	0.070	0.0200	haiku,opus,sonnet	4
+1.30	W 공개	23	26	0.161	0.0504	haiku,opus,sonnet	3
+1.29	W 한눈에	13	14	0.091	0.0276	haiku,opus,sonnet	3
+1.29	W 붙여	13	14	0.091	0.0276	haiku,opus,sonnet	5
+1.28	W 동시성	12	13	0.084	0.0257	haiku,opus,sonnet	4
+1.27	W 개선	29	35	0.203	0.0675	haiku,opus,sonnet	4
+1.26	W 번들	23	27	0.161	0.0523	haiku,opus,sonnet	4
+1.26	W 속도와	10	11	0.070	0.0219	haiku,opus,sonnet	3
+1.26	W 번들러	10	11	0.070	0.0219	haiku,opus,sonnet	3
+1.26	W CODE CODE 로	10	11	0.070	0.0219	haiku,opus,sonnet	4
+1.21	W CODE CODE 를	16	19	0.112	0.0371	haiku,opus,sonnet	4
+1.21	START 성능	16	19	0.112	0.0371	haiku,opus,sonnet	4
