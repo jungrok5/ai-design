@@ -34,6 +34,13 @@ class StyleCheck(unittest.TestCase):
         self.assertIn("ui-gradient-text", r.stdout)
         self.assertIn("ui-purple-gradient", r.stdout)
 
+    def test_spaced_middot_in_ui_metadata_is_not_a_prose_list(self):
+        # One middot per <li>, and a caption row, are UI separators; a list inside a sentence is still reported.
+        ui = '<ul class="tags"><li>2D · 3D</li><li>16:9 · 9:16</li><li>MP4</li></ul>\n<span class="no">장면 02 · 창조 · 35초</span><b>렌즈가 본 빛의 탄생입니다.</b>\n'
+        self.assertNotIn("ko-spaced-middot-list", run("ui.html", ui).stdout)
+        prose = '<p>파이프라인 · 프로토콜 · 서버 루프 같은 기술 과정을 영상으로 그립니다.</p>\n'
+        self.assertIn("ko-spaced-middot-list", run("p.html", prose).stdout)
+
     def test_raw_color_is_a_warning_and_tokens_are_fine(self):
         self.assertIn("ui-raw-color", run("a.css", "a{color:#1d4ed8}\n").stdout)
         self.assertNotIn("ui-raw-color", run("b.css", ":root{--accent:#1d4ed8}\na{color:var(--accent)}\n").stdout)
@@ -170,8 +177,9 @@ class StyleCheck(unittest.TestCase):
                 ["장점과 단점이 모두 존재한다.", "단순한 도구에서 필수 파트너로 진화했다."],
                 ["장점은 속도다.", "작은 함수에서 시작한다."]),
             "ko-spaced-middot-list": (
-                ["속도 · 품질 · 비용을 본다."],
-                ["속도·품질·비용을 본다.", "`<!--$?-->`·`<!--/$-->` 주석과 `B:0`·`S:0` 템플릿"]),
+                ["속도 · 품질 · 비용을 본다.", "`--check`는 빠진 필드 · 없는 파일 · 동기화 여부를 검사합니다."],
+                ["속도·품질·비용을 본다.", "`<!--$?-->`·`<!--/$-->` 주석과 `B:0`·`S:0` 템플릿",
+                 "장면 01 · 창조 · 35초", "| 명령줄 · pre-commit · CI | 지원 |"]),
             "ko-personified-subject": (
                 ["결과가 증명한다.", "시장이 원한다.", "기술이 질문을 던진다."],
                 ["사용자가 원한다."]),

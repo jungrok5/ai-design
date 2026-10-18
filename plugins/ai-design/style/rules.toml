@@ -676,7 +676,9 @@ max_per_file = 2
 id = "ko-spaced-middot-list"
 lang = "ko"
 severity = "warning"
-pattern = '(?<=[가-힣A-Za-z0-9])[  ]·[  ](?=[가-힣A-Za-z0-9])[^\n]*?(?<=[가-힣A-Za-z0-9])[  ]·[  ](?=[가-힣A-Za-z0-9])'
+# Only a list inside a sentence: the line must reach a predicate ending without crossing a run of 2+ spaces (where
+# markup was). Metadata rows ("장면 02 · 창조 · 35초") and one middot per <li> are UI separators, not prose.
+pattern = '(?m)(?<=[가-힣A-Za-z0-9])[  ]·[  ](?=[가-힣A-Za-z0-9])(?:(?![ \t]{2})[^\n])*?(?<=[가-힣A-Za-z0-9])[  ]·[  ](?=[가-힣A-Za-z0-9])(?=(?:(?![ \t]{2})[^\n])*?(?:니다|[다요])(?:[.!?]|[ \t]*$))'
 message = "공백 가운뎃점 나열 ('속도 · 품질 · 비용')"
 suggest = "쉼표로 나열하거나 붙여 쓴 가운뎃점(속도·품질)"
 
