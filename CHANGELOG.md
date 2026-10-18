@@ -3,6 +3,17 @@
 버전은 `plugins/ai-design/.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`에 같은 값으로 기록합니다.
 태그 대신 커밋 SHA를 적어 두므로 pre-commit과 GitHub Action에서는 이 SHA를 `rev`나 `uses`에 고정해 씁니다.
 
+## 1.6.0 (병합 후 SHA 기록)
+
+<!-- style-ignore-start -->
+- 경고 규칙 `ko-metaphor-noun`: 연결이나 과정을 비유 명사로 쓴 표현("샘플 페이지로 가는 길이 있습니다", "패킷을 받는
+  길", "~의 여정", "전체 지도", "문을 열어 줍니다", "첫걸음을 내딛", "디딤돌", "나침반")
+- 사람 문서를 보고하지 않도록 패턴을 좁힘: `길이`(length), `길찾기`, `지름길`, "집에 가는 길에", "React 여정을 시작",
+  "JavaScript 첫걸음", "~하는 열쇠입니다"는 보고하지 않음. 비교 묶음에서 사람 문서 보고는 학습용 0/525, 시험용 0/139,
+  표본 밖 Markdown 0/836 ([docs/measurement.md](docs/measurement.md#비유-명사-160))
+<!-- style-ignore-end -->
+- `polish-writing` 스킬, `docs/standard.md`, 어댑터의 규칙 요약에 위 표현 추가
+
 ## 1.5.1 (`ece33e4`)
 
 - 규칙 옵션 `max_per_1k`: 1,000단어당 이 횟수를 넘을 때만 보고. 긴 파일이 길다는 이유로 보고되지 않음

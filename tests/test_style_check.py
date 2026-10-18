@@ -156,6 +156,25 @@ class StyleCheck(unittest.TestCase):
         twice = run("b.md", "# 소개\n\nAI 티를 걸러 냅니다.\n흔적을 걸러 내는 도구입니다.\n").stdout
         self.assertIn("ko-metaphor-verb", twice)
 
+    def test_metaphor_nouns_for_a_process_or_link(self):
+        """1.6.0: '가는 길', '여정', '전체 지도' for a link or a flow; length (길이) and literal routes stay quiet."""
+        bad = ["카드마다 그 스킬이 만드는 것과 샘플 페이지로 가는 길이 있습니다.", "패킷을 받는 길을 따라갑니다.",
+               "서버로 가는 여정.", "요청의 여정을 살펴봅니다.", "## 패킷을 받는 길", "이 표가 전체 지도입니다.",
+               "새 API가 확장의 문을 열어 줍니다.", "첫걸음을 내딛습니다.", "이 문서가 나침반이 됩니다.",
+               "학습의 디딤돌입니다.", "성공의 열쇠는 테스트입니다.", "로드맵의 청사진을 제시합니다."]
+        for line in bad:
+            self.assertIn("ko-metaphor-noun", run("b.md", f"# 소개\n\n{line}\n").stdout, line)
+        # Lines like these appear in ko.react.dev, MDN ko, es-toolkit and tech-interview (research/ai-vs-human).
+        ok = ("# 길이\n\n문자열 길이를 구합니다. 배열의 길이가 3인 경우를 봅니다.\n"
+              "문자열이 원하는 길이보다 짧을 때 패딩 문자를 추가합니다.\n"
+              "두 헤더로 정의하는 길이가 알려진 본문입니다. 마지막 항목을 나타내는 길이 속성을 씁니다.\n"
+              "운전기사는 당신이 몰랐던 지름길을 알고 있습니다. 길찾기 API와 갈림길을 표시합니다.\n"
+              "집에 가는 길에 메일을 확인합니다. 정밀한 분석을 가능하게 하는 길을 열었습니다.\n"
+              "React 여정을 시작하기에 좋은 곳입니다. JavaScript 첫걸음 모듈을 먼저 읽습니다.\n"
+              "Refresh Token이 새 토큰을 발급하는 열쇠가 됩니다. 이것은 청사진처럼 간단한 설명입니다.\n"
+              "안정화까지의 로드맵을 공유합니다. 지도 위젯을 불러옵니다. 도어록을 확인하려고 문을 열었다가 닫습니다.\n")
+        self.assertNotIn("ko-metaphor-noun", run("ok.md", ok).stdout)
+
     def test_decorative_section_numbers(self):
         html = "".join(f'<section><span class="num">0{i}</span><h2>t</h2></section>' for i in range(1, 5))
         self.assertIn("ui-section-number", run("s.html", html).stdout)

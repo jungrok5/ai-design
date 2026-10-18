@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "ai-design",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Writing and visual style for anything people read or use: polish-writing (Korean/English AI tone out, 합니다체 docs, content-form rules), polish-ui (design system first, bundled default \"Clear\" with light/dark tokens and components), and a deterministic style check that runs after every edit.",
   "author": {
     "name": "jungrok5",
