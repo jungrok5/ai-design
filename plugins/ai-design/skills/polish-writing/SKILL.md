@@ -20,7 +20,8 @@ regex cannot judge.
 - Do not add facts, numbers, names, quotes, customers or claims that are not in the source. If copy needs a number
   you do not have, leave `[숫자 필요]` / `[TODO: metric]` and say so.
 - Leave code, commands, paths, identifiers, link targets, API names, units and quoted text exactly as they are.
-- Keep the author's meaning and technical precision; cut words, not content.
+- Keep the author's meaning and technical precision; cut words, not content. Keep the strength of each claim too: a
+  hedge the source chose (`~로 보인다`, `may`) stays a hedge.
 
 ## Order of work
 
@@ -39,9 +40,11 @@ regex cannot judge.
    (`~하시길 권합니다`, `~하는 편이 안전합니다`: state the condition and result instead), stock section headings
    (`체크리스트`, `핵심 포인트`: name what the section holds), summaries of what was just said
    (`결론적으로`, `In summary`), significance inflation (`시사하는 바가 크다`, `pivotal`), contrast theater
-   (`단순한 X를 넘어`, `It's not X, it's Y`, `The question isn't X`), staged reveals (`Here's the catch`, `The result?`),
-   column clichés (`그 어느 때보다`, `가능성을 열어준다`, `과제도 남아 있다`, `~다는 분석이다`), assistant residue
-   (`Absolutely!`, `Feel free to reach out`), forced triplets, rhetorical questions, emoji markers, decorative bold.
+   (`단순한 X를 넘어`, `It's not X, it's Y`, `The question isn't X`), staged reveals (`Here's the catch`, `The result?`,
+   `The best part:`), column clichés (`그 어느 때보다`, `가능성을 열어준다`, `과제도 남아 있다`, `~다는 분석이다`,
+   `한 획을 그었다`, `앞으로의 행보가 기대된다`), unsourced authority (`전문가들은`, `일각에서는`), assistant residue
+   (`Absolutely!`, `Feel free to reach out`, `~해 드릴까요?`), forced triplets, rhetorical questions, emoji markers,
+   decorative bold and bold-label lists (`- **성능:** …`).
 6. **Natural Korean.** Prefer verbs to nominalizations (`삭제 작업을 수행합니다` → `삭제합니다`), active voice with a real
    subject, and Korean particles over translationese (`~을 통해` → `~로`, `~에 있어서` → `~에서`, `~을 가지고 있다` →
    `~이 있다`). One term per concept; expand an abbreviation once on first use, e.g. `SSR(Server-Side Rendering)`.
@@ -85,11 +88,22 @@ A page can pass every rule and still read as generated. Before you finish, read 
   repetition, and do not use one word for two actors (the AI that wrote the text and the AI that fixes it). An internal
   name (a theme or code name) gets a plain noun the first time.
 - **Say who made it and why**, when the reader will ask: one honest paragraph from facts you have, never invented.
+- **Paragraphs build on each other.** If two body paragraphs could swap places without breaking anything, the page is
+  a list of points: connect them, or make it an honest list. Ask of each paragraph what it adds that the last one did not.
+- **Steps are verbs.** Write what the reader does (`기호를 먼저 구한 뒤 문제를 하나씩 풉니다`), not a classification of it
+  (`~부터 깨는 순서입니다`, `~는 구조라`, `~하는 쪽이 빠릅니다`).
+- **Cutting must not starve a sentence.** After removing filler, check that no subject, object, particle or degree word
+  went with it; a short sentence the reader cannot parse is worse than the padded one. Restore only what the text itself
+  supports. These last three come from Aparnabuilds/humanizer, Aboudjem/humanizer-skill, teo713ko-gif/hangul-humanizer
+  and amondnet/yoonmoon; the cluster rule and the self-check below from IsaacEryn/humanizer-ko and
+  giudegio-ai/claude-skill-humanizer (all MIT).
 
 ## Output
 
-When asked to polish existing text, return the revised text, then at most 5 bullets naming the biggest changes. When
-writing new text, just write it to this standard. Fix every `error` from the style check; for a `warning`, fix it or
-keep it on purpose. To quote a bad example on purpose, mark the line with `style-ignore`.
+When asked to polish existing text, judge by clusters: one dash, one `다양한` or one bold label is not a tell, and a
+passage with no cluster stays as written (say so). Rewrite the rest, then ask once: what in this still reads as
+generated, and did any fact, number or name enter that the source does not have? Fix those, then return the revised
+text and at most 5 bullets naming the biggest changes. When writing new text, just write it to this standard. Fix
+every `error` from the style check; for a `warning`, fix it or keep it on purpose. To quote a bad example on purpose, mark the line with `style-ignore`.
 
 Sources and licenses: `THIRD_PARTY_NOTICES.md` in this plugin.

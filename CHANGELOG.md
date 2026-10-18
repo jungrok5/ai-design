@@ -3,6 +3,24 @@
 버전은 `plugins/ai-design/.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`에 같은 값으로 기록합니다.
 태그 대신 커밋 SHA를 적어 두므로 pre-commit과 GitHub Action에서는 이 SHA를 `rev`나 `uses`에 고정해 씁니다.
 
+## 1.6.0
+
+<!-- style-ignore-start -->
+- AI 문체 검출 도구 13곳(모두 MIT)의 패턴을 1.5.0과 같은 방법으로 측정해서 사람 글을 잘못 보고하지 않는 것만 경고 규칙으로
+  추가([docs/measurement.md](docs/measurement.md#160-출처-13곳-추가)):
+  - 한국어 20개: 굵은 머리말 목록(`ko-bold-label-list`), "~로 자리잡고 있다", "한 획을 그었다", "전문가들은", "앞으로의
+    행보가 기대된다", "~해 드릴까요?", "하나씩 짚어 보겠습니다", "~하고 있는 중이다", "미리 예측" 등
+  - 영어 13개: "The best part: …", "the data tells us", "north star", "reflects broader trends", "at the end of
+    the day", "Contrary to popular belief", "Whether you're a … or …", "What makes this work is" 등
+  - `ko-personified-subject`가 "시장이 원한다", "결과가 증명한다"도 보고
+  - 시험용에서 새 규칙이 보고한 문서는 한국어 AI 8/35(23%), 사람 1/139, 영어 AI 0/13, 사람 2/150
+<!-- style-ignore-end -->
+- `polish-writing` 스킬: 문단 순서 점검, 따라 할 일은 동사로, 군더더기를 지운 뒤 빠진 성분 점검, 여러 신호가 겹친
+  곳만 고치기, 마지막 자기 점검, 원문의 추측 표현 유지. [docs/standard.md](docs/standard.md)에도 같은 기준 추가
+- 후보 목록과 채택 이유, 출처 커밋: [research/oss-patterns/](research/oss-patterns/). 후보를 검사기와 같은 방식으로
+  세는 `research/oss-patterns/measure.py` 추가
+- 스킬과 Cursor, Copilot, AGENTS.md 어댑터의 규칙 요약에 위 표현 추가
+
 ## 1.5.1 (`ece33e4`)
 
 - 규칙 옵션 `max_per_1k`: 1,000단어당 이 횟수를 넘을 때만 보고. 긴 파일이 길다는 이유로 보고되지 않음

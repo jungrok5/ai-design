@@ -25,6 +25,8 @@ AI가 작성한 글과 화면은 내용이 정확해도 AI가 만들었다는 �
 | 자연스러운 한국어 | `~을 통해`, `~에 있어서`, `수행합니다`, 이중 피동 | `~로`, `~에서`, 동사, 주어가 있는 능동문 |
 | 군더더기 제거 | 도입부 예고, 결론 요약, 의미 부풀리기, 대구, 3단 나열 | 바로 내용으로 시작해 마지막 사실로 끝냄 |
 | 꾸밈 최소화 | 목록 앞 이모지, 문장마다 굵게, 문장마다 대시 | 굵게는 UI 이름과 반드시 알아야 할 값에만 |
+| 따라 할 일 | 독자가 할 동작을 분류문으로 압축(`~부터 확인하는 순서입니다`) | 동작을 동사로 씀(`설정을 먼저 확인한 뒤 배포합니다`) |
+| 고칠 범위 | 표현 하나만 보고 글 전체를 다시 쓰기, 원문의 추측을 단정으로 바꾸기 | 여러 신호가 겹친 곳만 고치고, 원문이 정한 확신의 세기는 그대로 둠 |
 
 <!-- style-ignore-start -->
 | 전 | 후 |
@@ -108,7 +110,7 @@ AI가 만든 화면은 매번 모델에 익숙한 기본 스타일로 색과 모
 | --- | --- | --- | --- |
 | 수정 직후 검사(PostToolUse 훅) | Claude Code가 `.md`, `.html`, `.css`, `.tsx` 등을 수정할 때마다 | 0.1초, 문제가 없으면 토큰 0 | `style_check.py`가 규칙을 검사하고 결과를 AI에게 반환. 수정을 차단하지 않음 |
 | 스킬 | 글이나 화면 작업일 때(설명문과 `paths:`로 자동 선택) | 필요할 때만 본문 로드 | `polish-writing`, `polish-ui`: 규칙으로 판별할 수 없는 판단 |
-| 명령줄 · pre-commit · CI | 커밋할 때, PR마다 | 0 | 사람이 쓴 글과 다른 AI 도구가 쓴 글도 같은 기준으로 검사. `error`는 실패 처리 |
+| 명령줄, pre-commit, CI | 커밋할 때, PR마다 | 0 | 사람이 쓴 글과 다른 AI 도구가 쓴 글도 같은 기준으로 검사. `error`는 실패 처리 |
 | 평가 | 스킬을 바꿀 때 `claude plugin eval` | 케이스당 몇 센트 | 필요할 때 호출하는지, 불필요할 때 호출하지 않는지 |
 
 훅으로 스킬을 강제하지 않은 이유는 다음과 같습니다.
@@ -136,7 +138,9 @@ AI가 만든 화면은 매번 모델에 익숙한 기본 스타일로 색과 모
 - 문체: 자연스러움을 이유로 문체 혼용을 권하는 의견이 있었으나, 일관성을 우선해 한 문서에는 한 가지 문체만 씁니다.
   처음에는 해요체를 기본으로 정했으나 문서가 전문적으로 읽히지 않는다는 검토 의견에 따라 문서는 합니다체(문어체)로
   정했습니다. 제품 UI는 제품별로 문체를 정합니다.
-- 굵은 라벨 목록: 권장하는 출처와 피하라는 출처가 갈려, 굵게는 UI 이름과 핵심 값에만 씁니다.
+- 굵은 라벨 목록: 권장하는 출처와 피하라는 출처가 갈려, 굵게는 UI 이름과 핵심 값에만 씁니다. 1.6.0에서 측정해 보니
+  굵은 머리말 목록이 잦은 문서가 Claude가 쓴 한국어 기술 문서의 22%, 사람이 쓴 문서의 0.2%(학습용)였으므로 경고
+  규칙(`ko-bold-label-list`)을 추가했습니다.
 - 제목: Title Case 대신 문장형(sentence case)을 씁니다.
 - 글꼴: Pretendard는 Inter를 바탕으로 만든 글꼴이므로 "Inter 금지" 규칙의 예외입니다.
 - 기계로 판별할 수 있는 것은 규칙(`rules.toml`)으로, 판단은 스킬(`SKILL.md`)로 나눕니다. 규칙이 탐지하는
@@ -152,5 +156,6 @@ AI가 만든 화면은 매번 모델에 익숙한 기본 스타일로 색과 모
   [pbakaus/impeccable](https://github.com/pbakaus/impeccable) (Apache-2.0)
 - [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) (CC BY-SA, 인용만)
 - [토스 테크니컬 라이팅 가이드](https://technical-writing.dev/), [토스의 8가지 라이팅 원칙](https://toss.tech/article/8-writing-principles-of-toss) (인용만)
+- 패턴을 측정해 규칙으로 옮긴 오픈소스 검출기 24곳(1.5.0, 1.6.0): [research/oss-patterns/](../research/oss-patterns/) (MIT, Apache-2.0)
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
 - Claude Code [hooks](https://code.claude.com/docs/en/hooks), [skills](https://code.claude.com/docs/en/skills), [memory](https://code.claude.com/docs/en/memory)

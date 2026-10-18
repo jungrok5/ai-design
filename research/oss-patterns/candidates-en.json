@@ -504,7 +504,45 @@
   "suggested_fix": "Write a plain sentence.",
   "train_ai_docs": 0,
   "train_human_docs": 0,
-  "decision": "rejected: only 2 independent sources"
+  "decision": "rejected: only 2 independent sources",
+  "sources_added_1_6_0": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "README.md:38",
+    "license": "MIT"
+   },
+   {
+    "repo": "lguz/humanize-writing-skill",
+    "file": "skills/humanize-writing/references/ai-patterns-dictionary.md:120",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos_1_6_0": 4,
+  "re_measured_1_6_0": {
+   "pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))the (?:catch|kicker|upshot|payoff|twist|punchline|secret|takeaway|bottom line|irony|surprise|best part|worst part|real advantage|detail that makes it work)\\s*:\\s",
+   "positives": [
+    "The catch: it only works offline.",
+    "Fine. The kicker: the cache never expires.",
+    "The best part: it learns."
+   ],
+   "negatives": [
+    "The takeaway is in the next section.",
+    "Note: the cache is cleared on restart."
+   ],
+   "train_ai_docs": 0,
+   "train_human_docs": 0,
+   "train_human_examples": [],
+   "decision": "adopted as en-colon-reveal",
+   "adopted_pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))the (?:catch|kicker|upshot|payoff|twist|punchline|secret|takeaway|bottom line|irony|surprise|best part|worst part)\\s*:\\s|\\bthe (?:answer|reason|problem|difference|catch|upshot|issue|question|point|trick|fix) is (?:simple|straightforward|this|obvious)\\s*:|\\b(?:comes?|boils?|boiled|came) down to (?:one|a single|this|two|three)(?: \\w+)?\\s*:",
+   "rule_train": {
+    "ai": 0,
+    "human": 0
+   },
+   "rule_test": {
+    "ai": 0,
+    "human": 0
+   }
+  }
  },
  {
   "sources": [
@@ -537,7 +575,39 @@
   "suggested_fix": "Give the answer without the announcement.",
   "train_ai_docs": 0,
   "train_human_docs": 0,
-  "decision": "rejected: fewer than 3 independent sources"
+  "decision": "rejected: fewer than 3 independent sources",
+  "sources_added_1_6_0": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "skills/humanizer/SKILL.md:240",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos_1_6_0": 3,
+  "re_measured_1_6_0": {
+   "pattern": "\\bthe (?:answer|reason|problem|difference|catch|upshot|issue|question|point|trick|fix) is (?:simple|straightforward|this|obvious)\\s*:|\\b(?:comes?|boils?|boiled|came) down to (?:one|a single|this|two|three)(?: \\w+)?\\s*:",
+   "positives": [
+    "The answer is simple: use a queue.",
+    "It all comes down to one thing: latency."
+   ],
+   "negatives": [
+    "The reason is this configuration key.",
+    "Things come down to the wire sometimes."
+   ],
+   "train_ai_docs": 0,
+   "train_human_docs": 0,
+   "train_human_examples": [],
+   "decision": "adopted as en-colon-reveal",
+   "adopted_pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))the (?:catch|kicker|upshot|payoff|twist|punchline|secret|takeaway|bottom line|irony|surprise|best part|worst part)\\s*:\\s|\\bthe (?:answer|reason|problem|difference|catch|upshot|issue|question|point|trick|fix) is (?:simple|straightforward|this|obvious)\\s*:|\\b(?:comes?|boils?|boiled|came) down to (?:one|a single|this|two|three)(?: \\w+)?\\s*:",
+   "rule_train": {
+    "ai": 0,
+    "human": 0
+   },
+   "rule_test": {
+    "ai": 0,
+    "human": 0
+   }
+  }
  },
  {
   "sources": [
@@ -571,7 +641,43 @@
   "suggested_fix": "Name the specific implication, risk or reason.",
   "train_ai_docs": 0,
   "train_human_docs": 0,
-  "decision": "rejected: fewer than 3 independent sources"
+  "decision": "rejected: fewer than 3 independent sources",
+  "sources_added_1_6_0": [
+   {
+    "repo": "Hainrixz/humanizalo",
+    "file": "README.md:20",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/UrgencyInflation.yml:43",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos_1_6_0": 3,
+  "re_measured_1_6_0": {
+   "pattern": "\\bthe (?:implications|stakes|consequences|reasons|results|costs|risks|challenges|reality) (?:are|is) (?:significant|high|real|clear|profound|enormous|structural|substantial|serious|staggering|far-reaching)\\b",
+   "positives": [
+    "The implications are significant.",
+    "The stakes are high."
+   ],
+   "negatives": [
+    "The risks are listed below."
+   ],
+   "train_ai_docs": 0,
+   "train_human_docs": 0,
+   "train_human_examples": [],
+   "decision": "adopted as en-meaning-telling",
+   "adopted_pattern": "\\breflect(?:s|ed|ing)? (?:a |the )?(?:broader|larger|wider) (?:trends?|shifts?|movements?|patterns?)\\b|\\brepresents? (?:a |the )?(?:broader|larger|fundamental|major|significant) shift\\b|\\bdeeply rooted\\b|\\bthe (?:implications|stakes|consequences|reasons|results|costs|risks|challenges|reality) (?:are|is) (?:significant|high|real|clear|profound|enormous|structural|substantial|serious|staggering|far-reaching)\\b",
+   "rule_train": {
+    "ai": 0,
+    "human": 0
+   },
+   "rule_test": {
+    "ai": 0,
+    "human": 0
+   }
+  }
  },
  {
   "sources": [
@@ -610,7 +716,50 @@
   "suggested_fix": "Name the person who reads, decides or does it.",
   "train_ai_docs": 0,
   "train_human_docs": 0,
-  "decision": "rejected: only 2 independent sources"
+  "decision": "rejected: only 2 independent sources",
+  "sources_added_1_6_0": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "README.md:47",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aboudjem/humanizer-skill",
+    "file": "README.md:139",
+    "license": "MIT"
+   },
+   {
+    "repo": "Hainrixz/humanizalo",
+    "file": "README.md:98",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos_1_6_0": 5,
+  "re_measured_1_6_0": {
+   "pattern": "\\bthe (?:data|numbers|evidence|metrics|results) (?:tell|tells|show|shows|reveal|reveals) us\\b|\\bthe (?:culture|market|decision|conversation|complaint) (?:shifts|emerges|rewards|moves toward|becomes a fix)\\b",
+   "positives": [
+    "The data tells us that users churn early.",
+    "The market rewards speed.",
+    "The decision emerges from the review."
+   ],
+   "negatives": [
+    "The data show a clear trend.",
+    "The metrics show up in the dashboard."
+   ],
+   "train_ai_docs": 0,
+   "train_human_docs": 0,
+   "train_human_examples": [],
+   "decision": "adopted as en-false-agency",
+   "adopted_pattern": "\\bthe (?:data|numbers|evidence|metrics|results) (?:tell|tells|show|shows|reveal|reveals) us\\b|\\bthe (?:culture|market|decision|conversation|complaint) (?:shifts|emerges|rewards|moves toward|becomes a fix)\\b",
+   "rule_train": {
+    "ai": 0,
+    "human": 0
+   },
+   "rule_test": {
+    "ai": 0,
+    "human": 0
+   }
+  }
  },
  {
   "sources": [
@@ -665,7 +814,47 @@
   "suggested_fix": "Cut the opener; start with the fact.",
   "train_ai_docs": 0,
   "train_human_docs": 2,
-  "decision": "rejected: fires on human docs"
+  "decision": "rejected: fires on human docs",
+  "sources_added_1_6_0": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:239",
+    "license": "MIT"
+   },
+   {
+    "repo": "Kevjade/humanizer-pro",
+    "file": "references/vocabulary.md:336",
+    "license": "MIT"
+   },
+   {
+    "repo": "jpeggdev/humanize-writing",
+    "file": "references/ai-tells.md:86",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos_1_6_0": 9,
+  "re_measured_1_6_0": {
+   "pattern": "\\bin (?:an|this) era (?:of|where|when|in which)\\b|\\bin the age of\\b",
+   "positives": [
+    "In an era of microservices, deploys multiply."
+   ],
+   "negatives": [
+    "The era field stores the epoch."
+   ],
+   "train_ai_docs": 0,
+   "train_human_docs": 0,
+   "train_human_examples": [],
+   "decision": "adopted as en-in-an-era",
+   "adopted_pattern": "\\bin (?:an|this) era (?:of|where|when|in which)\\b|\\bin the age of\\b",
+   "rule_train": {
+    "ai": 0,
+    "human": 0
+   },
+   "rule_test": {
+    "ai": 0,
+    "human": 1
+   }
+  }
  },
  {
   "sources": [
@@ -3030,7 +3219,45 @@
   "suggested_fix": "Describe the actual feedback loop.",
   "train_ai_docs": 0,
   "train_human_docs": 0,
-  "decision": "rejected: fewer than 3 independent sources"
+  "decision": "rejected: fewer than 3 independent sources",
+  "sources_added_1_6_0": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "skills/humanizer/SKILL.md:160",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "README.md:19",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos_1_6_0": 4,
+  "re_measured_1_6_0": {
+   "pattern": "\\bvirtuous (?:cycle|circle)\\b|\\b(?:growth|data|content|virtuous|self-?reinforcing) flywheel\\b|\\bflywheel effect\\b|\\b(?:competitive|economic|defensible|durable) moats?\\b|\\b(?:our|the|a|your) north star\\b|\\bsecret sauce\\b",
+   "positives": [
+    "This creates a virtuous cycle.",
+    "Retention is our north star.",
+    "That is the secret sauce."
+   ],
+   "negatives": [
+    "The flywheel arm is machined steel.",
+    "Point the telescope at the north star in the sky map."
+   ],
+   "train_ai_docs": 0,
+   "train_human_docs": 0,
+   "train_human_examples": [],
+   "decision": "adopted as en-buzz-metaphor",
+   "adopted_pattern": "\\bvirtuous (?:cycle|circle)\\b|\\b(?:growth|data|content|virtuous|self-?reinforcing) flywheel\\b|\\bflywheel effect\\b|\\b(?:competitive|economic|defensible|durable) moats?\\b|\\b(?:our|your|a|their) north star\\b|\\bnorth[- ]star metric\\b|\\bharness(?:es|ed|ing)? the (?:full )?(?:power|potential|capabilities)\\b|\\bthought[- ]leader(?:s|ship)?\\b|\\bresonat(?:e|es|ed|ing) (?:deeply |strongly )?with\\b|\\bpoised (?:to|for)\\b",
+   "rule_train": {
+    "ai": 0,
+    "human": 0
+   },
+   "rule_test": {
+    "ai": 0,
+    "human": 0
+   }
+  }
  },
  {
   "sources": [
@@ -3062,7 +3289,22 @@
   "suggested_fix": "State the trade-off in terms.",
   "train_ai_docs": 0,
   "train_human_docs": 0,
-  "decision": "rejected: fewer than 3 independent sources"
+  "decision": "rejected: fewer than 3 independent sources",
+  "sources_added_1_6_0": [],
+  "independent_repos_1_6_0": 2,
+  "re_measured_1_6_0": {
+   "pattern": "\\bdelicate (?:balance|balancing act|dance|interplay)\\b",
+   "positives": [
+    "a delicate balance between speed and safety"
+   ],
+   "negatives": [
+    "Balance the load across nodes."
+   ],
+   "train_ai_docs": 0,
+   "train_human_docs": 0,
+   "train_human_examples": [],
+   "decision": "rejected: fewer than 3 independent sources (no new source lists it)"
+  }
  },
  {
   "sources": [
@@ -3186,6 +3428,1325 @@
   "suggested_fix": "State the actual scope.",
   "train_ai_docs": 0,
   "train_human_docs": 0,
+  "decision": "rejected: fewer than 3 independent sources",
+  "sources_added_1_6_0": [],
+  "independent_repos_1_6_0": 1,
+  "re_measured_1_6_0": {
+   "pattern": "\\b(?:extends?|extended|goes|going|stretches) far beyond\\b|\\bfar beyond (?:mere|simple|simply)\\b|\\b(?:goes|go|move|moving) beyond (?:mere|merely|simply)\\b",
+   "positives": [
+    "Its impact extends far beyond the codebase."
+   ],
+   "negatives": [
+    "The buffer extends beyond the page boundary."
+   ],
+   "train_ai_docs": 0,
+   "train_human_docs": 0,
+   "train_human_examples": [],
+   "decision": "rejected: fewer than 3 independent sources"
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:131",
+    "license": "MIT"
+   },
+   {
+    "repo": "jpeggdev/humanize-writing",
+    "file": "SKILL.md:274",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aboudjem/humanizer-skill",
+    "file": "skills/humanizer/SKILL.md:198",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "README.md:30",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AICompoundPhrases.yml:45",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 5,
+  "category": "generic-closer",
+  "description": "Generic future closers: 'only time will tell', 'it remains to be seen', 'exciting times lie ahead', 'the future is bright'.",
+  "pattern": "\\bonly time will tell\\b|\\bit remains to be seen\\b|\\bexciting times (?:lie|are) ahead\\b|\\bthe future is bright\\b|\\ba step in the right direction\\b",
+  "positives": [
+   "Only time will tell.",
+   "Exciting times lie ahead.",
+   "It remains to be seen whether teams adopt it."
+  ],
+  "negatives": [
+   "Time is measured in milliseconds."
+  ],
+  "suggest_id": "en-time-will-tell",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-hollow-phrase",
+  "adopted_pattern": "\\bat the end of the day\\b|\\bwhen all is said and done\\b|\\bthe bottom line is\\b|\\bat (?:its|their) core\\b|\\bonly time will tell\\b|\\bit remains to be seen\\b|\\bexciting times (?:lie|are) ahead\\b|\\bthe future is bright\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 1
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "skills/humanizer/SKILL.md:105",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:244",
+    "license": "MIT"
+   },
+   {
+    "repo": "Kevjade/humanizer-pro",
+    "file": "references/vocabulary.md:249",
+    "license": "MIT"
+   },
+   {
+    "repo": "jpeggdev/humanize-writing",
+    "file": "references/ai-tells.md:91",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aboudjem/humanizer-skill",
+    "file": "skills/humanizer/references/patterns.md:124",
+    "license": "MIT"
+   },
+   {
+    "repo": "Hainrixz/humanizalo",
+    "file": "references/vocabulary.md:110",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:80",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "README.md:27",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Human/Brief.md:21",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "README.md:166",
+    "license": "MIT"
+   },
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/Cliche.yml:7",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "README.md:49",
+    "license": "MIT"
+   },
+   {
+    "repo": "aaazzam/dslop",
+    "file": "README.md:55",
+    "license": "Apache-2.0"
+   }
+  ],
+  "independent_repos": 13,
+  "category": "generic-closer",
+  "description": "'At the end of the day', 'when all is said and done', 'the bottom line is'.",
+  "pattern": "\\bat the end of the day\\b|\\bwhen all is said and done\\b|\\bthe bottom line is\\b",
+  "positives": [
+   "At the end of the day, users want speed.",
+   "The bottom line is that it works."
+  ],
+  "negatives": [
+   "The job runs at the end of each day."
+  ],
+  "suggest_id": "en-end-of-day",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-hollow-phrase",
+  "adopted_pattern": "\\bat the end of the day\\b|\\bwhen all is said and done\\b|\\bthe bottom line is\\b|\\bat (?:its|their) core\\b|\\bonly time will tell\\b|\\bit remains to be seen\\b|\\bexciting times (?:lie|are) ahead\\b|\\bthe future is bright\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 1
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "skills/humanizer/SKILL.md:118",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:245",
+    "license": "MIT"
+   },
+   {
+    "repo": "Kevjade/humanizer-pro",
+    "file": "references/vocabulary.md:258",
+    "license": "MIT"
+   },
+   {
+    "repo": "jpeggdev/humanize-writing",
+    "file": "SKILL.md:287",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "README.md:232",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 5,
+  "category": "dead-transition",
+  "description": "'That being said', 'With that being said', 'With that in mind'.",
+  "pattern": "\\b(?:with )?that being said\\b|\\bwith that in mind\\b",
+  "positives": [
+   "That being said, the API is stable.",
+   "With that in mind, we cached it."
+  ],
+  "negatives": [
+   "That said value is cached."
+  ],
+  "suggest_id": "en-that-being-said",
+  "train_ai_docs": 0,
+  "train_human_docs": 3,
+  "train_human_examples": [
+   "mdn-content/files/en-us/learn_web_development/extensions/server-side/django/models/index.md:50 With that in mind, the UML association diagram below shows the models we'll define in this case (as boxes).",
+   "mdn-content/files/en-us/learn_web_development/extensions/server-side/django/testing/index.md:110 With that in mind let's start looking at how to define and run tests."
+  ],
+  "decision": "rejected: fires on human docs ('With that in mind, let's start looking at how to define and run tests', MDN)"
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:149",
+    "license": "MIT"
+   },
+   {
+    "repo": "Hainrixz/humanizalo",
+    "file": "references/vocabulary.md:144",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:77",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:50",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/Metacommentary.yml:80",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "README.md:26",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 6,
+  "category": "dead-transition",
+  "description": "'At its core, …'.",
+  "pattern": "\\bat (?:its|their|the) core\\b",
+  "positives": [
+   "At its core, the tool is a parser."
+  ],
+  "negatives": [
+   "The core module loads first."
+  ],
+  "suggest_id": "en-at-its-core",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-hollow-phrase",
+  "adopted_pattern": "\\bat the end of the day\\b|\\bwhen all is said and done\\b|\\bthe bottom line is\\b|\\bat (?:its|their) core\\b|\\bonly time will tell\\b|\\bit remains to be seen\\b|\\bexciting times (?:lie|are) ahead\\b|\\bthe future is bright\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 1
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "skills/humanizer/SKILL.md:64",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:91",
+    "license": "MIT"
+   },
+   {
+    "repo": "Kevjade/humanizer-pro",
+    "file": "references/vocabulary.md:332",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 3,
+  "category": "contrast-scaffold",
+  "description": "Misconception-clearing set-up: 'Contrary to popular belief', 'Conventional wisdom says', 'Most people think'.",
+  "pattern": "\\bcontrary to (?:popular|common) (?:belief|opinion|wisdom)\\b|\\bconventional wisdom (?:says|holds|suggests|tells us)\\b|\\bmost people (?:think|assume|believe)\\b|\\bmany (?:people )?assume\\b",
+  "positives": [
+   "Contrary to popular belief, caching is cheap.",
+   "Most people think this is a hiring problem."
+  ],
+  "negatives": [
+   "The belief propagation step runs first."
+  ],
+  "suggest_id": "en-misconception-frame",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-misconception-frame",
+  "adopted_pattern": "\\bcontrary to (?:popular|common) (?:belief|opinion|wisdom)\\b|\\bconventional wisdom (?:says|holds|suggests|tells us)\\b|\\bmost people (?:think|assume|believe)\\b|\\bmany (?:people )?assume\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 0
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:97",
+    "license": "MIT"
+   },
+   {
+    "repo": "Kevjade/humanizer-pro",
+    "file": "SKILL.md:119",
+    "license": "MIT"
+   },
+   {
+    "repo": "jpeggdev/humanize-writing",
+    "file": "SKILL.md:260",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aboudjem/humanizer-skill",
+    "file": "docs-site/docs/patterns.md:48",
+    "license": "MIT"
+   },
+   {
+    "repo": "Hainrixz/humanizalo",
+    "file": "SKILL.md:148",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "README.md:162",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 6,
+  "category": "cutoff-disclaimer",
+  "description": "Gap-filling guesses and limited-information hedges: 'is believed to have', 'maintains a low public profile', 'while specific details are limited', 'based on available information'.",
+  "pattern": "\\b(?:is|was) believed to have\\b|\\bmaintains? a (?:relatively )?low (?:public )?profile\\b|\\bwhile (?:specific )?details (?:are|remain) (?:limited|scarce)\\b|\\bbased on (?:the )?available information\\b|\\bspecific details (?:are|remain) (?:limited|scarce|unavailable)\\b",
+  "positives": [
+   "He is believed to have started in 1990.",
+   "While specific details are limited, the firm grew."
+  ],
+  "negatives": [
+   "Details are in the appendix."
+  ],
+  "suggest_id": "en-speculative-gap",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-speculative-gap",
+  "adopted_pattern": "\\bwhile (?:specific )?details (?:are|remain) (?:limited|scarce)\\b|\\bbased on (?:the )?available information\\b|\\bspecific details (?:are|remain) (?:limited|scarce|unavailable)\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 0
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:259",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aboudjem/humanizer-skill",
+    "file": "docs-site/docs/patterns.md:77",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Human/Brief.md:23",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "README.md:253",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 4,
+  "category": "slot-fill",
+  "description": "False-breadth slot fill: 'Whether you're a beginner or an expert'.",
+  "pattern": "\\bwhether you['’]re (?:a|an|just) [^.,;!?\\n]{1,40}? or (?:a|an|just)? ?[^.,;!?\\n]{1,40}",
+  "positives": [
+   "Whether you're a beginner or a seasoned pro, this guide helps.",
+   "Whether you're a startup or an enterprise, it scales."
+  ],
+  "negatives": [
+   "Check whether you're logged in."
+  ],
+  "suggest_id": "en-whether-youre",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-whether-youre",
+  "adopted_pattern": "\\bwhether you['’]re (?:a|an|just) [^.,;!?\\n]{1,40}? or (?:a |an |just )?[^.,;!?\\n]{1,40}",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 0
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:311",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aboudjem/humanizer-skill",
+    "file": "docs-site/docs/patterns.md:94",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 2,
+  "category": "chat-artifact",
+  "description": "Reasoning-chain leaks: 'Let me think step by step', 'Let's break this down step by step'.",
+  "pattern": "\\blet(?: me|['’]s| us) think (?:step[- ]by[- ]step|about this|this through)\\b|\\bthinking step[- ]by[- ]step\\b|\\bstep[- ]by[- ]step reasoning\\b",
+  "positives": [
+   "Let me think step by step.",
+   "Let's think this through."
+  ],
+  "negatives": [
+   "Follow the step-by-step guide."
+  ],
+  "suggest_id": "en-reasoning-leak",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "rejected: only 2 independent sources"
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "README.md:20",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aboudjem/humanizer-skill",
+    "file": "docs-site/docs/patterns.md:72",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 2,
+  "category": "chat-artifact",
+  "description": "Chatbot citation markup pasted into prose: 'citeturn0search0', 'contentReference[oaicite:0]', 'oai_citation', '[cite_start]'.",
+  "pattern": "citeturn\\d|turn\\d+search\\d+|contentReference\\[oaicite|oaicite:\\d|oai_citation|\\[cite_start\\]|\\[cite:\\s?\\d|grok_card",
+  "positives": [
+   "As reported citeturn0search0.",
+   "The rate fell :contentReference[oaicite:0]{index=0}."
+  ],
+  "negatives": [
+   "Cite the paper in the references."
+  ],
+  "suggest_id": "en-citation-leak",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "rejected: only 2 independent sources (near-certain tell when present; no hits in either corpus)",
+  "case_sensitive": true
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "README.md:18",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 1,
+  "category": "chat-artifact",
+  "description": "Social endorsement closers: 'Don't sleep on this', 'Thank me later', 'Bookmark this'.",
+  "pattern": "\\bdon['’]t sleep on (?:this|it)\\b|\\bthank me later\\b|\\bbookmark this\\b|\\bthis one is worth your time\\b|\\byou['’]ll thank me\\b",
+  "positives": [
+   "Bookmark this.",
+   "Thank me later."
+  ],
+  "negatives": [
+   "Add a bookmark to the page."
+  ],
+  "suggest_id": "en-endorsement-closer",
+  "train_ai_docs": 0,
+  "train_human_docs": 1,
+  "train_human_examples": [
+   "mdn-content/files/en-us/learn_web_development/core/structuring_content/webpage_metadata/index.md:88 The `<title>` element contents are also used in other ways. For example, if you try bookmarking the page (_Bookmarks > B"
+  ],
+  "decision": "rejected: fires on human docs ('Bookmarks > Bookmark This Page', MDN) and only 1 source"
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:241",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 1,
+  "category": "claimed-emotion",
+  "description": "Claimed emotion and announced interest: 'What surprised me most', 'I was fascinated to discover', \"Here's what's interesting\".",
+  "pattern": "\\bwhat (?:surprised|struck|fascinated|amazed) me (?:most|the most)\\b|\\bi was (?:fascinated|amazed|surprised|delighted) to (?:discover|learn|find|see)\\b|\\bhere['’]s what['’]?s (?:interesting|fascinating|surprising)\\b|\\bwhat stood out (?:to me )?(?:most|the most)\\b",
+  "positives": [
+   "What surprised me most was the speed.",
+   "Here's what's interesting about it."
+  ],
+  "negatives": [
+   "The output surprised the parser."
+  ],
+  "suggest_id": "en-claimed-emotion",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
   "decision": "rejected: fewer than 3 independent sources"
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:335",
+    "license": "MIT"
+   },
+   {
+    "repo": "jpeggdev/humanize-writing",
+    "file": "references/ai-tells.md:99",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "styles/ai-tells/AICompoundPhrases.yml:54",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 3,
+  "category": "contrast-scaffold",
+  "description": "'While X is impressive, Y remains a challenge'; 'is not without its challenges'.",
+  "pattern": "\\bwhile [^.,;!?\\n]{1,50}? (?:is|are|may be|seems?) (?:impressive|promising|exciting|powerful|useful|valuable)[^.;!?\\n]{0,5}, [^.;!?\\n]{1,60}? remains? (?:a |an )?(?:challenge|concern|hurdle|open question|problem)\\b|\\b(?:is|are) not without (?:its |their )?(?:challenges|drawbacks|limitations|flaws|critics)\\b",
+  "positives": [
+   "While the model is impressive, cost remains a challenge.",
+   "The approach is not without its challenges."
+  ],
+  "negatives": [
+   "While the job is running, the lock remains held."
+  ],
+  "suggest_id": "en-false-concession",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-false-concession",
+  "adopted_pattern": "\\bwhile [^.,;!?\\n]{1,50}? (?:is|are|may be|seems?) (?:impressive|promising|exciting|powerful|useful|valuable)[^.;!?\\n]{0,5}, [^.;!?\\n]{1,60}? remains? (?:a |an )?(?:challenge|concern|hurdle|open question|problem)\\b|\\b(?:is|are) not without (?:its |their )?(?:challenges|drawbacks|limitations|flaws|critics)\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 0
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:87",
+    "license": "MIT"
+   },
+   {
+    "repo": "Kevjade/humanizer-pro",
+    "file": "SKILL.md:103",
+    "license": "MIT"
+   },
+   {
+    "repo": "jpeggdev/humanize-writing",
+    "file": "README.md:10",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aboudjem/humanizer-skill",
+    "file": "docs-site/docs/patterns.md:22",
+    "license": "MIT"
+   },
+   {
+    "repo": "Hainrixz/humanizalo",
+    "file": "SKILL.md:79",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "styles/Deslop/SlopVocab.yml:22",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "README.md:260",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:357",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "README.md:145",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 9,
+  "category": "promotional",
+  "description": "Brochure phrases: 'nestled in', 'in the heart of', 'renowned for', 'breathtaking', 'must-visit', 'stunning array'.",
+  "pattern": "\\bnestled (?:in|among|within|between)\\b|\\bin the heart of\\b|\\brenowned for\\b|\\bbreathtaking\\b|\\bmust-visit\\b|\\bstunning (?:array|views?|collection)\\b|\\brich (?:history|heritage|tapestry)\\b|\\bvibrant community\\b",
+  "positives": [
+   "The village is nestled in the hills.",
+   "It is renowned for its stunning views."
+  ],
+  "negatives": [
+   "Nested routes are supported."
+  ],
+  "suggest_id": "en-promo-phrases",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-promo-phrases",
+  "adopted_pattern": "\\bnestled (?:in|among|within|between)\\b|\\bin the heart of\\b|\\brenowned for\\b|\\bbreathtaking\\b|\\bmust-visit\\b|\\bstunning (?:array|views?|collection)\\b|\\brich (?:history|heritage)\\b|\\bvibrant community\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 0
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "skills/humanizer/SKILL.md:57",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 1,
+  "category": "contrast-scaffold",
+  "description": "'It was never about X. It was always about Y.'",
+  "pattern": "\\bit(?:['’]s| was| is| has) never (?:been )?about\\b[^.!?\\n]{1,60}[.,;—–]\\s*it(?:['’]s| was| is| has)(?: always)?(?: been)? about\\b",
+  "positives": [
+   "It was never about the code. It was always about the team."
+  ],
+  "negatives": [
+   "It is about time."
+  ],
+  "suggest_id": "en-never-about",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "rejected: fewer than 3 independent sources"
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "skills/humanizer/SKILL.md:51",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 1,
+  "category": "contrast-scaffold",
+  "description": "'Forget X. Focus on Y.' / 'You don't need X. You need Y.'",
+  "pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))forget (?:about )?[^.!?\\n]{1,40}[.,]\\s+(?:focus on|think about|start with)\\b|\\byou don['’]t need [^.!?\\n]{1,40}[.,]\\s+you need\\b",
+  "positives": [
+   "Forget the prompt. Focus on the context.",
+   "You don't need more tools. You need fewer meetings."
+  ],
+  "negatives": [
+   "Forget the cached value before reload."
+  ],
+  "suggest_id": "en-forget-x",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "rejected: fewer than 3 independent sources"
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "README.md:49",
+    "license": "MIT"
+   },
+   {
+    "repo": "Hainrixz/humanizalo",
+    "file": "references/structures.md:198",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/structures.md:116",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "test-document.md:3249",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:436",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 5,
+  "category": "wh-opener",
+  "description": "Formulaic wh-cleft: 'What makes this work is the cache.'",
+  "pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))what (?:makes|made) (?:this|it|that|them) (?:work|special|different|unique|powerful|possible)\\b[^.!?\\n]{0,30}\\b(?:is|was)\\b",
+  "positives": [
+   "What makes this work is the cache.",
+   "What makes it special is the API."
+  ],
+  "negatives": [
+   "What makes the build slow? Profile it."
+  ],
+  "suggest_id": "en-wh-cleft-opener",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-wh-cleft-opener",
+  "adopted_pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))what (?:makes|made) (?:this|it|that|them) (?:work|special|different|unique|powerful|possible)\\b[^.!?\\n]{0,30}\\b(?:is|was)\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 0
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "skills/humanizer/SKILL.md:358",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:327",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 2,
+  "category": "self-labeling",
+  "description": "Telling the reader what to weigh: 'That last part matters more than it sounds'.",
+  "pattern": "\\bmatters? (?:more|far more) than (?:it sounds|you(?:['’]d| might)? think|it seems|most people (?:think|realize))\\b|\\bthat last (?:part|point|move|bit) (?:is|matters)\\b",
+  "positives": [
+   "That last part matters more than it sounds.",
+   "That last move is the contrarian one."
+  ],
+  "negatives": [
+   "The last part of the path is the file name."
+  ],
+  "suggest_id": "en-matters-more",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "rejected: only 2 independent sources"
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:61",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 1,
+  "category": "generic-closer",
+  "description": "Generic future narrative: 'could become one of the most important …'.",
+  "pattern": "\\b(?:will|could|may|might|is poised to|is set to) (?:soon |likely |ultimately |eventually )?become one of the most\\b",
+  "positives": [
+   "It could become one of the most important tools."
+  ],
+  "negatives": [
+   "It is one of the most used hooks."
+  ],
+  "suggest_id": "en-become-one-of",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "rejected: fewer than 3 independent sources"
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:273",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aboudjem/humanizer-skill",
+    "file": "docs-site/docs/patterns.md:93",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 2,
+  "category": "fragment",
+  "description": "Subjectless slogan fragments: 'Designed for speed. Built for scale.'",
+  "pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))(?:designed|built|made|crafted|engineered|optimized) for [\\w -]{1,25}\\.\\s+(?:designed|built|made|crafted|engineered|optimized) for\\b",
+  "positives": [
+   "Designed for speed. Built for scale."
+  ],
+  "negatives": [
+   "It is designed for speed and built for scale."
+  ],
+  "suggest_id": "en-subjectless-fragments",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "rejected: only 2 independent sources"
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "skills/humanizer/SKILL.md:108",
+    "license": "MIT"
+   },
+   {
+    "repo": "Kevjade/humanizer-pro",
+    "file": "references/patterns.md:149",
+    "license": "MIT"
+   },
+   {
+    "repo": "jpeggdev/humanize-writing",
+    "file": "SKILL.md:289",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/phrases.md:49",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 4,
+  "category": "dead-transition",
+  "description": "'Moving forward', 'Going forward', 'Looking ahead' openers.",
+  "pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))(?:moving forward|going forward|looking ahead|as we move forward)\\b",
+  "positives": [
+   "Moving forward, we will ship weekly.",
+   "Looking ahead, the team plans v2."
+  ],
+  "negatives": [
+   "Keep moving forward through the list items."
+  ],
+  "suggest_id": "en-forward-transitions",
+  "train_ai_docs": 0,
+  "train_human_docs": 2,
+  "train_human_examples": [
+   "react.dev/src/content/blog/2022/06/15/react-labs-what-we-have-been-working-on-june-2022.md:20 We typically have a number of projects being worked on at any time, ranging from the more experimental to the clearly de",
+   "mdn-content/files/en-us/learn_web_development/changelog/index.md:27 "
+  ],
+  "decision": "rejected: fires on human docs ('Looking ahead, we'd like to start…', react.dev blog)"
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "skills/humanizer/SKILL.md:194",
+    "license": "MIT"
+   },
+   {
+    "repo": "Hainrixz/humanizalo",
+    "file": "README.md:151",
+    "license": "MIT"
+   },
+   {
+    "repo": "hardikpandya/stop-slop",
+    "file": "references/examples.md:54",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "script/tokens/no-ai-slop.SKILL.md:80",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 4,
+  "category": "rhetorical-setup",
+  "description": "'What if I told you …?'",
+  "pattern": "\\bwhat if i told you\\b",
+  "positives": [
+   "What if I told you the cache is slower?"
+  ],
+  "negatives": [
+   "What if the file is missing?"
+  ],
+  "suggest_id": "en-what-if-told",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-what-if-i-told-you",
+  "adopted_pattern": "\\bwhat if i told you\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 0
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "giudegio-ai/claude-skill-humanizer",
+    "file": "README.md:58",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "README.md:15",
+    "license": "MIT"
+   },
+   {
+    "repo": "Kevjade/humanizer-pro",
+    "file": "references/examples.md:13",
+    "license": "MIT"
+   },
+   {
+    "repo": "jpeggdev/humanize-writing",
+    "file": "SKILL.md:88",
+    "license": "MIT"
+   },
+   {
+    "repo": "Hainrixz/humanizalo",
+    "file": "references/vocabulary.md:28",
+    "license": "MIT"
+   },
+   {
+    "repo": "jdkato/voices",
+    "file": "Voices/styles/Voices/Banned.yml:26",
+    "license": "MIT"
+   },
+   {
+    "repo": "tnguyen21/slop-guard-rs",
+    "file": "src/lib.rs:373",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 7,
+  "category": "ai-vocabulary",
+  "description": "'harness the power/potential of'.",
+  "pattern": "\\bharness(?:es|ed|ing)? the (?:full )?(?:power|potential|capabilities)\\b",
+  "positives": [
+   "Harness the power of streams."
+  ],
+  "negatives": [
+   "Wire the harness to the board."
+  ],
+  "suggest_id": "en-harness-power",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-buzz-metaphor",
+  "adopted_pattern": "\\bvirtuous (?:cycle|circle)\\b|\\b(?:growth|data|content|virtuous|self-?reinforcing) flywheel\\b|\\bflywheel effect\\b|\\b(?:competitive|economic|defensible|durable) moats?\\b|\\b(?:our|your|a|their) north star\\b|\\bnorth[- ]star metric\\b|\\bharness(?:es|ed|ing)? the (?:full )?(?:power|potential|capabilities)\\b|\\bthought[- ]leader(?:s|ship)?\\b|\\bresonat(?:e|es|ed|ing) (?:deeply |strongly )?with\\b|\\bpoised (?:to|for)\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 0
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:179",
+    "license": "MIT"
+   },
+   {
+    "repo": "jpeggdev/humanize-writing",
+    "file": "SKILL.md:88",
+    "license": "MIT"
+   },
+   {
+    "repo": "lguz/humanize-writing-skill",
+    "file": "skills/humanize-writing/references/ai-patterns-dictionary.md:42",
+    "license": "MIT"
+   },
+   {
+    "repo": "blader/humanizer",
+    "file": "SKILL.md:239",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 4,
+  "category": "ai-vocabulary",
+  "description": "'resonates with' (figurative).",
+  "pattern": "\\bresonat(?:e|es|ed|ing) (?:deeply |strongly )?with\\b",
+  "positives": [
+   "The message resonates with developers."
+  ],
+  "negatives": [
+   "The circuit resonates at 50 Hz."
+  ],
+  "suggest_id": "en-resonate-with",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-buzz-metaphor",
+  "adopted_pattern": "\\bvirtuous (?:cycle|circle)\\b|\\b(?:growth|data|content|virtuous|self-?reinforcing) flywheel\\b|\\bflywheel effect\\b|\\b(?:competitive|economic|defensible|durable) moats?\\b|\\b(?:our|your|a|their) north star\\b|\\bnorth[- ]star metric\\b|\\bharness(?:es|ed|ing)? the (?:full )?(?:power|potential|capabilities)\\b|\\bthought[- ]leader(?:s|ship)?\\b|\\bresonat(?:e|es|ed|ing) (?:deeply |strongly )?with\\b|\\bpoised (?:to|for)\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 0
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:200",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aboudjem/humanizer-skill",
+    "file": "cli/lib/vocabulary.js:50",
+    "license": "MIT"
+   },
+   {
+    "repo": "Hainrixz/humanizalo",
+    "file": "SKILL.md:82",
+    "license": "MIT"
+   },
+   {
+    "repo": "JMill/deslop",
+    "file": "README.md:29",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 4,
+  "category": "ai-vocabulary",
+  "description": "'poised to/for'.",
+  "pattern": "\\bpoised (?:to|for)\\b",
+  "positives": [
+   "The team is poised for growth."
+  ],
+  "negatives": [
+   "Set the poise value."
+  ],
+  "suggest_id": "en-poised-to",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-buzz-metaphor",
+  "adopted_pattern": "\\bvirtuous (?:cycle|circle)\\b|\\b(?:growth|data|content|virtuous|self-?reinforcing) flywheel\\b|\\bflywheel effect\\b|\\b(?:competitive|economic|defensible|durable) moats?\\b|\\b(?:our|your|a|their) north star\\b|\\bnorth[- ]star metric\\b|\\bharness(?:es|ed|ing)? the (?:full )?(?:power|potential|capabilities)\\b|\\bthought[- ]leader(?:s|ship)?\\b|\\bresonat(?:e|es|ed|ing) (?:deeply |strongly )?with\\b|\\bpoised (?:to|for)\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 0
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:147",
+    "license": "MIT"
+   },
+   {
+    "repo": "lguz/humanize-writing-skill",
+    "file": "skills/humanize-writing/SKILL.md:192",
+    "license": "MIT"
+   },
+   {
+    "repo": "Hainrixz/humanizalo",
+    "file": "references/vocabulary.md:120",
+    "license": "MIT"
+   },
+   {
+    "repo": "krishnasunkam/vale-ai-tells",
+    "file": "AiTells/Cliche.yml:12",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 4,
+  "category": "biz-jargon",
+  "description": "'thought leader(ship)'.",
+  "pattern": "\\bthought[- ]leader(?:s|ship)?\\b",
+  "positives": [
+   "She is a thought leader in AI."
+  ],
+  "negatives": [
+   "The thought process is simple."
+  ],
+  "suggest_id": "en-thought-leader",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-buzz-metaphor",
+  "adopted_pattern": "\\bvirtuous (?:cycle|circle)\\b|\\b(?:growth|data|content|virtuous|self-?reinforcing) flywheel\\b|\\bflywheel effect\\b|\\b(?:competitive|economic|defensible|durable) moats?\\b|\\b(?:our|your|a|their) north star\\b|\\bnorth[- ]star metric\\b|\\bharness(?:es|ed|ing)? the (?:full )?(?:power|potential|capabilities)\\b|\\bthought[- ]leader(?:s|ship)?\\b|\\bresonat(?:e|es|ed|ing) (?:deeply |strongly )?with\\b|\\bpoised (?:to|for)\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 0
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:228",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "README.md:198",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 2,
+  "category": "biz-jargon",
+  "description": "'at the intersection of X and Y'.",
+  "pattern": "\\b(?:at|sits at|lives at) the intersection of\\b",
+  "positives": [
+   "The product sits at the intersection of design and code."
+  ],
+  "negatives": [
+   "Compute the intersection of two sets."
+  ],
+  "suggest_id": "en-intersection-of",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "rejected: only 2 independent sources"
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aparnabuilds/humanizer",
+    "file": "SKILL.md:81",
+    "license": "MIT"
+   },
+   {
+    "repo": "Kevjade/humanizer-pro",
+    "file": "references/patterns.md:9",
+    "license": "MIT"
+   },
+   {
+    "repo": "jpeggdev/humanize-writing",
+    "file": "SKILL.md:70",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aboudjem/humanizer-skill",
+    "file": "skills/humanizer/SKILL.md:144",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "README.md:258",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 5,
+  "category": "significance-inflation",
+  "description": "Meaning-telling: 'reflects broader trends', 'speaks to a larger shift', 'represents a fundamental shift'.",
+  "pattern": "\\breflect(?:s|ed|ing)? (?:a |the )?(?:broader|larger|wider) (?:trends?|shifts?|movements?|patterns?)\\b|\\bspeaks? to (?:a |the )?(?:larger|broader|deeper) (?:trend|shift|truth|issue)\\b|\\brepresents? (?:a |the )?(?:broader|larger|fundamental|major|significant) shift\\b|\\bdeeply rooted\\b",
+  "positives": [
+   "This reflects broader trends in the industry.",
+   "It represents a fundamental shift."
+  ],
+  "negatives": [
+   "The value reflects the current state."
+  ],
+  "suggest_id": "en-reflects-broader",
+  "train_ai_docs": 0,
+  "train_human_docs": 0,
+  "train_human_examples": [],
+  "decision": "adopted as en-meaning-telling",
+  "adopted_pattern": "\\breflect(?:s|ed|ing)? (?:a |the )?(?:broader|larger|wider) (?:trends?|shifts?|movements?|patterns?)\\b|\\brepresents? (?:a |the )?(?:broader|larger|fundamental|major|significant) shift\\b|\\bdeeply rooted\\b|\\bthe (?:implications|stakes|consequences|reasons|results|costs|risks|challenges|reality) (?:are|is) (?:significant|high|real|clear|profound|enormous|structural|substantial|serious|staggering|far-reaching)\\b",
+  "rule_train": {
+   "ai": 0,
+   "human": 0
+  },
+  "rule_test": {
+   "ai": 0,
+   "human": 0
+  }
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Kevjade/humanizer-pro",
+    "file": "references/vocabulary.md:313",
+    "license": "MIT"
+   },
+   {
+    "repo": "jpeggdev/humanize-writing",
+    "file": "references/ai-tells.md:171",
+    "license": "MIT"
+   },
+   {
+    "repo": "Aboudjem/humanizer-skill",
+    "file": "skills/humanizer/references/patterns.md:277",
+    "license": "MIT"
+   },
+   {
+    "repo": "tbhb/vale-ai-tells",
+    "file": "test-document.md:9",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 4,
+  "category": "significance-inflation",
+  "description": "'highlights the importance of', 'emphasizes the significance of'.",
+  "pattern": "\\b(?:highlight|emphasi[sz]e|stress)(?:s|ed|ing)? the (?:importance|significance|critical role|need) of\\b",
+  "positives": [
+   "This highlights the importance of testing.",
+   "It emphasizes the significance of caching."
+  ],
+  "negatives": [
+   "Highlight the row in the table."
+  ],
+  "suggest_id": "en-highlights-importance",
+  "train_ai_docs": 0,
+  "train_human_docs": 1,
+  "train_human_examples": [
+   "mdn-content/files/en-us/learn_web_development/extensions/performance/business_case_for_performance/index.md:37 We've discussed how prioritizing performance can improve user experience and therefore revenue. We know that not priorit"
+  ],
+  "decision": "rejected: the one human hit is a legitimate use ('It highlights the importance of understanding how cumulative experiences impact conversion', MDN article summary)"
+ },
+ {
+  "added_in": "1.6.0",
+  "sources": [
+   {
+    "repo": "Aboudjem/humanizer-skill",
+    "file": "docs-site/docs/patterns.md:96",
+    "license": "MIT"
+   }
+  ],
+  "independent_repos": 1,
+  "category": "hedged-enumeration",
+  "description": "Vague list announcement: 'There are several ways to …'.",
+  "pattern": "(?m)(?:^\\s*|(?<=[.!?]\\s))there are (?:several|many|a number of|various|numerous) (?:ways|reasons|factors|things|approaches|options) (?:to|why|that)\\b",
+  "positives": [
+   "There are several ways to approach this.",
+   "There are many reasons why caching helps."
+  ],
+  "negatives": [
+   "There are two flags: -a and -b."
+  ],
+  "suggest_id": "en-hedged-enumeration",
+  "train_ai_docs": 0,
+  "train_human_docs": 11,
+  "train_human_examples": [
+   "mdn-content/files/en-us/learn_web_development/core/scripting/a_first_splash/index.md:342 Functions are reusable blocks of code that you can write once and run again and again, saving the need to keep repeating",
+   "mdn-content/files/en-us/learn_web_development/extensions/client-side_apis/video_and_audio_apis/index.md:736 "
+  ],
+  "decision": "rejected: fires on human docs ('There are several ways to…', MDN)"
  }
 ]

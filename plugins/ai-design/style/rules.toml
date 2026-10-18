@@ -443,8 +443,8 @@ suggest = "비교 대상을 숫자로"
 id = "ko-personified-subject"
 lang = "ko"
 severity = "warning"
-pattern = '(?:충돌|가성비|기술|시대|현실|역사|데이터|변화|질문|숫자|통계|혁신|위기|경쟁|등장|흐름|물결|AI|인공지능)(?:이|가)\s(?:[가-힣]{1,8}[을를]\s)?(?:던집니다|던진다|묻습니다|묻는다|부릅니다|부른다|증명합니다|증명한다|말해줍니다|말해준다|속삭입니다|속삭인다|외칩니다|외친다)'
-message = "추상 주어의 의인화 ('기술이 묻는다')"
+pattern = '(?:충돌|가성비|기술|시대|현실|역사|데이터|변화|질문|숫자|통계|혁신|위기|경쟁|등장|흐름|물결|AI|인공지능|수치|결과|시장|지표)(?:이|가)\s(?:[가-힣]{1,8}[을를]\s)?(?:던집니다|던진다|묻습니다|묻는다|부릅니다|부른다|증명합니다|증명한다|말해줍니다|말해준다|속삭입니다|속삭인다|외칩니다|외친다|원한다|원합니다|답을\s?내놓)'
+message = "추상 주어의 의인화 ('기술이 묻는다', '시장이 원한다')"
 suggest = "사람·기관을 주어로, 또는 동사를 평이하게"
 
 [[rule]]
@@ -510,6 +510,174 @@ severity = "warning"
 pattern = '[다라]는\s?(?:분석|평가|관측|전망|지적|해석)(?:이다|입니다)[.]'
 message = "무주체 판정 종결 ('~다는 분석이다')"
 suggest = "출처가 있으면 출처를 앞에, 없으면 직접 서술"
+
+# 1.6.0: Korean tells from IsaacEryn/humanizer-ko, amondnet/yoonmoon, leeandev/stop-slop-ko,
+# dongsukjang26/natural-korean-skills-for-research, nerdkim/im-a-korean-ai-in-seoul and teo713ko-gif/hangul-humanizer
+# (all MIT). Kept only if they fired on at most 1 of 525 human train docs (research/oss-patterns/README.md).
+# Patterns are ours.
+
+[[rule]]
+id = "ko-legacy-inflation"
+lang = "ko"
+severity = "warning"
+pattern = '한\s?획을\s?(?:긋|그었|그은|그을)|전환점을\s?마련|(?:업계|시장|산업|생태계)의?\s?지형을\s?(?:바꾸|바꿨|바꾼|바꿀|바꿔)|큰\s?흐름을\s?반영|깊이\s?뿌리\s?내린|(?:주요|국내외|여러|각종)\s?(?:언론|매체)(?:에|의|들의?)\s?(?:소개|보도|주목|인용|조명)|언론의\s?(?:큰\s)?주목을\s?받|아무리\s?강조해도\s?지나치지\s?않'
+message = "의의·유산 부풀리기 ('한 획을 긋다', '전환점을 마련하다', '언론의 주목')"
+suggest = "무슨 일이 언제 있었는지만 서술 (1987년에 개관했다)"
+
+[[rule]]
+id = "ko-promo-vocab"
+lang = "ko"
+severity = "warning"
+pattern = '(?:을|를)\s?자랑(?:한다|합니다|하는|하며|해\s?왔)|명실상부(?:한|하게)|자락에\s?(?:자리한|자리\s?잡은|위치한)|꼭\s?가\s?봐야\s?할|빼어난\s|손꼽히는\s'
+message = "홍보성 수식 ('~를 자랑하는', '명실상부한', '빼어난')"
+suggest = "무엇이 있는지 사실로 (전시실은 네 개다)"
+
+[[rule]]
+id = "ko-vague-attribution"
+lang = "ko"
+severity = "warning"
+pattern = '(?<![가-힣])(?:전문가들(?:은|에\s?따르면|의\s?(?:의견|견해))|일각에서는|업계에서는\s|관계자들에\s?따르면|(?:여러|많은|다수의)\s?연구(?:에\s?따르면|들?(?:이|은)\s?(?:보여|밝혀|입증)))'
+message = "출처 없는 권위 ('전문가들은', '일각에서는', '여러 연구에 따르면')"
+suggest = "출처를 밝히거나 귀속을 지우고 명제만"
+
+[[rule]]
+id = "ko-closing-cliche"
+lang = "ko"
+severity = "warning"
+pattern = '(?:과제|도전|어려움|난관)에\s?직면(?:해\s?있|하고\s?있|했|한다|합니다|하게)|행보가\s?(?:더욱\s)?기대|앞으로가\s?(?:더욱\s?|더\s)?기대(?:된다|됩니다)|미래는\s?밝(?:다|습니다)|우리\s?모두의\s?(?:과제|숙제|몫|책임)|[가-힣]는\s?사람이\s?되겠(?:다|습니다)'
+message = "과제·전망 상투구 ('과제에 직면해 있다', '앞으로의 행보가 기대된다', '우리 모두의 과제다')"
+suggest = "마지막 사실이나 실제 계획으로 끝내기"
+
+[[rule]]
+id = "ko-ai-buzzword"
+lang = "ko"
+severity = "warning"
+pattern = '시너지(?:를|가|\s?효과)|급부상(?:하|했|한|해|중)|(?:을|를)\s?조명(?:한다|합니다|하는|했|하고)'
+message = "AI가 몰아 쓰는 어휘 (시너지, 급부상, 조명하다)"
+suggest = "구체적인 동작으로 (함께 쓰면 빌드가 20% 빨라진다)"
+
+[[rule]]
+id = "ko-copula-avoidance"
+lang = "ko"
+severity = "warning"
+pattern = '(?:으로|로)\s?자리\s?잡고\s?있|역할을\s?수행(?:하고\s?있|한다|합니다|해\s?왔)|(?:으로|로)\s?기능하고\s?있|(?:으로|로)\s?평가받고\s?있'
+message = "'~이다' 회피 서술어 ('~로 자리잡고 있다', '역할을 수행하고 있다')"
+suggest = "~이다 / ~이 있다 (협회의 전시 공간이다)"
+
+[[rule]]
+id = "ko-interpretive-rider"
+lang = "ko"
+severity = "warning"
+pattern = '(?:상징|반영|대변|방증)하며,?\s|(?:보여\s?주|드러내)며,?\s[^.!?\n]{0,40}(?:마음|의지|정신|가치|노력|태도)|함으로써\s[^.!?\n]{0,40}?(?:기여|이바지)(?:한다|합니다|했다|했습니다|하고)'
+message = "해석을 덧붙이는 부가절 ('~를 상징하며', '~함으로써 기여한다')"
+suggest = "사실만 남기고 해석은 출처가 있을 때만"
+
+[[rule]]
+id = "ko-chatbot-offer"
+lang = "ko"
+severity = "warning"
+pattern = '(?:해|알려|들어|정리해|설명해|만들어|작성해)\s?드릴까요\?|(?:더\s)?자세한\s?(?:설명|내용|정보)이\s?필요하시면|계속할까요\?|원하시면\s[^.!?\n]{0,20}?(?:알려|정리해|설명해|만들어)\s?드리|(?:좋은\s?지적|(?:훌륭한|정확한|예리한|날카로운)\s?(?:지적|질문))(?:입니다|이네요|이십니다|이시네요|이에요|이세요)|탁월한\s?(?:관점|질문|지적|통찰)'
+message = "챗봇의 제안·칭찬 ('~해 드릴까요?', '정확한 지적입니다')"
+suggest = "삭제"
+
+[[rule]]
+id = "ko-knowledge-gap"
+lang = "ko"
+severity = "warning"
+pattern = '구체적인\s?(?:정보|자료)(?:는|가)\s?(?:공개되어\s?있지\s?않|공개되지\s?않|알려져\s?있지\s?않)|확인\s?가능한\s?(?:자료|정보)에\s?따르면|알려진\s?바가\s?(?:많지\s?않|거의\s?없)|제\s?(?:지식|학습\s?데이터)(?:은|는|의)?\s?(?:기준|한계)'
+message = "지식 한계 면책 ('구체적인 정보는 공개되어 있지 않으나')"
+suggest = "모르는 것은 문장을 지우거나 출처를 찾아 쓰기"
+
+[[rule]]
+id = "ko-staged-opening"
+lang = "ko"
+severity = "warning"
+pattern = '(?:하나씩|차근차근|하나하나)\s?짚어\s?(?:보겠|드리겠|드릴게|봅시다|보자)|본격적으로\s?(?:들어가기|시작하기)\s?(?:전에|에\s?앞서)|시작해\s?볼까요|본\s?(?:보고서|리포트|레포트)에서는|이상으로\s[^.\n]{0,25}살펴보았|사전적\s?(?:의미|정의)(?:로|는|에\s?따르면)|(?:이)?라는\s?말이\s?있(?:다|습니다|듯)'
+message = "예고·명언으로 여는 도입 ('하나씩 짚어 보겠습니다', '본 보고서에서는', '사전적 의미로')"
+suggest = "첫 문장을 주장이나 핵심 사실로"
+
+[[rule]]
+id = "ko-performed-candor"
+lang = "ko"
+severity = "warning"
+pattern = '솔직히\s?(?:말해서|말하면|말씀드리면)|솔직히\?|까놓고\s?(?:말하면|말해서)|사실\s?말이죠'
+message = "가짜 솔직 훅 ('솔직히 말해서')"
+suggest = "삭제하고 주장만"
+
+[[rule]]
+id = "ko-aphorism"
+lang = "ko"
+severity = "warning"
+pattern = '[가-힣A-Za-z]+(?:은|는)\s[가-힣A-Za-z]+의\s(?:언어|통화|문법|건축학|화폐)(?:다|이다|입니다)[.]|(?:도구|수단)가\s?아니라\s(?:거울|태도|철학|언어|문화)(?:다|이다|입니다)'
+message = "경구 공식 ('X는 Y의 언어다')"
+suggest = "공식이 가리키던 구체적 주장으로"
+
+[[rule]]
+id = "ko-staccato-negation"
+lang = "ko"
+severity = "warning"
+pattern = '도\s?없(?:었)?(?:다|습니다)\.\s+[^.!?\n]{1,25}?도\s?없(?:었)?(?:다|습니다)\.'
+message = "부정 단문 연타 ('X도 없었다. Y도 없었다.')"
+suggest = "한 문장으로 합치기"
+
+[[rule]]
+id = "ko-calque"
+lang = "ko"
+severity = "warning"
+pattern = '고\s?있는\s?중(?:이다|입니다|이에요|이며|이고)|지\s?않으면\s?안\s?(?:된다|됩니다|돼요|돼)|결정을\s?만(?:든|들|듭)|대비\s[^.\n]{0,30}상이|의\s?(?:증가|감소|향상|하락|상승|저하)(?:를|을)\s?(?:보였|보인|보이|초래)|(?:이러한|이와\s?같은|이런)\s?맥락에서'
+message = "영어·일본어 구문 직역 ('~하고 있는 중이다', '~하지 않으면 안 된다', '이러한 맥락에서')"
+suggest = "한국어 동사로 (검토 중이다 / 해야 한다 / 늘었다)"
+
+[[rule]]
+id = "ko-pleonasm"
+lang = "ko"
+severity = "warning"
+pattern = '미리\s?(?:예측|예상|예고)|함께\s?협력|다시\s?재(?:시작|검토|확인|발견|정의)|먼저\s?선행|매(?:일|주|달|월|년)마다|과반수\s?이상'
+message = "같은 뜻을 겹친 표현 ('미리 예측', '함께 협력', '매주마다')"
+suggest = "한쪽만 남기기 (예측한다 / 협력한다 / 매주)"
+
+[[rule]]
+id = "ko-brings-about"
+lang = "ko"
+severity = "warning"
+pattern = '(?:향상|개선|변화|효과|혁신|성장|이점|이익|발전|감소|증가|혼란)[을를]\s?가져(?:온다|옵니다|왔다|왔습니다|올\s|오는|오며|다준)'
+message = "추상 결과 + '가져오다' ('효율의 향상을 가져온다')"
+suggest = "원인과 결과를 동사로 (이렇게 바꾸면 빨라진다)"
+
+[[rule]]
+id = "ko-balance-pair"
+lang = "ko"
+severity = "warning"
+pattern = '장단점이\s?(?:모두|공존)|장점과\s?단점이\s?(?:모두|공존|함께)|한편으로는[^.!?\n]{1,60}다른\s?한편으로는|(?:단순한|평범한|작은)\s?[가-힣]+에서\s[^.!?\n]{1,20}?(?:으로|로)\s?(?:진화|거듭|변모|탈바꿈|도약)'
+message = "균형 강박·변신 도식 ('장점과 단점이 모두 존재한다', '단순한 도구에서 필수 파트너로')"
+suggest = "핵심 비교 한 가지를 구체적으로"
+
+[[rule]]
+id = "ko-think-repeat"
+lang = "ko"
+severity = "warning"
+pattern = '[다라]고\s?(?:생각(?:한다|합니다|된다|됩니다|해요)|본다|봅니다)|[다라]는\s?생각이\s?(?:든다|듭니다)'
+message = "'~라고 생각한다' 반복"
+suggest = "근거가 있으면 단정, 정말 의견인 곳 하나만"
+max_per_file = 2
+
+[[rule]]
+id = "ko-spaced-middot-list"
+lang = "ko"
+severity = "warning"
+pattern = '(?<=[가-힣A-Za-z0-9])[  ]·[  ](?=[가-힣A-Za-z0-9])[^\n]*?(?<=[가-힣A-Za-z0-9])[  ]·[  ](?=[가-힣A-Za-z0-9])'
+message = "공백 가운뎃점 나열 ('속도 · 품질 · 비용')"
+suggest = "쉼표로 나열하거나 붙여 쓴 가운뎃점(속도·품질)"
+
+[[rule]]
+id = "ko-bold-label-list"
+lang = "ko"
+severity = "warning"
+pattern = '(?m)^[ \t]*(?:[-*+]|\d+\.)\s+\*\*[^*\n]{1,20}?[:：]\*\*|^[ \t]*(?:[-*+]|\d+\.)\s+\*\*[^*\n]{1,20}?\*\*[:：]'
+message = "굵은 머리말 + 쌍점 목록이 잦음"
+suggest = "머리말을 빼고 문장으로, 굵게는 UI 이름과 핵심 값에만"
+max_per_file = 3
+max_per_1k = 15  # 1.6.0: AI-written Korean docs 22% (train), human 0.2%
 
 # ───────────────────────── English prose ─────────────────────────
 
@@ -807,6 +975,115 @@ severity = "warning"
 pattern = '\b(?:play|plays|played|playing) an? (?:crucial|pivotal|vital|significant|critical|instrumental|integral|central|key) role\b'
 message = "'Plays a … role' inflation"
 suggest = "say what it does"
+
+# 1.6.0: more tells that three or more detectors list independently, adding giudegio-ai/claude-skill-humanizer,
+# Aparnabuilds/humanizer, Kevjade/humanizer-pro, jpeggdev/humanize-writing, Aboudjem/humanizer-skill,
+# lguz/humanize-writing-skill and Hainrixz/humanizalo (all MIT) to the sources above. Same bar: at most 1 of 499
+# human train docs. Patterns are ours.
+
+[[rule]]
+id = "en-colon-reveal"
+lang = "en"
+severity = "warning"
+pattern = '(?m)(?:^\s*|(?<=[.!?]\s))the (?:catch|kicker|upshot|payoff|twist|punchline|secret|takeaway|bottom line|irony|surprise|best part|worst part)\s*:\s|\bthe (?:answer|reason|problem|difference|catch|upshot|issue|question|point|trick|fix) is (?:simple|straightforward|this|obvious)\s*:|\b(?:comes?|boils?|boiled|came) down to (?:one|a single|this|two|three)(?: \w+)?\s*:'
+message = "Colon reveal ('The best part: …', 'The answer is simple: …')"
+suggest = "write it as a plain sentence"
+
+[[rule]]
+id = "en-false-agency"
+lang = "en"
+severity = "warning"
+pattern = '\bthe (?:data|numbers|evidence|metrics|results) (?:tell|tells|show|shows|reveal|reveals) us\b|\bthe (?:culture|market|decision|conversation|complaint) (?:shifts|emerges|rewards|moves toward|becomes a fix)\b'
+message = "False agency ('the data tells us', 'the market rewards')"
+suggest = "name who decides or acts"
+
+[[rule]]
+id = "en-buzz-metaphor"
+lang = "en"
+severity = "warning"
+pattern = '\bvirtuous (?:cycle|circle)\b|\b(?:growth|data|content|virtuous|self-?reinforcing) flywheel\b|\bflywheel effect\b|\b(?:competitive|economic|defensible|durable) moats?\b|\b(?:our|your|a|their) north star\b|\bnorth[- ]star metric\b|\bharness(?:es|ed|ing)? the (?:full )?(?:power|potential|capabilities)\b|\bthought[- ]leader(?:s|ship)?\b|\bresonat(?:e|es|ed|ing) (?:deeply |strongly )?with\b|\bpoised (?:to|for)\b'
+message = "Strategy-deck metaphor or buzz phrase (flywheel, north star, harness the power, resonates with, poised to)"
+suggest = "say the literal mechanism or effect"
+
+[[rule]]
+id = "en-meaning-telling"
+lang = "en"
+severity = "warning"
+pattern = '\breflect(?:s|ed|ing)? (?:a |the )?(?:broader|larger|wider) (?:trends?|shifts?|movements?|patterns?)\b|\brepresents? (?:a |the )?(?:broader|larger|fundamental|major|significant) shift\b|\bdeeply rooted\b|\bthe (?:implications|stakes|consequences|reasons|results|costs|risks|challenges|reality) (?:are|is) (?:significant|high|real|clear|profound|enormous|structural|substantial|serious|staggering|far-reaching)\b'
+message = "Meaning-telling ('reflects broader trends', 'represents a fundamental shift', 'the stakes are high')"
+suggest = "state the fact and let the reader judge it"
+
+[[rule]]
+id = "en-hollow-phrase"
+lang = "en"
+severity = "warning"
+pattern = '\bat the end of the day\b|\bwhen all is said and done\b|\bthe bottom line is\b|\bat (?:its|their) core\b|\bonly time will tell\b|\bit remains to be seen\b|\bexciting times (?:lie|are) ahead\b|\bthe future is bright\b'
+message = "Hollow stock phrase ('at the end of the day', 'at its core', 'only time will tell')"
+suggest = "cut it and keep the claim"
+
+[[rule]]
+id = "en-misconception-frame"
+lang = "en"
+severity = "warning"
+pattern = '\bcontrary to (?:popular|common) (?:belief|opinion|wisdom)\b|\bconventional wisdom (?:says|holds|suggests|tells us)\b|\bmost people (?:think|assume|believe)\b|\bmany (?:people )?assume\b'
+message = "Misconception set-up ('Contrary to popular belief', 'Most people think')"
+suggest = "state the claim; cite the misconception only if it is documented"
+
+[[rule]]
+id = "en-false-concession"
+lang = "en"
+severity = "warning"
+pattern = '\bwhile [^.,;!?\n]{1,50}? (?:is|are|may be|seems?) (?:impressive|promising|exciting|powerful|useful|valuable)[^.;!?\n]{0,5}, [^.;!?\n]{1,60}? remains? (?:a |an )?(?:challenge|concern|hurdle|open question|problem)\b|\b(?:is|are) not without (?:its |their )?(?:challenges|drawbacks|limitations|flaws|critics)\b'
+message = "False concession ('While X is impressive, Y remains a challenge')"
+suggest = "name what is impressive and what the challenge is, or pick a side"
+
+[[rule]]
+id = "en-speculative-gap"
+lang = "en"
+severity = "warning"
+pattern = '\bwhile (?:specific )?details (?:are|remain) (?:limited|scarce)\b|\bbased on (?:the )?available information\b|\bspecific details (?:are|remain) (?:limited|scarce|unavailable)\b'
+message = "Limited-information hedge ('while specific details are limited')"
+suggest = "find the source or cut the sentence"
+
+[[rule]]
+id = "en-whether-youre"
+lang = "en"
+severity = "warning"
+pattern = "\\bwhether you['’]re (?:a|an|just) [^.,;!?\\n]{1,40}? or (?:a |an |just )?[^.,;!?\\n]{1,40}"
+message = "False-breadth opener ('Whether you're a beginner or an expert')"
+suggest = "name the actual reader"
+
+[[rule]]
+id = "en-promo-phrases"
+lang = "en"
+severity = "warning"
+pattern = '\bnestled (?:in|among|within|between)\b|\bin the heart of\b|\brenowned for\b|\bbreathtaking\b|\bmust-visit\b|\bstunning (?:array|views?|collection)\b|\brich (?:history|heritage)\b|\bvibrant community\b'
+message = "Brochure phrase ('nestled in', 'in the heart of', 'renowned for')"
+suggest = "give a checkable detail"
+
+[[rule]]
+id = "en-wh-cleft-opener"
+lang = "en"
+severity = "warning"
+pattern = '(?m)(?:^\s*|(?<=[.!?]\s))what (?:makes|made) (?:this|it|that|them) (?:work|special|different|unique|powerful|possible)\b[^.!?\n]{0,30}\b(?:is|was)\b'
+message = "Wh-cleft opener ('What makes this work is …')"
+suggest = "start from the real subject (The cache makes this work)"
+
+[[rule]]
+id = "en-what-if-i-told-you"
+lang = "en"
+severity = "warning"
+pattern = '\bwhat if i told you\b'
+message = "Rhetorical set-up ('What if I told you …')"
+suggest = "make the claim directly"
+
+[[rule]]
+id = "en-in-an-era"
+lang = "en"
+severity = "warning"
+pattern = '\bin (?:an|this) era (?:of|where|when|in which)\b|\bin the age of\b'
+message = "Era framing ('In an era of …')"
+suggest = "start with the specific context or cut"
 
 [[rule]]
 id = "dash-overuse"

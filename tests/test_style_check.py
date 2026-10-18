@@ -114,6 +114,125 @@ class StyleCheck(unittest.TestCase):
     def test_double_passive_past_tense(self):
         self.assertIn("ko-double-passive", run("p.md", "# t\n\n문서가 작성되어졌다.\n").stdout)
 
+    def test_rules_absorbed_in_1_6_0(self):
+        # 1.6.0: every example a source lists is caught one by one; near-misses stay clean, including human-doc
+        # sentences from the train split that a wider draft of the pattern flagged (research/oss-patterns/).
+        cases = {
+            "ko-legacy-inflation": (
+                ["지역 문화 발전의 중요한 전환점을 마련했다.", "이 앨범은 대중음악사에 한 획을 그었다.", "업계 지형을 바꾸는 제품이다.", "국내외 언론의 주목을 받았다.", "테스트의 중요성은 아무리 강조해도 지나치지 않다."],
+                ["교차로의 전환점에서 좌회전합니다.", "데이터 흐름을 바꿨습니다.", "언론 보도 자료를 첨부합니다."]),
+            "ko-promo-vocab": (
+                ["풍부한 문화유산과 빼어난 자연경관을 자랑하는 마을이다.", "명실상부한 업계 1위다.", "설악산 자락에 자리한 마을이다."],
+                ["자랑할 만한 결과는 아니다.", "손꼽아 기다렸다."]),
+            "ko-vague-attribution": (
+                ["전문가들은 이 하천이 핵심적인 역할을 한다고 본다.", "일각에서는 성공 사례로 평가한다.", "여러 연구에 따르면 효과가 있다.", "업계에서는 이를 표준으로 본다."],
+                ["Kim 등(2023)의 연구에 따르면 지연이 줄었다.", "전문가 모드에서 실행합니다.", "업계 표준을 따른다."]),
+            "ko-closing-cliche": (
+                ["여러 과제에 직면해 있다.", "앞으로의 행보가 기대된다.", "회사의 미래는 밝다.", "기후 위기는 우리 모두의 과제다.", "앞으로 배우는 사람이 되겠습니다."],
+                ["다음 버전에서 기능이 추가됩니다.", "업계의 귀추가 주목된다.", "사람이 직접 확인한다.", "이러한 장애물에도 불구하고, 향상된 최적화 기술을 구현할 수 있습니다."]),
+            "ko-ai-buzzword": (
+                ["전통 식단과 시너지를 만들어냈다.", "새 강자로 급부상했다.", "이 책은 도시 문제를 조명한다."],
+                ["조명을 켠다.", "무대 조명이 밝다.", "가장 널리 사용되는 도구 중 하나로 자리매김했었습니다."]),
+            "ko-copula-avoidance": (
+                ["협회의 전시 공간으로 자리잡고 있다.", "거점 역할을 수행하고 있다.", "대안으로 기능하고 있다."],
+                ["서버가 요청을 수행한다.", "함수로 기능을 나눈다.", "배열을 보유하고 있다."]),
+            "ko-interpretive-rider": (
+                ["지역의 산과 바다를 상징하며, 주민들의 마음을 보여준다.", "규칙을 정비함으로써 생태계 발전에 기여한다."],
+                ["캐시를 비움으로써 메모리를 확보한다.", "상태를 반영해 화면을 다시 그린다."]),
+            "ko-chatbot-offer": (
+                ["예시를 들어 드릴까요?", "더 자세한 설명이 필요하시면 말씀해 주세요.", "원하시면 표로 정리해 드리겠습니다.", "정확한 지적이시네요.", "정말 탁월한 관점입니다."],
+                ["자세한 설명은 문서를 참고하세요.", "지적 재산권을 보호합니다.", "좋은 질문입니다."]),
+            "ko-knowledge-gap": (
+                ["설립 연도에 대한 구체적인 정보는 공개되어 있지 않으나 1990년대로 추정된다.", "알려진 바가 많지 않다."],
+                ["2025년 기준 사용자는 3만 명이다."]),
+            "ko-staged-opening": (
+                ["알아야 할 내용을 하나씩 짚어드릴게요.", "본격적으로 들어가기 전에 용어를 정리합니다.", "그럼 시작해 볼까요?", "본 보고서에서는 원인을 다룬다.", "이상으로 세 가지 방법을 살펴보았다.", "사전적 의미로 협업은 함께 일하는 것이다."],
+                ["다음 단계로 넘어갑니다.", "사전 데이터를 불러온다.", "웹 이벤트에 대해 알아야 할 모든 것을 알게 되었을 것입니다.", "어떤 일이 일어나는지 자세히 알아보고자 합니다."]),
+            "ko-performed-candor": (
+                ["솔직히 말해서, 그건 자주 쓰느냐에 달렸습니다."],
+                ["솔직한 후기"]),
+            "ko-aphorism": (
+                ["대칭은 신뢰의 언어다.", "AI는 도구가 아니라 거울이다."],
+                ["Python은 범용 언어다."]),
+            "ko-staccato-negation": (
+                ["대칭에 대한 선호도 없었다. 미적 편향도 없었다."],
+                ["반환 값은 없다. 대신 이벤트를 보낸다.", "모든 질문에 대답할 필요는 없다. 그리고 리스트에 모든 것을 할 필요는 없다."]),
+            "ko-calque": (
+                ["검토하고 있는 중이다.", "반드시 확인하지 않으면 안 된다.", "결정을 만든다.", "전년 대비 구성이 상이하다.", "매출의 증가를 보였다.", "이러한 맥락에서 개선안을 마련했다."],
+                ["검토 중이다.", "확인하지 않으면 오류가 난다.", "전년 대비 10% 늘었다.", "같은 맥락에서 보면 이해된다.", "HTML 이미지는 여기서 빛을 발합니다.", "약 30%의 이익 감소가 발생했다."]),
+            "ko-pleonasm": (
+                ["결과를 미리 예측한다.", "두 팀이 함께 협력한다.", "매주마다 회의를 한다."],
+                ["미리 설정한다.", "다시 시작한다.", "공간을 미리 예약한다.", "스레드가 서로 협력관계일 경우 대기시킨다."]),
+            "ko-brings-about": (
+                ["이러한 변화는 효율성의 향상을 가져올 수 있습니다.", "새 정책은 큰 변화를 가져왔다."],
+                ["서버에서 데이터를 가져온다.", "검색 결과를 가져오는 동안", "비즈니스적인 성과를 가져왔다고 소개했다."]),
+            "ko-balance-pair": (
+                ["장점과 단점이 모두 존재한다.", "단순한 도구에서 필수 파트너로 진화했다."],
+                ["장점은 속도다.", "작은 함수에서 시작한다."]),
+            "ko-spaced-middot-list": (
+                ["속도 · 품질 · 비용을 본다."],
+                ["속도·품질·비용을 본다.", "`<!--$?-->`·`<!--/$-->` 주석과 `B:0`·`S:0` 템플릿"]),
+            "ko-personified-subject": (
+                ["결과가 증명한다.", "시장이 원한다.", "기술이 질문을 던진다."],
+                ["사용자가 원한다."]),
+            "en-colon-reveal": (
+                ["The catch: it only works offline.", "Fine. The best part: it learns.", "The answer is simple: use a queue.", "It all comes down to one thing: latency."],
+                ["The takeaway is in the next section.", "Note: the cache is cleared on restart.", "The reason is this configuration key."]),
+            "en-false-agency": (
+                ["The data tells us that users churn early.", "The market rewards speed.", "The decision emerges from the review."],
+                ["The data show a clear trend.", "The metrics show up in the dashboard."]),
+            "en-buzz-metaphor": (
+                ["This creates a virtuous cycle.", "Retention is our north star.", "Harness the power of streams.", "The message resonates with developers.", "The team is poised for growth.", "She is a thought leader in AI."],
+                ["The flywheel arm is machined steel.", "Point the telescope at the North Star.", "Wire the harness to the board.", "The circuit resonates at 50 Hz."]),
+            "en-meaning-telling": (
+                ["This reflects broader trends in the industry.", "It represents a fundamental shift.", "The implications are significant.", "The stakes are high."],
+                ["The value reflects the current state.", "The risks are listed below."]),
+            "en-hollow-phrase": (
+                ["At the end of the day, users want speed.", "At its core, the tool is a parser.", "Only time will tell.", "It remains to be seen whether teams adopt it."],
+                ["The job runs at the end of each day.", "The core module loads first."]),
+            "en-misconception-frame": (
+                ["Contrary to popular belief, caching is cheap.", "Most people think this is a hiring problem."],
+                ["The belief propagation step runs first."]),
+            "en-false-concession": (
+                ["While the model is impressive, cost remains a challenge.", "The approach is not without its challenges."],
+                ["While the job is running, the lock remains held."]),
+            "en-speculative-gap": (
+                ["While specific details are limited, the firm grew.", "Based on available information, it launched in 2019."],
+                ["Details are in the appendix."]),
+            "en-whether-youre": (
+                ["Whether you're a beginner or a seasoned pro, this guide helps.", "Whether you're a startup or an enterprise, it scales."],
+                ["Check whether you're logged in."]),
+            "en-promo-phrases": (
+                ["The village is nestled in the hills.", "It is renowned for its stunning views."],
+                ["Nested routes are supported."]),
+            "en-wh-cleft-opener": (
+                ["What makes this work is the cache.", "What makes it special is the API."],
+                ["What makes the build slow? Profile it."]),
+            "en-what-if-i-told-you": (
+                ["What if I told you the cache is slower?"],
+                ["What if the file is missing?"]),
+            "en-in-an-era": (
+                ["In an era of microservices, deploys multiply."],
+                ["The era field stores the epoch."]),
+        }
+        for rule, (bad, ok) in cases.items():
+            for text in bad:
+                self.assertIn(f"[{rule}]", run("b.md", "# t\n\n" + text + "\n").stdout, f"{rule}: {text}")
+            for text in ok:
+                self.assertNotIn(f"[{rule}]", run("o.md", "# t\n\n" + text + "\n").stdout, f"{rule}: {text}")
+
+    def test_bold_label_lists_and_repeated_opinion(self):
+        labels = "".join(f"- **항목{i}:** 설정을 바꿉니다.\n" for i in range(5))
+        self.assertIn("ko-bold-label-list", run("l.md", "# 설정\n\n" + labels).stdout)
+        long_doc = "# 설정\n\n" + labels + "\n" + "이 함수는 입력 배열을 정렬한 뒤 새 배열을 반환합니다. " * 80 + "\n"
+        self.assertNotIn("ko-bold-label-list", run("m.md", long_doc).stdout)
+        self.assertNotIn("ko-bold-label-list", run("n.md", "# 설정\n\n" + labels.replace("**", "")).stdout)
+        self.assertIn("ko-think-repeat", run("t.md", "# 의견\n\n좋다고 생각한다. 맞다고 생각한다. 옳다고 본다.\n").stdout)
+        self.assertNotIn("ko-think-repeat", run("u.md", "# 의견\n\n좋다고 생각한다. 맞다고 본다.\n").stdout)
+        self.assertIn("ko-personified-subject", run("p.md", "# 시장\n\n결과가 증명한다.\n").stdout)
+        self.assertNotIn("ko-chatbot-offer", run("q.md", "# 답\n\n좋은 질문입니다.\n").stdout)  # ko-chatbot-residue reports it
+
+
     def test_density_threshold_spares_long_files(self):
         # 1.5.1: en-filler-words and dash-overuse count per 1,000 words, so a long doc is not flagged for its length.
         filler = "We just need the cache. " * 5
