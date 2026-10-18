@@ -3,6 +3,12 @@
 버전은 `plugins/ai-design/.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`에 같은 값으로 기록합니다.
 태그 대신 커밋 SHA를 적어 두므로 pre-commit과 GitHub Action에서는 이 SHA를 `rev`나 `uses`에 고정해 씁니다.
 
+## 1.6.1
+
+- `ui-raw-font`: `@font-face` 블록 안의 `font-family`는 보고하지 않음. 이 값은 불러올 글꼴의 이름을 정하는 선언이라 토큰
+  밖의 글꼴 스택이 아님. 일반 CSS 규칙과 `style` 속성의 글꼴 스택은 그대로 보고. 사이트 3곳에서 비교한 결과 줄어든 보고
+  12건은 모두 `@font-face` 선언이었고, 남은 4건은 실제 규칙의 글꼴 스택
+
 ## 1.6.0 (`c64fa89`)
 
 <!-- style-ignore-start -->

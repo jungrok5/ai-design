@@ -1254,7 +1254,9 @@ suggest = "var(--token) from the design system (default: polish-ui/design/tokens
 id = "ui-raw-font"
 kind = "markup"
 severity = "warning"
-pattern = '(?<![\w-])font-family\s*:\s*(?!\s*(?:var\(|inherit|initial|unset))'
+# Inside an ordinary CSS block or a style attribute only. In an @font-face block, font-family names the face being
+# declared, which is how a token's font gets loaded, so it is not a raw stack.
+pattern = '(?:(?<!@font-face)(?<!@font-face )\{[^{}]*?|\bstyle\s*=\s*["\x27][^"\x27]*?)(?<![\w-])(?P<hit>font-family\s*:\s*(?!\s*(?:var\(|inherit|initial|unset)))'
 message = "Font stack outside the design tokens"
 suggest = "font-family: var(--font-sans) or var(--font-mono)"
 

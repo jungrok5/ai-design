@@ -41,6 +41,16 @@ class StyleCheck(unittest.TestCase):
         prose = '<p>파이프라인 · 프로토콜 · 서버 루프 같은 기술 과정을 영상으로 그립니다.</p>\n'
         self.assertIn("ko-spaced-middot-list", run("p.html", prose).stdout)
 
+    def test_raw_font_skips_font_face_declarations(self):
+        # font-family inside @font-face names the face being loaded; a stack in a rule or a style attribute is reported.
+        face = '@font-face{font-family:"JetBrains Mono";src:url(a.woff2)}\n@font-face {\n  font-family: Pretendard;\n}\n:root{--font-mono:"JetBrains Mono",monospace}\np{font-family:var(--font-mono)}\n'
+        self.assertNotIn("ui-raw-font", run("face.css", face).stdout)
+        self.assertIn("ui-raw-font", run("rule.css", "p{color:var(--ink);\n  font-family: Arial, sans-serif}\n").stdout)
+        self.assertIn("ui-raw-font", run("attr.html", '<p style="font-family: Arial">x</p>\n').stdout)
+        r = run("mix.css", '@font-face{font-family:X;src:url(x.woff2)}\nh1{font-family:Georgia,serif}\n')
+        self.assertEqual(r.stdout.count("ui-raw-font"), 1, r.stdout)
+        self.assertIn(":2:", r.stdout)
+
     def test_raw_color_is_a_warning_and_tokens_are_fine(self):
         self.assertIn("ui-raw-color", run("a.css", "a{color:#1d4ed8}\n").stdout)
         self.assertNotIn("ui-raw-color", run("b.css", ":root{--accent:#1d4ed8}\na{color:var(--accent)}\n").stdout)
