@@ -52,7 +52,7 @@ Python 3.11 이상이 필요합니다.
 
 ```yaml
 - repo: https://github.com/jungrok5/ai-design
-  rev: ece33e4e76cb7388c47156e8378184e6ba136f94  # 1.5.1
+  rev: c64fa8942670fa358bd7d907a30f902e6b3328cf  # 1.6.0
   hooks:
     - id: ai-design-style
 ```
@@ -70,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: jungrok5/ai-design@ece33e4e76cb7388c47156e8378184e6ba136f94  # 1.5.1
+      - uses: jungrok5/ai-design@c64fa8942670fa358bd7d907a30f902e6b3328cf  # 1.6.0
         with:
           warn-only: "true"   # 첫 도입 기간에는 실패 처리하지 않음
           # baseline: .style/baseline.txt

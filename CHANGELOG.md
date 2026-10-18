@@ -3,7 +3,7 @@
 버전은 `plugins/ai-design/.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`에 같은 값으로 기록합니다.
 태그 대신 커밋 SHA를 적어 두므로 pre-commit과 GitHub Action에서는 이 SHA를 `rev`나 `uses`에 고정해 씁니다.
 
-## 1.6.0
+## 1.6.0 (`c64fa89`)
 
 <!-- style-ignore-start -->
 - AI 문체 검출 도구 13곳(모두 MIT)의 패턴을 1.5.0과 같은 방법으로 측정해서 사람 글을 잘못 보고하지 않는 것만 경고 규칙으로
