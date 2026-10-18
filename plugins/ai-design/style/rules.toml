@@ -311,6 +311,17 @@ message = "동작을 비유 동사로 표현 ('걸러 냅니다', '덜어 줍니
 suggest = "실제 동작 동사로 교체 (걸러 냅니다 → 검사하고 위치를 알립니다)"
 max_per_file = 1
 
+# Measured on research/ai-vs-human (docs/measurement.md, 1.6.0): every branch is narrowed until it reports no human doc.
+# "길" needs a -는 adnominal and a metaphor continuation, so 길이 (length), 길찾기, 지름길 and the literal "가는 길에"
+# stay quiet; bare 여정, 열쇠, 첫걸음 and 청사진 are used by human translators ("React 여정을 시작", "JavaScript 첫걸음").
+[[rule]]
+id = "ko-metaphor-noun"
+lang = "ko"
+severity = "warning"
+pattern = '[가-힣]는\s?길(이\s?(있|없)|은\s|을\s?(따라|안내|보여|알려|제시|제공|찾아|살펴|정리|소개)|입니다|이다|이에요|도\s?(있|없)|만\s?(있|없)|(?=[ \t.:]*(\n|$)))|(의|가는|향하는|이르는|따라가는)\s?여정|여정을\s?(따라|떠나)|전체\s?지도|한\s?장의\s?지도|지도처럼|(?<![가-힣])문(을\s?(열어\s?(줍|주는|주고|줄|드립|둡)|엽니다|여는)|이\s?열립)|(가능성|기회)의\s?문(을|이|은|도|\s)|핵심\s?열쇠|열쇠를\s?쥐|(성공|해결|이해)의\s?열쇠|첫\s?걸음을\s?(내딛|뗍|떼|딛)|발판(을\s?마련|으로\s?삼|이\s?됩|이\s?되어\s?줍)|디딤돌|나침반|청사진(을\s?(제시|그리|그려|보여|펼)|입니다|이\s?됩)'
+message = "과정·연결을 비유 명사로 표현 ('가는 길', '여정', '전체 지도')"
+suggest = "실제 대상과 동작으로 (샘플 페이지로 가는 길이 있습니다 → 샘플 페이지 링크가 있습니다)"
+
 [[rule]]
 id = "ko-universal-claim"
 lang = "ko"

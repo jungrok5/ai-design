@@ -16,6 +16,8 @@ https://github.com/jungrok5/ai-design/blob/main/docs/standard.md
   "The best part:", "What makes this work is", "at the end of the day". No column clichés (`그 어느 때보다`,
   `가능성을 열어준다`, `과제도 남아 있다`, `한 획을 그었다`, `앞으로의 행보가 기대된다`), unsourced authority
   (`전문가들은`, `일각에서는`), chatbot offers (`~해 드릴까요?`), or lists of bold labels (`- **성능:** …`).
+  No metaphor for a link or a process (`샘플 페이지로 가는 길`, `~의 여정`, `전체 지도`, `걸러 냅니다`): name the
+  real object and action (`샘플 페이지 링크`).
 <!-- style-ignore-end -->
 - Start with the fact and end on the last fact: no run-up, no recap, no forced groups of three, no count
   run-up (`변경은 세 가지입니다`), no advice voice (`~하시길 권합니다`, `~하는 편이 안전합니다`), no stock

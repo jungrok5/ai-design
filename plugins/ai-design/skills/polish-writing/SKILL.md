@@ -83,7 +83,10 @@ A page can pass every rule and still read as generated. Before you finish, read 
   paired sentence into two matching short sentences is the same stamp. Do not run three or more short sentences in a
   row; join a cause and its result in one sentence. Lists of exactly three examples need a reason to be three.
 - **Literal verbs, one subject.** Name what the thing does (`검사합니다`, `알립니다`, `막습니다`), not a metaphor
-  (`걸러 냅니다`, `덜어 줍니다`). Keep one subject per sentence; do not start with the product and end with something else.
+  (`걸러 냅니다`, `덜어 줍니다`). Name the real object, not a metaphor noun for a link or a flow
+  (`샘플 페이지로 가는 길이 있습니다` → `샘플 페이지 링크가 있습니다`; `패킷을 받는 길`, `~의 여정`, `전체 지도`,
+  `문을 열어 줍니다`, `열쇠`, `첫걸음`, `발판`, `디딤돌`, `나침반`, `청사진`). Keep one subject per sentence; do not
+  start with the product and end with something else.
 - **One name per concept, one concept per name.** Do not rotate synonyms (흔적 / AI 티, 결과 / 출력) to avoid
   repetition, and do not use one word for two actors (the AI that wrote the text and the AI that fixes it). An internal
   name (a theme or code name) gets a plain noun the first time.

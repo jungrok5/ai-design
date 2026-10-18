@@ -14,12 +14,17 @@
     the day", "Contrary to popular belief", "Whether you're a … or …", "What makes this work is" 등
   - `ko-personified-subject`가 "시장이 원한다", "결과가 증명한다"도 보고
   - 시험용에서 새 규칙이 보고한 문서는 한국어 AI 8/35(23%), 사람 1/139, 영어 AI 0/13, 사람 2/150
+- 경고 규칙 `ko-metaphor-noun`: 연결이나 과정을 비유 명사로 쓴 표현("샘플 페이지로 가는 길이 있습니다", "패킷을 받는
+  길", "~의 여정", "전체 지도", "문을 열어 줍니다", "첫걸음을 내딛", "디딤돌", "나침반")
+- 사람 문서를 보고하지 않도록 패턴을 좁힘: `길이`(length), `길찾기`, `지름길`, "집에 가는 길에", "React 여정을 시작",
+  "JavaScript 첫걸음", "~하는 열쇠입니다"는 보고하지 않음. 비교 묶음에서 사람 문서 보고는 학습용 0/525, 시험용 0/139,
+  표본 밖 Markdown 0/836 ([docs/measurement.md](docs/measurement.md#비유-명사-160))
 <!-- style-ignore-end -->
 - `polish-writing` 스킬: 문단 순서 점검, 따라 할 일은 동사로, 군더더기를 지운 뒤 빠진 성분 점검, 여러 신호가 겹친
   곳만 고치기, 마지막 자기 점검, 원문의 추측 표현 유지. [docs/standard.md](docs/standard.md)에도 같은 기준 추가
 - 후보 목록과 채택 이유, 출처 커밋: [research/oss-patterns/](research/oss-patterns/). 후보를 검사기와 같은 방식으로
   세는 `research/oss-patterns/measure.py` 추가
-- 스킬과 Cursor, Copilot, AGENTS.md 어댑터의 규칙 요약에 위 표현 추가
+- 스킬과 `docs/standard.md`, Cursor, Copilot, AGENTS.md 어댑터의 규칙 요약에 위 표현 추가
 
 ## 1.5.1 (`ece33e4`)
 
