@@ -364,6 +364,24 @@ class StyleCheck(unittest.TestCase):
         for rule in cases:
             self.assertNotIn(rule, out)
 
+    def test_quoted_contrast_and_slogan(self):
+        """1.7.1: a quoted 'X'가 아닌 'Y' pair and a quoted 'A 대신 B' motto, seen in a résumé reviewed with the plugin."""
+        for line in ["서버 부하가 'NPC 총수'가 아닌 '유저 주변 활성 NPC 수'로 수렴합니다.",
+                     "재진입 시 재전송 없음, '총량 대신 활성량만 처리'", "“총량 대신 활성량만 처리” 철학으로 설계했습니다."]:
+            self.assertIn("ko-reframe", run("q.md", f"# 소개\n\n{line}\n").stdout, line)
+        ok = ("# 테스트\n\nform의 필드명은 **'renewal_date'** 대신 **'due_back'**으로 나타납니다.\n"
+              "전송 계층에서 TCP 대신 QUIC을 사용합니다. 'id'가 아닌 값은 무시합니다.\n")
+        self.assertNotIn("ko-reframe", run("ok.md", ok).stdout)
+
+    def test_game_terms_and_year_ranges_are_not_hype_or_dashes(self):
+        """1.7.1: 'seamless field' is a game term; 2007 – 2015 is a range, not dash punctuation."""
+        self.assertNotIn("en-hype", run("g.md", "# Work\n\nR&D on large-scale NPC processing and seamless fields.\n").stdout)
+        self.assertIn("en-hype", run("h.md", "# Work\n\nA seamless experience for every team.\n").stdout)
+        years = "# 경력\n\n" + "".join(f"- 회사 {i} · 20{i:02d} – 20{i + 1:02d} · 2024 – 현재\n" for i in range(10))
+        self.assertNotIn("dash-overuse", run("y.md", years).stdout)
+        prose = "# 글\n\n" + "이 값은 — 기본값과 달리 — 바뀝니다. " * 6 + "\n"
+        self.assertIn("dash-overuse", run("p.md", prose).stdout)
+
     def test_english_mannered_copy(self):
         """1.7.0: Claude-era mannered prose and landing-page formulas; no hit in 985 human English docs."""
         cases = {"en-mannered": ["This check earns its keep.", "A dial worth turning.", "The load-bearing piece of the design."],

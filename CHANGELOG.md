@@ -3,6 +3,17 @@
 버전은 `plugins/ai-design/.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`에 같은 값으로 기록합니다.
 태그 대신 커밋 SHA를 적어 두므로 pre-commit과 GitHub Action에서는 이 SHA를 `rev`나 `uses`에 고정해 씁니다.
 
+## 1.7.1
+
+<!-- style-ignore-start -->
+- `ko-reframe`: 따옴표로 감싼 대비("'NPC 총수'가 아닌 '유저 주변 활성 NPC 수'로")와 따옴표 표어("'총량 대신 활성량만
+  처리'")도 보고. 플러그인으로 이력서 레포를 검토하다 놓친 표현. 사람이 쓴 한국어 문서 1,500개에서 보고 0건, 플러그인 없이
+  만든 페이지에서 1개 추가("'내일'이 아닌 '오늘'")
+- 오탐 수정: `en-hype`가 게임 용어 "seamless field(s)", "seamless world"를 보고하지 않음. `dash-overuse`가 숫자 사이의
+  범위 표기("2007 – 2015", "09:00 – 18:00", "2024 – 현재")를 줄표로 세지 않음. 생성한 페이지 42개에서 `dash-overuse`
+  보고 7개 → 4개
+<!-- style-ignore-end -->
+
 ## 1.7.0 (`4695610`)
 
 <!-- style-ignore-start -->
