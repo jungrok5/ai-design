@@ -3,7 +3,7 @@
 버전은 `plugins/ai-design/.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`에 같은 값으로 기록합니다.
 태그 대신 커밋 SHA를 적어 두므로 pre-commit과 GitHub Action에서는 이 SHA를 `rev`나 `uses`에 고정해 씁니다.
 
-## 1.7.0
+## 1.7.0 (`4695610`)
 
 <!-- style-ignore-start -->
 - 웹페이지·소개 페이지 문구의 비유와 슬로건을 잡는 경고 규칙. 플러그인 없이 Claude Code(Opus, Sonnet, Haiku)에게 웹페이지와
