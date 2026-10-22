@@ -349,8 +349,8 @@ suggest = "무엇을 기준으로 나눴는지 그대로 (두 축으로 봅니�
 id = "ko-reframe"
 lang = "ko"
 severity = "warning"
-pattern = '(?:은|는)\s[가-힣]{1,6}(?:이|가)\s아니라\s[가-힣]{1,8}(?:입니다|이다|예요)\.|단순한\s[가-힣]{1,8}(?:이|가)\s(?:아니라|아닙니다)[^.\n]{0,20}(?:입니다|이다|예요)\.|(?:필요한|중요한)\s?(?:건|것은)\s[^.\n]{1,20}?(?:이|가)\s아니라|도\s(?:아니다|아닙니다|아니에요)\.\s+[^.\n]{1,20}?도\s아(?:니|닙)|(?:자리|일|것)이지\s[^.\n]{1,25}?(?:자리|일|것)(?:이|가)?\s?아닙니다'
-message = "반전 경구 ('모노레포는 목적이 아니라 수단입니다', '리뷰는 코드를 보는 일이지 사람을 평가하는 일이 아닙니다')"
+pattern = '''(?:은|는)\s[가-힣]{1,6}(?:이|가)\s아니라\s[가-힣]{1,8}(?:입니다|이다|예요)\.|단순한\s[가-힣]{1,8}(?:이|가)\s(?:아니라|아닙니다)[^.\n]{0,20}(?:입니다|이다|예요)\.|(?:필요한|중요한)\s?(?:건|것은)\s[^.\n]{1,20}?(?:이|가)\s아니라|도\s(?:아니다|아닙니다|아니에요)\.\s+[^.\n]{1,20}?도\s아(?:니|닙)|(?:자리|일|것)이지\s[^.\n]{1,25}?(?:자리|일|것)(?:이|가)?\s?아닙니다|(?<![^\s(,])['‘"“][가-힣A-Za-z0-9][가-힣A-Za-z0-9 ]{0,19}['’"”](?:이|가)\s아닌\s['‘"“][가-힣A-Za-z0-9][가-힣A-Za-z0-9 ]{0,24}['’"”]|(?<![^\s(,])['‘"“][가-힣][가-힣 ]{0,11}\s대신\s[가-힣][가-힣 ]{0,13}['’"”]'''
+message = "반전 경구 ('모노레포는 목적이 아니라 수단입니다', '리뷰는 코드를 보는 일이지 사람을 평가하는 일이 아닙니다', 따옴표 대비 'X'가 아닌 'Y', 따옴표 표어 'A 대신 B')"
 suggest = "부정 없이 사실로 (모노레포로 공용 코드 변경을 PR 하나로 끝냈습니다)"
 
 [[rule]]
@@ -778,7 +778,7 @@ suggest = "plain verb or the fact itself"
 id = "en-hype"
 lang = "en"
 severity = "error"
-pattern = '\b(seamless(ly)?|cutting-edge|game-?chang(er|ing)|revolutioniz\w*|unleash\w*|supercharg\w*|best-in-class|world-class|next-gen(eration)?|unlock the (power|potential)|state-of-the-art|empower(s|ing)?)\b'
+pattern = '\b(seamless(ly)?(?!\s(?:fields?|worlds?|maps?|zones?|open[- ]worlds?|loading|servers?)\b)|cutting-edge|game-?chang(er|ing)|revolutioniz\w*|unleash\w*|supercharg\w*|best-in-class|world-class|next-gen(eration)?|unlock the (power|potential)|state-of-the-art|empower(s|ing)?)\b'
 message = "Sales language"
 suggest = "say what the user can do, with a number if you have one"
 
@@ -1174,7 +1174,7 @@ suggest = "start with the specific context or cut"
 id = "dash-overuse"
 lang = "any"
 severity = "warning"
-pattern = '(?<!\|) [—–] (?!\|)'  # a dash alone in a table cell means "none" and is fine
+pattern = '(?<![|\d]) [—–] (?![|\d])'  # a dash alone in a table cell means "none"; between numbers it is a range (2007 – 2015)
 message = "Em/en dash used as punctuation"
 suggest = "쉼표, 콜론, 괄호 / comma, colon, parentheses"
 max_per_file = 4
