@@ -364,6 +364,16 @@ class StyleCheck(unittest.TestCase):
         for rule in cases:
             self.assertNotIn(rule, out)
 
+    def test_garuda_and_jari_metaphors(self):
+        """1.7.2: '가르는 로그 5줄' (판별할 수 있는 로그) and '렉이 생기는 자리' (위치), seen on a work page."""
+        for line in ["원인을 가르는 로그 5줄을 봅니다.", "## 구조와 렉이 생기는 자리", "성패를 가르는 지표입니다.",
+                     "병목이 막히는 자리를 표시합니다."]:
+            self.assertIn("ko-ornamental-verb", run("g.md", f"# 소개\n\n{line}\n").stdout, line)
+        ok = ("# 배열\n\n짧은 배열의 빈 자리는 `undefined`로 채워져요. 그 이터러블의 요소를 그 자리에서 내보냅니다.\n"
+              "첫 번째 자리에 `Counter`가 있습니다. CVC는 아무 숫자 3자리를 입력합니다. 판별할 수 있는 로그 5줄을 봅니다.\n"
+              "렉이 발생할 수 있는 위치를 정리합니다. 머리카락을 가르는 빗입니다.\n")
+        self.assertNotIn("ko-ornamental-verb", run("ok.md", ok).stdout)
+
     def test_quoted_contrast_and_slogan(self):
         """1.7.1: a quoted 'X'가 아닌 'Y' pair and a quoted 'A 대신 B' motto, seen in a résumé reviewed with the plugin."""
         for line in ["서버 부하가 'NPC 총수'가 아닌 '유저 주변 활성 NPC 수'로 수렴합니다.",

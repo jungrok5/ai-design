@@ -3,6 +3,15 @@
 버전은 `plugins/ai-design/.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`에 같은 값으로 기록합니다.
 태그 대신 커밋 SHA를 적어 두므로 pre-commit과 GitHub Action에서는 이 SHA를 `rev`나 `uses`에 고정해 씁니다.
 
+## 1.7.2 (`a21172f`)
+
+<!-- style-ignore-start -->
+- `ko-ornamental-verb`: "원인을 가르는 로그", "가르는 지표"(판별할 수 있는 로그·지표)와 "렉이 생기는 자리", "막히는
+  자리"(위치)도 보고. 사내 페이지를 만들다 사용자가 직접 찾은 표현. 사람이 쓴 한국어 문서 1,472개에서 보고 0건. "자리"
+  단어만으로는 "그 자리에서", "빈 자리는"처럼 문자 그대로 쓴 사람 문서 15건이 걸려서 동사 뒤의 "자리"로 좁힘
+- `polish-writing` 스킬의 비유 단어 목록에 `가르다`, `자리`와 고칠 예 추가
+<!-- style-ignore-end -->
+
 ## 1.7.1 (`8b73a0e`)
 
 <!-- style-ignore-start -->
