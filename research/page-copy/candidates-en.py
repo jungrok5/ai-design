@@ -1,0 +1,15 @@
+"""English candidates measured for 1.7.0 with tools/measure.py --en. Results and decisions: README.md."""
+C = {}
+C['en-mannered'] = '\\bearn(?:s|ed|ing)? (?:its|their) (?:keep|place)\\b|\\b(?:dial|lever|knob)s? worth (?:turning|pulling)\\b|\\bload[- ]bearing\\b'
+C['en-less-more'] = '\\bless (?:like )?(?:a |an )?[\\w-]+(?: [\\w-]+){0,3},? (?:and )?more (?:like )?(?:a |an )?[\\w-]+'
+C['en-rather-merely'] = '\\brather than (?:merely|simply|just)\\b|\\bmore than just an?\\b'
+C['en-reimagined'] = ',\\s*reimagined\\b|\\bwhere [\\w ]{2,20} meets [\\w ]{2,20}\\b|\\bexperience the (?:difference|power of)\\b|\\bthe future of (?:work|\\w+ing)\\b'
+C['en-imagine'] = '\\bimagine a world (?:where|in which)\\b|\\bthink of (?:it|this) as an?\\b|\\bstops? being\\b[^.]{1,40}\\bstarts? being\\b'
+C['en-hype2'] = '\\beffortless(?:ly)?\\b|\\bfrictionless\\b|\\btransformative\\b|\\bunparalleled\\b|\\bfuture-proof\\b|\\blimitless possibilit|\\bto the next level\\b|\\brevolutioni[sz]e'
+C['en-unlock'] = '\\bunlock(?:s|ing)? (?:new |your |the )?(?:possibilit|growth|insight|value|productivity)'
+C['en-journey'] = '\\b(?:your|our) journey\\b|\\bembark(?:s|ed|ing)? on\\b'
+C['en-orn-noun'] = '\\ba symphony of\\b|\\bthrough (?:the|a|this) (?:new )?lens of\\b|\\b(?:beacon|cornerstone|bedrock|mosaic) of\\b'
+C['en-honest'] = '\\bhonest (?:caveat|take|answer|assessment)\\b'
+C['en-single-most'] = '\\bthe single most\\b|(?:^|\\. )This matters because\\b'
+C['en-without-sacr'] = '\\bwithout (?:sacrificing|compromising)\\b'
+C['en-social-proof'] = '\\b(?:join|trusted by|loved by) (?:over )?(?:[\\d,.]+k?\\+?|thousands|millions) of\\b'

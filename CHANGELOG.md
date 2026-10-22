@@ -3,6 +3,26 @@
 버전은 `plugins/ai-design/.claude-plugin/plugin.json`과 `.claude-plugin/marketplace.json`에 같은 값으로 기록합니다.
 태그 대신 커밋 SHA를 적어 두므로 pre-commit과 GitHub Action에서는 이 SHA를 `rev`나 `uses`에 고정해 씁니다.
 
+## 1.7.0
+
+<!-- style-ignore-start -->
+- 웹페이지·소개 페이지 문구의 비유와 슬로건을 잡는 경고 규칙. 플러그인 없이 Claude Code(Opus, Sonnet, Haiku)에게 웹페이지와
+  문서 42개를 만들게 해서 읽은 표현과, 한국어·영어 커뮤니티 조사([research/page-copy/](research/page-copy/))에서 나온
+  표현 중 사람이 쓴 한국어 문서 1,472개에서 보고가 0–1건인 것만 넣음
+  - 새 한국어 규칙 8개: `ko-ornamental-verb`("하나의 흐름으로 잇습니다", "결이 깊어집니다", "오늘 안에 닿게 합니다"),
+    `ko-axis-metaphor`("두 축으로"), `ko-reframe`("X는 목적이 아니라 수단입니다"), `ko-reveal`("그게 ~입니다"),
+    `ko-paired-slogan`("속도만큼 신뢰를, 규모만큼 책임을"), `ko-fragment-slogan`("돈 관리는 더 쉽게."),
+    `ko-era-opener`("급변하는"), `ko-hook-formula`("결론부터 말씀드리면")
+  - 넓힌 규칙: `ko-metaphor-noun`("~라는 벽", "출발선", "문턱을 낮추다"), `ko-aphorism`("기다리는 시간이 맛을 만듭니다"),
+    `ko-count-runup`("우리가 일하는 세 가지 원칙"), `ko-promo-vocab`, `ko-copula-avoidance`
+  - 새 영어 규칙 3개: `en-mannered`("earns its keep", "load-bearing"), `en-hero-formula`("X, reimagined"),
+    `en-social-proof`("Join thousands of")
+- `ko-metaphor-noun`이 페이지의 "오시는 길", "찾아오는 길" 메뉴를 보고하던 오탐 수정
+- `polish-writing` 스킬: "Page copy: plain, not mannered" 절. 비유를 다른 비유로 바꾸지 않기, 경구와 조각 슬로건 대신
+  사실 문장, 과교정(딱딱한 FAQ) 피하기
+- 수정 직후 검사가 비유·슬로건을 보고할 때 다른 비유로 바꾸지 말고 사실 문장으로 다시 쓰라는 안내를 덧붙임
+<!-- style-ignore-end -->
+
 ## 1.6.1 (`2a92155`)
 
 - `ui-raw-font`: `@font-face` 블록 안의 `font-family`는 보고하지 않음. 이 값은 불러올 글꼴의 이름을 정하는 선언이라 토큰

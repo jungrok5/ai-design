@@ -87,6 +87,36 @@ A page can pass every rule and still read as generated. Before you finish, read 
   (`샘플 페이지로 가는 길이 있습니다` → `샘플 페이지 링크가 있습니다`; `패킷을 받는 길`, `~의 여정`, `전체 지도`,
   `문을 열어 줍니다`, `열쇠`, `첫걸음`, `발판`, `디딤돌`, `나침반`, `청사진`). Keep one subject per sentence; do not
   start with the product and end with something else.
+
+## Page copy: plain, not mannered
+
+<!-- style-ignore-start -->
+Asked for a site, a landing page or an About page, models switch into a brand-copy voice they do not use in chat:
+metaphor and flourish stand in for the statement (Anthropic's guide calls this mannered prose: "When a literal phrase
+is available, use it"). In 42 pages Claude Code wrote with no plugin, almost every promotional page had it; the docs
+pages (API quick start, README) had little. Write page copy the way you would answer the same question in chat.
+
+- **Say the mechanism.** `작은 쇼핑몰과 고객 사이를 가장 짧은 길로 잇습니다` → `오후 1시까지 들어온 주문을 그날 밤
+  10시 전에 배송합니다`. `흘러가는 로그에서 필요한 것만` → `tail 중인 로그에서 조건에 맞는 줄만 골라 셉니다`.
+  `밀이 숨 쉬는 시간만큼 결이 생깁니다` → `반죽을 4℃에서 14시간 발효한 뒤 굽습니다`. If the metaphor hid that you
+  have no fact, leave `[숫자 필요]` instead of a softer metaphor.
+- **Do not trade one image for another.** `흐름`, `결`, `온도`, `숨`, `닿다`, `잇다`, `스며들다`, `빚다`, `축`, `벽`,
+  `문턱`, `출발선`, `연료`, `한 판`, `단단하게`, `흔들리지 않는`, English `journey`, `lens`, `load-bearing`,
+  `earns its keep`: replacing one with another of the list is the same tell. Keep a word when it is the literal term
+  (`빵의 결` as the crumb, `작업 흐름` for a workflow, `오시는 길` for directions, `x축`).
+- **No aphorism, reframe or reveal.** Lines that sound like a motto carry no information: `기다리는 시간이 맛을
+  만듭니다`, `루틴이 실력을 만듭니다`, `X는 목적이 아니라 수단입니다`, `리뷰는 코드를 평가하는 자리이지 사람을
+  평가하는 자리가 아닙니다`, `정답보다 과정에 집중합니다`, `~하는 것. 그게 우리가 하는 일입니다`,
+  `성장은 함께 하는 것이니까요`. State the rule or the fact behind it (`리뷰 댓글은 코드 줄에만 답니다`), or delete it.
+- **Headlines are sentences.** No slogan fragments that end on a particle or adverb (`돈 관리는 더 쉽게.`,
+  `5분 안에 첫 집계까지.`, `원하는 방법으로.`), no mirrored pairs (`속도만큼 신뢰를, 규모만큼 책임을`,
+  `적는 수고는 줄이고, 재미는 더하고`), no division-of-labor slogans (`녹음만 하세요. 정리는 노트메이트가 합니다`),
+  no counted promises in headings (`세 가지 약속`, `새로워진 세 가지`, `세 단계면 충분합니다`). Headline = what the
+  reader gets, as a plain sentence (`회의 녹음을 올리면 회의록과 할 일 목록이 나옵니다`).
+- **Do not overcorrect.** Plain is not stiff. Keep the page's register: an FAQ in 합니다체 still asks
+  `참여할 수 있나요?`, not `참여할 수 있습니까?`; a neighborhood bakery can say `다 팔리면 일찍 닫습니다`.
+  Remove the decoration, keep the warmth that comes from facts (hours, prices, names).
+<!-- style-ignore-end -->
 - **One name per concept, one concept per name.** Do not rotate synonyms (흔적 / AI 티, 결과 / 출력) to avoid
   repetition, and do not use one word for two actors (the AI that wrote the text and the AI that fixes it). An internal
   name (a theme or code name) gets a plain noun the first time.

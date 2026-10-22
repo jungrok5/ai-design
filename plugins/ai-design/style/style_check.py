@@ -251,7 +251,8 @@ def hook_mode(rules: list[Rule]) -> int:
     context = ("ai-design style check (github.com/jungrok5/ai-design, docs/standard.md) found AI-tone/AI-look patterns in the "
                "lines you just wrote. Fix the ones that are real in this context, only in those lines (keep facts, names and "
                "code unchanged; do not rewrite text you were not asked to touch); leave deliberate quotes with a "
-               "`style-ignore` marker.\n" + "\n".join(lines))
+               "`style-ignore` marker. For a metaphor or slogan, rewrite the sentence as a plain statement of who does what "
+               "(with the number or condition if you have it) instead of swapping in another image.\n" + "\n".join(lines))
     print(json.dumps({"hookSpecificOutput": {"hookEventName": "PostToolUse", "additionalContext": context}}, ensure_ascii=False))
     return 0
 
