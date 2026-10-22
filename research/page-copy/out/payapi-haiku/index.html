@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PayAPI 개발자 문서 - 빠른 시작</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f6f7f9;
+    --text: #1b1f27;
+    --text-soft: #5b6372;
+    --border: #e3e6eb;
+    --accent: #3b5bdb;
+    --accent-soft: #edf1ff;
+    --code-bg: #0f1420;
+    --code-text: #e6e9ef;
+    --warn-bg: #fff6e5;
+    --warn-border: #f0b548;
+    --ok: #2b8a5b;
+    --header-h: 60px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1117;
+      --bg-soft: #161b24;
+      --text: #e6e9ef;
+      --text-soft: #9aa3b2;
+      --border: #262d3a;
+      --accent: #8aa4ff;
+      --accent-soft: #1d2540;
+      --code-bg: #0a0d14;
+      --code-text: #d7dce6;
+      --warn-bg: #2a2214;
+      --warn-border: #b8862e;
+      --ok: #5fcf96;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1117;
+    --bg-soft: #161b24;
+    --text: #e6e9ef;
+    --text-soft: #9aa3b2;
+    --border: #262d3a;
+    --accent: #8aa4ff;
+    --accent-soft: #1d2540;
+    --code-bg: #0a0d14;
+    --code-text: #d7dce6;
+    --warn-bg: #2a2214;
+    --warn-border: #b8862e;
+    --ok: #5fcf96;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+  :not(pre) > code {
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: var(--header-h);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    height: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .brand { font-weight: 700; font-size: 18px; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  .brand:hover { text-decoration: none; }
+  .brand-mark {
+    width: 26px; height: 26px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--accent), #7048e8);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 14px; font-weight: 800;
+  }
+  .brand-tag { font-size: 12px; font-weight: 600; color: var(--text-soft); border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; }
+  nav.top-nav { display: flex; gap: 18px; font-size: 15px; }
+  nav.top-nav a { color: var(--text-soft); }
+  nav.top-nav a.active { color: var(--text); font-weight: 600; }
+  .header-spacer { flex: 1; }
+  .search {
+    width: 240px;
+    padding: 7px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-soft);
+    color: var(--text);
+    font: inherit;
+    font-size: 14px;
+  }
+  .search:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .menu-btn {
+    display: none;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  /* ---------- Layout ---------- */
+  .layout {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 40px;
+    padding: 0 16px;
+  }
+  aside.sidebar {
+    position: sticky;
+    top: var(--header-h);
+    align-self: start;
+    height: calc(100vh - var(--header-h));
+    overflow-y: auto;
+    padding: 28px 0;
+    font-size: 14.5px;
+  }
+  .side-group { margin-bottom: 22px; }
+  .side-title { font-size: 12px; font-weight: 700; letter-spacing: .04em; color: var(--text-soft); text-transform: uppercase; margin: 0 0 8px; }
+  .side-group a {
+    display: block;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: var(--text-soft);
+  }
+  .side-group a:hover { background: var(--bg-soft); text-decoration: none; color: var(--text); }
+  .side-group a.current { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+
+  main { padding: 40px 0 96px; min-width: 0; }
+  .crumb { font-size: 14px; color: var(--text-soft); margin-bottom: 8px; }
+  h1 { font-size: 40px; line-height: 1.25; margin: 0 0 14px; letter-spacing: -.02em; }
+  h2 { font-size: 26px; margin: 56px 0 14px; padding-top: 8px; letter-spacing: -.01em; scroll-margin-top: calc(var(--header-h) + 16px); }
+  h3 { font-size: 18px; margin: 28px 0 10px; }
+  p { margin: 0 0 14px; }
+  .lead { font-size: 18px; color: var(--text-soft); margin-bottom: 24px; }
+  ol.steps, ul.plain { padding-left: 22px; margin: 0 0 16px; }
+  ol.steps li, ul.plain li { margin-bottom: 8px; }
+
+  /* progress overview */
+  .overview {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 28px 0 8px;
+  }
+  .overview a {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    color: var(--text);
+    background: var(--bg);
+    transition: border-color .15s, transform .15s;
+  }
+  .overview a:hover { border-color: var(--accent); text-decoration: none; transform: translateY(-1px); }
+  .overview .num {
+    display: inline-flex; width: 26px; height: 26px; border-radius: 50%;
+    align-items: center; justify-content: center;
+    background: var(--accent); color: #fff; font-size: 13px; font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .overview strong { display: block; font-size: 16px; margin-bottom: 4px; }
+  .overview span { font-size: 14px; color: var(--text-soft); }
+
+  /* callouts */
+  .callout {
+    border-left: 4px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 14px 18px;
+    border-radius: 0 10px 10px 0;
+    margin: 20px 0;
+    font-size: 15px;
+  }
+  .callout.warn { border-color: var(--warn-border); background: var(--warn-bg); }
+  .callout strong { display: block; margin-bottom: 4px; }
+
+  /* step blocks */
+  .step-head { display: flex; align-items: center; gap: 12px; margin-top: 64px; }
+  .step-head h2 { margin: 0; padding: 0; }
+  .step-badge {
+    flex: none;
+    width: 34px; height: 34px; border-radius: 10px;
+    background: var(--accent); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px;
+  }
+  .step-time { margin-left: auto; font-size: 13px; color: var(--text-soft); white-space: nowrap; }
+
+  /* code blocks */
+  .code-block {
+    position: relative;
+    margin: 14px 0 22px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--code-bg);
+  }
+  .code-head {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 8px 8px 14px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    font-size: 13px;
+    color: #9aa3b2;
+  }
+  .code-head .lang { margin-right: auto; }
+  .tabs { display: flex; gap: 2px; }
+  .tab {
+    background: transparent; border: 0; color: #9aa3b2;
+    padding: 4px 10px; border-radius: 6px; font: inherit; font-size: 13px; cursor: pointer;
+  }
+  .tab[aria-selected="true"] { background: rgba(255,255,255,.1); color: #fff; }
+  .copy-btn {
+    background: rgba(255,255,255,.08); border: 0; color: #d7dce6;
+    padding: 4px 10px; border-radius: 6px; font: inherit; font-size: 13px; cursor: pointer;
+  }
+  .copy-btn:hover { background: rgba(255,255,255,.16); }
+  pre {
+    margin: 0;
+    padding: 16px 18px;
+    overflow-x: auto;
+    color: var(--code-text);
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .code-block pre[hidden], .code-block [hidden] { display: none; }
+  .tok-c { color: #6b7689; }
+  .tok-k { color: #c792ea; }
+  .tok-s { color: #a5d6a7; }
+  .tok-n { color: #f5a97f; }
+
+  .field-table { width: 100%; border-collapse: collapse; font-size: 14.5px; margin: 10px 0 22px; }
+  .field-table th, .field-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .field-table th { color: var(--text-soft); font-weight: 600; font-size: 13px; }
+  .field-table td:first-child code { white-space: nowrap; }
+  .req { color: var(--ok); font-size: 12px; font-weight: 700; }
+
+  /* event list */
+  .event-list { display: grid; gap: 10px; margin: 14px 0 22px; }
+  .event {
+    display: grid; grid-template-columns: 180px 1fr; gap: 12px;
+    padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px;
+    font-size: 14.5px;
+  }
+  .event code { font-weight: 600; }
+
+  /* status flow */
+  .flow {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    margin: 14px 0 22px; font-size: 14px;
+  }
+  .pill {
+    border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px;
+    background: var(--bg-soft); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px;
+  }
+  .pill.ok { border-color: var(--ok); color: var(--ok); }
+  .arrow { color: var(--text-soft); }
+
+  .checklist { list-style: none; padding: 0; margin: 0 0 16px; }
+  .checklist li { padding-left: 28px; position: relative; margin-bottom: 8px; }
+  .checklist li::before {
+    content: ""; position: absolute; left: 2px; top: 9px;
+    width: 12px; height: 12px; border: 2px solid var(--accent); border-radius: 3px;
+  }
+
+  .next-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
+  .next-grid a {
+    border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px;
+    color: var(--text); background: var(--bg-soft);
+  }
+  .next-grid a:hover { border-color: var(--accent); text-decoration: none; }
+  .next-grid strong { display: block; margin-bottom: 4px; }
+  .next-grid span { font-size: 14px; color: var(--text-soft); }
+
+  footer {
+    margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--border);
+    font-size: 14px; color: var(--text-soft);
+    display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .layout { grid-template-columns: 200px minmax(0, 1fr); gap: 28px; }
+    .search { width: 180px; }
+  }
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; gap: 0; }
+    .menu-btn { display: inline-block; }
+    nav.top-nav, .search, .brand-tag { display: none; }
+    aside.sidebar {
+      position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0;
+      height: auto; background: var(--bg); z-index: 9;
+      padding: 16px; border-top: 1px solid var(--border);
+      transform: translateX(-100%); transition: transform .2s;
+      display: none;
+    }
+    aside.sidebar.open { display: block; transform: translateX(0); }
+    h1 { font-size: 30px; }
+    h2 { font-size: 22px; }
+    .overview, .next-grid { grid-template-columns: 1fr; }
+    .event { grid-template-columns: 1fr; gap: 4px; }
+    .step-time { display: none; }
+  }
+  @media (max-width: 480px) {
+    .layout { padding: 0 16px; }
+    .header-inner { gap: 12px; }
+    .code-head { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="brand" href="#">
+      <span class="brand-mark">P</span>
+      PayAPI
+    </a>
+    <span class="brand-tag">Developer Docs</span>
+    <nav class="top-nav" aria-label="상단 메뉴">
+      <a href="#" class="active">시작하기</a>
+      <a href="#">결제 API</a>
+      <a href="#">웹훅</a>
+      <a href="#">API 레퍼런스</a>
+      <a href="#">변경 기록</a>
+    </nav>
+    <div class="header-spacer"></div>
+    <input class="search" type="search" placeholder="문서 검색  (⌘K)" aria-label="문서 검색">
+    <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="sidebar">메뉴</button>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="side-group">
+      <p class="side-title">시작하기</p>
+      <a href="#overview" class="current">개요</a>
+      <a href="#step-1">1. API 키 발급</a>
+      <a href="#step-2">2. 첫 결제 요청</a>
+      <a href="#step-3">3. 웹훅 설정</a>
+      <a href="#next">다음 단계</a>
+    </div>
+    <div class="side-group">
+      <p class="side-title">결제</p>
+      <a href="#">결제 생성</a>
+      <a href="#">결제 조회</a>
+      <a href="#">결제 취소·환불</a>
+      <a href="#">정기 결제</a>
+    </div>
+    <div class="side-group">
+      <p class="side-title">웹훅</p>
+      <a href="#">이벤트 목록</a>
+      <a href="#">서명 검증</a>
+      <a href="#">재시도 정책</a>
+    </div>
+    <div class="side-group">
+      <p class="side-title">참고</p>
+      <a href="#">에러 코드</a>
+      <a href="#">테스트 카드</a>
+      <a href="#">SDK 목록</a>
+    </div>
+  </aside>
+
+  <main>
+    <div class="crumb">시작하기 / 빠른 시작</div>
+    <h1 id="overview">빠른 시작</h1>
+    <p class="lead">
+      약 15분이면 테스트 환경에서 첫 결제를 완료하고, 결제 결과를 서버로 받아볼 수 있습니다.
+      아래 순서대로 진행하세요.
+    </p>
+
+    <div class="overview">
+      <a href="#step-1">
+        <span class="num">1</span>
+        <strong>API 키 발급</strong>
+        <span>테스트용 secret key 받기</span>
+      </a>
+      <a href="#step-2">
+        <span class="num">2</span>
+        <strong>첫 결제 요청</strong>
+        <span>결제를 만들고 checkout 열기</span>
+      </a>
+      <a href="#step-3">
+        <span class="num">3</span>
+        <strong>웹훅 설정</strong>
+        <span>결제 결과를 서버로 받기</span>
+      </a>
+    </div>
+
+    <div class="callout">
+      <strong>시작 전에 준비할 것</strong>
+      PayAPI 계정 (가입 후 이메일 인증), 서버에서 HTTPS 요청을 보낼 수 있는 개발 환경,
+      그리고 예제를 실행할 Node.js 18+ 또는 Python 3.9+.
+    </div>
+
+    <!-- ============ STEP 1 ============ -->
+    <div class="step-head" id="step-1">
+      <span class="step-badge">1</span>
+      <h2>API 키 발급</h2>
+      <span class="step-time">약 3분</span>
+    </div>
+
+    <p>
+      API 키는 PayAPI 서버에 요청할 때 본인을 증명하는 값입니다. 키는 두 종류가 있고,
+      처음에는 <strong>테스트 키</strong>만 사용합니다.
+    </p>
+
+    <ol class="steps">
+      <li>대시보드에 로그인한 뒤 <strong>개발자 &gt; API 키</strong> 메뉴로 이동합니다.</li>
+      <li><strong>테스트 모드</strong>가 켜져 있는지 확인합니다. 화면 상단에 주황색 배너가 보이면 테스트 모드입니다.</li>
+      <li><strong>Secret key 생성</strong> 버튼을 누릅니다. <code>sk_test_</code>로 시작하는 키가 발급됩니다.</li>
+      <li>키는 생성 직후 한 번만 전체가 표시됩니다. 바로 안전한 곳(비밀 관리자, 환경 변수 파일 등)에 저장하세요.</li>
+    </ol>
+
+    <div class="callout warn">
+      <strong>Secret key는 서버에서만 사용하세요</strong>
+      브라우저 코드, 모바일 앱, 공개 저장소에 넣으면 누구나 결제를 만들거나 환불할 수 있습니다.
+      키가 노출됐다면 대시보드에서 즉시 <strong>폐기(Roll)</strong>하고 새 키를 발급받으세요.
+    </div>
+
+    <h3>환경 변수로 저장하기</h3>
+    <p>예제 코드는 키를 환경 변수 <code>PAYAPI_SECRET_KEY</code>에서 읽습니다. 터미널에서 한 번 설정하세요.</p>
+
+    <div class="code-block" data-tabs>
+      <div class="code-head">
+        <span class="lang">shell</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code>export PAYAPI_SECRET_KEY="<span class="tok-s">sk_test_EXAMPLE</span>"</code></pre>
+    </div>
+
+    <p>키가 올바른지 확인하려면 계정 정보를 조회해 보세요. <code>200 OK</code>가 오면 준비가 끝났습니다.</p>
+
+    <div class="code-block" data-tabs>
+      <div class="code-head">
+        <span class="lang">shell</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code>curl https://api.payapi.example/v1/account \
+  -H "Authorization: Bearer $PAYAPI_SECRET_KEY"</code></pre>
+    </div>
+
+    <!-- ============ STEP 2 ============ -->
+    <div class="step-head" id="step-2">
+      <span class="step-badge">2</span>
+      <h2>첫 결제 요청</h2>
+      <span class="step-time">약 5분</span>
+    </div>
+
+    <p>
+      서버에서 <code>POST /v1/payments</code>를 호출하면 결제 객체가 만들어지고,
+      응답으로 받은 <code>checkout_url</code>로 고객을 보내 결제를 진행합니다.
+      카드 번호 같은 민감한 정보는 우리 서버 대신 PayAPI의 checkout 페이지에서 입력받으므로,
+      가맹점 서버는 카드 정보를 다루지 않습니다.
+    </p>
+
+    <h3>요청 보내기</h3>
+    <p>언어를 선택해 예제를 확인하세요.</p>
+
+    <div class="code-block" data-tabs>
+      <div class="code-head">
+        <div class="tabs" role="tablist">
+          <button class="tab" type="button" role="tab" aria-selected="true" data-tab="0">curl</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-tab="1">Node.js</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-tab="2">Python</button>
+        </div>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre data-panel="0"><code>curl https://api.payapi.example/v1/payments \
+  -H "Authorization: Bearer $PAYAPI_SECRET_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: order_1001-attempt-1" \
+  -d '{
+    "amount": 15000,
+    "currency": "KRW",
+    "order_id": "order_1001",
+    "description": "프리미엄 플랜 1개월",
+    "return_url": "https://shop.example.com/checkout/done"
+  }'</code></pre>
+      <pre data-panel="1" hidden><code><span class="tok-k">const</span> res = <span class="tok-k">await</span> fetch(<span class="tok-s">"https://api.payapi.example/v1/payments"</span>, {
+  method: <span class="tok-s">"POST"</span>,
+  headers: {
+    <span class="tok-s">"Authorization"</span>: <span class="tok-s">`Bearer ${process.env.PAYAPI_SECRET_KEY}`</span>,
+    <span class="tok-s">"Content-Type"</span>: <span class="tok-s">"application/json"</span>,
+    <span class="tok-s">"Idempotency-Key"</span>: <span class="tok-s">"order_1001-attempt-1"</span>,
+  },
+  body: JSON.stringify({
+    amount: <span class="tok-n">15000</span>,
+    currency: <span class="tok-s">"KRW"</span>,
+    order_id: <span class="tok-s">"order_1001"</span>,
+    description: <span class="tok-s">"프리미엄 플랜 1개월"</span>,
+    return_url: <span class="tok-s">"https://shop.example.com/checkout/done"</span>,
+  }),
+});
+
+<span class="tok-k">if</span> (!res.ok) <span class="tok-k">throw</span> <span class="tok-k">new</span> Error(<span class="tok-s">`결제 생성 실패: ${res.status}`</span>);
+
+<span class="tok-k">const</span> payment = <span class="tok-k">await</span> res.json();
+console.log(payment.checkout_url);</code></pre>
+      <pre data-panel="2" hidden><code><span class="tok-k">import</span> os
+<span class="tok-k">import</span> requests
+
+res = requests.post(
+    <span class="tok-s">"https://api.payapi.example/v1/payments"</span>,
+    headers={
+        <span class="tok-s">"Authorization"</span>: <span class="tok-s">f"Bearer {os.environ['PAYAPI_SECRET_KEY']}"</span>,
+        <span class="tok-s">"Idempotency-Key"</span>: <span class="tok-s">"order_1001-attempt-1"</span>,
+    },
+    json={
+        <span class="tok-s">"amount"</span>: <span class="tok-n">15000</span>,
+        <span class="tok-s">"currency"</span>: <span class="tok-s">"KRW"</span>,
+        <span class="tok-s">"order_id"</span>: <span class="tok-s">"order_1001"</span>,
+        <span class="tok-s">"description"</span>: <span class="tok-s">"프리미엄 플랜 1개월"</span>,
+        <span class="tok-s">"return_url"</span>: <span class="tok-s">"https://shop.example.com/checkout/done"</span>,
+    },
+    timeout=<span class="tok-n">10</span>,
+)
+res.raise_for_status()
+<span class="tok-k">print</span>(res.json()[<span class="tok-s">"checkout_url"</span>])</code></pre>
+    </div>
+
+    <h3>응답 예시</h3>
+    <div class="code-block">
+      <div class="code-head">
+        <span class="lang">json</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code>{
+  "id": "pay_01HZX8K3Q9",
+  "object": "payment",
+  "status": "requires_action",
+  "amount": 15000,
+  "currency": "KRW",
+  "order_id": "order_1001",
+  "checkout_url": "https://checkout.payapi.example/pay_01HZX8K3Q9",
+  "created_at": "2026-10-22T09:00:00Z"
+}</code></pre>
+    </div>
+
+    <h3>요청 파라미터</h3>
+    <table class="field-table">
+      <thead>
+        <tr><th>필드</th><th>타입</th><th>설명</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>amount</code> <span class="req">필수</span></td>
+          <td>integer</td>
+          <td>결제 금액. KRW는 원 단위 정수입니다 (예: 15000 = 15,000원).</td>
+        </tr>
+        <tr>
+          <td><code>currency</code> <span class="req">필수</span></td>
+          <td>string</td>
+          <td>ISO 4217 통화 코드. 현재 <code>KRW</code>만 지원합니다.</td>
+        </tr>
+        <tr>
+          <td><code>order_id</code> <span class="req">필수</span></td>
+          <td>string</td>
+          <td>가맹점의 주문 번호. 같은 주문을 식별하는 값으로, 웹훅과 조회에 사용됩니다.</td>
+        </tr>
+        <tr>
+          <td><code>return_url</code></td>
+          <td>string</td>
+          <td>결제가 끝난 뒤 고객을 돌려보낼 주소. HTTPS여야 합니다.</td>
+        </tr>
+        <tr>
+          <td><code>description</code></td>
+          <td>string</td>
+          <td>checkout 화면과 명세서에 표시되는 설명 (최대 100자).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Idempotency-Key 헤더를 붙이세요</strong>
+      네트워크 오류로 응답을 받지 못해 같은 요청을 다시 보내도 결제가 두 번 생성되지 않도록 막아 줍니다.
+      같은 키로 보낸 요청은 처음 결과를 그대로 돌려줍니다. 키는 주문 시도마다 고유한 값을 쓰세요.
+    </div>
+
+    <h3>고객을 checkout으로 보내기</h3>
+    <p>
+      응답의 <code>checkout_url</code>로 고객을 이동시키면 결제 화면이 열립니다.
+      결제가 끝나면 고객은 <code>return_url</code>로 돌아오지만, <strong>주문 완료 처리는 이 페이지를 믿지 말고 웹훅으로</strong> 하세요.
+      고객이 창을 닫거나 네트워크가 끊기면 돌아오지 않을 수 있습니다.
+    </p>
+
+    <h3>결제 상태 흐름</h3>
+    <div class="flow">
+      <span class="pill">requires_action</span>
+      <span class="arrow">→</span>
+      <span class="pill ok">succeeded</span>
+      <span class="arrow">or</span>
+      <span class="pill">failed</span>
+      <span class="arrow">or</span>
+      <span class="pill">canceled</span>
+    </div>
+    <p>결제 객체의 <code>status</code>는 위 순서로 바뀝니다. 최종 상태는 웹훅 이벤트로 확인하세요.</p>
+
+    <div class="callout">
+      <strong>테스트 결제</strong>
+      테스트 키로 만든 결제는 실제로 청구되지 않습니다. checkout에서 카드 번호로
+      <code>4242 4242 4242 4242</code>, 만료일은 미래 날짜, CVC는 아무 숫자 3자리를 입력하면 성공합니다.
+      실패 시나리오는 <a href="#">테스트 카드 목록</a>을 참고하세요.
+    </div>
+
+    <!-- ============ STEP 3 ============ -->
+    <div class="step-head" id="step-3">
+      <span class="step-badge">3</span>
+      <h2>웹훅 설정</h2>
+      <span class="step-time">약 5분</span>
+    </div>
+
+    <p>
+      웹훅은 결제 상태가 바뀔 때 PayAPI가 가맹점 서버의 주소로 보내는 HTTP 요청입니다.
+      고객이 결제 화면을 닫아도, 은행 승인이 늦게 떨어져도, 서버는 최종 결과를 받을 수 있습니다.
+    </p>
+
+    <h3>1) 엔드포인트 등록</h3>
+    <p>
+      <strong>개발자 &gt; 웹훅</strong>에서 <strong>엔드포인트 추가</strong>를 눌러 주소를 등록하거나,
+      API로 등록할 수도 있습니다. 주소는 반드시 HTTPS여야 합니다.
+    </p>
+
+    <div class="code-block" data-tabs>
+      <div class="code-head">
+        <span class="lang">shell</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code>curl https://api.payapi.example/v1/webhook_endpoints \
+  -H "Authorization: Bearer $PAYAPI_SECRET_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://shop.example.com/webhooks/payapi",
+    "events": ["payment.succeeded", "payment.failed", "payment.canceled"]
+  }'</code></pre>
+    </div>
+
+    <p>
+      응답에 포함된 <code>secret</code>(<code>whsec_</code>로 시작)은 서명 검증에 쓰는 값입니다.
+      이 값도 환경 변수 <code>PAYAPI_WEBHOOK_SECRET</code>에 저장하세요.
+    </p>
+
+    <h3>2) 받을 이벤트 선택</h3>
+    <div class="event-list">
+      <div class="event">
+        <code>payment.succeeded</code>
+        <span>결제가 승인되어 완료됨. 주문을 "결제 완료"로 바꾸는 기준 이벤트입니다.</span>
+      </div>
+      <div class="event">
+        <code>payment.failed</code>
+        <span>카드 거절, 한도 초과 등으로 결제가 실패함. 고객에게 재시도를 안내하세요.</span>
+      </div>
+      <div class="event">
+        <code>payment.canceled</code>
+        <span>결제가 취소됨. 고객이 checkout을 닫았거나 가맹점이 취소한 경우입니다.</span>
+      </div>
+    </div>
+
+    <h3>3) 서명 검증 후 처리하기</h3>
+    <p>
+      누구나 이 주소로 요청을 보낼 수 있으므로, 모든 요청은 <code>PayAPI-Signature</code> 헤더로 진위를 확인해야 합니다.
+      헤더 형식은 <code>t=타임스탬프,v1=서명</code>이며, 서명은 <code>타임스탬프.원본 본문</code>을 HMAC-SHA256으로 계산한 값입니다.
+      JSON을 파싱하기 전의 <strong>원본 본문</strong>으로 계산해야 합니다.
+    </p>
+
+    <div class="code-block" data-tabs>
+      <div class="code-head">
+        <span class="lang">Node.js (Express)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code><span class="tok-k">import</span> crypto <span class="tok-k">from</span> <span class="tok-s">"node:crypto"</span>;
+<span class="tok-k">import</span> express <span class="tok-k">from</span> <span class="tok-s">"express"</span>;
+
+<span class="tok-k">const</span> app = express();
+<span class="tok-c">// JSON 파서보다 먼저, 원본 본문을 Buffer로 받습니다.</span>
+app.post(<span class="tok-s">"/webhooks/payapi"</span>, express.raw({ type: <span class="tok-s">"application/json"</span> }), (req, res) =&gt; {
+  <span class="tok-k">const</span> header = req.get(<span class="tok-s">"PayAPI-Signature"</span>) ?? <span class="tok-s">""</span>;
+  <span class="tok-k">const</span> parts = Object.fromEntries(header.split(<span class="tok-s">","</span>).map(p =&gt; p.split(<span class="tok-s">"="</span>)));
+
+  <span class="tok-c">// 5분 이상 지난 요청은 재전송 공격일 수 있으니 거부합니다.</span>
+  <span class="tok-k">const</span> age = Math.abs(Date.now() / <span class="tok-n">1000</span> - Number(parts.t));
+  <span class="tok-k">if</span> (!parts.t || age &gt; <span class="tok-n">300</span>) <span class="tok-k">return</span> res.sendStatus(<span class="tok-n">400</span>);
+
+  <span class="tok-k">const</span> expected = crypto
+    .createHmac(<span class="tok-s">"sha256"</span>, process.env.PAYAPI_WEBHOOK_SECRET)
+    .update(<span class="tok-s">`${parts.t}.${req.body.toString("utf8")}`</span>)
+    .digest(<span class="tok-s">"hex"</span>);
+
+  <span class="tok-k">const</span> a = Buffer.from(expected);
+  <span class="tok-k">const</span> b = Buffer.from(parts.v1 ?? <span class="tok-s">""</span>);
+  <span class="tok-k">if</span> (a.length !== b.length || !crypto.timingSafeEqual(a, b)) {
+    <span class="tok-k">return</span> res.sendStatus(<span class="tok-n">400</span>);
+  }
+
+  <span class="tok-k">const</span> event = JSON.parse(req.body.toString(<span class="tok-s">"utf8"</span>));
+
+  <span class="tok-c">// 같은 이벤트가 여러 번 올 수 있으므로 event.id 기준으로 멱등하게 처리하세요.</span>
+  <span class="tok-k">if</span> (event.type === <span class="tok-s">"payment.succeeded"</span>) {
+    markOrderPaid(event.data.order_id, event.id);
+  }
+
+  <span class="tok-c">// 처리 시간이 길면 먼저 200을 응답하고 큐에서 처리하는 편이 안전합니다.</span>
+  res.sendStatus(<span class="tok-n">200</span>);
+});</code></pre>
+    </div>
+
+    <div class="callout">
+      <strong>응답은 빠르게, 처리는 멱등하게</strong>
+      웹훅 수신 측은 <strong>2xx 응답을 10초 안</strong>에 돌려줘야 합니다. 그렇지 않으면 실패로 간주해 재전송합니다.
+      같은 <code>event.id</code>가 두 번 와도 주문이 두 번 결제 처리되지 않도록 DB에 처리 이력을 남기세요.
+    </div>
+
+    <h3>4) 재시도 정책</h3>
+    <p>2xx가 아닌 응답이나 시간 초과가 발생하면 PayAPI는 다음 간격으로 최대 3일 동안 재시도합니다.</p>
+    <ul class="plain">
+      <li>1분 → 5분 → 30분 → 2시간 → 이후 매 2시간 간격</li>
+      <li>대시보드 &gt; 웹훅 &gt; 전송 로그에서 개별 이벤트를 다시 보내거나 상태를 확인할 수 있습니다.</li>
+    </ul>
+
+    <h3>5) 로컬에서 테스트하기</h3>
+    <p>
+      개발 중인 로컬 서버는 외부에서 접근할 수 없습니다. 터널링 도구(예: ngrok, Cloudflare Tunnel)로
+      공개 HTTPS 주소를 만든 뒤, 그 주소를 웹훅 엔드포인트로 등록하세요.
+      테스트 키로 결제를 한 번 완료하면 <code>payment.succeeded</code> 요청이 도착하는지 전송 로그에서 확인할 수 있습니다.
+    </p>
+
+    <!-- ============ CHECK ============ -->
+    <h2>마무리 체크리스트</h2>
+    <ul class="checklist">
+      <li>테스트 키(<code>sk_test_</code>)를 환경 변수로 저장했다</li>
+      <li>서버에서 결제를 생성하고 <code>checkout_url</code>을 받았다</li>
+      <li>테스트 카드로 결제를 완료했다</li>
+      <li>웹훅 엔드포인트를 등록하고 서명을 검증한다</li>
+      <li><code>payment.succeeded</code> 수신 시 주문 상태를 변경한다 (중복 처리 방지 포함)</li>
+    </ul>
+
+    <!-- ============ NEXT ============ -->
+    <h2 id="next">다음 단계</h2>
+    <div class="next-grid">
+      <a href="#">
+        <strong>결제 취소·환불</strong>
+        <span>결제 승인 후 전액 또는 부분 환불하기</span>
+      </a>
+      <a href="#">
+        <strong>정기 결제</strong>
+        <span>구독 모델을 위한 빌링키 발급과 자동 청구</span>
+      </a>
+      <a href="#">
+        <strong>API 레퍼런스</strong>
+        <span>모든 엔드포인트와 파라미터 전체 목록</span>
+      </a>
+    </div>
+
+    <footer>
+      <span>© PayAPI 개발자 문서 · 문서 내용은 예시이며 실제 API와 다를 수 있습니다.</span>
+      <span><a href="#">문서 피드백</a> · <a href="#">지원 센터</a></span>
+    </footer>
+  </main>
+</div>
+
+<script>
+  (function () {
+    // 탭 전환 (언어별 예제)
+    document.querySelectorAll('[data-tabs]').forEach(function (block) {
+      var tabs = block.querySelectorAll('.tab');
+      if (!tabs.length) return;
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var idx = tab.getAttribute('data-tab');
+          tabs.forEach(function (t) { t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+          block.querySelectorAll('[data-panel]').forEach(function (panel) {
+            panel.hidden = panel.getAttribute('data-panel') !== idx;
+          });
+        });
+      });
+    });
+
+    // 복사 버튼
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var block = btn.closest('.code-block');
+        var visible = block.querySelector('pre:not([hidden]) code');
+        if (!visible) return;
+        var text = visible.textContent;
+        var done = function () {
+          btn.textContent = '복사됨';
+          setTimeout(function () { btn.textContent = '복사'; }, 1500);
+        };
+        try {
+          navigator.clipboard.writeText(text).then(done, function () {});
+        } catch (e) {
+          /* 클립보드를 사용할 수 없는 환경에서는 조용히 넘어갑니다 */
+        }
+      });
+    });
+
+    // 모바일 사이드바 토글
+    var menuBtn = document.getElementById('menuBtn');
+    var sidebar = document.getElementById('sidebar');
+    menuBtn.addEventListener('click', function () {
+      var open = sidebar.classList.toggle('open');
+      sidebar.style.display = open ? 'block' : '';
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    sidebar.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (window.innerWidth <= 800) {
+          sidebar.classList.remove('open');
+          sidebar.style.display = '';
+          menuBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // 사이드바 현재 위치 표시
+    var links = sidebar.querySelectorAll('.side-group a[href^="#"]');
+    var sections = Array.prototype.map.call(links, function (a) {
+      return document.querySelector(a.getAttribute('href'));
+    });
+    var onScroll = function () {
+      var y = window.scrollY + 120;
+      var current = 0;
+      sections.forEach(function (sec, i) {
+        if (sec && sec.offsetTop <= y) current = i;
+      });
+      links.forEach(function (a, i) {
+        a.classList.toggle('current', i === current);
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+</body>
+</html>

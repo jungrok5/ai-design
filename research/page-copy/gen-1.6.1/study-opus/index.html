@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>주말 알고리즘</title>
+<meta name="description" content="토요일 오전, 강남에서 모여 알고리즘 문제를 푸는 스터디 모임입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* ── Tokens: design system "Clear" (ai-design) ── */
+:root {
+  --bg: #ffffff; --surface: #f8fafc; --sunk: #f1f5f9; --line: #e2e8f0; --line-strong: #cbd5e1;
+  --fg: #0f172a; --muted: #475569; --subtle: #64748b;
+  --accent: #1d4ed8; --accent-hover: #1e40af; --accent-fg: #ffffff; --accent-soft: #eff6ff;
+  --ok: #067647; --ok-soft: #ecfdf3; --warn: #b54708; --warn-soft: #fffaeb;
+  --code-bg: #0f172a; --code-fg: #e2e8f0; --code-muted: #94a3b8; --code-line: #334155;
+  --code-ok: #86efac; --code-warn: #fcd34d;
+  --focus: #1d4ed8;
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-xs: 12px; --text-s: 14px; --text-m: 16px; --text-l: 18px;
+  --text-h3: 18px; --text-h2: 24px; --text-h1: clamp(30px, 4.4vw, 44px);
+  --leading: 1.7; --leading-tight: 1.3;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --radius-s: 6px; --radius-m: 8px; --radius-l: 10px;
+  --border: 1px solid var(--line);
+  --measure: 68ch; --page: 1040px;
+  --motion: 180ms ease-out;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+    --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+    --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+    --ok: #47cd89; --ok-soft: #16322a; --warn: #fdb022; --warn-soft: #3a2c12;
+    --code-bg: #111315; --code-fg: #e4e6e8; --code-muted: #8a9096; --code-line: #33373b;
+    --code-ok: #86e0b0; --code-warn: #f5c45e; --focus: #7cb7e8;
+    color-scheme: dark;
+  }
+}
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-sans); font-size: var(--text-m); line-height: var(--leading);
+  word-break: keep-all; overflow-wrap: anywhere;
+}
+h1, h2, h3 { line-height: var(--leading-tight); margin: 0; }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); }
+p { margin: 0; }
+a { color: var(--accent); }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-s); }
+code, pre { font-family: var(--font-mono); }
+
+.wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--space-4); }
+@media (min-width: 768px) { .wrap { padding: 0 var(--space-6); } }
+
+section { padding: var(--space-7) 0; border-top: var(--border); }
+.lede { color: var(--muted); font-size: var(--text-l); max-width: var(--measure); }
+.prose { max-width: var(--measure); }
+.prose > * + * { margin-top: var(--space-3); }
+.section-head { margin-bottom: var(--space-5); }
+.section-head p { color: var(--muted); margin-top: var(--space-2); max-width: var(--measure); }
+
+/* ── Header ── */
+.site-head { border-bottom: var(--border); }
+.site-head .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 60px; gap: var(--space-4); }
+.logo { font-weight: 700; color: var(--fg); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
+.logo span { font-family: var(--font-mono); color: var(--accent); margin-right: var(--space-2); font-weight: 500; }
+.site-head nav { display: none; gap: var(--space-5); font-size: var(--text-s); }
+.site-head nav a { color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
+.site-head nav a:hover { color: var(--fg); }
+@media (min-width: 768px) { .site-head nav { display: flex; } }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; padding: 0 var(--space-5);
+  border-radius: var(--radius-m); border: 1px solid var(--line-strong);
+  background: var(--bg); color: var(--fg); font: inherit; font-weight: 500;
+  text-decoration: none; transition: background var(--motion), border-color var(--motion);
+}
+.btn:hover { background: var(--surface); color: var(--fg); }
+.btn--primary { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-fg); }
+
+/* ── Hero ── */
+.hero { padding: var(--space-7) 0 var(--space-7); border-top: 0; }
+.hero-grid { display: grid; gap: var(--space-6); align-items: start; }
+@media (min-width: 900px) { .hero-grid { grid-template-columns: 1.05fr 1fr; gap: var(--space-7); } }
+.hero h1 { font-size: var(--text-h1); letter-spacing: -0.01em; }
+.hero .lede { margin-top: var(--space-4); }
+.facts { margin: var(--space-5) 0 0; display: grid; grid-template-columns: max-content 1fr; gap: var(--space-2) var(--space-5); }
+.facts dt { color: var(--subtle); font-size: var(--text-s); padding-top: 2px; }
+.facts dd { margin: 0; font-weight: 500; }
+.hero-actions { margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+/* Code sample: what a Saturday actually looks like */
+.code {
+  background: var(--code-bg); color: var(--code-fg); border-radius: var(--radius-l);
+  overflow: hidden; font-size: var(--text-s);
+}
+.code-bar {
+  display: flex; justify-content: space-between; gap: var(--space-3);
+  padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--code-line);
+  color: var(--code-muted); font-family: var(--font-mono); font-size: var(--text-xs);
+}
+.code pre { margin: 0; padding: var(--space-4); overflow-x: auto; line-height: 1.65; word-break: normal; overflow-wrap: normal; }
+.code .c { color: var(--code-muted); }
+.code .k { color: var(--code-warn); }
+.code .ok { color: var(--code-ok); }
+.code-foot {
+  padding: var(--space-3) var(--space-4); border-top: 1px solid var(--code-line);
+  font-family: var(--font-mono); font-size: var(--text-xs); color: var(--code-muted);
+}
+
+/* ── Timeline ── */
+.timeline { list-style: none; margin: 0; padding: 0; border-top: var(--border); max-width: 760px; }
+.timeline li { display: grid; grid-template-columns: 5.5em 1fr; gap: var(--space-4); padding: var(--space-4) 0; border-bottom: var(--border); }
+.timeline time { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--accent); font-size: var(--text-s); padding-top: 2px; }
+.timeline h3 { font-size: var(--text-m); }
+.timeline p { color: var(--muted); font-size: var(--text-s); margin-top: var(--space-1); }
+
+/* ── Fit list ── */
+.fit { display: grid; gap: var(--space-5); }
+@media (min-width: 768px) { .fit { grid-template-columns: 1fr 1fr; } }
+.fit-box { border: var(--border); border-radius: var(--radius-l); padding: var(--space-5); background: var(--surface); }
+.fit-box h3 { margin-bottom: var(--space-3); }
+.fit-box ul { margin: 0; padding: 0; list-style: none; }
+.fit-box li { padding: var(--space-2) 0 var(--space-2) 1.6em; position: relative; }
+.fit-box li + li { border-top: var(--border); }
+.fit-box li::before { position: absolute; left: 0; font-weight: 700; }
+.fit-yes li::before { content: "✓"; color: var(--ok); }
+.fit-no li::before { content: "–"; color: var(--subtle); }
+
+/* ── Rules (dl) ── */
+.rules { margin: 0; max-width: 760px; }
+.rules div { padding: var(--space-4) 0; border-bottom: var(--border); }
+.rules div:first-child { border-top: var(--border); }
+.rules dt { font-weight: 700; }
+.rules dd { margin: var(--space-1) 0 0; color: var(--muted); }
+@media (min-width: 768px) {
+  .rules div { display: grid; grid-template-columns: 11em 1fr; gap: var(--space-5); }
+  .rules dd { margin: 0; }
+}
+
+/* ── Join steps ── */
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: s; display: grid; gap: var(--space-4); max-width: 760px; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 32px 1fr; gap: var(--space-4); }
+.steps li::before {
+  content: counter(s); width: 32px; height: 32px; border-radius: 50%;
+  display: grid; place-items: center; font-size: var(--text-s); font-weight: 700;
+  background: var(--accent-soft); color: var(--accent);
+}
+.steps h3 { font-size: var(--text-m); padding-top: 4px; }
+.steps p { color: var(--muted); font-size: var(--text-s); margin-top: var(--space-1); }
+
+/* ── FAQ ── */
+.faq { max-width: 760px; border-top: var(--border); }
+.faq details { border-bottom: var(--border); }
+.faq summary {
+  cursor: pointer; list-style: none; min-height: 44px; padding: var(--space-4) var(--space-6) var(--space-4) 0;
+  font-weight: 500; position: relative;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: var(--space-2); top: var(--space-4); color: var(--subtle); font-family: var(--font-mono); }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { padding: 0 0 var(--space-4); color: var(--muted); max-width: var(--measure); }
+
+/* ── Join CTA ── */
+.join { background: var(--surface); }
+.join-box { display: grid; gap: var(--space-5); }
+@media (min-width: 900px) { .join-box { grid-template-columns: 1fr auto; align-items: end; } }
+
+footer { border-top: var(--border); padding: var(--space-5) 0; color: var(--subtle); font-size: var(--text-s); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="#top"><span>&gt;_</span>주말 알고리즘</a>
+    <nav aria-label="페이지 메뉴">
+      <a href="#day">진행 방식</a>
+      <a href="#rules">규칙</a>
+      <a href="#faq">자주 묻는 질문</a>
+      <a href="#join">참여 신청</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>토요일 오전, 강남에서<br>알고리즘 문제를 같이 풉니다</h1>
+        <p class="lede">평일에는 혼자 풀기 어려운 문제를 주말에 모여서 풉니다. 한 주 동안 각자 풀어 오고, 토요일에는 서로의 풀이를 설명하고 막힌 문제를 함께 붙잡습니다.</p>
+        <dl class="facts">
+          <dt>언제</dt><dd>매주 토요일 오전 10:00–12:30</dd>
+          <dt>어디서</dt><dd>강남역 근처 스터디룸</dd>
+          <dt>인원</dt><dd>회차당 6–8명</dd>
+          <dt>언어</dt><dd>Python, C++, Java 등 자유</dd>
+        </dl>
+        <div class="hero-actions">
+          <a class="btn btn--primary" href="#join">참여 신청하기</a>
+          <a class="btn" href="#day">토요일 진행 보기</a>
+        </div>
+      </div>
+
+      <figure class="code" aria-label="스터디에서 실제로 다루는 풀이 예시" style="margin:0">
+        <div class="code-bar"><span>이번 주 문제 · BFS</span><span>solve.py</span></div>
+<pre><code><span class="c"># 미로 최단 거리 — 토요일에 설명할 풀이</span>
+<span class="k">from</span> collections <span class="k">import</span> deque
+
+<span class="k">def</span> shortest(grid, start, goal):
+    q = deque([(start, 0)])
+    seen = {start}
+    <span class="k">while</span> q:
+        (r, c), d = q.popleft()
+        <span class="k">if</span> (r, c) == goal:
+            <span class="k">return</span> d
+        <span class="k">for</span> dr, dc <span class="k">in</span> ((1,0),(-1,0),(0,1),(0,-1)):
+            nxt = (r + dr, c + dc)
+            <span class="k">if</span> ok(grid, nxt) <span class="k">and</span> nxt <span class="k">not in</span> seen:
+                seen.add(nxt)
+                q.append((nxt, d + 1))
+    <span class="k">return</span> -1</code></pre>
+        <div class="code-foot"><span class="ok">✓ 리뷰 질문</span> 왜 방문 표시를 큐에 넣을 때 하나요?</div>
+      </figure>
+    </div>
+  </section>
+
+  <section id="day">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>토요일 오전은 이렇게 흘러갑니다</h2>
+        <p>문제는 한 주 전에 공지합니다. 모임 시간에는 새 문제를 푸는 것보다 이미 푼 문제를 설명하고 다듬는 데 시간을 씁니다.</p>
+      </div>
+      <ol class="timeline">
+        <li><time>10:00</time><div><h3>체크인</h3><p>이번 주에 푼 문제 수와 막힌 문제를 한 줄씩 말합니다.</p></div></li>
+        <li><time>10:15</time><div><h3>풀이 발표</h3><p>문제마다 한 명이 화이트보드에서 풀이를 설명하고, 나머지는 다른 접근을 덧붙입니다.</p></div></li>
+        <li><time>11:15</time><div><h3>막힌 문제 같이 풀기</h3><p>아무도 못 푼 문제를 2–3명씩 짝지어 30분 동안 다시 풀어 봅니다.</p></div></li>
+        <li><time>11:50</time><div><h3>정리와 다음 주 문제</h3><p>오늘 나온 핵심 아이디어를 정리하고 다음 주 문제 4개를 정합니다.</p></div></li>
+        <li><time>12:30</time><div><h3>해산</h3><p>시간이 되는 사람끼리 근처에서 점심을 먹습니다. 선택입니다.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2>이런 분께 맞습니다</h2>
+      </div>
+      <div class="fit">
+        <div class="fit-box fit-yes">
+          <h3>잘 맞는 경우</h3>
+          <ul>
+            <li>코딩 테스트를 준비하는데 혼자서는 꾸준히 하기 어렵다</li>
+            <li>문제는 풀었는데 더 나은 풀이가 궁금하다</li>
+            <li>내 풀이를 말로 설명하는 연습을 하고 싶다</li>
+            <li>반복문과 함수는 쓸 줄 안다</li>
+          </ul>
+        </div>
+        <div class="fit-box fit-no">
+          <h3>맞지 않을 수 있는 경우</h3>
+          <ul>
+            <li>프로그래밍 문법부터 배우려는 단계다</li>
+            <li>강의처럼 누군가 가르쳐 주길 바란다</li>
+            <li>한 달에 한두 번만 나올 수 있다</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>모임 규칙</h2>
+        <p>규칙은 적게, 대신 지킵니다.</p>
+      </div>
+      <dl class="rules">
+        <div><dt>문제 풀어 오기</dt><dd>공지된 4문제 중 2문제 이상 시도하고 옵니다. 못 풀었으면 어디서 막혔는지만 적어 와도 됩니다.</dd></div>
+        <div><dt>설명할 수 있는 코드</dt><dd>복사한 풀이는 발표하지 않습니다. 이해한 만큼만 설명합니다.</dd></div>
+        <div><dt>출석</dt><dd>불참은 금요일 저녁까지 단톡방에 알려 주세요. 연락 없이 두 번 빠지면 다음 기수로 넘어갑니다.</dd></div>
+        <div><dt>비용</dt><dd>스터디룸 대여비를 참석 인원이 나눠 냅니다. 보통 1인 1만 원 안쪽입니다.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2>참여 방법</h2>
+      </div>
+      <ol class="steps">
+        <li><div><h3>신청서 작성</h3><p>아래 신청 버튼에서 이름, 주로 쓰는 언어, 최근 푼 문제 하나를 적어 주세요.</p></div></li>
+        <li><div><h3>단톡방 초대</h3><p>확인 후 2–3일 안에 연락드리고 단톡방에 초대합니다.</p></div></li>
+        <li><div><h3>첫 모임 참석</h3><p>첫 주는 문제를 다 못 풀어 와도 괜찮습니다. 분위기를 보고 계속할지 정하세요.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>자주 묻는 질문</h2>
+      </div>
+      <div class="faq">
+        <details><summary>문제 고르는 기준</summary><p>백준과 프로그래머스에서 주제별로 고릅니다. 한 달 단위로 주제를 정하고(예: 그래프 탐색, DP), 매주 쉬운 문제 2개와 어려운 문제 2개를 섞습니다.</p></details>
+        <details><summary>실력 차이가 클 때</summary><p>같이 풀기 시간에 실력이 비슷한 사람끼리 짝을 짓습니다. 발표할 때는 풀이의 핵심만 설명하면 됩니다.</p></details>
+        <details><summary>노트북 준비</summary><p>필요합니다. 같이 풀기 시간에 바로 코드를 작성합니다. 콘센트는 스터디룸에 있습니다.</p></details>
+        <details><summary>중간 합류</summary><p>자리가 있으면 언제든 합류할 수 있습니다. 정원이 찼으면 대기 명단에 올려 두고 자리가 나면 연락드립니다.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" class="join">
+    <div class="wrap join-box">
+      <div class="prose">
+        <h2>이번 주 토요일부터 합류할 수 있습니다</h2>
+        <p class="lede">신청서는 3분이면 작성할 수 있습니다. 궁금한 점은 신청서 마지막 칸에 남겨 주세요.</p>
+      </div>
+      <a class="btn btn--primary" href="#" aria-label="참여 신청서 열기">참여 신청하기</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">주말 알고리즘 · 매주 토요일 오전 · 강남</div>
+</footer>
+
+</body>
+</html>

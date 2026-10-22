@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>노트메이트 · 회의 녹음으로 회의록과 할 일 만들기</title>
+<meta name="description" content="회의 녹음 파일을 올리면 노트메이트가 요약, 결정 사항, 담당자와 마감일이 붙은 할 일 목록을 만듭니다.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* ---------- tokens (design system "Clear") ---------- */
+:root {
+  --bg: #ffffff; --surface: #f8fafc; --sunk: #f1f5f9; --line: #e2e8f0; --line-strong: #cbd5e1;
+  --fg: #0f172a; --muted: #475569; --subtle: #64748b;
+  --accent: #1d4ed8; --accent-hover: #1e40af; --accent-fg: #ffffff; --accent-soft: #eff6ff;
+  --ok: #067647; --ok-soft: #ecfdf3; --warn: #b54708; --warn-soft: #fffaeb; --danger: #b42318; --danger-soft: #fef3f2;
+  --code-bg: #0f172a; --code-fg: #e2e8f0; --code-muted: #94a3b8; --code-line: #334155;
+  --focus: #1d4ed8;
+  --brand: #0f766e;
+
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-xs: 12px; --text-s: 14px; --text-m: 16px; --text-l: 18px;
+  --text-h3: 18px; --text-h2: 24px; --text-h1: clamp(30px, 4.4vw, 44px);
+  --leading: 1.7; --leading-tight: 1.3;
+
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --radius-s: 6px; --radius-m: 8px; --radius-l: 10px;
+  --border: 1px solid var(--line);
+  --measure: 72ch;
+  --page: 1120px;
+  --motion: 180ms ease-out;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+    --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+    --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+    --ok: #47cd89; --ok-soft: #16322a; --warn: #fdb022; --warn-soft: #3a2c12; --danger: #f97066; --danger-soft: #3b1f1d;
+    --code-bg: #111315; --code-fg: #e4e6e8; --code-muted: #8a9096; --code-line: #33373b; --focus: #7cb7e8;
+    --brand: #5eead4;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+  --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+  --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+  --ok: #47cd89; --ok-soft: #16322a; --warn: #fdb022; --warn-soft: #3a2c12; --danger: #f97066; --danger-soft: #3b1f1d;
+  --code-bg: #111315; --code-fg: #e4e6e8; --code-muted: #8a9096; --code-line: #33373b; --focus: #7cb7e8;
+  --brand: #5eead4;
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-sans); font-size: var(--text-m); line-height: var(--leading);
+  word-break: keep-all; overflow-wrap: break-word;
+}
+h1, h2, h3 { margin: 0; line-height: var(--leading-tight); font-weight: 700; text-wrap: balance; }
+h1 { font-size: var(--text-h1); letter-spacing: -0.02em; }
+h2 { font-size: var(--text-h2); letter-spacing: -0.01em; }
+h3 { font-size: var(--text-h3); }
+p, ul, ol, dl, dd { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+code { font-family: var(--font-mono); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+.skip { position: absolute; left: var(--space-4); top: -100px; background: var(--bg); padding: var(--space-2) var(--space-3); border-radius: var(--radius-s); z-index: 10; }
+.skip:focus { top: var(--space-2); }
+
+/* ---------- components ---------- */
+.wrap { max-width: var(--page); margin: 0 auto; padding-inline: var(--space-4); }
+@media (min-width: 720px) { .wrap { padding-inline: var(--space-5); } }
+
+.ds-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: 44px; padding: 0 var(--space-4); border-radius: var(--radius-m);
+  font: 700 var(--text-s) / 1 var(--font-sans); cursor: pointer; text-decoration: none;
+  background: var(--bg); color: var(--fg); border: 1px solid var(--line-strong);
+  transition: background-color var(--motion), border-color var(--motion);
+}
+.ds-btn:hover { border-color: var(--subtle); color: var(--fg); }
+.ds-btn--primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.ds-btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-fg); }
+.ds-btn--l { min-height: 48px; padding-inline: var(--space-5); font-size: var(--text-m); }
+
+.ds-badge {
+  display: inline-flex; align-items: center; min-height: 22px; padding: 0 var(--space-2); border-radius: 4px;
+  font-size: var(--text-xs); font-weight: 700; background: var(--sunk); color: var(--muted); white-space: nowrap;
+}
+.ds-badge--accent { background: var(--accent-soft); color: var(--accent); }
+.ds-badge--ok { background: var(--ok-soft); color: var(--ok); }
+.ds-badge--warn { background: var(--warn-soft); color: var(--warn); }
+
+.ds-panel { background: var(--bg); border: var(--border); border-radius: var(--radius-l); padding: var(--space-5); min-width: 0; }
+.ds-panel--sunk { background: var(--surface); }
+
+.ds-steps { list-style: none; padding: 0; counter-reset: ds-step; }
+.ds-steps > li {
+  display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: var(--space-3); align-items: start;
+  padding: var(--space-4) 0; border-bottom: var(--border);
+}
+.ds-steps > li:last-child { border-bottom: 0; }
+.ds-steps > li::before {
+  counter-increment: ds-step; content: counter(ds-step);
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--sunk); color: var(--fg); font: 700 var(--text-xs) / 1 var(--font-sans);
+}
+.ds-steps > li.is-human::before { background: var(--accent); color: var(--accent-fg); }
+.ds-steps .ds-who { font-size: var(--text-xs); font-weight: 700; color: var(--accent); white-space: nowrap; padding-top: 3px; }
+.ds-steps h3 { font-size: var(--text-m); }
+.ds-steps p { font-size: var(--text-s); color: var(--muted); margin-top: 2px; }
+
+.ds-table-wrap { overflow-x: auto; }
+.ds-table { width: 100%; border-collapse: collapse; font-size: var(--text-s); font-variant-numeric: tabular-nums; }
+.ds-table th, .ds-table td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: var(--border); }
+.ds-table thead th { font-size: var(--text-xs); font-weight: 500; color: var(--subtle); border-bottom-color: var(--line-strong); }
+.ds-table tbody th { font-weight: 500; color: var(--muted); }
+.ds-table tbody tr:last-child > * { border-bottom: 0; }
+
+.ds-details { border-top: var(--border); }
+.ds-details:last-child { border-bottom: var(--border); }
+.ds-details > summary { cursor: pointer; padding: var(--space-3) 0; min-height: 52px; display: flex; align-items: center;
+  gap: var(--space-3); color: var(--fg); font-weight: 500; list-style: none; }
+.ds-details > summary::-webkit-details-marker { display: none; }
+.ds-details > summary::before { content: ""; width: 7px; height: 7px; border-right: 1.5px solid var(--muted);
+  border-bottom: 1.5px solid var(--muted); transform: rotate(-45deg); transition: transform 150ms ease-out; flex: none; }
+.ds-details[open] > summary::before { transform: rotate(45deg); }
+.ds-details > p { color: var(--muted); padding: 0 0 var(--space-4) 19px; max-width: var(--measure); }
+
+/* ---------- page ---------- */
+.topbar { border-bottom: var(--border); }
+.topbar .wrap { display: flex; align-items: center; gap: var(--space-5); min-height: 64px; }
+.logo { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--fg); text-decoration: none; font-weight: 700; font-size: var(--text-l); }
+.logo svg { color: var(--brand); }
+.logo:hover { color: var(--fg); }
+.nav { display: flex; gap: var(--space-5); margin-left: auto; }
+.nav a { color: var(--muted); text-decoration: none; font-size: var(--text-s); padding-block: var(--space-2); }
+.nav a:hover { color: var(--fg); }
+@media (max-width: 719px) { .nav { display: none; } .topbar .ds-btn { margin-left: auto; } }
+
+/* hero */
+.hero { padding-block: var(--space-7) var(--space-8); display: grid; gap: var(--space-6); }
+.hero-copy { display: grid; gap: var(--space-4); align-content: start; max-width: 34rem; }
+.hero-copy .lede { font-size: var(--text-l); color: var(--muted); }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-4); margin-top: var(--space-2); }
+.hero-actions small { font-size: var(--text-s); color: var(--subtle); }
+@media (min-width: 1024px) {
+  .hero { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-7); padding-top: var(--space-8); }
+  .hero-copy { padding-top: var(--space-5); }
+}
+
+/* result card: the product's own output */
+.result { border: 1px solid var(--line-strong); border-radius: var(--radius-l); background: var(--bg); min-width: 0; overflow: hidden; }
+.result-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); padding: var(--space-3) var(--space-5); border-bottom: var(--border); background: var(--surface); }
+.result-head .file { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--muted); overflow-wrap: anywhere; }
+.result-head .ds-badge { margin-left: auto; }
+.result-body { padding: var(--space-5); display: grid; gap: var(--space-5); }
+.result-title { display: grid; gap: 2px; }
+.result-title h2 { font-size: var(--text-l); }
+.meta { font-size: var(--text-s); color: var(--subtle); font-variant-numeric: tabular-nums; }
+.block { display: grid; gap: var(--space-2); }
+.block-label { font-size: var(--text-xs); font-weight: 700; color: var(--subtle); }
+.block ul { padding-left: 1.1em; display: grid; gap: var(--space-1); font-size: var(--text-s); }
+.block li::marker { color: var(--subtle); }
+
+.todo { list-style: none; padding: 0 !important; gap: 0 !important; border-top: var(--border); }
+.todo li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: var(--space-1) var(--space-3); align-items: start; padding: var(--space-3) 0; border-bottom: var(--border); }
+.todo li:last-child { border-bottom: 0; }
+.todo input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--accent); cursor: pointer; }
+.todo label { cursor: pointer; font-size: var(--text-s); font-weight: 500; }
+.todo input:checked + label { color: var(--subtle); text-decoration: line-through; }
+.todo .facts { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-3); font-size: var(--text-xs); color: var(--subtle); font-variant-numeric: tabular-nums; }
+.ts { font-family: var(--font-mono); }
+.example-note { font-size: var(--text-xs); color: var(--subtle); margin-top: var(--space-2); }
+
+/* sections */
+section { padding-block: var(--space-8); border-top: var(--border); }
+.sec-head { display: grid; gap: var(--space-3); max-width: 40rem; margin-bottom: var(--space-6); }
+.sec-head p { color: var(--muted); }
+
+/* evidence: transcript next to the task it produced */
+.evidence { display: grid; gap: var(--space-5); align-items: start; }
+@media (min-width: 900px) { .evidence { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: var(--space-7); } }
+.evidence-copy { display: grid; gap: var(--space-4); }
+.evidence-copy p { color: var(--muted); }
+.transcript { display: grid; gap: 0; font-size: var(--text-s); }
+.line { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: var(--space-3); padding: var(--space-2) var(--space-3); border-radius: var(--radius-s); }
+.line .ts { color: var(--subtle); font-size: var(--text-xs); padding-top: 3px; }
+.line b { font-weight: 700; margin-right: var(--space-2); }
+.line.hit { background: var(--accent-soft); }
+.line.hit .ts { color: var(--accent); font-weight: 500; }
+.derived { margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px dashed var(--line-strong); display: grid; gap: var(--space-2); }
+.derived p { font-weight: 500; }
+.derived .facts { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-3); align-items: center; font-size: var(--text-xs); color: var(--subtle); }
+
+/* steps section */
+.flow { display: grid; gap: var(--space-6); }
+@media (min-width: 900px) { .flow { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: var(--space-7); } }
+.flow .ds-steps { border-top: var(--border); }
+.formats { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
+
+/* pricing */
+.price-table th[scope="col"]:not(:first-child), .price-table td { min-width: 6.5rem; }
+.price-table .plan { font-size: var(--text-m); font-weight: 700; color: var(--fg); display: block; }
+.price-table .amount { font-size: var(--text-l); font-weight: 700; color: var(--fg); }
+.price-table .yes { color: var(--ok); font-weight: 500; }
+.price-table .no { color: var(--subtle); }
+.price-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-5); }
+
+/* faq */
+.faq { max-width: 48rem; }
+
+/* closing */
+.closing { display: grid; gap: var(--space-4); align-items: center; }
+@media (min-width: 900px) { .closing { grid-template-columns: minmax(0, 1fr) auto; } }
+.closing p { color: var(--muted); margin-top: var(--space-2); }
+
+footer { border-top: var(--border); padding-block: var(--space-6); font-size: var(--text-s); color: var(--subtle); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); align-items: center; }
+footer nav { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-left: auto; }
+footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="노트메이트 홈">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="4" y="3" width="16" height="18" rx="3" stroke="currentColor" stroke-width="2"/>
+        <path d="M8 9h8M8 13h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M12.5 16.5l1.5 1.5 3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      노트메이트
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#how">사용 방법</a>
+      <a href="#pricing">요금</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </nav>
+    <a class="ds-btn" href="#">로그인</a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <h1>회의 녹음을 올리면 회의록과 할 일 목록이 나옵니다</h1>
+      <p class="lede">노트메이트는 녹음 파일을 받아쓰고, 결정 사항과 할 일을 골라 담당자와 마감일을 붙입니다. 회의가 끝난 뒤 메모를 정리하는 시간이 필요 없습니다.</p>
+      <div class="hero-actions">
+        <a class="ds-btn ds-btn--primary ds-btn--l" href="#">녹음 파일 올리기</a>
+        <small>무료 요금제로 카드 등록 없이 시작</small>
+      </div>
+    </div>
+
+    <figure style="margin:0">
+      <article class="result" aria-label="노트메이트 결과 화면 예시">
+        <div class="result-head">
+          <span class="file">주간제품회의_1020.m4a</span>
+          <span class="ds-badge ds-badge--ok">✓ 정리 완료</span>
+        </div>
+        <div class="result-body">
+          <div class="result-title">
+            <h2>주간 제품 회의</h2>
+            <p class="meta">10월 20일 (월) · 42분 · 참석 4명</p>
+          </div>
+
+          <div class="block">
+            <h3 class="block-label">요약</h3>
+            <ul>
+              <li>11월 업데이트는 검색 개선을 먼저 내고, 알림 설정 개편은 12월로 미룹니다.</li>
+              <li>결제 오류 문의가 지난주보다 늘어 원인을 이번 주 안에 확인합니다.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h3 class="block-label">결정 사항</h3>
+            <ul>
+              <li>검색 개선 출시일: 11월 12일</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h3 class="block-label">할 일 3건</h3>
+            <ul class="todo">
+              <li>
+                <input type="checkbox" id="t1">
+                <label for="t1">결제 오류 로그에서 실패 원인 분류하기</label>
+                <span class="facts"><span class="ds-badge ds-badge--accent">김서연</span><span>10월 24일까지</span><span class="ts">14:32</span></span>
+              </li>
+              <li>
+                <input type="checkbox" id="t2">
+                <label for="t2">검색 개선 출시 공지 초안 작성</label>
+                <span class="facts"><span class="ds-badge ds-badge--accent">박지훈</span><span>11월 5일까지</span><span class="ts">27:08</span></span>
+              </li>
+              <li>
+                <input type="checkbox" id="t3">
+                <label for="t3">알림 설정 개편 일정 디자인팀과 다시 잡기</label>
+                <span class="facts"><span class="ds-badge ds-badge--warn">담당자 미정</span><span>마감일 없음</span><span class="ts">35:51</span></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </article>
+      <figcaption class="example-note">예시 회의로 만든 결과 화면입니다. 시각은 할 일이 나온 녹음 위치입니다.</figcaption>
+    </figure>
+  </div>
+
+  <section aria-labelledby="evidence-title">
+    <div class="wrap evidence">
+      <div class="evidence-copy">
+        <h2 id="evidence-title">할 일마다 녹음 위치가 붙습니다</h2>
+        <p>할 일을 누르면 그 말이 나온 대목부터 녹음이 재생됩니다. "누가 하기로 했지?"를 확인하려고 40분짜리 녹음을 처음부터 다시 듣지 않아도 됩니다.</p>
+        <p>회의에서 담당자나 마감일을 말하지 않았다면 노트메이트는 빈칸을 추측해 채우지 않고 <span class="ds-badge ds-badge--warn">담당자 미정</span>으로 표시합니다. 공유하기 전에 회의 진행자가 채우면 됩니다.</p>
+      </div>
+
+      <div class="ds-panel ds-panel--sunk">
+        <div class="transcript" role="group" aria-label="받아쓴 회의 내용 일부와 거기서 나온 할 일">
+          <p class="line"><span class="ts">14:18</span><span><b>박지훈</b>결제 실패 문의가 지난주보다 꽤 늘었어요.</span></p>
+          <p class="line"><span class="ts">14:25</span><span><b>이도윤</b>카드사 쪽 문제인지 우리 쪽인지부터 봐야 할 것 같은데요.</span></p>
+          <p class="line hit"><span class="ts">14:32</span><span><b>김서연</b>로그는 제가 볼게요. 금요일까지 원인별로 나눠서 공유할게요.</span></p>
+          <p class="line"><span class="ts">14:41</span><span><b>박지훈</b>좋아요, 그럼 다음 안건으로 넘어가죠.</span></p>
+        </div>
+        <div class="derived">
+          <span class="block-label">노트메이트가 만든 할 일</span>
+          <p>결제 오류 로그에서 실패 원인 분류하기</p>
+          <div class="facts">
+            <span class="ds-badge ds-badge--accent">김서연</span>
+            <span>10월 24일까지 ("금요일까지")</span>
+            <span class="ts">14:32</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" aria-labelledby="how-title">
+    <div class="wrap flow">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2 id="how-title">사용 방법</h2>
+        <p>녹음은 휴대폰, 줌, 구글 미트 등 어디서 했든 파일만 있으면 됩니다.</p>
+        <div class="formats" aria-label="지원 파일 형식">
+          <span class="ds-badge">mp3</span><span class="ds-badge">m4a</span><span class="ds-badge">wav</span><span class="ds-badge">mp4</span>
+        </div>
+      </div>
+      <ol class="ds-steps">
+        <li>
+          <div><h3>녹음 파일 올리기</h3><p>파일을 끌어다 놓거나 선택합니다. 회의 제목과 참석자 이름을 넣으면 화자 이름이 정확해집니다.</p></div>
+        </li>
+        <li>
+          <div><h3>받아쓰기와 정리</h3><p>노트메이트가 말한 사람별로 받아쓴 뒤 요약, 결정 사항, 할 일을 뽑습니다.</p></div>
+        </li>
+        <li class="is-human">
+          <div><h3>검토하고 고치기</h3><p>담당자 미정 항목을 채우고, 잘못 들은 이름이나 숫자를 고칩니다.</p></div>
+          <span class="ds-who">진행자</span>
+        </li>
+        <li>
+          <div><h3>공유하기</h3><p>링크로 공유하거나 슬랙, 노션, 이메일로 보냅니다. 할 일은 담당자에게 따로 알림이 갑니다.</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="pricing" aria-labelledby="pricing-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="pricing-title">요금</h2>
+        <p>요금은 한 달에 올리는 녹음 시간으로 정해집니다. 쓰지 않은 시간은 다음 달로 넘어가지 않습니다.</p>
+      </div>
+      <div class="ds-table-wrap">
+        <table class="ds-table price-table">
+          <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">요금제 비교</caption>
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col"><span class="plan">무료</span>개인</th>
+              <th scope="col"><span class="plan">팀</span>사용자 1명당</th>
+              <th scope="col"><span class="plan">기업</span>문의</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">월 요금</th><td><span class="amount">0원</span></td><td><span class="amount">[금액]</span></td><td>견적</td></tr>
+            <tr><th scope="row">월 녹음 시간</th><td>[시간]</td><td>[시간]</td><td>협의</td></tr>
+            <tr><th scope="row">요약과 할 일</th><td class="yes">✓ 포함</td><td class="yes">✓ 포함</td><td class="yes">✓ 포함</td></tr>
+            <tr><th scope="row">슬랙·노션 연동</th><td class="no">– 없음</td><td class="yes">✓ 포함</td><td class="yes">✓ 포함</td></tr>
+            <tr><th scope="row">SSO 로그인</th><td class="no">– 없음</td><td class="no">– 없음</td><td class="yes">✓ 포함</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="price-actions">
+        <a class="ds-btn" href="#">무료로 가입</a>
+        <a class="ds-btn" href="#">기업 요금 문의</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq">
+      <h2 id="faq-title" style="margin-bottom:var(--space-5)">자주 묻는 질문</h2>
+      <details class="ds-details">
+        <summary>올린 녹음 파일은 어디에 보관되나요?</summary>
+        <p>녹음 파일과 받아쓴 내용은 계정 안에만 저장되고, 공유 링크를 만든 회의만 다른 사람이 볼 수 있습니다. 회의를 지우면 녹음 파일도 함께 지워집니다.</p>
+      </details>
+      <details class="ds-details">
+        <summary>올린 회의 내용이 AI 학습에 쓰이나요?</summary>
+        <p>쓰이지 않습니다. 녹음과 회의록은 해당 회의를 정리하는 데만 사용합니다.</p>
+      </details>
+      <details class="ds-details">
+        <summary>한국어와 영어가 섞인 회의도 되나요?</summary>
+        <p>됩니다. 한 문장 안에 영어 용어가 섞여도 그대로 받아씁니다. 요약과 할 일은 회의에서 주로 쓴 언어로 작성됩니다.</p>
+      </details>
+      <details class="ds-details">
+        <summary>받아쓰기가 틀리면 어떻게 하나요?</summary>
+        <p>결과 화면에서 문장을 눌러 바로 고칠 수 있습니다. 자주 틀리는 사람 이름이나 제품명은 용어집에 넣어 두면 다음 회의부터 반영됩니다.</p>
+      </details>
+    </div>
+  </section>
+
+  <section aria-labelledby="closing-title">
+    <div class="wrap closing">
+      <div>
+        <h2 id="closing-title">지난 회의 녹음 하나로 결과를 확인할 수 있습니다</h2>
+        <p>무료 요금제는 가입만 하면 쓸 수 있고, 카드를 등록하지 않습니다.</p>
+      </div>
+      <a class="ds-btn ds-btn--primary ds-btn--l" href="#">녹음 파일 올리기</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 노트메이트</span>
+    <nav aria-label="하단 메뉴">
+      <a href="#">이용약관</a>
+      <a href="#">개인정보처리방침</a>
+      <a href="#">문의</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

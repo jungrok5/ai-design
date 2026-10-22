@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사내 해커톤 2026 · AI로 업무 자동화</title>
+<meta name="description" content="2026년 11월 13일(금)–14일(토), AI로 업무 자동화를 주제로 하는 사내 해커톤 안내">
+<style>
+  :root {
+    --bg: #f7f7f4;
+    --surface: #ffffff;
+    --text: #1b1d21;
+    --muted: #5d6470;
+    --line: #e3e3dd;
+    --accent: #3b4cca;
+    --accent-ink: #ffffff;
+    --accent-soft: #e9ebfb;
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101216;
+      --surface: #181b21;
+      --text: #eceef2;
+      --muted: #9aa3b0;
+      --line: #2a2e37;
+      --accent: #8c9bff;
+      --accent-ink: #10131f;
+      --accent-soft: #20253d;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    line-height: 1.65;
+    word-break: keep-all;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 56px 0 0; }
+  h2 { font-size: 1.4rem; margin: 0 0 20px; letter-spacing: -0.01em; }
+  p { margin: 0 0 12px; }
+
+  header.hero { padding: 72px 0 48px; border-bottom: 1px solid var(--line); }
+  .eyebrow {
+    display: inline-block; font-size: .85rem; font-weight: 600;
+    color: var(--accent); background: var(--accent-soft);
+    padding: 4px 12px; border-radius: 999px; margin-bottom: 20px;
+  }
+  h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.2; margin: 0 0 16px; letter-spacing: -0.03em; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .lead { font-size: 1.1rem; color: var(--muted); max-width: 560px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0; }
+  .chip {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 12px 18px;
+  }
+  .chip small { display: block; color: var(--muted); font-size: .78rem; }
+  .chip strong { font-size: 1.05rem; }
+  .cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+  .btn {
+    display: inline-block; background: var(--accent); color: var(--accent-ink);
+    padding: 13px 26px; border-radius: 10px; font-weight: 700; text-decoration: none;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  #dday { color: var(--muted); font-size: .95rem; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 20px;
+  }
+  .card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+  .card p { color: var(--muted); font-size: .95rem; margin: 0; }
+  .num {
+    display: inline-grid; place-items: center; width: 28px; height: 28px;
+    border-radius: 50%; background: var(--accent-soft); color: var(--accent);
+    font-weight: 700; font-size: .85rem; margin-bottom: 10px;
+  }
+
+  .days { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+  .day { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .day h3 { margin: 0 0 12px; font-size: 1.1rem; }
+  .day h3 span { color: var(--accent); }
+  .day ol { list-style: none; margin: 0; padding: 0; }
+  .day li { display: flex; gap: 14px; padding: 9px 0; border-top: 1px solid var(--line); font-size: .95rem; }
+  .day li:first-child { border-top: 0; }
+  .day time { flex: none; width: 96px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .note { color: var(--muted); font-size: .88rem; margin-top: 14px; }
+
+  ul.plain { margin: 0; padding-left: 1.2em; }
+  ul.plain li { margin-bottom: 8px; }
+
+  details {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 14px 20px; margin-bottom: 10px;
+  }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin: 10px 0 0; color: var(--muted); }
+
+  footer { margin-top: 64px; padding: 28px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+  @media (max-width: 420px) { .days { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">사내 해커톤 2026</span>
+    <h1>AI로 <em>업무 자동화</em>,<br>이틀 만에 만들어 봅니다</h1>
+    <p class="lead">매일 반복하던 일을 AI에게 맡겨 보세요. 아이디어부터 동작하는 데모까지, 팀과 함께 금·토 이틀 동안 몰입합니다.</p>
+
+    <div class="meta">
+      <div class="chip"><small>일시</small><strong>11월 13일(금) – 14일(토)</strong></div>
+      <div class="chip"><small>주제</small><strong>AI로 업무 자동화</strong></div>
+      <div class="chip"><small>장소</small><strong>추후 공지</strong></div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn" href="#apply">참가 신청 안내</a>
+      <span id="dday"></span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="about">
+    <h2>이런 행사예요</h2>
+    <p>우리 팀의 번거로운 업무를 AI로 줄이는 것이 목표입니다. 개발 직군이 아니어도, 코딩 경험이 적어도 괜찮습니다. 기획·운영·영업·CS 등 다양한 직무가 한 팀이 될수록 더 좋은 아이디어가 나옵니다.</p>
+    <div class="cards" style="margin-top:20px">
+      <div class="card"><span class="num">1</span><h3>실제 업무에서 출발</h3><p>보고서 작성, 문의 분류, 회의록 정리처럼 내가 매일 겪는 문제를 주제로 삼습니다.</p></div>
+      <div class="card"><span class="num">2</span><h3>동작하는 결과물</h3><p>발표 자료보다 실제로 돌아가는 데모를 우선합니다. 작아도 쓸 수 있으면 충분해요.</p></div>
+      <div class="card"><span class="num">3</span><h3>현업 적용까지</h3><p>우수 결과물은 이후 실제 업무 도구로 이어질 수 있도록 지원을 검토합니다.</p></div>
+    </div>
+  </section>
+
+  <section id="schedule">
+    <h2>일정</h2>
+    <div class="days">
+      <div class="day">
+        <h3><span>Day 1</span> · 11월 13일(금)</h3>
+        <ol>
+          <li><time>10:00</time>오프닝 · 규칙 안내</li>
+          <li><time>10:30</time>팀 빌딩 · 아이디어 확정</li>
+          <li><time>12:00</time>점심</li>
+          <li><time>13:00</time>본격 개발</li>
+          <li><time>17:00</time>중간 점검 (팀별 3분)</li>
+          <li><time>18:00</time>저녁 · 자유 개발</li>
+        </ol>
+      </div>
+      <div class="day">
+        <h3><span>Day 2</span> · 11월 14일(토)</h3>
+        <ol>
+          <li><time>10:00</time>개발 이어가기</li>
+          <li><time>12:00</time>점심</li>
+          <li><time>13:00</time>제출 마감 · 발표 준비</li>
+          <li><time>14:30</time>팀별 데모 발표</li>
+          <li><time>16:30</time>심사 · 시상</li>
+          <li><time>17:30</time>마무리</li>
+        </ol>
+      </div>
+    </div>
+    <p class="note">※ 세부 시간은 운영 상황에 따라 조정될 수 있으며, 확정되면 다시 안내드립니다.</p>
+  </section>
+
+  <section id="rules">
+    <h2>참가 방법 및 규칙</h2>
+    <ul class="plain">
+      <li><strong>팀 구성</strong>: 3–5명. 개인 신청 시 현장에서 팀 매칭을 도와드립니다.</li>
+      <li><strong>주제</strong>: AI를 활용해 업무 하나를 자동화하거나 크게 줄이는 것.</li>
+      <li><strong>도구</strong>: 사용 가능한 AI 도구·API에 제한은 없습니다. 단, 사내 보안 지침을 지켜 주세요.</li>
+      <li><strong>데이터</strong>: 고객 정보 등 민감한 실제 데이터는 사용하지 말고, 샘플·더미 데이터로 시연합니다.</li>
+      <li><strong>제출물</strong>: 동작하는 데모, 3분 내외 발표, 한 장짜리 설명 자료.</li>
+    </ul>
+  </section>
+
+  <section id="judging">
+    <h2>평가 기준</h2>
+    <div class="cards">
+      <div class="card"><h3>문제의 가치</h3><p>얼마나 많은 사람의 시간을 얼마나 줄이는가</p></div>
+      <div class="card"><h3>완성도</h3><p>데모가 실제로 동작하는가</p></div>
+      <div class="card"><h3>AI 활용의 적절성</h3><p>AI가 꼭 필요한 곳에 쓰였는가</p></div>
+      <div class="card"><h3>확장 가능성</h3><p>다른 팀·업무로 넓힐 수 있는가</p></div>
+    </div>
+  </section>
+
+  <section id="apply">
+    <h2>참가 신청</h2>
+    <div class="card">
+      <p>신청 방법과 마감일은 곧 공지됩니다. 아래 내용을 미리 준비해 두면 좋아요.</p>
+      <ul class="plain">
+        <li>팀 이름과 팀원 (또는 개인 참가 희망 여부)</li>
+        <li>자동화하고 싶은 업무 아이디어 한두 줄</li>
+      </ul>
+      <p class="note" style="margin-bottom:0">문의: 해커톤 운영팀 (연락처 추후 공지)</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>자주 묻는 질문</h2>
+    <details>
+      <summary>개발자가 아니어도 참가할 수 있나요?</summary>
+      <p>네. 노코드 도구나 AI 에이전트만으로도 충분히 만들 수 있고, 기획과 문제 정의 역할도 팀에 꼭 필요합니다.</p>
+    </details>
+    <details>
+      <summary>토요일에도 근무로 인정되나요?</summary>
+      <p>보상휴가 등 운영 방침은 확정되는 대로 공지하겠습니다.</p>
+    </details>
+    <details>
+      <summary>아이디어가 아직 없어도 되나요?</summary>
+      <p>괜찮습니다. 첫날 오전 팀 빌딩 시간에 함께 정하게 됩니다.</p>
+    </details>
+    <details>
+      <summary>식사와 간식은 제공되나요?</summary>
+      <p>점심·저녁과 간식이 제공될 예정입니다. 알레르기나 식이 제한은 신청 시 알려 주세요.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">사내 해커톤 2026 · AI로 업무 자동화 · 11월 13일(금) – 14일(토)</div>
+</footer>
+
+<script>
+  (function () {
+    var el = document.getElementById('dday');
+    var start = new Date('2026-11-13T10:00:00+09:00');
+    var end = new Date('2026-11-14T17:30:00+09:00');
+    var now = new Date();
+    var days = Math.ceil((start - now) / 86400000);
+    if (now > end) el.textContent = '행사가 종료되었습니다.';
+    else if (now >= start) el.textContent = '지금 진행 중입니다!';
+    else el.textContent = days === 1 ? '내일 시작합니다' : 'D-' + days;
+  })();
+</script>
+</body>
+</html>

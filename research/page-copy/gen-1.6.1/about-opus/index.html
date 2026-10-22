@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회사 소개 | 이음로지스</title>
+<meta name="description" content="이음로지스는 중소 쇼핑몰의 당일 배송을 맡는 물류 회사입니다. 오후 1시까지 들어온 주문을 그날 밤 고객에게 전달합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* ---------- tokens (design system "Clear", light/dark) ---------- */
+:root {
+  --bg: #ffffff; --surface: #f8fafc; --sunk: #f1f5f9; --line: #e2e8f0; --line-strong: #cbd5e1;
+  --fg: #0f172a; --muted: #475569; --subtle: #64748b;
+  --accent: #1d4ed8; --accent-hover: #1e40af; --accent-fg: #ffffff; --accent-soft: #eff6ff;
+  --ok: #067647; --ok-soft: #ecfdf3;
+  --focus: #1d4ed8;
+  --brand: #0f766e; /* 로고 전용 */
+
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-xs: 12px; --text-s: 14px; --text-m: 16px; --text-l: 18px;
+  --text-h3: 18px; --text-h2: 24px; --text-h1: clamp(30px, 4.4vw, 44px);
+  --leading: 1.7; --leading-tight: 1.3;
+
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --radius-s: 6px; --radius-m: 8px; --radius-l: 10px;
+  --border: 1px solid var(--line);
+  --measure: 64ch;
+  --page: 1120px;
+  --motion: 180ms ease-out;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+    --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+    --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+    --ok: #47cd89; --ok-soft: #16322a; --focus: #7cb7e8;
+    --brand: #5eead4;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+  --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+  --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+  --ok: #47cd89; --ok-soft: #16322a; --focus: #7cb7e8;
+  --brand: #5eead4;
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-sans); font-size: var(--text-m); line-height: var(--leading);
+  word-break: keep-all; overflow-wrap: break-word;
+}
+h1, h2, h3 { margin: 0; line-height: var(--leading-tight); font-weight: 700; text-wrap: balance; }
+h1 { font-size: var(--text-h1); letter-spacing: -0.02em; }
+h2 { font-size: var(--text-h2); letter-spacing: -0.01em; }
+h3 { font-size: var(--text-h3); }
+p, dl, dd, ol, ul { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: var(--space-4); top: var(--space-2); background: var(--bg); padding: var(--space-2) var(--space-3); z-index: 10; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- layout ---------- */
+.wrap { max-width: var(--page); margin: 0 auto; padding-inline: var(--space-4); }
+@media (min-width: 720px) { .wrap { padding-inline: var(--space-5); } }
+section { padding-block: var(--space-7); border-top: var(--border); }
+@media (min-width: 900px) { section { padding-block: var(--space-8); } }
+.narrow { max-width: var(--measure); }
+.lede { font-size: var(--text-l); color: var(--muted); }
+.muted { color: var(--muted); }
+.sec-head { display: grid; gap: var(--space-2); margin-bottom: var(--space-6); max-width: var(--measure); }
+
+/* ---------- top bar ---------- */
+.topbar { border-bottom: var(--border); background: var(--bg); }
+.topbar .wrap { display: flex; align-items: center; gap: var(--space-5); min-height: 60px; }
+.logo { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--fg); text-decoration: none; font-weight: 700; font-size: var(--text-l); min-height: 44px; }
+.logo svg { color: var(--brand); flex: none; }
+.nav { display: flex; gap: var(--space-1); margin-left: auto; }
+.nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-2); color: var(--muted); text-decoration: none; font-size: var(--text-s); }
+.nav a:hover { color: var(--fg); }
+.nav a[aria-current="page"] { color: var(--fg); font-weight: 700; }
+@media (max-width: 560px) { .nav .opt { display: none; } }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: 44px; padding: 0 var(--space-4); border-radius: var(--radius-m);
+  font: 700 var(--text-s) / 1 var(--font-sans); text-decoration: none;
+  background: var(--bg); color: var(--fg); border: 1px solid var(--line-strong);
+  transition: background-color var(--motion), border-color var(--motion);
+}
+.btn:hover { border-color: var(--subtle); color: var(--fg); }
+.btn--primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-fg); }
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+/* ---------- hero ---------- */
+.hero { padding-block: var(--space-7) var(--space-8); border-top: 0; }
+.hero .wrap { display: grid; gap: var(--space-7); align-items: center; }
+@media (min-width: 900px) { .hero .wrap { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--space-8); } }
+.hero-copy { display: grid; gap: var(--space-5); }
+.hero-copy .who { font-size: var(--text-s); color: var(--muted); }
+
+/* 배송 조회 카드: 실제 고객이 받는 화면 */
+.track { margin: 0; border: var(--border); border-radius: var(--radius-l); background: var(--bg); overflow: hidden; }
+.track-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3); flex-wrap: wrap; padding: var(--space-4) var(--space-5); background: var(--surface); border-bottom: var(--border); }
+.track-head p { font-size: var(--text-s); color: var(--muted); }
+.track-head strong { display: block; font-size: var(--text-m); color: var(--fg); }
+.badge { display: inline-flex; align-items: center; gap: var(--space-1); min-height: 24px; padding: 0 var(--space-2); border-radius: 4px; font-size: var(--text-xs); font-weight: 700; white-space: nowrap; }
+.badge--ok { background: var(--ok-soft); color: var(--ok); }
+.track ol { list-style: none; padding: var(--space-4) var(--space-5) var(--space-5); }
+.track li { display: grid; grid-template-columns: 52px 14px minmax(0, 1fr); gap: var(--space-3); position: relative; padding-bottom: var(--space-4); }
+.track li:last-child { padding-bottom: 0; }
+.track time { font-size: var(--text-s); color: var(--subtle); padding-top: 1px; }
+.track .dot { width: 10px; height: 10px; margin-top: 8px; border-radius: 50%; border: 2px solid var(--line-strong); background: var(--bg); position: relative; z-index: 1; }
+.track li:not(:last-child)::after { content: ""; position: absolute; left: calc(52px + var(--space-3) + 4px); top: 20px; bottom: -6px; width: 2px; background: var(--line); }
+.track li.done .dot { border-color: var(--accent); background: var(--accent); }
+.track li.now .dot { border-color: var(--ok); background: var(--ok); }
+.track li p { font-size: var(--text-s); color: var(--muted); }
+.track li b { display: block; color: var(--fg); font-size: var(--text-m); font-weight: 500; }
+.track-foot { padding: var(--space-3) var(--space-5); border-top: var(--border); font-size: var(--text-xs); color: var(--subtle); }
+
+/* ---------- story ---------- */
+.story { display: grid; gap: var(--space-5); }
+@media (min-width: 900px) { .story { grid-template-columns: 280px minmax(0, var(--measure)); gap: var(--space-8); } }
+.story .body { display: grid; gap: var(--space-4); }
+.story blockquote { margin: 0; padding: var(--space-4) 0; border-block: var(--border); font-size: var(--text-l); font-weight: 500; }
+
+/* ---------- day timeline ---------- */
+.day { list-style: none; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line-strong); }
+.day li { display: grid; gap: var(--space-1) var(--space-5); padding: var(--space-4) 0; border-bottom: var(--border); }
+@media (min-width: 720px) { .day li { grid-template-columns: 140px minmax(0, 1fr) minmax(0, 1.4fr); align-items: baseline; } }
+.day time { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 500; color: var(--accent); }
+.day h3 { font-size: var(--text-m); }
+.day p { color: var(--muted); font-size: 15px; }
+.day li.key time { font-weight: 700; }
+
+/* ---------- facts (dl) ---------- */
+.facts { display: grid; gap: var(--space-6); }
+@media (min-width: 900px) { .facts { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-8); align-items: start; } }
+.facts dl { display: grid; border-top: 1px solid var(--line-strong); }
+.facts dl > div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: var(--space-4); padding: var(--space-3) 0; border-bottom: var(--border); }
+.facts dt { color: var(--subtle); font-size: var(--text-s); padding-top: 2px; }
+.facts dd { font-variant-numeric: tabular-nums; }
+.facts .side { display: grid; gap: var(--space-4); }
+.note { background: var(--accent-soft); border-radius: var(--radius-m); padding: var(--space-3) var(--space-4); font-size: 15px; }
+
+/* ---------- principles ---------- */
+.rules { list-style: none; padding: 0; display: grid; gap: var(--space-6) var(--space-7); }
+@media (min-width: 720px) { .rules { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.rules li { display: grid; gap: var(--space-2); align-content: start; }
+.rules p { color: var(--muted); }
+
+/* ---------- contact ---------- */
+.contact { background: var(--surface); }
+.contact .wrap { display: grid; gap: var(--space-6); }
+@media (min-width: 900px) { .contact .wrap { grid-template-columns: minmax(0, 1fr) auto; align-items: end; } }
+.contact-lede { margin-top: var(--space-3); }
+.contact .ways { display: grid; gap: var(--space-1); margin-top: var(--space-4); }
+.contact .ways a { overflow-wrap: anywhere; }
+
+footer { border-top: var(--border); padding-block: var(--space-5); font-size: var(--text-s); color: var(--subtle); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); justify-content: space-between; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="이음로지스 홈">
+      <svg width="28" height="20" viewBox="0 0 28 20" aria-hidden="true" focusable="false">
+        <circle cx="5" cy="14" r="4" fill="currentColor"/>
+        <circle cx="23" cy="6" r="4" fill="currentColor"/>
+        <path d="M8.5 12.5 C 13 12, 15 8, 19.5 7.5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      </svg>
+      이음로지스
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#top" aria-current="page">회사 소개</a>
+      <a class="opt" href="#day">배송 흐름</a>
+      <a class="opt" href="#terms">이용 조건</a>
+      <a href="#contact">문의</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- 시간·지역·연락처 등 수치는 예시 값입니다. 실제 운영 기준으로 바꿔 주세요. -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="who">중소 쇼핑몰 당일 배송 · 이음로지스</p>
+        <h1>오늘 들어온 주문을<br>오늘 밤 고객 문 앞까지</h1>
+        <p class="lede">이음로지스는 직원 몇 명이 운영하는 쇼핑몰도 당일 배송을 할 수 있게 만듭니다. 오후 1시까지 들어온 주문을 매장이나 창고에서 직접 가져가, 그날 밤 10시 전에 고객에게 전달합니다.</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="#contact">입점 상담 신청</a>
+          <a class="btn" href="#day">하루 배송 흐름 보기</a>
+        </div>
+      </div>
+
+      <figure class="track" aria-label="고객이 받는 배송 조회 화면 예시">
+        <div class="track-head">
+          <p><strong>니트 가디건 외 1건</strong>주문번호 <span class="mono">EL-1022-0418</span></p>
+          <span class="badge badge--ok">✓ 배송 완료</span>
+        </div>
+        <ol>
+          <li class="done"><time class="mono" datetime="11:42">11:42</time><span class="dot" aria-hidden="true"></span><p><b>주문 접수</b>쇼핑몰 주문 자동 연동</p></li>
+          <li class="done"><time class="mono" datetime="14:10">14:10</time><span class="dot" aria-hidden="true"></span><p><b>상품 픽업</b>성수동 판매자 창고</p></li>
+          <li class="done"><time class="mono" datetime="17:05">17:05</time><span class="dot" aria-hidden="true"></span><p><b>허브 분류</b>동네별 분류 후 배송 기사 배정</p></li>
+          <li class="now"><time class="mono" datetime="20:37">20:37</time><span class="dot" aria-hidden="true"></span><p><b>문 앞 전달</b>현관 앞 전달, 사진 전송</p></li>
+        </ol>
+        <figcaption class="track-foot">고객이 받는 배송 조회 화면 (예시)</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="why-title">
+    <div class="wrap story">
+      <h2 id="why-title">왜 시작했나</h2>
+      <div class="body">
+        <p>큰 쇼핑몰은 자체 물류센터와 계약 물량으로 당일 배송을 합니다. 하루 주문이 수십 건인 쇼핑몰은 그럴 수 없었습니다. 택배사는 다음 날 도착이 기본이고, 퀵은 건당 비용이 너무 높습니다.</p>
+        <blockquote><!-- style-ignore: 판매자 인용 -->“상품은 자신 있는데, 배송이 하루 늦어서 고객을 놓쳐요.”</blockquote>
+        <p>여러 쇼핑몰의 주문을 한 동선으로 묶으면 작은 물량도 당일에 보낼 수 있습니다. 이음로지스는 그 묶는 일을 합니다. 판매자는 포장까지만 하고, 그다음은 저희가 맡습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="day" aria-labelledby="day-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="day-title">주문 하나가 지나가는 하루</h2>
+        <p class="muted">평일 기준입니다. 토요일은 마감과 배송 시간이 2시간씩 당겨집니다.</p>
+      </div>
+      <ol class="day">
+        <li class="key"><time datetime="13:00">13:00</time><h3>주문 마감</h3><p>이 시각까지 쇼핑몰에 들어온 주문이 오늘 배송 대상입니다.</p></li>
+        <li><time datetime="14:00">14:00 – 16:00</time><h3>매장·창고 픽업</h3><p>담당 기사가 정해진 시간에 판매자를 찾아가 포장된 상품을 가져갑니다.</p></li>
+        <li><time datetime="17:00">17:00</time><h3>허브 분류</h3><p>여러 쇼핑몰의 상품을 받는 동네별로 다시 나눕니다.</p></li>
+        <li><time datetime="18:00">18:00 – 22:00</time><h3>문 앞 배송</h3><p>고객에게 도착 예정 시간을 문자로 먼저 알리고 배송합니다.</p></li>
+        <li class="key"><time datetime="22:00">22:00</time><h3>완료 보고</h3><p>전달 사진과 결과를 판매자 관리 화면에 올립니다. 못 보낸 건은 사유와 함께 따로 표시합니다.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="terms" aria-labelledby="terms-title">
+    <div class="wrap facts">
+      <div class="side">
+        <h2 id="terms-title">이용 조건</h2>
+        <p class="muted">계약 전에 가장 많이 묻는 내용입니다. 물량과 지역에 따라 조정할 수 있으니 상담 때 말씀해 주세요.</p>
+        <p class="note">하루 주문이 적어도 괜찮습니다. 최소 물량 대신 픽업 1회당 기본료를 받습니다.</p>
+      </div>
+      <dl>
+        <div><dt>배송 지역</dt><dd>서울 전 지역, 경기 성남·하남·과천·광명</dd></div>
+        <div><dt>주문 마감</dt><dd>평일 오후 1시, 토요일 오전 11시</dd></div>
+        <div><dt>배송 완료</dt><dd>당일 밤 10시 전</dd></div>
+        <div><dt>최소 물량</dt><dd>없음</dd></div>
+        <div><dt>주문 연동</dt><dd>카페24, 스마트스토어, 아임웹, 엑셀 업로드</dd></div>
+        <div><dt>정산</dt><dd>매월 말일 마감, 다음 달 10일 청구</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section aria-labelledby="rules-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="rules-title">저희가 지키는 것</h2>
+      </div>
+      <ul class="rules">
+        <li><h3>약속한 시간을 먼저 말합니다</h3><p>늦어질 것 같으면 판매자와 고객에게 미리 알립니다. 도착하고 나서 사과하지 않습니다.</p></li>
+        <li><h3>판매자의 브랜드로 전달합니다</h3><p>배송 안내 문자와 조회 화면에는 쇼핑몰 이름이 먼저 나옵니다. 고객이 기억할 이름은 판매자입니다.</p></li>
+        <li><h3>못 보낸 건을 숨기지 않습니다</h3><p>부재, 주소 오류, 파손은 그날 밤 사유와 사진을 함께 보고하고 다음 날 재배송 일정을 잡습니다.</p></li>
+        <li><h3>기사에게 무리한 동선을 주지 않습니다</h3><p>한 사람이 맡는 구역과 건수를 정해 두고, 물량이 늘면 사람을 늘립니다.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="narrow">
+        <h2 id="contact-title">우리 쇼핑몰도 당일 배송이 될까요?</h2>
+        <p class="lede contact-lede">하루 주문 수, 상품 보관 위치, 주로 보내는 지역을 알려 주시면 영업일 1일 안에 가능 여부와 예상 비용을 답드립니다.</p>
+        <div class="ways">
+          <p>이메일 <a href="mailto:hello@eumlogis.co.kr">hello@eumlogis.co.kr</a></p>
+          <p>전화 <a href="tel:0212345678" class="mono">02-1234-5678</a> <span class="muted">(평일 9:00 – 18:00)</span></p>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn btn--primary" href="mailto:hello@eumlogis.co.kr?subject=%EC%9E%85%EC%A0%90%20%EC%83%81%EB%8B%B4%20%EC%8B%A0%EC%B2%AD">입점 상담 신청</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 이음로지스</p>
+    <p>서울특별시 성동구 성수이로 00, 3층</p>
+  </div>
+</footer>
+</body>
+</html>

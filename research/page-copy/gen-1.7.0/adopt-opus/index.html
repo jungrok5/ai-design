@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>다시, 집 · 유기동물 입양 캠페인</title>
+<meta name="description" content="보호소에서 가족을 기다리는 개와 고양이를 소개하고 입양 상담을 받습니다. 비영리 단체 다시, 집.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* ── Tokens (design system "Clear"). 모든 색·글꼴·간격은 여기서만 정의합니다. ── */
+:root {
+  --bg: #ffffff; --surface: #f8fafc; --sunk: #f1f5f9; --line: #e2e8f0; --line-strong: #cbd5e1;
+  --fg: #0f172a; --muted: #475569; --subtle: #64748b;
+  --accent: #1d4ed8; --accent-hover: #1e40af; --accent-fg: #ffffff; --accent-soft: #eff6ff;
+  --ok: #067647; --ok-soft: #ecfdf3;
+  --warn: #b54708; --warn-soft: #fffaeb;
+  --focus: #1d4ed8;
+  --brand: #c2410c; /* 로고 전용 */
+
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --text-xs: 12px; --text-s: 14px; --text-m: 16px; --text-l: 18px;
+  --text-h3: 18px; --text-h2: 24px; --text-h1: clamp(30px, 4.4vw, 44px);
+  --text-display: clamp(40px, 6vw, 64px);
+  --leading: 1.7; --leading-tight: 1.3;
+
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --radius-s: 6px; --radius-m: 8px; --radius-l: 10px;
+  --border: 1px solid var(--line);
+  --measure: 64ch;
+  --page: 1120px;
+  --motion: 180ms ease-out;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+    --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+    --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+    --ok: #47cd89; --ok-soft: #16322a; --warn: #fdb022; --warn-soft: #3a2c12;
+    --focus: #7cb7e8;
+    --brand: #fb923c;
+    color-scheme: dark;
+  }
+}
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-sans); font-size: var(--text-m); line-height: var(--leading);
+  word-break: keep-all; overflow-wrap: anywhere;
+}
+h1, h2, h3 { line-height: var(--leading-tight); margin: 0; letter-spacing: -0.01em; }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-s); }
+.wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--space-4); }
+@media (min-width: 768px) { .wrap { padding: 0 var(--space-6); } }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: var(--space-4); top: var(--space-4); background: var(--bg); padding: var(--space-2) var(--space-3); z-index: 10; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: 44px; padding: 0 var(--space-5);
+  border: 1px solid var(--line-strong); border-radius: var(--radius-m);
+  background: var(--bg); color: var(--fg); font: inherit; font-weight: 500;
+  text-decoration: none; cursor: pointer; transition: background var(--motion), border-color var(--motion);
+}
+.btn:hover { background: var(--sunk); color: var(--fg); }
+.btn--primary { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-fg); }
+
+/* ── Header ── */
+.site-header { border-bottom: var(--border); background: var(--bg); position: sticky; top: 0; z-index: 5; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 64px; }
+.logo { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: 700; font-size: var(--text-l); color: var(--fg); text-decoration: none; }
+.logo svg { color: var(--brand); }
+.nav { display: none; gap: var(--space-5); }
+.nav a { color: var(--muted); text-decoration: none; font-size: var(--text-s); padding: var(--space-2) 0; }
+.nav a:hover { color: var(--fg); }
+@media (min-width: 900px) { .nav { display: flex; } }
+.site-header .btn { padding: 0 var(--space-4); font-size: var(--text-s); }
+
+/* ── Hero ── */
+.hero { padding: var(--space-8) 0 var(--space-8); border-bottom: var(--border); }
+.hero .wrap { display: grid; gap: var(--space-7); align-items: center; }
+@media (min-width: 960px) { .hero .wrap { grid-template-columns: 1.15fr 1fr; gap: var(--space-8); } .hero { padding: var(--space-9) 0; } }
+.hero h1 { font-size: var(--text-display); font-weight: 700; letter-spacing: -0.02em; }
+.hero h1 span { display: block; color: var(--muted); font-weight: 500; font-size: var(--text-h1); margin-bottom: var(--space-3); }
+.hero .lede { margin-top: var(--space-5); font-size: var(--text-l); color: var(--muted); max-width: 34em; }
+.hero .actions { margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+/* Hero: 이번 주 소개하는 아이 (실제 보호 기록 형식) */
+.record { border: var(--border); border-radius: var(--radius-l); background: var(--surface); overflow: hidden; }
+.record-head { display: flex; justify-content: space-between; align-items: center; padding: var(--space-3) var(--space-5); border-bottom: var(--border); font-size: var(--text-s); color: var(--muted); }
+.record-body { padding: var(--space-5); display: grid; gap: var(--space-5); }
+@media (min-width: 480px) { .record-body { grid-template-columns: 140px 1fr; } }
+.record-body h2 { font-size: var(--text-h2); }
+.record-body p { color: var(--muted); margin-top: var(--space-2); }
+.record dl { margin: var(--space-4) 0 0; display: grid; grid-template-columns: auto 1fr; gap: var(--space-1) var(--space-4); font-size: var(--text-s); }
+.record dt { color: var(--subtle); }
+.record dd { margin: 0; }
+.record-foot { padding: var(--space-4) var(--space-5); border-top: var(--border); background: var(--bg); font-size: var(--text-s); }
+
+/* 사진 자리: 실제 사진으로 바꿀 때 <img width height alt>로 교체 */
+.photo {
+  aspect-ratio: 1 / 1; border-radius: var(--radius-m); background: var(--sunk); border: var(--border);
+  display: grid; place-items: center; color: var(--subtle); font-size: var(--text-h1); font-weight: 700;
+}
+.photo img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+
+/* ── Sections ── */
+section { padding: var(--space-8) 0; }
+@media (min-width: 960px) { section { padding: var(--space-9) 0; } }
+.section-head { max-width: var(--measure); margin-bottom: var(--space-6); }
+.section-head p { margin-top: var(--space-3); color: var(--muted); }
+
+/* ── 아이들 목록 ── */
+.filter { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-5); }
+.filter button {
+  min-height: 44px; padding: 0 var(--space-4); border-radius: var(--radius-m);
+  border: 1px solid var(--line-strong); background: var(--bg); color: var(--fg); font: inherit; font-size: var(--text-s); cursor: pointer;
+}
+.filter button[aria-pressed="true"] { background: var(--fg); border-color: var(--fg); color: var(--bg); font-weight: 500; }
+.count { color: var(--subtle); font-size: var(--text-s); margin-left: var(--space-2); align-self: center; }
+
+.animals { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.animal { border: var(--border); border-radius: var(--radius-l); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); background: var(--bg); }
+.animal[hidden] { display: none; }
+.animal .meta { font-size: var(--text-s); color: var(--muted); }
+.animal .note { font-size: var(--text-s); }
+.animal .tags { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+.animal a.btn { margin-top: auto; width: 100%; }
+.badge { display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--text-xs); padding: 2px var(--space-2); border-radius: 4px; background: var(--sunk); color: var(--muted); font-weight: 500; }
+.badge--ok { background: var(--ok-soft); color: var(--ok); }
+.badge--warn { background: var(--warn-soft); color: var(--warn); }
+
+/* ── 입양 절차 ── */
+#process { background: var(--surface); border-top: var(--border); border-bottom: var(--border); }
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: step; display: grid; gap: 0; max-width: 760px; }
+.steps li { counter-increment: step; display: grid; grid-template-columns: 40px 1fr; gap: var(--space-4); position: relative; padding-bottom: var(--space-6); }
+.steps li:last-child { padding-bottom: 0; }
+.steps li::before {
+  content: counter(step); width: 32px; height: 32px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--bg); border: 1px solid var(--line-strong);
+  font-size: var(--text-s); font-weight: 700; color: var(--fg); position: relative; z-index: 1;
+}
+.steps li:not(:last-child)::after { content: ""; position: absolute; left: 15.5px; top: 32px; bottom: 0; width: 1px; background: var(--line-strong); }
+.steps h3 { padding-top: 4px; }
+.steps p { color: var(--muted); margin-top: var(--space-1); }
+.steps .when { font-size: var(--text-s); color: var(--subtle); }
+
+/* ── 입양 전 확인 ── */
+.check { display: grid; gap: var(--space-7); }
+@media (min-width: 960px) { .check { grid-template-columns: 1fr 1fr; } }
+.checklist { list-style: none; margin: 0; padding: 0; border-top: var(--border); }
+.checklist li { display: grid; grid-template-columns: 24px 1fr; gap: var(--space-3); padding: var(--space-4) 0; border-bottom: var(--border); }
+.checklist svg { margin-top: 4px; color: var(--accent); }
+.checklist strong { display: block; font-weight: 500; }
+.checklist span { color: var(--muted); font-size: var(--text-s); }
+.costs { border: var(--border); border-radius: var(--radius-l); padding: var(--space-5); align-self: start; }
+.costs h3 { margin-bottom: var(--space-2); }
+.costs > p { color: var(--muted); font-size: var(--text-s); }
+.costs dl { margin: var(--space-4) 0 0; }
+.costs dl div { display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-3) 0; border-top: var(--border); }
+.costs dt { color: var(--muted); }
+.costs dd { margin: 0; font-variant-numeric: tabular-nums; text-align: right; }
+
+/* ── 다른 방법 ── */
+.ways { border-top: var(--border); }
+.way { display: grid; gap: var(--space-2) var(--space-6); padding: var(--space-5) 0; border-bottom: var(--border); }
+@media (min-width: 768px) { .way { grid-template-columns: 200px 1fr auto; align-items: baseline; } }
+.way p { color: var(--muted); }
+.way a { font-weight: 500; white-space: nowrap; }
+
+/* ── 신청 폼 ── */
+#apply { background: var(--surface); border-top: var(--border); }
+.apply { display: grid; gap: var(--space-7); }
+@media (min-width: 960px) { .apply { grid-template-columns: 1fr 1.3fr; } }
+.apply-side p { color: var(--muted); margin-top: var(--space-3); }
+.apply-side dl { margin: var(--space-5) 0 0; font-size: var(--text-s); }
+.apply-side dt { color: var(--subtle); }
+.apply-side dd { margin: 0 0 var(--space-3); }
+form { background: var(--bg); border: var(--border); border-radius: var(--radius-l); padding: var(--space-5); display: grid; gap: var(--space-5); }
+@media (min-width: 768px) { form { padding: var(--space-6); } }
+.row { display: grid; gap: var(--space-5); }
+@media (min-width: 600px) { .row { grid-template-columns: 1fr 1fr; } }
+.field { display: grid; gap: var(--space-2); }
+label, legend { font-size: var(--text-s); font-weight: 500; }
+.hint { font-size: var(--text-xs); color: var(--subtle); font-weight: 400; }
+input[type="text"], input[type="tel"], select, textarea {
+  width: 100%; min-height: 44px; padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--line-strong); border-radius: var(--radius-m);
+  background: var(--bg); color: var(--fg); font: inherit;
+}
+textarea { min-height: 112px; resize: vertical; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--focus); outline-offset: 0; border-color: var(--focus); }
+fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+.choices { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+.choice { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; font-weight: 400; font-size: var(--text-m); cursor: pointer; }
+.choice input { width: 20px; height: 20px; accent-color: var(--accent); margin: 0; }
+.agree { align-items: flex-start; min-height: 0; padding: var(--space-2) 0; }
+.agree input { margin-top: 4px; flex: none; }
+.form-msg { border-radius: var(--radius-m); padding: var(--space-4); background: var(--ok-soft); color: var(--fg); }
+.form-msg strong { color: var(--ok); }
+
+/* ── FAQ ── */
+.faq { max-width: var(--measure); border-top: var(--border); }
+.faq details { border-bottom: var(--border); }
+.faq summary { cursor: pointer; padding: var(--space-4) 0; font-weight: 500; list-style: none; display: flex; justify-content: space-between; gap: var(--space-4); min-height: 44px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--subtle); font-weight: 400; font-size: var(--text-l); line-height: 1; }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { padding: 0 0 var(--space-5); color: var(--muted); }
+
+/* ── Footer ── */
+footer { border-top: var(--border); padding: var(--space-7) 0; font-size: var(--text-s); color: var(--muted); }
+footer .wrap { display: grid; gap: var(--space-5); }
+@media (min-width: 768px) { footer .wrap { grid-template-columns: 1fr auto; } }
+footer dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: var(--space-1) var(--space-4); }
+footer dt { color: var(--subtle); }
+footer dd { margin: 0; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="다시, 집 처음으로">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg>
+      다시, 집
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#animals">가족을 기다려요</a>
+      <a href="#process">입양 절차</a>
+      <a href="#before">입양 전에</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </nav>
+    <a class="btn btn--primary" href="#apply">상담 신청</a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <h1><span>사지 말고, 입양하세요.</span>한 번 버려진 아이에게 다시, 집을</h1>
+        <p class="lede">보호소에 온 개와 고양이는 대부분 사람 손을 거쳐 온 아이들입니다. 상담부터 입양 후 적응까지 다시, 집이 함께합니다.</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="#animals">기다리는 아이들 보기</a>
+          <a class="btn" href="#process">입양 절차 알아보기</a>
+        </div>
+      </div>
+
+      <!-- 이번 주 소개하는 아이. 사진·내용은 실제 보호 기록으로 교체하세요. -->
+      <article class="record" aria-labelledby="featured-name">
+        <div class="record-head">
+          <span>이번 주 소개하는 아이</span>
+          <span>보호 214일째</span>
+        </div>
+        <div class="record-body">
+          <div class="photo" aria-hidden="true">보리</div>
+          <div>
+            <h2 id="featured-name">보리</h2>
+            <p>산책 줄만 보면 문 앞에 먼저 가 앉아 있습니다. 처음 보는 사람에게는 조금 시간이 필요하지만, 두 번째 만남부터는 먼저 다가옵니다.</p>
+            <dl>
+              <dt>종</dt><dd>믹스견 · 수컷</dd>
+              <dt>나이</dt><dd>약 3살</dd>
+              <dt>몸무게</dt><dd>11kg</dd>
+              <dt>건강</dt><dd>중성화 · 기본 접종 완료</dd>
+            </dl>
+          </div>
+        </div>
+        <div class="record-foot"><a href="#apply" data-animal="보리">보리 입양 상담 신청하기</a></div>
+      </article>
+    </div>
+  </div>
+
+  <section id="animals" aria-labelledby="animals-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="animals-title">가족을 기다리는 아이들</h2>
+        <p>성격과 건강 상태는 보호소 활동가가 매주 직접 확인해 적습니다. 마음이 가는 아이가 있다면 상담을 신청해 주세요.</p>
+      </div>
+
+      <div class="filter" role="group" aria-label="동물 종류로 보기">
+        <button type="button" aria-pressed="true" data-filter="all">전체</button>
+        <button type="button" aria-pressed="false" data-filter="dog">강아지</button>
+        <button type="button" aria-pressed="false" data-filter="cat">고양이</button>
+        <span class="count" aria-live="polite" id="count"></span>
+      </div>
+
+      <!-- 예시 프로필입니다. 실제 보호 동물 정보로 바꾸세요. -->
+      <ul class="animals" id="animal-list">
+        <li class="animal" data-kind="dog">
+          <div class="photo" aria-hidden="true">보리</div>
+          <div><h3>보리</h3><p class="meta">믹스견 · 수컷 · 약 3살 · 11kg</p></div>
+          <p class="note">산책을 좋아하고 줄을 당기지 않습니다.</p>
+          <div class="tags"><span class="badge badge--ok">✓ 중성화</span><span class="badge badge--ok">✓ 기본 접종</span></div>
+          <a class="btn" href="#apply" data-animal="보리">보리 상담 신청</a>
+        </li>
+        <li class="animal" data-kind="cat">
+          <div class="photo" aria-hidden="true">두부</div>
+          <div><h3>두부</h3><p class="meta">코리안 숏헤어 · 암컷 · 약 2살 · 3.8kg</p></div>
+          <p class="note">무릎에 올라오는 걸 좋아합니다. 다른 고양이와도 잘 지냅니다.</p>
+          <div class="tags"><span class="badge badge--ok">✓ 중성화</span><span class="badge badge--ok">✓ 기본 접종</span></div>
+          <a class="btn" href="#apply" data-animal="두부">두부 상담 신청</a>
+        </li>
+        <li class="animal" data-kind="dog">
+          <div class="photo" aria-hidden="true">콩이</div>
+          <div><h3>콩이</h3><p class="meta">푸들 믹스 · 암컷 · 약 8살 · 5kg</p></div>
+          <p class="note">조용하고 사람 곁에 붙어 있는 편입니다. 계단은 천천히 오릅니다.</p>
+          <div class="tags"><span class="badge badge--ok">✓ 중성화</span><span class="badge badge--warn">! 슬개골 관리 중</span></div>
+          <a class="btn" href="#apply" data-animal="콩이">콩이 상담 신청</a>
+        </li>
+        <li class="animal" data-kind="cat">
+          <div class="photo" aria-hidden="true">호박</div>
+          <div><h3>호박</h3><p class="meta">치즈 고양이 · 수컷 · 약 5개월 · 2.1kg</p></div>
+          <p class="note">장난감 하나면 한 시간도 혼자 놉니다. 아직 사람 손을 배우는 중입니다.</p>
+          <div class="tags"><span class="badge">중성화 예정</span><span class="badge badge--ok">✓ 1차 접종</span></div>
+          <a class="btn" href="#apply" data-animal="호박">호박 상담 신청</a>
+        </li>
+        <li class="animal" data-kind="dog">
+          <div class="photo" aria-hidden="true">누리</div>
+          <div><h3>누리</h3><p class="meta">진돗개 믹스 · 암컷 · 약 4살 · 16kg</p></div>
+          <p class="note">한 사람을 깊이 따르는 성격입니다. 넓게 산책할 수 있는 가족을 찾습니다.</p>
+          <div class="tags"><span class="badge badge--ok">✓ 중성화</span><span class="badge badge--ok">✓ 기본 접종</span></div>
+          <a class="btn" href="#apply" data-animal="누리">누리 상담 신청</a>
+        </li>
+        <li class="animal" data-kind="cat">
+          <div class="photo" aria-hidden="true">먹물</div>
+          <div><h3>먹물</h3><p class="meta">검은 고양이 · 수컷 · 약 6살 · 5.2kg</p></div>
+          <p class="note">처음엔 숨어 있지만 밥 시간엔 꼭 나와서 인사합니다.</p>
+          <div class="tags"><span class="badge badge--ok">✓ 중성화</span><span class="badge badge--ok">✓ 기본 접종</span></div>
+          <a class="btn" href="#apply" data-animal="먹물">먹물 상담 신청</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="process" aria-labelledby="process-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="process-title">입양은 이렇게 진행돼요</h2>
+        <p>신청에서 입양까지 보통 2~3주가 걸립니다. 서두르지 않는 게 아이와 가족 모두에게 좋습니다.</p>
+      </div>
+      <ol class="steps">
+        <li><div><h3>상담 신청</h3><p>아래 양식에 연락처와 생활 환경을 적어 주세요. 관심 있는 아이가 아직 없어도 괜찮습니다.</p></div></li>
+        <li><div><h3>전화 상담</h3><p>활동가가 가족 구성, 집에 있는 시간, 이전 반려 경험을 여쭤보고 잘 맞는 아이를 함께 찾습니다.</p><p class="when">신청 후 3일 안에 연락드립니다</p></div></li>
+        <li><div><h3>보호소에서 만나기</h3><p>가족 모두 함께 방문해 아이와 시간을 보냅니다. 한 번에 정하지 않아도 되고, 여러 번 와도 됩니다.</p></div></li>
+        <li><div><h3>입양 계약</h3><p>입양 계약서를 함께 읽고 서명합니다. 동물등록 변경도 이 자리에서 도와드립니다.</p></div></li>
+        <li><div><h3>집으로, 그리고 적응</h3><p>첫 3개월 동안 활동가가 주기적으로 연락드립니다. 문제 행동이나 건강 고민이 생기면 언제든 연락 주십시오.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="before" aria-labelledby="before-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="before-title">신청 전에 한 번 더 생각해 주세요</h2>
+        <p>보호소로 돌아오는 아이들 대부분은 "이렇게 힘들 줄 몰랐다"는 이유로 돌아옵니다. 아래 질문에 모두 "예"라고 답할 수 있을 때 신청해 주세요.</p>
+      </div>
+      <div class="check">
+        <ul class="checklist">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="16" height="16" rx="3"/><path d="m6 10 3 3 5-6"/></svg>
+            <div><strong>함께 사는 가족이 모두 동의했나요?</strong><span>한 사람의 바람만으로 시작한 입양은 오래가기 어렵습니다.</span></div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="16" height="16" rx="3"/><path d="m6 10 3 3 5-6"/></svg>
+            <div><strong>15년 뒤에도 함께할 수 있나요?</strong><span>이사, 결혼, 출산, 이직이 있어도 아이는 가족입니다.</span></div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="16" height="16" rx="3"/><path d="m6 10 3 3 5-6"/></svg>
+            <div><strong>집에서 동물을 키울 수 있나요?</strong><span>전세·월세라면 집주인 동의를 먼저 받아 주세요.</span></div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="16" height="16" rx="3"/><path d="m6 10 3 3 5-6"/></svg>
+            <div><strong>아이가 혼자 있는 시간이 하루 8시간을 넘지 않나요?</strong><span>강아지는 특히 긴 혼자 있는 시간을 힘들어합니다.</span></div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="16" height="16" rx="3"/><path d="m6 10 3 3 5-6"/></svg>
+            <div><strong>아파도 끝까지 치료할 준비가 됐나요?</strong><span>나이가 들면 병원비가 늘어나므로 비상금이 따로 필요합니다.</span></div>
+          </li>
+        </ul>
+
+        <!-- 금액은 예시입니다. 단체 기준에 맞게 고쳐 주세요. -->
+        <div class="costs">
+          <h3>입양할 때 드는 비용</h3>
+          <p>입양비는 받지 않습니다. 아래는 입양 후 가족이 직접 쓰게 되는 비용의 대략적인 예입니다.</p>
+          <dl>
+            <div><dt>입양비</dt><dd>없음</dd></div>
+            <div><dt>사료·모래 등 소모품</dt><dd>월 5~10만 원</dd></div>
+            <div><dt>정기 접종·검진</dt><dd>연 20~40만 원</dd></div>
+            <div><dt>동물등록 변경</dt><dd>무료</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="other-ways" aria-labelledby="ways-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="ways-title">지금 입양이 어렵다면</h2>
+        <p>집에 들일 수 없어도 아이들이 가족을 만날 때까지 도울 방법이 있습니다.</p>
+      </div>
+      <div class="ways">
+        <div class="way">
+          <h3>임시보호</h3>
+          <p>입양 전까지 몇 주에서 몇 달 동안 집에서 돌봐 주세요. 사료와 병원비는 다시, 집이 부담합니다.</p>
+          <a href="#apply" data-animal="임시보호 문의">임시보호 문의</a>
+        </div>
+        <div class="way">
+          <h3>보호소 봉사</h3>
+          <p>주말에 산책, 청소, 목욕을 함께합니다. 사람에 익숙해진 아이는 입양 확률이 높아집니다.</p>
+          <a href="#apply" data-animal="봉사 문의">봉사 신청</a>
+        </div>
+        <div class="way">
+          <h3>정기 후원</h3>
+          <p>후원금은 치료비, 중성화 수술비, 보호소 운영비로 쓰이며 사용 내역을 매년 공개합니다.</p>
+          <a href="#apply" data-animal="후원 문의">후원 문의</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="apply" aria-labelledby="apply-title">
+    <div class="wrap apply">
+      <div class="apply-side">
+        <h2 id="apply-title">입양 상담 신청</h2>
+        <p>신청서를 보내셨다고 바로 입양이 정해지지는 않습니다. 활동가가 전화로 먼저 이야기를 나눈 뒤 다음 단계를 안내해 드립니다.</p>
+        <dl>
+          <dt>답변</dt><dd>신청 후 3일 안에 전화</dd>
+          <dt>방문 상담</dt><dd>화–일 오전 11시–오후 5시 (예약제)</dd>
+          <dt>문의</dt><dd><a href="mailto:hello@example.org">hello@example.org</a></dd>
+        </dl>
+      </div>
+
+      <!-- action을 실제 접수 주소(구글 폼, 서버 등)로 바꾸세요. 지금은 화면에서 확인 메시지만 보여줍니다. -->
+      <form id="apply-form" action="#" method="post" novalidate>
+        <div class="row">
+          <div class="field">
+            <label for="name">이름</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="tel">연락처</label>
+            <input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="010-0000-0000" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="animal">관심 있는 아이 <span class="hint">(선택)</span></label>
+          <select id="animal" name="animal">
+            <option value="">아직 정하지 않았어요</option>
+            <option>보리</option>
+            <option>두부</option>
+            <option>콩이</option>
+            <option>호박</option>
+            <option>누리</option>
+            <option>먹물</option>
+            <option>임시보호 문의</option>
+            <option>봉사 문의</option>
+            <option>후원 문의</option>
+          </select>
+        </div>
+
+        <fieldset>
+          <legend>사는 곳</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="home" value="아파트·빌라"> 아파트·빌라</label>
+            <label class="choice"><input type="radio" name="home" value="단독주택"> 단독주택</label>
+            <label class="choice"><input type="radio" name="home" value="기타"> 기타</label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="message">함께 살 가족과 하루 일과를 알려 주세요 <span class="hint">(선택)</span></label>
+          <textarea id="message" name="message" placeholder="예: 부부 둘이 살고, 평일엔 오전 9시부터 오후 6시까지 집이 빕니다."></textarea>
+        </div>
+
+        <label class="choice agree"><input type="checkbox" name="agree" id="agree" required> 함께 사는 가족 모두 입양에 동의했고, 상담을 위한 연락처 수집에 동의합니다.</label>
+
+        <div id="form-error" class="hint" role="alert"></div>
+        <button class="btn btn--primary" type="submit">상담 신청 보내기</button>
+        <div id="form-msg" class="form-msg" role="status" hidden></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="section-head"><h2 id="faq-title">자주 묻는 질문</h2></div>
+      <div class="faq">
+        <details>
+          <summary>반려동물을 처음 키워도 입양할 수 있나요?</summary>
+          <p>네. 처음이라면 성격이 차분하고 사람에게 익숙한 아이를 추천해 드리고, 입양 전에 기본 돌봄 방법을 따로 안내해 드립니다.</p>
+        </details>
+        <details>
+          <summary>1인 가구나 직장인도 신청할 수 있나요?</summary>
+          <p>신청할 수 있습니다. 다만 아이가 혼자 있는 시간이 길다면 고양이나 나이가 있는 강아지처럼 혼자 있는 걸 잘 견디는 아이를 함께 고릅니다.</p>
+        </details>
+        <details>
+          <summary>입양 후 도저히 키울 수 없게 되면 어떻게 하나요?</summary>
+          <p>다른 곳에 보내거나 버리지 말고 반드시 다시, 집에 먼저 연락해 주세요. 계약서에도 같은 내용이 있습니다. 함께 방법을 찾고, 필요하면 아이를 다시 데려옵니다.</p>
+        </details>
+        <details>
+          <summary>상담을 받으면 꼭 입양해야 하나요?</summary>
+          <p>아니요. 상담과 방문은 아이와 가족이 서로 맞는지 알아보는 과정입니다. 언제든 그만두셔도 괜찮습니다.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <p><strong>다시, 집</strong> · 유기동물 구조와 입양을 돕는 비영리 단체</p>
+      <p>버려진 동물이 다시 집을 찾을 때까지 곁에 있습니다.</p>
+    </div>
+    <dl>
+      <dt>이메일</dt><dd><a href="mailto:hello@example.org">hello@example.org</a></dd>
+      <dt>보호소</dt><dd>주소를 입력하세요</dd>
+    </dl>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // 종류 필터
+  var buttons = document.querySelectorAll('[data-filter]');
+  var cards = document.querySelectorAll('#animal-list .animal');
+  var count = document.getElementById('count');
+  function apply(kind) {
+    var shown = 0;
+    cards.forEach(function (c) {
+      var on = kind === 'all' || c.dataset.kind === kind;
+      c.hidden = !on;
+      if (on) shown++;
+    });
+    count.textContent = shown + '마리';
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.filter === kind)); });
+  }
+  buttons.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.filter); }); });
+  apply('all');
+
+  // "상담 신청" 링크를 누르면 해당 아이를 미리 선택
+  var select = document.getElementById('animal');
+  document.querySelectorAll('[data-animal]').forEach(function (a) {
+    a.addEventListener('click', function () { select.value = a.dataset.animal; });
+  });
+
+  // 신청 폼: 필수 항목 확인 후 메시지 표시 (실제 전송은 action 연결 후)
+  var form = document.getElementById('apply-form');
+  var err = document.getElementById('form-error');
+  var msg = document.getElementById('form-msg');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = form.elements;
+    var name = f.namedItem('name').value.trim();
+    var tel = f.namedItem('tel').value.trim();
+    var missing = [];
+    if (!name) missing.push('이름');
+    if (!tel) missing.push('연락처');
+    if (!f.namedItem('agree').checked) missing.push('동의 확인');
+    if (missing.length) {
+      err.textContent = '다음 항목을 확인해 주세요: ' + missing.join(', ');
+      f.namedItem(!name ? 'name' : !tel ? 'tel' : 'agree').focus();
+      return;
+    }
+    err.textContent = '';
+    msg.innerHTML = '<strong>신청이 접수되었습니다.</strong> ' + name.replace(/[<>&"]/g, '') + '님, 3일 안에 ' + tel.replace(/[<>&"]/g, '') + '로 연락드리겠습니다.';
+    msg.hidden = false;
+    form.querySelector('button[type="submit"]').disabled = true;
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>빠른 시작 · PayAPI 개발자 문서</title>
+<meta name="description" content="API 키 발급부터 첫 결제 요청, 웹훅 설정까지 15분 안에 끝내는 PayAPI 빠른 시작 가이드">
+<style>
+:root{
+  --bg:#fbfbfa; --surface:#fff; --text:#1a1d21; --muted:#5f6670; --line:#e4e6e9;
+  --accent:#4f46e5; --accent-soft:#eef0ff; --accent-text:#4338ca;
+  --code-bg:#14161b; --code-text:#e6e8ec; --code-muted:#8b93a1;
+  --ok:#0f8a5f; --warn-bg:#fff7e6; --warn-line:#f2d28b; --warn-text:#7a5200;
+  --k:#c4a7ff; --s:#9ee0b0; --c:#6c7686; --f:#8ec7ff;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"D2Coding",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1115; --surface:#16191f; --text:#e8eaed; --muted:#9aa2ae; --line:#272b33;
+    --accent:#8b86ff; --accent-soft:#1d2040; --accent-text:#b4b0ff;
+    --code-bg:#0a0c10; --warn-bg:#2a2110; --warn-line:#5c4718; --warn-text:#f0cf86; --ok:#4cd7a0}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent-text)}
+code{font-family:var(--mono);font-size:.88em;background:var(--accent-soft);color:var(--accent-text);padding:.12em .4em;border-radius:5px}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1180px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:20px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.01em;color:var(--text);text-decoration:none}
+.logo i{width:24px;height:24px;border-radius:7px;background:var(--accent);display:grid;place-items:center}
+.logo i::after{content:"";width:9px;height:9px;border-radius:50%;border:2.5px solid #fff}
+.logo small{font-weight:500;color:var(--muted)}
+.top nav{margin-left:auto;display:flex;gap:18px;font-size:14px}
+.top nav a{color:var(--muted);text-decoration:none}
+.top nav a:hover,.top nav a.on{color:var(--text)}
+.env{font-size:12px;font-weight:600;padding:3px 9px;border-radius:99px;background:var(--accent-soft);color:var(--accent-text)}
+
+/* layout */
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px}
+aside{position:sticky;top:60px;align-self:start;padding:36px 0;height:calc(100vh - 60px);overflow:auto}
+aside h4{margin:0 0 10px;font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+aside a{display:block;padding:6px 12px;margin-left:-12px;border-left:2px solid transparent;font-size:14px;color:var(--muted);text-decoration:none}
+aside a:hover{color:var(--text)}
+aside a.on{color:var(--accent-text);border-left-color:var(--accent);font-weight:600}
+aside .sub{margin-top:28px}
+main{padding:44px 0 96px;max-width:760px}
+
+/* hero */
+.crumb{font-size:13px;color:var(--muted)}
+h1{font-size:clamp(30px,5vw,42px);line-height:1.25;letter-spacing:-.03em;margin:10px 0 14px}
+.lead{font-size:18px;color:var(--muted);margin:0 0 26px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--muted);margin-bottom:34px}
+.meta b{color:var(--text)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px;padding:0;list-style:none}
+.steps a{display:block;height:100%;padding:16px;border:1px solid var(--line);background:var(--surface);border-radius:12px;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s}
+.steps a:hover{border-color:var(--accent);transform:translateY(-2px)}
+.steps span{font:600 12px var(--mono);color:var(--accent-text)}
+.steps strong{display:block;margin:4px 0 2px}
+.steps em{font-style:normal;font-size:13px;color:var(--muted);line-height:1.5;display:block}
+
+section{padding-top:48px}
+h2{font-size:26px;letter-spacing:-.02em;margin:0 0 6px;display:flex;align-items:center;gap:12px}
+h2 .n{flex:none;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-size:15px;display:grid;place-items:center}
+h3{font-size:17px;margin:30px 0 6px}
+p{margin:10px 0}
+ol.list,ul.list{padding-left:22px;margin:10px 0}
+ol.list li,ul.list li{margin:5px 0}
+
+/* callouts */
+.note{display:flex;gap:12px;padding:14px 16px;border-radius:10px;margin:18px 0;font-size:15px;background:var(--accent-soft);color:var(--text);border:1px solid color-mix(in srgb,var(--accent) 25%,transparent)}
+.note.warn{background:var(--warn-bg);border-color:var(--warn-line);color:var(--warn-text)}
+.note b{white-space:nowrap}
+.note p{margin:0}
+
+/* keys table */
+.keys{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.keys th,.keys td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.keys tr:last-child td{border-bottom:0}
+.keys th{background:var(--bg);font-size:12px;color:var(--muted);letter-spacing:.04em}
+.tag{font:600 12px var(--mono);padding:2px 7px;border-radius:5px;background:var(--accent-soft);color:var(--accent-text)}
+.tag.s{background:var(--warn-bg);color:var(--warn-text)}
+
+/* code */
+.code{margin:16px 0;border-radius:12px;overflow:hidden;background:var(--code-bg);border:1px solid #232730}
+.code-h{display:flex;align-items:center;gap:4px;padding:6px 8px 6px 12px;border-bottom:1px solid #232730;min-height:42px}
+.code-h .file{font:12px var(--mono);color:var(--code-muted);margin-right:auto}
+.tabs{display:flex;gap:2px;margin-right:auto}
+.tabs button{all:unset;cursor:pointer;font:600 13px var(--sans);color:var(--code-muted);padding:5px 11px;border-radius:7px}
+.tabs button:hover{color:#fff}
+.tabs button[aria-selected=true]{background:#262b35;color:#fff}
+.tabs button:focus-visible,.copy:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.copy{all:unset;cursor:pointer;font:600 12px var(--sans);color:var(--code-muted);padding:5px 10px;border-radius:7px;border:1px solid #2e3440}
+.copy:hover{color:#fff;border-color:#4a5262}
+.copy.done{color:#4cd7a0;border-color:#4cd7a0}
+pre{margin:0;padding:16px 18px;overflow-x:auto;font:13.5px/1.7 var(--mono);color:var(--code-text);tab-size:2}
+pre[hidden]{display:none}
+.k{color:var(--k)}.s{color:var(--s)}.c{color:var(--c)}.f{color:var(--f)}
+.out-label{font-size:12px;color:var(--muted);margin:14px 0 -6px;font-weight:600}
+
+/* checklist */
+.check{list-style:none;padding:0;margin:14px 0}
+.check li{display:flex;gap:10px;margin:8px 0}
+.check li::before{content:"✓";color:var(--ok);font-weight:700}
+
+.next{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
+.next a{padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-decoration:none;color:var(--text)}
+.next a:hover{border-color:var(--accent)}
+.next b{display:block}.next span{font-size:14px;color:var(--muted)}
+footer{border-top:1px solid var(--line);margin-top:64px;padding-top:20px;font-size:13px;color:var(--muted)}
+
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr;gap:0}
+  aside{display:none}
+  .top nav a:not(.on):not(:last-child){display:none}
+  .steps,.next{grid-template-columns:1fr}
+}
+@media (max-width:520px){.top nav{display:none}.keys{font-size:13px}.keys th,.keys td{padding:9px 10px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="logo" href="#"><i></i>PayAPI <small>Docs</small></a>
+    <span class="env">v2 · 테스트 모드</span>
+    <nav aria-label="주요 메뉴">
+      <a class="on" href="#">빠른 시작</a>
+      <a href="#next">API 레퍼런스</a>
+      <a href="#next">SDK</a>
+      <a href="#next">대시보드 →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <aside aria-label="목차">
+    <h4>빠른 시작</h4>
+    <a href="#overview" class="on">개요</a>
+    <a href="#keys">1. API 키 발급</a>
+    <a href="#payment">2. 첫 결제 요청</a>
+    <a href="#webhook">3. 웹훅 설정</a>
+    <a href="#golive">라이브 전환 체크리스트</a>
+    <a href="#next">다음 단계</a>
+  </aside>
+
+  <main>
+    <div class="crumb">시작하기 / 빠른 시작</div>
+    <h1>15분 만에 첫 결제 받기</h1>
+    <p class="lead">API 키를 발급받고, 테스트 결제를 만들고, 결제 결과를 웹훅으로 받는 데까지 필요한 모든 과정을 한 페이지에 담았습니다.</p>
+    <div class="meta">
+      <span>⏱ 예상 소요 <b>15분</b></span>
+      <span>🧰 필요한 것 <b>가입한 계정, 터미널</b></span>
+      <span>💳 실제 결제는 발생하지 않습니다</span>
+    </div>
+
+    <ol class="steps" id="overview">
+      <li><a href="#keys"><span>STEP 1</span><strong>API 키 발급</strong><em>대시보드에서 테스트 키를 만듭니다</em></a></li>
+      <li><a href="#payment"><span>STEP 2</span><strong>첫 결제 요청</strong><em>결제를 생성하고 승인합니다</em></a></li>
+      <li><a href="#webhook"><span>STEP 3</span><strong>웹훅 설정</strong><em>결제 결과를 서버로 받습니다</em></a></li>
+    </ol>
+
+    <!-- STEP 1 -->
+    <section id="keys">
+      <h2><span class="n">1</span>API 키 발급</h2>
+      <p>모든 API 요청은 시크릿 키로 인증합니다. 처음에는 실제 돈이 오가지 않는 <b>테스트 키</b>로 시작하세요.</p>
+      <ol class="list">
+        <li><a href="#keys">대시보드</a>에 로그인한 뒤 <b>개발자 → API 키</b> 메뉴로 이동합니다.</li>
+        <li>상단 토글이 <b>테스트 모드</b>인지 확인합니다.</li>
+        <li><b>새 키 만들기</b>를 누르고 이름(예: <code>local-dev</code>)을 입력합니다.</li>
+        <li>발급된 두 개의 키를 안전한 곳에 복사합니다.</li>
+      </ol>
+      <table class="keys">
+        <thead><tr><th>키</th><th>형식</th><th>용도</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag">공개 키</span></td><td><code>pk_test_…</code></td><td>브라우저·앱에서 결제창을 열 때 사용. 노출되어도 안전합니다.</td></tr>
+          <tr><td><span class="tag s">시크릿 키</span></td><td><code>sk_test_…</code></td><td>서버에서 API를 호출할 때 사용. <b>절대 클라이언트에 넣지 마세요.</b></td></tr>
+        </tbody>
+      </table>
+      <div class="note warn"><b>⚠ 주의</b><p>시크릿 키는 발급 직후 한 번만 전체가 표시됩니다. 코드나 Git 저장소에 직접 넣지 말고 환경 변수로 관리하세요.</p></div>
+
+      <div class="code">
+        <div class="code-h"><span class="file">.env</span><button class="copy" type="button">복사</button></div>
+        <pre><span class="c"># 서버 환경 변수</span>
+PAYAPI_SECRET_KEY=sk_test_EXAMPLE
+PAYAPI_WEBHOOK_SECRET=whsec_EXAMPLE</pre>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section id="payment">
+      <h2><span class="n">2</span>첫 결제 요청</h2>
+      <p>결제는 <code>POST /v2/payments</code> 한 번의 호출로 생성됩니다. 금액은 통화의 최소 단위(원화는 <b>원</b>)로 보내며, 같은 요청이 중복 처리되지 않도록 <code>Idempotency-Key</code> 헤더를 함께 보내는 것을 권장합니다.</p>
+
+      <div class="code" data-tabs>
+        <div class="code-h">
+          <div class="tabs" role="tablist" aria-label="언어 선택">
+            <button role="tab" aria-selected="true" type="button">cURL</button>
+            <button role="tab" aria-selected="false" type="button">Node.js</button>
+            <button role="tab" aria-selected="false" type="button">Python</button>
+          </div>
+          <button class="copy" type="button">복사</button>
+        </div>
+<pre role="tabpanel"><span class="f">curl</span> https://api.payapi.example/v2/payments \
+  -u <span class="s">$PAYAPI_SECRET_KEY</span>: \
+  -H <span class="s">"Idempotency-Key: order_20261022_0001"</span> \
+  -d amount=<span class="s">12900</span> \
+  -d currency=<span class="s">krw</span> \
+  -d order_id=<span class="s">order_20261022_0001</span> \
+  -d method=<span class="s">card</span> \
+  -d card[number]=<span class="s">4242424242424242</span> \
+  -d card[exp]=<span class="s">12/30</span> \
+  -d card[cvc]=<span class="s">123</span></pre>
+<pre role="tabpanel" hidden><span class="k">import</span> PayAPI <span class="k">from</span> <span class="s">"@payapi/node"</span>;
+
+<span class="k">const</span> payapi = <span class="k">new</span> <span class="f">PayAPI</span>(process.env.PAYAPI_SECRET_KEY);
+
+<span class="k">const</span> payment = <span class="k">await</span> payapi.payments.<span class="f">create</span>(
+  {
+    amount: <span class="s">12900</span>,
+    currency: <span class="s">"krw"</span>,
+    order_id: <span class="s">"order_20261022_0001"</span>,
+    method: <span class="s">"card"</span>,
+    card: { number: <span class="s">"4242424242424242"</span>, exp: <span class="s">"12/30"</span>, cvc: <span class="s">"123"</span> },
+  },
+  { idempotencyKey: <span class="s">"order_20261022_0001"</span> }
+);
+
+console.<span class="f">log</span>(payment.status); <span class="c">// "succeeded"</span></pre>
+<pre role="tabpanel" hidden><span class="k">import</span> os, payapi
+
+payapi.api_key = os.environ[<span class="s">"PAYAPI_SECRET_KEY"</span>]
+
+payment = payapi.Payment.<span class="f">create</span>(
+    amount=<span class="s">12900</span>,
+    currency=<span class="s">"krw"</span>,
+    order_id=<span class="s">"order_20261022_0001"</span>,
+    method=<span class="s">"card"</span>,
+    card={<span class="s">"number"</span>: <span class="s">"4242424242424242"</span>, <span class="s">"exp"</span>: <span class="s">"12/30"</span>, <span class="s">"cvc"</span>: <span class="s">"123"</span>},
+    idempotency_key=<span class="s">"order_20261022_0001"</span>,
+)
+
+<span class="f">print</span>(payment.status)  <span class="c"># "succeeded"</span></pre>
+      </div>
+
+      <div class="out-label">응답 · 200 OK</div>
+      <div class="code">
+        <div class="code-h"><span class="file">application/json</span><button class="copy" type="button">복사</button></div>
+<pre>{
+  <span class="s">"id"</span>: <span class="s">"pay_8fK2xQ1mZ"</span>,
+  <span class="s">"object"</span>: <span class="s">"payment"</span>,
+  <span class="s">"status"</span>: <span class="s">"succeeded"</span>,
+  <span class="s">"amount"</span>: 12900,
+  <span class="s">"currency"</span>: <span class="s">"krw"</span>,
+  <span class="s">"order_id"</span>: <span class="s">"order_20261022_0001"</span>,
+  <span class="s">"method"</span>: <span class="s">"card"</span>,
+  <span class="s">"created_at"</span>: <span class="s">"2026-10-22T09:30:12Z"</span>
+}</pre>
+      </div>
+      <p><code>status</code>가 <code>succeeded</code>면 승인 완료입니다. 대시보드의 <b>결제 내역</b>에서도 같은 건을 확인할 수 있습니다.</p>
+
+      <h3>테스트 카드</h3>
+      <table class="keys">
+        <thead><tr><th>카드 번호</th><th>결과</th></tr></thead>
+        <tbody>
+          <tr><td><code>4242 4242 4242 4242</code></td><td>항상 승인</td></tr>
+          <tr><td><code>4000 0000 0000 0002</code></td><td>카드 거절 (<code>card_declined</code>)</td></tr>
+          <tr><td><code>4000 0000 0000 9995</code></td><td>잔액 부족 (<code>insufficient_funds</code>)</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><b>💡 팁</b><p>응답이 <code>4xx</code>이면 본문의 <code>error.code</code>와 <code>error.message</code>를 확인하세요. 네트워크 오류로 재시도할 때는 반드시 같은 <code>Idempotency-Key</code>를 사용해야 이중 결제를 막을 수 있습니다.</p></div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section id="webhook">
+      <h2><span class="n">3</span>웹훅 설정</h2>
+      <p>가상계좌 입금, 취소, 비동기 승인처럼 요청 시점 이후에 일어나는 일은 웹훅으로 전달됩니다. 주문 상태의 기준은 API 응답이 아닌 <b>웹훅 이벤트</b>로 삼는 것을 권장합니다.</p>
+
+      <h3>엔드포인트 등록</h3>
+      <ol class="list">
+        <li><b>개발자 → 웹훅 → 엔드포인트 추가</b>를 엽니다.</li>
+        <li>HTTPS URL을 입력합니다. (예: <code>https://example.com/webhooks/payapi</code>)</li>
+        <li>수신할 이벤트를 고릅니다: <code>payment.succeeded</code>, <code>payment.failed</code>, <code>payment.canceled</code></li>
+        <li>생성된 <code>whsec_…</code> 서명 비밀값을 <code>PAYAPI_WEBHOOK_SECRET</code>에 저장합니다.</li>
+      </ol>
+      <div class="note"><b>💡 팁</b><p>로컬 개발 중이라면 <code>ngrok http 3000</code> 같은 터널링 도구로 공개 URL을 만들어 등록하세요.</p></div>
+
+      <h3>서명 검증하고 이벤트 처리하기</h3>
+      <p>모든 웹훅에는 <code>PayAPI-Signature</code> 헤더가 포함됩니다. 형식은 <code>t=타임스탬프,v1=HMAC</code>이며, <code>{타임스탬프}.{원본 본문}</code>을 비밀값으로 HMAC-SHA256 한 값과 비교해 검증합니다. <b>반드시 파싱 전의 원본 본문(raw body)</b>을 사용해야 합니다.</p>
+
+      <div class="code" data-tabs>
+        <div class="code-h">
+          <div class="tabs" role="tablist" aria-label="언어 선택">
+            <button role="tab" aria-selected="true" type="button">Node.js</button>
+            <button role="tab" aria-selected="false" type="button">Python</button>
+          </div>
+          <button class="copy" type="button">복사</button>
+        </div>
+<pre role="tabpanel"><span class="k">import</span> express <span class="k">from</span> <span class="s">"express"</span>;
+<span class="k">import</span> crypto <span class="k">from</span> <span class="s">"node:crypto"</span>;
+
+<span class="k">const</span> app = <span class="f">express</span>();
+
+<span class="c">// 서명 검증을 위해 raw body 유지</span>
+app.<span class="f">post</span>("/webhooks/payapi", express.<span class="f">raw</span>({ type: <span class="s">"application/json"</span> }), (req, res) =&gt; {
+  <span class="k">const</span> header = req.headers[<span class="s">"payapi-signature"</span>] ?? <span class="s">""</span>;
+  <span class="k">const</span> { t, v1 } = Object.<span class="f">fromEntries</span>(header.<span class="f">split</span>(<span class="s">","</span>).<span class="f">map</span>(p =&gt; p.<span class="f">split</span>(<span class="s">"="</span>)));
+
+  <span class="k">const</span> expected = crypto
+    .<span class="f">createHmac</span>(<span class="s">"sha256"</span>, process.env.PAYAPI_WEBHOOK_SECRET)
+    .<span class="f">update</span>(`${t}.${req.body}`)
+    .<span class="f">digest</span>(<span class="s">"hex"</span>);
+
+  <span class="k">const</span> ok = v1 &amp;&amp; v1.length === expected.length &amp;&amp;
+    crypto.<span class="f">timingSafeEqual</span>(Buffer.<span class="f">from</span>(v1), Buffer.<span class="f">from</span>(expected));
+  <span class="c">// 5분 이상 지난 요청은 재전송 공격으로 간주</span>
+  <span class="k">const</span> fresh = Math.<span class="f">abs</span>(Date.<span class="f">now</span>() / 1000 - Number(t)) &lt; 300;
+  <span class="k">if</span> (!ok || !fresh) <span class="k">return</span> res.<span class="f">sendStatus</span>(400);
+
+  <span class="k">const</span> event = JSON.<span class="f">parse</span>(req.body);
+  <span class="k">switch</span> (event.type) {
+    <span class="k">case</span> <span class="s">"payment.succeeded"</span>: <span class="c">/* 주문을 '결제 완료'로 변경 */</span> <span class="k">break</span>;
+    <span class="k">case</span> <span class="s">"payment.failed"</span>:    <span class="c">/* 고객에게 재시도 안내 */</span> <span class="k">break</span>;
+  }
+  res.<span class="f">sendStatus</span>(200); <span class="c">// 2xx를 빠르게 반환</span>
+});
+
+app.<span class="f">listen</span>(3000);</pre>
+<pre role="tabpanel" hidden><span class="k">import</span> hmac, hashlib, json, os, time
+<span class="k">from</span> flask <span class="k">import</span> Flask, request, abort
+
+app = Flask(__name__)
+
+<span class="k">@</span>app.<span class="f">post</span>(<span class="s">"/webhooks/payapi"</span>)
+<span class="k">def</span> <span class="f">payapi_webhook</span>():
+    body = request.get_data()  <span class="c"># 파싱 전 원본 본문</span>
+    parts = <span class="f">dict</span>(p.split(<span class="s">"="</span>, 1) <span class="k">for</span> p <span class="k">in</span> request.headers.get(<span class="s">"PayAPI-Signature"</span>, <span class="s">""</span>).split(<span class="s">","</span>) <span class="k">if</span> <span class="s">"="</span> <span class="k">in</span> p)
+    t, v1 = parts.get(<span class="s">"t"</span>, <span class="s">"0"</span>), parts.get(<span class="s">"v1"</span>, <span class="s">""</span>)
+
+    expected = hmac.new(
+        os.environ[<span class="s">"PAYAPI_WEBHOOK_SECRET"</span>].encode(),
+        t.encode() + <span class="s">b"."</span> + body,
+        hashlib.sha256,
+    ).hexdigest()
+
+    <span class="k">if not</span> hmac.compare_digest(v1, expected) <span class="k">or</span> <span class="f">abs</span>(time.time() - <span class="f">int</span>(t)) &gt; 300:
+        <span class="f">abort</span>(400)
+
+    event = json.loads(body)
+    <span class="k">if</span> event[<span class="s">"type"</span>] == <span class="s">"payment.succeeded"</span>:
+        <span class="c"># 주문을 '결제 완료'로 변경</span>
+        <span class="k">pass</span>
+    <span class="k">return</span> <span class="s">""</span>, 200</pre>
+      </div>
+
+      <div class="out-label">웹훅 본문 예시 · payment.succeeded</div>
+      <div class="code">
+        <div class="code-h"><span class="file">POST /webhooks/payapi</span><button class="copy" type="button">복사</button></div>
+<pre>{
+  <span class="s">"id"</span>: <span class="s">"evt_3Lp0aWx"</span>,
+  <span class="s">"type"</span>: <span class="s">"payment.succeeded"</span>,
+  <span class="s">"created_at"</span>: <span class="s">"2026-10-22T09:30:13Z"</span>,
+  <span class="s">"data"</span>: {
+    <span class="s">"id"</span>: <span class="s">"pay_8fK2xQ1mZ"</span>,
+    <span class="s">"status"</span>: <span class="s">"succeeded"</span>,
+    <span class="s">"amount"</span>: 12900,
+    <span class="s">"order_id"</span>: <span class="s">"order_20261022_0001"</span>
+  }
+}</pre>
+      </div>
+
+      <h3>동작 확인과 재시도</h3>
+      <ul class="list">
+        <li>대시보드의 <b>웹훅 → 테스트 이벤트 보내기</b>로 즉시 전송해 볼 수 있습니다.</li>
+        <li>2xx 이외의 응답이나 10초 초과 시 실패로 간주하며, 최대 24시간 동안 지수 백오프로 재전송합니다.</li>
+        <li>같은 이벤트가 두 번 올 수 있으니 <code>event.id</code>로 중복 처리를 막으세요.</li>
+      </ul>
+    </section>
+
+    <!-- GO LIVE -->
+    <section id="golive">
+      <h2>라이브 전환 체크리스트</h2>
+      <p>테스트에서 모든 흐름이 확인되면 아래 항목을 점검하고 라이브 키로 교체하세요.</p>
+      <ul class="check">
+        <li>대시보드에서 사업자 심사를 완료하고 <b>라이브 모드</b>를 활성화했다</li>
+        <li>환경 변수의 키를 <code>sk_live_…</code>로 교체했고 저장소에 키가 남아 있지 않다</li>
+        <li>웹훅 엔드포인트를 라이브 모드에서 다시 등록하고 새 서명 비밀값을 적용했다</li>
+        <li>웹훅에서 서명·타임스탬프 검증과 <code>event.id</code> 중복 처리를 한다</li>
+        <li>결제 요청마다 <code>Idempotency-Key</code>를 사용한다</li>
+      </ul>
+    </section>
+
+    <section id="next">
+      <h2>다음 단계</h2>
+      <div class="next">
+        <a href="#"><b>API 레퍼런스 →</b><span>결제, 취소, 정산 등 전체 엔드포인트</span></a>
+        <a href="#"><b>결제창(Checkout) 연동 →</b><span>카드 정보를 직접 다루지 않고 결제받기</span></a>
+        <a href="#"><b>정기결제 →</b><span>빌링키로 구독 상품 만들기</span></a>
+        <a href="#"><b>에러 코드 →</b><span>실패 사유별 대응 방법</span></a>
+      </div>
+      <footer>문제가 있나요? 개발자 지원 <a href="mailto:dev-support@payapi.example">dev-support@payapi.example</a> · 이 페이지의 키, 도메인, 카드 번호는 모두 예시입니다.</footer>
+    </section>
+  </main>
+</div>
+
+<script>
+// 언어 탭
+document.querySelectorAll('[data-tabs]').forEach(box=>{
+  const tabs=[...box.querySelectorAll('[role=tab]')], panels=[...box.querySelectorAll('[role=tabpanel]')];
+  tabs.forEach((tab,i)=>tab.addEventListener('click',()=>{
+    tabs.forEach((t,j)=>t.setAttribute('aria-selected',i===j));
+    panels.forEach((p,j)=>p.hidden=i!==j);
+  }));
+});
+// 복사 버튼
+document.querySelectorAll('.copy').forEach(btn=>btn.addEventListener('click',async()=>{
+  const code=btn.closest('.code'), pre=[...code.querySelectorAll('pre')].find(p=>!p.hidden);
+  try{await navigator.clipboard.writeText(pre.innerText)}catch(e){
+    const r=document.createRange();r.selectNodeContents(pre);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges();
+  }
+  btn.textContent='복사됨';btn.classList.add('done');
+  setTimeout(()=>{btn.textContent='복사';btn.classList.remove('done')},1600);
+}));
+// 목차 스크롤 연동
+const links=[...document.querySelectorAll('aside a')];
+const targets=links.map(a=>document.querySelector(a.getAttribute('href')));
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id))}
+}),{rootMargin:'-80px 0px -65% 0px'});
+targets.forEach(t=>t&&io.observe(t));
+</script>
+</body>
+</html>

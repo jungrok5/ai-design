@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>신입 개발자 온보딩 가이드</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --text: #1d2330;
+    --muted: #5b6474;
+    --line: #e2e6ec;
+    --accent: #2f6fed;
+    --accent-soft: #e8f0fe;
+    --code-bg: #0f1420;
+    --code-text: #e6edf7;
+    --warn: #b45309;
+    --warn-soft: #fef3e2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1117;
+      --surface: #171c26;
+      --text: #e6e9ef;
+      --muted: #9aa4b5;
+      --line: #2a3140;
+      --accent: #6ea8ff;
+      --accent-soft: #1d2b44;
+      --code-bg: #0a0d14;
+      --code-text: #d7e2f5;
+      --warn: #f5b04a;
+      --warn-soft: #3a2a12;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1117;
+    --surface: #171c26;
+    --text: #e6e9ef;
+    --muted: #9aa4b5;
+    --line: #2a3140;
+    --accent: #6ea8ff;
+    --accent-soft: #1d2b44;
+    --code-bg: #0a0d14;
+    --code-text: #d7e2f5;
+    --warn: #f5b04a;
+    --warn-soft: #3a2a12;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  a { color: var(--accent); }
+  code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+  header.hero {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    padding: 40px 16px 28px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+  .hero h1 { margin: 0 0 8px; font-size: 1.8rem; }
+  .hero p { margin: 0; color: var(--muted); }
+
+  nav.toc {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.toc ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+  }
+  nav.toc a {
+    display: block;
+    padding: 12px 14px;
+    color: var(--muted);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+  }
+  nav.toc a:hover { color: var(--text); }
+
+  main section {
+    margin: 32px 0;
+    scroll-margin-top: 56px;
+  }
+  section h2 {
+    font-size: 1.4rem;
+    margin: 0 0 4px;
+  }
+  section > .lead {
+    color: var(--muted);
+    margin: 0 0 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .card h3 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+  }
+  .card ul, .card ol { margin: 0; padding-left: 20px; }
+  .card li { margin: 4px 0; }
+
+  .days {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .day {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .day .badge {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .day h3 { margin: 0 0 6px; font-size: 1rem; }
+  .day ul { margin: 0; padding-left: 18px; font-size: 0.95rem; }
+
+  .step {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 16px;
+  }
+  .step::before {
+    content: attr(data-n);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step h3 { margin: 2px 0 6px; font-size: 1.05rem; }
+  .step p { margin: 6px 0; }
+
+  .codewrap { position: relative; margin: 10px 0; }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .copy {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    border: 1px solid #3a4456;
+    background: #1b2231;
+    color: #cfd8e8;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+  .copy:hover { background: #26304a; }
+
+  .note {
+    background: var(--warn-soft);
+    border-left: 4px solid var(--warn);
+    padding: 12px 14px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-size: 0.95rem;
+  }
+  .note strong { color: var(--warn); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.95rem;
+    display: block;
+    overflow-x: auto;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th { background: var(--accent-soft); }
+  tr:last-child td { border-bottom: 0; }
+
+  .label-list { display: grid; gap: 8px; }
+  .label {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .label code { font-weight: 700; color: var(--accent); }
+  @media (max-width: 560px) {
+    .label { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  .checklist-group { margin-bottom: 16px; }
+  .checklist-group h3 { font-size: 1rem; margin: 0 0 8px; }
+  .check {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .check:last-child { border-bottom: 0; }
+  .check input { margin-top: 5px; width: 18px; height: 18px; flex: none; }
+  .check span { flex: 1; }
+  .check input:checked + span { color: var(--muted); text-decoration: line-through; }
+
+  .progress {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    position: sticky;
+    top: 56px;
+    z-index: 5;
+  }
+  .progress-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+  .bar {
+    height: 8px;
+    background: var(--line);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    transition: width 0.2s ease;
+  }
+  .reset {
+    margin-top: 10px;
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  footer {
+    color: var(--muted);
+    font-size: 0.9rem;
+    padding: 24px 0 48px;
+    text-align: center;
+  }
+
+  @media (max-width: 560px) {
+    .hero h1 { font-size: 1.5rem; }
+    nav.toc a { padding: 10px 10px; font-size: 0.9rem; }
+    .progress { top: 44px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>신입 개발자 온보딩 가이드</h1>
+    <p>입사 첫 주에 무엇을 하면 되는지, 개발 환경을 어떻게 세팅하는지, 코드 리뷰는 어떤 규칙으로 하는지 정리했습니다. 내용은 팀 상황에 맞게 언제든 수정하세요.</p>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <ul>
+      <li><a href="#week">첫 주 할 일</a></li>
+      <li><a href="#setup">개발 환경 세팅</a></li>
+      <li><a href="#review">코드 리뷰 규칙</a></li>
+      <li><a href="#checklist">체크리스트</a></li>
+      <li><a href="#contact">도움 요청</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- 첫 주 할 일 -->
+  <section id="week">
+    <h2>1. 첫 주 할 일</h2>
+    <p class="lead">첫 주의 목표는 <strong>로컬에서 프로젝트를 실행하고, 작은 변경을 PR로 올려 리뷰를 받아보는 것</strong>입니다. 속도보다 흐름을 익히는 데 집중하세요.</p>
+
+    <div class="days">
+      <div class="day">
+        <span class="badge">Day 1</span>
+        <h3>오리엔테이션</h3>
+        <ul>
+          <li>팀장·멘토와 1:1 인사</li>
+          <li>계정 발급 확인 (메일, 사내 메신저, Git, 이슈 트래커)</li>
+          <li>보안 교육 및 서약</li>
+          <li>이 가이드 끝까지 읽기</li>
+        </ul>
+      </div>
+      <div class="day">
+        <span class="badge">Day 2</span>
+        <h3>개발 환경 세팅</h3>
+        <ul>
+          <li>아래 2장의 순서대로 설치</li>
+          <li>저장소 clone 후 로컬 실행</li>
+          <li>테스트 한 번 돌려보기</li>
+        </ul>
+      </div>
+      <div class="day">
+        <span class="badge">Day 3</span>
+        <h3>코드베이스 파악</h3>
+        <ul>
+          <li>README, 아키텍처 문서 읽기</li>
+          <li>멘토와 함께 최근 PR 2~3개 같이 보기</li>
+          <li>주요 디렉터리 구조 메모</li>
+        </ul>
+      </div>
+      <div class="day">
+        <span class="badge">Day 4</span>
+        <h3>첫 PR 올리기</h3>
+        <ul>
+          <li>문서 오타 수정 또는 아주 작은 버그 한 건 선택</li>
+          <li>브랜치 생성 → 수정 → PR 작성</li>
+          <li>셀프 리뷰 후 리뷰 요청</li>
+        </ul>
+      </div>
+      <div class="day">
+        <span class="badge">Day 5</span>
+        <h3>리뷰 반영 & 회고</h3>
+        <ul>
+          <li>받은 코멘트 반영 후 머지</li>
+          <li>멘토와 한 주 회고 (잘 된 것, 막힌 것)</li>
+          <li>다음 주 목표 합의</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:16px">
+      <strong>막히면 바로 물어보세요.</strong> 30분 이상 혼자 붙잡고 있는 것은 도움이 되지 않습니다. 질문은 언제든 환영입니다.
+    </div>
+  </section>
+
+  <!-- 개발 환경 세팅 -->
+  <section id="setup">
+    <h2>2. 개발 환경 세팅</h2>
+    <p class="lead">아래 순서대로 진행하세요. 각 명령어 우측의 <em>복사</em> 버튼으로 바로 복사할 수 있습니다.</p>
+
+    <div class="step" data-n="1">
+      <h3>필수 도구 설치</h3>
+      <p>아래 도구를 설치합니다. 버전은 팀 문서의 권장 버전을 따르세요.</p>
+      <table>
+        <thead>
+          <tr><th>도구</th><th>용도</th><th>확인 명령</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Git</td><td>소스 버전 관리</td><td><code>git --version</code></td></tr>
+          <tr><td>런타임 (팀 지정)</td><td>애플리케이션 실행</td><td><code>[런타임] --version</code></td></tr>
+          <tr><td>Docker</td><td>로컬 DB·의존 서비스 실행</td><td><code>docker --version</code></td></tr>
+          <tr><td>IDE / 에디터</td><td>코드 작성</td><td>팀 권장 에디터 (린터·포매터 플러그인 설치)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="step" data-n="2">
+      <h3>Git 기본 설정</h3>
+      <p>커밋에 남을 이름과 이메일을 회사 계정으로 맞춥니다.</p>
+      <div class="codewrap">
+        <pre><code>git config --global user.name "홍길동"
+git config --global user.email "gildong.hong@company.com"
+git config --global pull.rebase true</code></pre>
+        <button class="copy" type="button">복사</button>
+      </div>
+    </div>
+
+    <div class="step" data-n="3">
+      <h3>저장소 clone 및 의존성 설치</h3>
+      <div class="codewrap">
+        <pre><code>git clone &lt;저장소 URL&gt;
+cd &lt;프로젝트 폴더&gt;
+&lt;패키지 매니저&gt; install   # 예: npm install, pip install -r requirements.txt</code></pre>
+        <button class="copy" type="button">복사</button>
+      </div>
+    </div>
+
+    <div class="step" data-n="4">
+      <h3>환경 변수 설정</h3>
+      <p>비밀 값은 저장소에 커밋하지 않습니다. 예시 파일을 복사해 로컬 값만 채웁니다.</p>
+      <div class="codewrap">
+        <pre><code>cp .env.example .env
+# .env 파일을 열어 개발용 값 입력 (값은 팀 비밀 저장소에서 확인)</code></pre>
+        <button class="copy" type="button">복사</button>
+      </div>
+      <div class="note">
+        <strong>주의:</strong> <code>.env</code> 파일은 절대 커밋하지 마세요. 실수로 커밋했다면 즉시 멘토에게 알려 주세요.
+      </div>
+    </div>
+
+    <div class="step" data-n="5">
+      <h3>로컬 DB 및 서비스 실행</h3>
+      <div class="codewrap">
+        <pre><code>docker compose up -d
+&lt;실행 명령&gt;        # 예: npm run dev
+&lt;테스트 명령&gt;      # 예: npm test</code></pre>
+        <button class="copy" type="button">복사</button>
+      </div>
+      <p>브라우저에서 <code>http://localhost:&lt;포트&gt;</code>에 접속해 화면이 뜨면 세팅 완료입니다.</p>
+    </div>
+
+    <div class="step" data-n="6">
+      <h3>문제 해결 팁</h3>
+      <ul>
+        <li><strong>포트 충돌:</strong> 이미 같은 포트를 쓰는 프로세스가 있는지 확인하고 종료합니다.</li>
+        <li><strong>의존성 오류:</strong> 런타임 버전이 팀 권장 버전과 맞는지 확인합니다.</li>
+        <li><strong>Docker 실행 실패:</strong> Docker Desktop이 켜져 있는지 확인합니다.</li>
+        <li><strong>그래도 안 되면:</strong> 에러 전문과 실행 명령을 함께 멘토에게 공유하세요.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 코드 리뷰 규칙 -->
+  <section id="review">
+    <h2>3. 코드 리뷰 규칙</h2>
+    <p class="lead">리뷰의 목적은 코드의 품질을 높이고 팀이 같은 코드를 이해하도록 돕는 것입니다. 사람이 아니라 코드를 평가합니다.</p>
+
+    <div class="card">
+      <h3>3-1. 작성자(PR 올리는 사람)의 책임</h3>
+      <ol>
+        <li><strong>셀프 리뷰 먼저:</strong> 올리기 전에 diff를 직접 한 번 읽고 불필요한 변경, 디버그 코드, 주석 처리된 코드를 지웁니다.</li>
+        <li><strong>CI 통과 확인:</strong> 빌드, 린트, 테스트가 모두 통과한 뒤 리뷰를 요청합니다.</li>
+        <li><strong>PR 크기:</strong> 변경 줄 수는 400줄 이내를 권장합니다. 넘으면 나눠서 올립니다.</li>
+        <li><strong>설명 작성:</strong> 무엇을, 왜 바꿨는지, 어떻게 확인했는지, 리뷰어가 특히 봐야 할 부분을 적습니다.</li>
+        <li><strong>빠른 응답:</strong> 코멘트에는 해당 반영 여부를 답변으로 남깁니다. 반영하지 않으면 이유를 적습니다.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>3-2. PR 제목 및 브랜치 이름</h3>
+      <div class="codewrap">
+        <pre><code>브랜치:  feature/&lt;이슈번호&gt;-&lt;짧은-설명&gt;   예) feature/123-login-validation
+         fix/&lt;이슈번호&gt;-&lt;짧은-설명&gt;       예) fix/456-null-pointer-on-logout
+
+PR 제목: [&lt;이슈번호&gt;] &lt;변경 요약&gt;       예) [123] 로그인 폼 이메일 검증 추가</code></pre>
+        <button class="copy" type="button">복사</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>3-3. 리뷰어의 책임</h3>
+      <ul>
+        <li>요청을 받으면 <strong>1 영업일 이내</strong>에 첫 리뷰를 남깁니다. 바빠서 늦어지면 미리 알립니다.</li>
+        <li>코드의 <strong>정확성, 가독성, 테스트, 보안</strong> 측면을 중심으로 봅니다.</li>
+        <li>취향 차이는 강요하지 않습니다. 팀 컨벤션에 없는 스타일 문제는 린터에 맡깁니다.</li>
+        <li>문제만 지적하지 말고 가능하면 대안이나 이유를 함께 씁니다.</li>
+        <li>승인(Approve)은 <strong>최소 1명</strong>의 리뷰를 받은 뒤, 남은 코멘트를 모두 해결했을 때 합니다.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>3-4. 코멘트 라벨</h3>
+      <p>코멘트 앞에 라벨을 붙이면 작성자가 우선순위를 바로 알 수 있습니다.</p>
+      <div class="label-list">
+        <div class="label"><code>blocker:</code><span>반드시 고쳐야 머지할 수 있음 (버그, 보안, 데이터 손실)</span></div>
+        <div class="label"><code>suggestion:</code><span>더 나은 방법이 있다는 제안. 반영 여부는 작성자가 판단</span></div>
+        <div class="label"><code>question:</code><span>이해가 안 되는 부분 질문. 답변이 곧 코드 설명이 됨</span></div>
+        <div class="label"><code>nit:</code><span>사소한 취향·오타. 반영하지 않아도 머지 가능</span></div>
+        <div class="label"><code>praise:</code><span>잘한 부분 칭찬. 신입이라면 꼭 받아 보세요</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>3-5. 머지 전 확인 사항</h3>
+      <ul>
+        <li>CI 전 항목 통과</li>
+        <li>승인 1건 이상, <code>blocker:</code> 코멘트 모두 해결</li>
+        <li>관련 문서(README, API 문서 등) 갱신 여부 확인</li>
+        <li>DB 스키마 변경이 있다면 마이그레이션 파일 포함 여부 확인</li>
+        <li>머지는 작성자가 직접 합니다 (리뷰어가 승인 후 작성자가 머지)</li>
+      </ul>
+    </div>
+
+    <div class="note">
+      <strong>리뷰 중 감정이 상했다면?</strong> 코드에 대한 피드백은 사람에 대한 평가가 아닙니다. 이해가 안 되면 댓글보다 짧은 대화(메신저, 통화)로 바로 풀어 보세요.
+    </div>
+  </section>
+
+  <!-- 체크리스트 -->
+  <section id="checklist">
+    <h2>4. 온보딩 체크리스트</h2>
+    <p class="lead">완료한 항목을 체크하세요. 브라우저에 저장되어 새로고침해도 유지됩니다.</p>
+
+    <div class="progress">
+      <div class="progress-top">
+        <span>진행률</span>
+        <span id="progress-text">0 / 0</span>
+      </div>
+      <div class="bar"><div class="bar-fill" id="progress-fill"></div></div>
+      <button class="reset" type="button" id="reset">체크 초기화</button>
+    </div>
+
+    <div class="card checklist-group">
+      <h3>계정 & 보안</h3>
+      <label class="check"><input type="checkbox" data-key="acc-1"><span>사내 메일, 메신저, Git 계정 로그인 확인</span></label>
+      <label class="check"><input type="checkbox" data-key="acc-2"><span>이슈 트래커 및 문서 도구 접근 확인</span></label>
+      <label class="check"><input type="checkbox" data-key="acc-3"><span>비밀번호 관리자 설치 및 2단계 인증 설정</span></label>
+      <label class="check"><input type="checkbox" data-key="acc-4"><span>보안 교육 이수</span></label>
+    </div>
+
+    <div class="card checklist-group">
+      <h3>개발 환경</h3>
+      <label class="check"><input type="checkbox" data-key="env-1"><span>필수 도구 설치 및 버전 확인</span></label>
+      <label class="check"><input type="checkbox" data-key="env-2"><span>저장소 clone 및 의존성 설치</span></label>
+      <label class="check"><input type="checkbox" data-key="env-3"><span>로컬 환경에서 앱 실행 성공</span></label>
+      <label class="check"><input type="checkbox" data-key="env-4"><span>테스트 전체 실행 성공</span></label>
+    </div>
+
+    <div class="card checklist-group">
+      <h3>코드 & 협업</h3>
+      <label class="check"><input type="checkbox" data-key="code-1"><span>README 및 아키텍처 문서 읽기</span></label>
+      <label class="check"><input type="checkbox" data-key="code-2"><span>최근 PR 2~3개 함께 리뷰 보기</span></label>
+      <label class="check"><input type="checkbox" data-key="code-3"><span>첫 PR 생성 및 리뷰 요청</span></label>
+      <label class="check"><input type="checkbox" data-key="code-4"><span>받은 리뷰 반영 후 머지</span></label>
+      <label class="check"><input type="checkbox" data-key="code-5"><span>첫 주 회고 및 다음 주 목표 합의</span></label>
+    </div>
+  </section>
+
+  <!-- 도움 요청 -->
+  <section id="contact">
+    <h2>5. 도움 요청처</h2>
+    <p class="lead">아래 담당자에게 먼저 물어보세요. 누구에게 물어야 할지 모르겠다면 멘토에게 먼저 연락하면 됩니다.</p>
+    <table>
+      <thead>
+        <tr><th>분류</th><th>담당</th><th>예시 질문</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>계정 · 권한</td><td>IT 지원 채널</td><td>Git, 메일, 사내 도구 접근이 안 될 때</td></tr>
+        <tr><td>개발 환경</td><td>팀 멘토</td><td>로컬 실행, 빌드 오류</td></tr>
+        <tr><td>업무 방향</td><td>팀 리드</td><td>작업 우선순위, 일정 조율</td></tr>
+        <tr><td>보안 · 개인정보</td><td>보안 담당</td><td>비밀 값 노출 의심, 권한 문의</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">환영합니다! 궁금한 점은 언제든 물어보세요.</div>
+</footer>
+
+<script>
+(function () {
+  // 복사 버튼
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.parentElement.querySelector('code');
+      if (!code) return;
+      var text = code.textContent;
+      var done = function () {
+        btn.textContent = '복사됨';
+        setTimeout(function () { btn.textContent = '복사'; }, 1500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () {});
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) {}
+        ta.remove();
+      }
+    });
+  });
+
+  // 체크리스트 진행률 (localStorage 실패 시에도 동작)
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.check input'));
+  var KEY = 'onboarding-checklist-v1';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+
+  function save() {
+    var state = {};
+    boxes.forEach(function (b) { state[b.dataset.key] = b.checked; });
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function render() {
+    var done = boxes.filter(function (b) { return b.checked; }).length;
+    var total = boxes.length;
+    document.getElementById('progress-text').textContent = done + ' / ' + total;
+    document.getElementById('progress-fill').style.width = total ? (done / total * 100) + '%' : '0';
+  }
+
+  boxes.forEach(function (b) {
+    if (saved[b.dataset.key]) b.checked = true;
+    b.addEventListener('change', function () { save(); render(); });
+  });
+  document.getElementById('reset').addEventListener('click', function () {
+    boxes.forEach(function (b) { b.checked = false; });
+    save();
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

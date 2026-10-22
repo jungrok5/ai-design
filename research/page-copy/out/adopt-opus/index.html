@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>다시, 집 입양 캠페인</title>
+<meta name="description" content="비영리 단체 다시, 집의 2026 가을 유기동물 입양 캠페인. 보호소에서 기다리는 친구들을 만나보세요.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 보호소 공고 카드(공고번호·보호 일수·체중)를 주인공으로, 차분한 저녁 하늘색 바탕에 현관등 같은 노란 포인트 하나 */
+:root {
+  --bg: #F2F5F7;
+  --surface: #FFFFFF;
+  --ink: #18273A;
+  --muted: #56667A;
+  --line: #D5DDE5;
+  --lamp: #F0AE2E;      /* 현관등 노랑: 포인트 색 */
+  --lamp-ink: #2A1E05;
+  --lamp-soft: #FCEFD2;
+  --dusk: #2D4A6B;      /* 보조 남색 */
+  --tag-dog: #DCE8F2;
+  --tag-cat: #EDE4F0;
+  --ok: #2F7A55;
+
+  --f-display: "Gowun Batang", "Nanum Myeongjo", "AppleMyungjo", serif;
+  --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --s-xs: .8125rem; --s-sm: .9375rem; --s-md: 1.0625rem; --s-lg: 1.375rem; --s-xl: 2rem; --s-2xl: clamp(2.4rem, 5vw, 3.4rem);
+  --radius: 10px;
+  --wrap: 1120px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1823; --surface: #172333; --ink: #E7EDF3; --muted: #9AABBD; --line: #2A3A4E;
+    --lamp: #F4B947; --lamp-ink: #241904; --lamp-soft: #3A2E14; --dusk: #9DBBDB;
+    --tag-dog: #1F3349; --tag-cat: #33263C; --ok: #6CC395;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1823; --surface: #172333; --ink: #E7EDF3; --muted: #9AABBD; --line: #2A3A4E;
+  --lamp: #F4B947; --lamp-ink: #241904; --lamp-soft: #3A2E14; --dusk: #9DBBDB;
+  --tag-dog: #1F3349; --tag-cat: #33263C; --ok: #6CC395;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: var(--s-md); line-height: 1.7;
+  word-break: keep-all; overflow-wrap: anywhere;
+}
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--lamp); outline-offset: 2px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 700; line-height: 1.25; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+
+.wrap {
+  max-width: var(--wrap); margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow { font-family: var(--f-mono); font-size: var(--s-xs); letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+.section { padding-block: clamp(56px, 9vw, 104px); }
+.section-head { display: grid; gap: 12px; max-width: 40rem; margin-bottom: 36px; }
+.section-head h2 { font-size: var(--s-xl); }
+.section-head p { color: var(--muted); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font: 600 var(--s-sm)/1 var(--f-body); text-decoration: none; cursor: pointer;
+  padding: 14px 22px; border-radius: 999px; border: 1.5px solid transparent;
+  transition: transform .15s ease, background .15s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-lamp { background: var(--lamp); color: var(--lamp-ink); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--ink); }
+
+/* Header */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.logo { font-family: var(--f-display); font-weight: 700; font-size: 1.35rem; text-decoration: none; display: inline-flex; align-items: baseline; }
+.logo .comma { color: var(--lamp); }
+.nav { display: flex; gap: 22px; font-size: var(--s-sm); }
+.nav a { text-decoration: none; color: var(--muted); }
+.nav a:hover { color: var(--ink); }
+.site-header .btn { padding: 10px 16px; }
+@media (max-width: 760px) { .nav { display: none; } }
+
+/* Hero */
+.hero { padding-block: clamp(40px, 7vw, 88px) clamp(48px, 8vw, 96px); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr); gap: clamp(32px, 6vw, 72px); align-items: center; }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: minmax(0, 1fr); } }
+.hero-copy { display: grid; gap: 22px; min-width: 0; }
+.campaign-badge { justify-self: start; display: inline-flex; gap: 10px; align-items: center; font-family: var(--f-mono); font-size: var(--s-xs); padding: 6px 12px; border-radius: 999px; background: var(--lamp-soft); color: var(--ink); }
+.campaign-badge b { font-weight: 500; color: var(--muted); }
+.hero h1 { font-size: clamp(3.6rem, 11vw, 7.5rem); line-height: 1; letter-spacing: -.02em; }
+.hero h1 .comma { color: var(--lamp); }
+.hero .lead { font-size: var(--s-lg); line-height: 1.6; max-width: 30rem; font-family: var(--f-display); }
+.hero .sub { color: var(--muted); max-width: 32rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 6px; }
+
+/* 공고 카드: 히어로 오른쪽 */
+.notice {
+  position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 24px; display: grid; gap: 18px; min-width: 0;
+  box-shadow: 0 1px 0 var(--line), 0 18px 40px -24px rgba(24, 39, 58, .35);
+}
+.notice::before { /* 케이지에 거는 집게 구멍 */
+  content: ""; position: absolute; top: -9px; left: 50%; width: 46px; height: 18px; translate: -50% 0;
+  border: 1.5px solid var(--line); border-bottom: 0; border-radius: 12px 12px 0 0; background: var(--bg);
+}
+.notice-top { display: flex; justify-content: space-between; gap: 12px; font-family: var(--f-mono); font-size: var(--s-xs); color: var(--muted); }
+.notice-portrait { aspect-ratio: 4 / 3; max-width: 100%; border-radius: 6px; background: var(--tag-dog); display: grid; place-items: center; overflow: hidden; }
+.notice-portrait svg { width: 52%; height: auto; }
+.notice-name { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.notice-name h2 { font-size: var(--s-xl); }
+.days { font-family: var(--f-mono); font-size: var(--s-sm); font-variant-numeric: tabular-nums; }
+.days strong { font-size: 1.6rem; font-weight: 500; color: var(--ink); }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); margin: 0; }
+.facts div { padding: 10px 0 0; display: grid; gap: 2px; }
+.facts dt { font-size: var(--s-xs); color: var(--muted); }
+.facts dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+.notice-quote { font-family: var(--f-display); color: var(--muted); font-size: var(--s-sm); }
+
+/* 숫자 띠 */
+.facts-band { background: var(--dusk); color: var(--bg); }
+.facts-band .wrap { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding-block: 36px; }
+@media (max-width: 700px) { .facts-band .wrap { grid-template-columns: minmax(0, 1fr); } }
+.facts-band .num { font-family: var(--f-display); font-size: var(--s-xl); font-weight: 700; }
+.facts-band p { font-size: var(--s-sm); opacity: .85; }
+
+/* 기다리는 친구들 */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.chip { font: 500 var(--s-sm)/1 var(--f-body); padding: 10px 16px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip .count { font-family: var(--f-mono); font-size: var(--s-xs); opacity: .7; margin-left: 4px; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 960px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.pet { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 14px; grid-template-rows: auto auto 1fr auto; min-width: 0; }
+.pet .notice-portrait { aspect-ratio: 16 / 10; }
+.pet .notice-portrait svg { width: 38%; }
+.pet.cat .notice-portrait { background: var(--tag-cat); }
+.pet-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.pet-head h3 { font-size: var(--s-lg); }
+.pet .meta { font-size: var(--s-sm); color: var(--muted); }
+.pet .no { font-family: var(--f-mono); font-size: var(--s-xs); color: var(--muted); }
+.traits { display: flex; flex-wrap: wrap; gap: 6px; align-content: start; }
+.traits span { font-size: var(--s-xs); padding: 4px 10px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); }
+.pet-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px dashed var(--line); padding-top: 14px; }
+.pet-foot .days strong { font-size: 1.25rem; }
+.pet-foot .btn { padding: 10px 14px; }
+.long-wait { color: var(--lamp); }
+.note { margin-top: 18px; font-size: var(--s-xs); color: var(--muted); }
+
+/* 입양 절차 */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; counter-reset: step; }
+@media (max-width: 900px) { .steps { grid-template-columns: minmax(0, 1fr); } }
+.steps li { counter-increment: step; padding: 20px 18px 22px 0; border-top: 2px solid var(--line); display: grid; gap: 8px; align-content: start; position: relative; }
+.steps li::before { content: counter(step, decimal-leading-zero); font-family: var(--f-mono); font-size: var(--s-xs); color: var(--muted); }
+.steps li:last-child { border-top-color: var(--lamp); }
+.steps li:last-child::before { color: var(--lamp); }
+.steps h3 { font-size: 1.15rem; }
+.steps p { font-size: var(--s-sm); color: var(--muted); }
+.steps .when { font-family: var(--f-mono); font-size: var(--s-xs); color: var(--ink); }
+
+/* 준비 체크 */
+.prep { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; }
+@media (max-width: 800px) { .prep { grid-template-columns: minmax(0, 1fr); } }
+.checklist { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+.checklist li { border-bottom: 1px solid var(--line); }
+.checklist label { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; cursor: pointer; }
+.checklist input { width: 20px; height: 20px; margin-top: 4px; accent-color: var(--dusk); flex: none; }
+.checklist strong { display: block; font-weight: 600; }
+.checklist span { color: var(--muted); font-size: var(--s-sm); }
+.check-result { margin-top: 16px; font-size: var(--s-sm); font-family: var(--f-mono); }
+.fee { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: grid; gap: 14px; align-content: start; }
+.fee h3 { font-size: var(--s-lg); }
+.fee table { width: 100%; border-collapse: collapse; font-size: var(--s-sm); font-variant-numeric: tabular-nums; }
+.fee td { padding: 9px 0; border-bottom: 1px solid var(--line); }
+.fee td:last-child { text-align: right; white-space: nowrap; }
+.fee tfoot td { border-bottom: 0; font-weight: 700; padding-top: 14px; }
+.fee p { font-size: var(--s-xs); color: var(--muted); }
+
+/* 다른 방법 */
+.ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+@media (max-width: 800px) { .ways { grid-template-columns: minmax(0, 1fr); } }
+.ways article { display: grid; gap: 10px; align-content: start; border-left: 2px solid var(--line); padding-left: 18px; }
+.ways h3 { font-size: 1.2rem; }
+.ways p { color: var(--muted); font-size: var(--s-sm); }
+.ways a { font-weight: 600; font-size: var(--s-sm); text-underline-offset: 4px; }
+
+/* 상담 신청 */
+.apply { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.apply .wrap { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 72px); }
+@media (max-width: 860px) { .apply .wrap { grid-template-columns: minmax(0, 1fr); } }
+.apply-intro { display: grid; gap: 16px; align-content: start; }
+.apply-intro h2 { font-size: var(--s-xl); }
+.apply-intro p { color: var(--muted); }
+.contact { font-family: var(--f-mono); font-size: var(--s-sm); display: grid; gap: 4px; padding-top: 8px; }
+form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 560px) { form { grid-template-columns: minmax(0, 1fr); } }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field.full { grid-column: 1 / -1; }
+.field label, .field legend { font-size: var(--s-sm); font-weight: 600; }
+.field input[type="text"], .field input[type="tel"], .field select, .field textarea {
+  font: inherit; font-size: var(--s-sm); color: var(--ink); background: var(--bg);
+  border: 1.5px solid var(--line); border-radius: 8px; padding: 12px 14px; width: 100%;
+}
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--dusk); }
+.field textarea { min-height: 96px; resize: vertical; }
+fieldset.field { border: 0; padding: 0; margin: 0; }
+.radios { display: flex; flex-wrap: wrap; gap: 8px; }
+.radios label { font-weight: 400; display: inline-flex; gap: 6px; align-items: center; padding: 8px 14px; border: 1.5px solid var(--line); border-radius: 999px; cursor: pointer; }
+.radios input { accent-color: var(--dusk); }
+.radios label:has(input:checked) { border-color: var(--dusk); }
+.agree { display: flex; gap: 10px; align-items: flex-start; font-size: var(--s-sm); color: var(--muted); }
+.agree input { margin-top: 5px; accent-color: var(--dusk); }
+.error { color: #C2412D; font-size: var(--s-xs); }
+.form-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.done { grid-column: 1 / -1; background: var(--lamp-soft); border-radius: var(--radius); padding: 22px; display: grid; gap: 8px; }
+.done h3 { font-size: var(--s-lg); }
+
+/* Footer */
+footer { padding-block: 40px 56px; font-size: var(--s-xs); color: var(--muted); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; }
+footer .logo { font-size: 1.1rem; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="다시, 집 처음으로">다시<span class="comma">,</span>&nbsp;집</a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#friends">기다리는 친구들</a>
+      <a href="#steps">입양 절차</a>
+      <a href="#prep">입양 전 준비</a>
+      <a href="#ways">다른 방법으로 돕기</a>
+    </nav>
+    <a class="btn btn-lamp" href="#apply">상담 신청</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="campaign-badge">2026 가을 입양 캠페인 <b>11.1 – 11.30</b></span>
+        <h1>다시<span class="comma">,</span><br>집</h1>
+        <p class="lead">한 번 집을 잃은 아이들이<br>다시 돌아갈 곳을 기다리고 있어요.</p>
+        <p class="sub">다시, 집은 보호소와 임시보호처에 머무는 개와 고양이를 새 가족과 이어주는 비영리 단체입니다. 이번 11월 한 달 동안 입양비 전액을 지원하고, 입양 후 3개월간 행동 상담을 함께합니다.</p>
+        <div class="hero-actions">
+          <a class="btn btn-lamp" href="#friends">기다리는 친구들 보기</a>
+          <a class="btn btn-ghost" href="#steps">입양은 어떻게 하나요?</a>
+        </div>
+      </div>
+
+      <article class="notice" aria-label="오래 기다린 친구, 보리">
+        <div class="notice-top">
+          <span>공고번호 DSJ-2026-0147</span>
+          <span>가장 오래 기다린 친구</span>
+        </div>
+        <div class="notice-portrait" aria-hidden="true">
+          <svg viewBox="0 0 120 100" fill="none"><use href="#dog"/></svg>
+        </div>
+        <div class="notice-name">
+          <h2>보리</h2>
+          <span class="days"><span class="eyebrow">보호</span> <strong id="hero-days">—</strong>일째</span>
+        </div>
+        <dl class="facts">
+          <div><dt>추정 나이</dt><dd>4살</dd></div>
+          <div><dt>체중</dt><dd>14.2kg</dd></div>
+          <div><dt>성별</dt><dd>수컷 · 중성화</dd></div>
+        </dl>
+        <p class="notice-quote">“산책 줄을 보면 꼬리부터 흔들어요. 사람 옆에 붙어 자는 걸 제일 좋아합니다.” <br>— 담당 봉사자 메모</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="facts-band" aria-label="함께 알아야 할 숫자">
+    <div class="wrap">
+      <div><div class="num">10만 마리 이상</div><p>해마다 전국 보호소에 새로 들어오는 유실·유기동물 수입니다.</p></div>
+      <div><div class="num">입양비 0원</div><p>캠페인 기간에는 중성화·예방접종·동물등록 비용을 단체가 부담합니다.</p></div>
+      <div><div class="num">3개월 동행</div><p>입양 후에도 훈련사와 수의사가 적응 과정을 함께 살핍니다.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="friends">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">기다리는 친구들</span>
+        <h2>보호 일수가 길수록, 먼저 소개하고 싶어요</h2>
+        <p>모든 친구는 건강검진과 기초 예방접종을 마쳤습니다. 마음이 가는 친구가 있다면 ‘만나보고 싶어요’를 눌러주세요. 상담 신청서에 이름이 자동으로 들어갑니다.</p>
+      </div>
+      <div class="filters" role="group" aria-label="종류로 보기">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">전체<span class="count" data-count="all"></span></button>
+        <button class="chip" type="button" data-filter="dog" aria-pressed="false">강아지<span class="count" data-count="dog"></span></button>
+        <button class="chip" type="button" data-filter="cat" aria-pressed="false">고양이<span class="count" data-count="cat"></span></button>
+      </div>
+      <div class="grid" id="pet-grid"></div>
+      <p class="note">보호 일수는 오늘 날짜를 기준으로 계산됩니다. 120일이 넘은 친구는 노란색으로 표시했어요.</p>
+    </div>
+  </section>
+
+  <section class="section" id="steps" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">입양 절차</span>
+        <h2>신청부터 집까지, 보통 2~3주 걸려요</h2>
+        <p>서두르지 않는 이유는 다시 파양되는 일을 막기 위해서입니다. 각 단계에서 가족과 아이가 서로 잘 맞는지 함께 확인해요.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>상담 신청</h3><p>이 페이지 아래 신청서를 보내주세요.</p><span class="when">1일</span></li>
+        <li><h3>설문·전화 상담</h3><p>생활 패턴, 주거 환경, 가족 구성을 이야기 나눠요.</p><span class="when">2~4일</span></li>
+        <li><h3>첫 만남</h3><p>보호소나 임시보호처에서 직접 만나고 산책해봐요.</p><span class="when">1주 안팎</span></li>
+        <li><h3>입양 계약·교육</h3><p>계약서를 쓰고, 첫 2주 적응 요령을 안내받아요.</p><span class="when">1일</span></li>
+        <li><h3>다시, 집으로</h3><p>집에 데려간 뒤 3개월 동안 정기적으로 연락드려요.</p><span class="when">입양 후 3개월</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="prep" style="padding-top:0">
+    <div class="wrap prep">
+      <div>
+        <div class="section-head">
+          <span class="eyebrow">입양 전 준비</span>
+          <h2>신청하기 전에 스스로 확인해보세요</h2>
+        </div>
+        <ul class="checklist" id="checklist">
+          <li><label><input type="checkbox" id="chk-family"><div><strong>함께 사는 가족 모두가 동의했어요</strong><span>한 사람이라도 반대하면 아이가 가장 먼저 힘들어져요.</span></div></label></li>
+          <li><label><input type="checkbox" id="chk-home"><div><strong>지금 사는 집에서 반려동물을 키울 수 있어요</strong><span>임대라면 집주인 동의를 미리 받아두세요.</span></div></label></li>
+          <li><label><input type="checkbox" id="chk-time"><div><strong>하루 1시간 이상 돌볼 시간이 있어요</strong><span>강아지는 하루 두 번 산책, 고양이는 놀이 시간이 필요해요.</span></div></label></li>
+          <li><label><input type="checkbox" id="chk-cost"><div><strong>매달 드는 비용을 감당할 수 있어요</strong><span>사료·모래·병원비를 합쳐 월 10~20만 원 정도 생각해주세요.</span></div></label></li>
+          <li><label><input type="checkbox" id="chk-years"><div><strong>앞으로 15년을 함께할 계획이에요</strong><span>이사, 결혼, 출산 같은 변화가 생겨도 함께하는 것이 입양입니다.</span></div></label></li>
+        </ul>
+        <p class="check-result" id="check-result" aria-live="polite">0 / 5 확인</p>
+      </div>
+      <aside class="fee" aria-label="캠페인 기간 입양비">
+        <span class="eyebrow">캠페인 기간 입양비</span>
+        <h3>입양 가족이 내는 비용은 0원이에요</h3>
+        <table>
+          <tbody>
+            <tr><td>중성화 수술</td><td>단체 부담</td></tr>
+            <tr><td>종합백신·광견병 접종</td><td>단체 부담</td></tr>
+            <tr><td>내장형 동물등록</td><td>단체 부담</td></tr>
+            <tr><td>입양 후 행동 상담 (3개월)</td><td>단체 부담</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td>입양 가족 부담</td><td>0원</td></tr>
+          </tfoot>
+        </table>
+        <p>캠페인 비용은 정기후원자 분들의 후원금으로 마련했습니다. 강아지는 동물보호법에 따라 입양 후 30일 안에 동물등록을 마쳐야 하며, 등록은 저희가 대신 진행해드려요.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="ways" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">다른 방법으로 돕기</span>
+        <h2>지금 입양이 어렵다면</h2>
+      </div>
+      <div class="ways">
+        <article>
+          <h3>임시보호</h3>
+          <p>입양처를 찾을 때까지 1~3개월 집에서 돌봐주세요. 사료와 병원비는 단체가 지원합니다. 보호소보다 집에서 지낸 아이가 입양도 더 빨리 갑니다.</p>
+          <a href="#apply" data-type="임시보호">임시보호 신청하기 →</a>
+        </article>
+        <article>
+          <h3>정기후원</h3>
+          <p>월 1만 원이면 한 아이의 한 달 사료비가 됩니다. 후원금은 치료비, 중성화, 입양비 지원에 쓰이고 분기마다 사용 내역을 공개해요.</p>
+          <a href="#apply" data-type="정기후원">후원 문의하기 →</a>
+        </article>
+        <article>
+          <h3>주말 봉사</h3>
+          <p>토요일 오전 산책 봉사와 견사 청소에 함께해주세요. 처음 오시는 분은 30분 오리엔테이션 후 시작합니다.</p>
+          <a href="#apply" data-type="봉사">봉사 신청하기 →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section apply" id="apply">
+    <div class="wrap">
+      <div class="apply-intro">
+        <span class="eyebrow">상담 신청</span>
+        <h2>먼저 이야기부터 나눠요</h2>
+        <p>신청서를 보내주시면 담당 활동가가 2일 안에 전화드립니다. 상담을 받는다고 꼭 입양해야 하는 건 아니에요.</p>
+        <div class="contact">
+          <span>상담 시간 · 평일 10:00–18:00</span>
+          <span>문의 · hello@dasi-jip.org</span>
+        </div>
+      </div>
+
+      <form id="apply-form" novalidate>
+        <div class="field">
+          <label for="f-name">이름</label>
+          <input type="text" id="f-name" name="name" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-phone">연락처</label>
+          <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="010-0000-0000" required>
+        </div>
+        <div class="field">
+          <label for="f-type">신청 종류</label>
+          <select id="f-type" name="type">
+            <option>입양</option>
+            <option>임시보호</option>
+            <option>정기후원</option>
+            <option>봉사</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-pet">관심 있는 친구</label>
+          <select id="f-pet" name="pet"><option value="">아직 정하지 않았어요</option></select>
+        </div>
+        <fieldset class="field full">
+          <legend>주거 형태</legend>
+          <div class="radios">
+            <label><input type="radio" name="home" id="f-home-apt" value="아파트" checked> 아파트</label>
+            <label><input type="radio" name="home" id="f-home-villa" value="빌라·연립"> 빌라·연립</label>
+            <label><input type="radio" name="home" id="f-home-house" value="단독주택"> 단독주택</label>
+            <label><input type="radio" name="home" id="f-home-etc" value="기타"> 기타</label>
+          </div>
+        </fieldset>
+        <div class="field full">
+          <label for="f-msg">하고 싶은 말 <span style="font-weight:400;color:var(--muted)">(선택)</span></label>
+          <textarea id="f-msg" name="message" placeholder="함께 사는 가족, 다른 반려동물, 궁금한 점을 적어주세요."></textarea>
+        </div>
+        <label class="agree full field" style="grid-column:1/-1;display:flex">
+          <input type="checkbox" id="f-agree" required>
+          <span>상담 연락을 위해 이름과 연락처를 수집하는 데 동의합니다. 정보는 상담이 끝나면 6개월 안에 파기합니다.</span>
+        </label>
+        <div class="form-actions">
+          <button class="btn btn-lamp" type="submit">상담 신청 보내기</button>
+          <span class="error" id="form-error" role="alert" hidden></span>
+        </div>
+        <div class="done" id="form-done" hidden>
+          <h3>신청서를 받았어요</h3>
+          <p id="done-text">담당 활동가가 2일 안에 연락드릴게요.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#top">다시<span class="comma">,</span>&nbsp;집</a>
+      <p>유기동물이 다시 집으로 돌아가도록 돕는 비영리 단체</p>
+    </div>
+    <div>
+      <p>hello@dasi-jip.org</p>
+      <p>© 2026 다시, 집</p>
+    </div>
+  </div>
+</footer>
+
+<!-- 일러스트 정의 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="dog" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--dusk)">
+      <path d="M34 30 C22 26 14 40 18 56 C20 64 28 62 30 54" fill="var(--surface)"/>
+      <path d="M86 30 C98 26 106 40 102 56 C100 64 92 62 90 54" fill="var(--surface)"/>
+      <path d="M32 40 C32 22 88 22 88 40 L90 66 C90 84 76 92 60 92 C44 92 30 84 30 66 Z" fill="var(--surface)"/>
+      <circle cx="47" cy="52" r="3.5" fill="currentColor"/>
+      <circle cx="73" cy="52" r="3.5" fill="currentColor"/>
+      <path d="M54 68 C54 64 66 64 66 68 C66 72 60 74 60 74 C60 74 54 72 54 68 Z" fill="currentColor"/>
+      <path d="M60 74 L60 80 M52 82 C56 85 64 85 68 82"/>
+    </g>
+    <g id="cat" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--dusk)">
+      <path d="M28 46 L30 14 L50 32 C56 30 64 30 70 32 L90 14 L92 46 C96 72 82 90 60 90 C38 90 24 72 28 46 Z" fill="var(--surface)"/>
+      <path d="M44 54 C46 50 50 50 52 54 M68 54 C70 50 74 50 76 54"/>
+      <path d="M56 66 L64 66 L60 71 Z" fill="currentColor"/>
+      <path d="M60 71 C58 76 52 76 50 73 M60 71 C62 76 68 76 70 73"/>
+      <path d="M38 66 L18 62 M38 71 L20 74 M82 66 L102 62 M82 71 L100 74"/>
+    </g>
+  </defs>
+</svg>
+
+<script>
+(function () {
+  // 기다리는 친구들 목록. 실제 공고로 바꿔 쓰세요. intake는 보호소 입소일입니다.
+  var pets = [
+    { id: "DSJ-2026-0147", name: "보리", species: "dog", breed: "믹스견", age: "4살", sex: "수컷", neutered: true, weight: "14.2kg", intake: "2026-03-24", traits: ["산책 좋아함", "사람 좋아함", "배변 가림"] },
+    { id: "DSJ-2026-0211", name: "호떡", species: "cat", breed: "코리안 숏헤어 (치즈)", age: "6살", sex: "수컷", neutered: true, weight: "5.8kg", intake: "2026-05-02", traits: ["무릎냥이", "느긋함", "다른 고양이와 지냄"] },
+    { id: "DSJ-2026-0238", name: "단비", species: "dog", breed: "진도 믹스", age: "2살", sex: "암컷", neutered: true, weight: "17.5kg", intake: "2026-05-19", traits: ["활발함", "단독주택 추천", "기본 훈련 완료"] },
+    { id: "DSJ-2026-0302", name: "먹물", species: "cat", breed: "코리안 숏헤어 (블랙)", age: "1살", sex: "암컷", neutered: true, weight: "3.4kg", intake: "2026-07-08", traits: ["호기심 많음", "장난꾸러기", "첫 입양 추천"] },
+    { id: "DSJ-2026-0355", name: "콩떡", species: "dog", breed: "말티즈 믹스", age: "9살", sex: "암컷", neutered: true, weight: "4.1kg", intake: "2026-08-14", traits: ["조용함", "노견", "아파트 적합"] },
+    { id: "DSJ-2026-0391", name: "구름", species: "cat", breed: "터키시 앙고라 믹스", age: "3살", sex: "수컷", neutered: true, weight: "4.6kg", intake: "2026-09-21", traits: ["낯가림 조금", "조용한 집 추천", "빗질 좋아함"] }
+  ];
+
+  var DAY = 86400000;
+  function daysSince(iso) {
+    var start = new Date(iso + "T00:00:00");
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    return Math.max(1, Math.round((today - start) / DAY) + 1);
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  pets.forEach(function (p) { p.days = daysSince(p.intake); });
+  pets.sort(function (a, b) { return b.days - a.days; });
+
+  document.getElementById("hero-days").textContent = pets.filter(function (p) { return p.name === "보리"; })[0].days;
+
+  var grid = document.getElementById("pet-grid");
+  grid.innerHTML = pets.map(function (p) {
+    var kind = p.species === "dog" ? "강아지" : "고양이";
+    return '<article class="pet ' + p.species + '" data-species="' + p.species + '">' +
+      '<div class="notice-portrait" aria-hidden="true"><svg viewBox="0 0 120 100" fill="none"><use href="#' + p.species + '"/></svg></div>' +
+      '<div class="pet-head"><h3>' + esc(p.name) + '</h3><span class="no">' + esc(p.id) + '</span></div>' +
+      '<div style="display:grid;gap:10px;align-content:start">' +
+        '<p class="meta">' + kind + ' · ' + esc(p.breed) + '<br>' + esc(p.age) + ' · ' + esc(p.sex) + (p.neutered ? ' · 중성화' : '') + ' · ' + esc(p.weight) + '</p>' +
+        '<div class="traits">' + p.traits.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join("") + '</div>' +
+      '</div>' +
+      '<div class="pet-foot"><span class="days' + (p.days > 120 ? ' long-wait' : '') + '">보호 <strong>' + p.days + '</strong>일째</span>' +
+      '<button class="btn btn-ghost" type="button" data-meet="' + esc(p.name) + '">만나보고 싶어요</button></div>' +
+    '</article>';
+  }).join("");
+
+  // 필터 개수
+  var counts = { all: pets.length, dog: 0, cat: 0 };
+  pets.forEach(function (p) { counts[p.species]++; });
+  document.querySelectorAll("[data-count]").forEach(function (el) { el.textContent = counts[el.dataset.count]; });
+
+  document.querySelectorAll(".chip").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var f = chip.dataset.filter;
+      document.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", String(c === chip)); });
+      grid.querySelectorAll(".pet").forEach(function (card) { card.hidden = f !== "all" && card.dataset.species !== f; });
+    });
+  });
+
+  // 신청서의 관심 친구 목록
+  var petSelect = document.getElementById("f-pet");
+  pets.forEach(function (p) {
+    var o = document.createElement("option");
+    o.value = p.name; o.textContent = p.name + " (" + (p.species === "dog" ? "강아지" : "고양이") + ", " + p.age + ")";
+    petSelect.appendChild(o);
+  });
+  var typeSelect = document.getElementById("f-type");
+
+  grid.addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-meet]");
+    if (!btn) return;
+    petSelect.value = btn.dataset.meet;
+    typeSelect.value = "입양";
+    document.getElementById("apply").scrollIntoView();
+    document.getElementById("f-name").focus({ preventScroll: true });
+  });
+  document.querySelectorAll("[data-type]").forEach(function (a) {
+    a.addEventListener("click", function () { typeSelect.value = a.dataset.type; });
+  });
+
+  // 준비 체크리스트
+  var boxes = document.querySelectorAll("#checklist input");
+  var result = document.getElementById("check-result");
+  function updateCheck() {
+    var n = Array.prototype.filter.call(boxes, function (b) { return b.checked; }).length;
+    result.textContent = n + " / " + boxes.length + " 확인" + (n === boxes.length ? " · 준비가 됐어요. 아래에서 상담을 신청해주세요." : "");
+  }
+  boxes.forEach(function (b) { b.addEventListener("change", updateCheck); });
+
+  // 상담 신청 (서버 연결 전: 입력 확인 후 완료 메시지만 보여줌)
+  var form = document.getElementById("apply-form");
+  var err = document.getElementById("form-error");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = form.elements.name.value.trim();
+    var phone = form.elements.phone.value.replace(/[^0-9]/g, "");
+    var msg = "";
+    if (!name) msg = "이름을 입력해주세요.";
+    else if (phone.length < 9) msg = "연락받을 전화번호를 숫자로 입력해주세요.";
+    else if (!document.getElementById("f-agree").checked) msg = "연락처 수집에 동의해주셔야 상담 연락을 드릴 수 있어요.";
+    if (msg) { err.textContent = msg; err.hidden = false; return; }
+    err.hidden = true;
+    // TODO: 여기에서 실제 접수 서버(예: 구글 폼, 자체 API)로 데이터를 보내세요.
+    var pet = petSelect.value;
+    document.getElementById("done-text").textContent =
+      name + "님, " + (pet ? pet + "에 대한 " : "") + typeSelect.value + " 상담 신청서를 받았어요. 담당 활동가가 2일 안에 연락드릴게요.";
+    document.getElementById("form-done").hidden = false;
+    form.querySelector('button[type="submit"]').disabled = true;
+  });
+})();
+</script>
+</body>
+</html>

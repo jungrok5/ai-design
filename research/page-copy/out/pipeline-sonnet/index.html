@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>flowkit 문서</title>
+<meta name="description" content="flowkit: 배치 작업을 YAML로 정의하고 스케줄링하는 사내 데이터 파이프라인 도구">
+<style>
+:root {
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --code-bg: #14171c;
+  --code-fg: #e4e7ec;
+  --text: #1b1f24;
+  --muted: #5d6671;
+  --line: #e3e3dc;
+  --accent: #0f6e5a;
+  --accent-ink: #ffffff;
+  --accent-soft: #e2f1ec;
+  --k: #7dd3b8;   /* yaml key */
+  --s: #f2c879;   /* string */
+  --c: #7c8696;   /* comment */
+  --n: #a9b8ff;   /* number / keyword */
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #101316;
+    --surface: #171b1f;
+    --code-bg: #0a0c0e;
+    --text: #e8eaed;
+    --muted: #98a1ac;
+    --line: #272d33;
+    --accent: #5fc9a8;
+    --accent-ink: #08201a;
+    --accent-soft: #15302a;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.7 var(--sans); -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+code { font-family: var(--mono); font-size: .9em; background: var(--accent-soft); padding: .1em .4em; border-radius: 4px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* header */
+header.top { border-bottom: 1px solid var(--line); background: var(--bg); position: sticky; top: 0; z-index: 10; }
+header.top .wrap { display: flex; align-items: center; gap: 28px; height: 56px; }
+.brand { font-weight: 700; font-size: 18px; letter-spacing: -.01em; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.brand svg { width: 22px; height: 22px; }
+nav { display: flex; gap: 22px; margin-left: auto; font-size: 14px; }
+nav a { color: var(--muted); text-decoration: none; }
+nav a:hover { color: var(--text); }
+.ver { font: 12px var(--mono); color: var(--muted); border: 1px solid var(--line); padding: 2px 8px; border-radius: 99px; }
+
+/* hero */
+.hero { padding: 72px 0 56px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; }
+.eyebrow { font: 13px var(--mono); color: var(--accent); margin: 0 0 14px; }
+h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.2; letter-spacing: -.03em; margin: 0 0 18px; }
+.lead { font-size: 18px; color: var(--muted); margin: 0 0 28px; max-width: 30em; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--line); color: var(--text); background: var(--surface); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn:hover { filter: brightness(1.06); }
+.btn:focus-visible, nav a:focus-visible, .card a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* code */
+pre {
+  margin: 0; background: var(--code-bg); color: var(--code-fg);
+  font: 13.5px/1.7 var(--mono); padding: 18px 20px; border-radius: 10px;
+  overflow-x: auto; word-break: normal; tab-size: 2;
+}
+.file { background: var(--code-bg); border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+.file .name { font: 12px var(--mono); color: var(--c); padding: 9px 20px 0; background: var(--code-bg); }
+.file pre { border-radius: 0; }
+.k { color: var(--k); } .s { color: var(--s); } .c { color: var(--c); } .n { color: var(--n); }
+.prompt { color: var(--c); user-select: none; }
+
+/* sections */
+section { padding: 56px 0; border-top: 1px solid var(--line); }
+h2 { font-size: 26px; letter-spacing: -.02em; margin: 0 0 8px; }
+.sub { color: var(--muted); margin: 0 0 32px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+.card h3 { margin: 0 0 6px; font-size: 16px; }
+.card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+.card .ico { width: 34px; height: 34px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: 14px; font: 700 15px var(--mono); }
+
+/* steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 36px 1fr; gap: 16px; }
+.steps li::before { content: counter(s); width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-weight: 700; font-size: 14px; }
+.steps h3 { margin: 3px 0 4px; font-size: 17px; }
+.steps p { margin: 0 0 12px; color: var(--muted); }
+.steps .body { min-width: 0; }
+
+/* table */
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { text-align: left; padding: 12px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 13px; color: var(--muted); font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+td:first-child { white-space: nowrap; }
+
+/* links */
+.links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.links a { display: block; text-decoration: none; color: var(--text); border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 18px 20px; }
+.links a:hover { border-color: var(--accent); }
+.links b { display: block; margin-bottom: 2px; }
+.links span { color: var(--muted); font-size: 14px; }
+
+footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; padding-top: 44px; gap: 32px; }
+  .grid, .links { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  nav a:not(:last-child) { display: none; }
+  .grid, .links { grid-template-columns: 1fr; }
+  .lead { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)" aria-hidden="true"><circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="12" r="2"/><path d="M7 6h4a3 3 0 0 1 3 3v0a3 3 0 0 0 3 3h0M7 18h4a3 3 0 0 0 3-3v0a3 3 0 0 1 3-3h0"/></svg>
+      flowkit
+    </a>
+    <span class="ver">v1.0</span>
+    <nav aria-label="주 메뉴">
+      <a href="#features">특징</a>
+      <a href="#quickstart">빠른 시작</a>
+      <a href="#schedule">스케줄</a>
+      <a href="#docs">문서</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <p class="eyebrow">사내 데이터 파이프라인 도구</p>
+      <h1>배치 작업을 YAML로 정의하고, 스케줄까지 한 번에.</h1>
+      <p class="lead">flowkit은 데이터 배치 작업을 선언적인 YAML 파일로 관리합니다. 작업 간 의존성, 재시도, 실행 주기를 코드 대신 설정으로 표현하세요.</p>
+      <div class="cta">
+        <a class="btn primary" href="#quickstart">빠른 시작</a>
+        <a class="btn" href="#docs">문서 둘러보기</a>
+      </div>
+    </div>
+
+    <div class="file">
+      <div class="name">daily_sales.yaml</div>
+<pre><span class="k">name:</span> daily_sales
+<span class="k">schedule:</span> <span class="s">"0 2 * * *"</span>   <span class="c"># 매일 02:00</span>
+<span class="k">timezone:</span> Asia/Seoul
+
+<span class="k">tasks:</span>
+  - <span class="k">id:</span> extract
+    <span class="k">run:</span> <span class="s">python extract_orders.py</span>
+    <span class="k">retries:</span> <span class="n">3</span>
+
+  - <span class="k">id:</span> transform
+    <span class="k">run:</span> <span class="s">dbt run --select sales</span>
+    <span class="k">depends_on:</span> [extract]
+
+  - <span class="k">id:</span> load
+    <span class="k">run:</span> <span class="s">python load_dw.py</span>
+    <span class="k">depends_on:</span> [transform]</pre>
+    </div>
+  </div>
+
+  <section id="features">
+    <h2>특징</h2>
+    <p class="sub">파이프라인 운영에 필요한 기본기를 YAML 하나로 다룹니다.</p>
+    <div class="grid">
+      <div class="card"><div class="ico">{ }</div><h3>선언적 정의</h3><p>작업, 의존성, 환경 변수를 YAML로 기술합니다. 코드 리뷰와 버전 관리도 그대로 적용됩니다.</p></div>
+      <div class="card"><div class="ico">◷</div><h3>내장 스케줄러</h3><p>cron 표현식과 <code>every</code> 단축 문법을 지원하며, 타임존을 작업 단위로 지정할 수 있습니다.</p></div>
+      <div class="card"><div class="ico">→</div><h3>의존성 그래프</h3><p><code>depends_on</code>으로 실행 순서를 정의하면 독립적인 작업은 자동으로 병렬 실행됩니다.</p></div>
+      <div class="card"><div class="ico">↻</div><h3>재시도와 백필</h3><p>실패한 작업만 다시 실행하고, 과거 기간의 데이터를 날짜 범위로 다시 채울 수 있습니다.</p></div>
+      <div class="card"><div class="ico">✓</div><h3>사전 검증</h3><p><code>flowkit validate</code>로 배포 전에 문법 오류와 순환 의존성을 잡아냅니다.</p></div>
+      <div class="card"><div class="ico">!</div><h3>실패 알림</h3><p>작업이 실패하면 지정한 채널로 알림을 보냅니다. 알림 대상은 파이프라인마다 설정합니다.</p></div>
+    </div>
+  </section>
+
+  <section id="quickstart">
+    <h2>빠른 시작</h2>
+    <p class="sub">5분 안에 첫 파이프라인을 실행해 보세요.</p>
+    <ol class="steps">
+      <li>
+        <div class="body">
+          <h3>설치</h3>
+          <p>사내 패키지 저장소에서 CLI를 설치합니다.</p>
+<pre><span class="prompt">$ </span>pip install flowkit</pre>
+        </div>
+      </li>
+      <li>
+        <div class="body">
+          <h3>파이프라인 만들기</h3>
+          <p>위 예시처럼 YAML 파일을 작성하거나 템플릿으로 시작하세요.</p>
+<pre><span class="prompt">$ </span>flowkit init daily_sales</pre>
+        </div>
+      </li>
+      <li>
+        <div class="body">
+          <h3>검증하고 실행</h3>
+          <p>문법을 확인한 뒤 한 번 수동으로 실행해 결과를 확인합니다.</p>
+<pre><span class="prompt">$ </span>flowkit validate daily_sales.yaml
+<span class="prompt">$ </span>flowkit run daily_sales.yaml</pre>
+        </div>
+      </li>
+      <li>
+        <div class="body">
+          <h3>스케줄 등록</h3>
+          <p>등록하면 YAML의 <code>schedule</code>에 따라 자동 실행됩니다.</p>
+<pre><span class="prompt">$ </span>flowkit deploy daily_sales.yaml
+<span class="prompt">$ </span>flowkit status</pre>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="schedule">
+    <h2>스케줄 문법</h2>
+    <p class="sub"><code>schedule</code> 필드에는 cron 표현식 또는 단축 문법을 쓸 수 있습니다.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>표현</th><th>의미</th></tr></thead>
+        <tbody>
+          <tr><td><code>"0 2 * * *"</code></td><td>매일 02:00</td></tr>
+          <tr><td><code>"*/15 * * * *"</code></td><td>15분마다</td></tr>
+          <tr><td><code>"0 9 * * 1-5"</code></td><td>평일 09:00</td></tr>
+          <tr><td><code>every: 6h</code></td><td>6시간마다 (직전 실행 완료 기준)</td></tr>
+          <tr><td><code>manual</code></td><td>자동 실행 없이 수동으로만 실행</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="docs">
+    <h2>문서</h2>
+    <p class="sub">필요한 주제로 바로 이동하세요.</p>
+    <div class="links">
+      <a href="#quickstart"><b>시작하기</b><span>설치부터 첫 실행까지</span></a>
+      <a href="#features"><b>YAML 레퍼런스</b><span>모든 필드와 기본값</span></a>
+      <a href="#schedule"><b>스케줄링</b><span>cron, 타임존, 백필</span></a>
+      <a href="#"><b>CLI 명령어</b><span>run, deploy, status 등</span></a>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>flowkit · 사내 데이터 플랫폼 팀</span>
+    <span>문의: 사내 메신저 #flowkit</span>
+  </div>
+</footer>
+
+</body>
+</html>

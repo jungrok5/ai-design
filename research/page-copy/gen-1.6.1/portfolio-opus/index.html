@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>김하늘 · 프론트엔드 개발자</title>
+<meta name="description" content="React와 TypeScript로 커머스 서비스를 만들어 온 5년차 프론트엔드 개발자 김하늘의 포트폴리오">
+<!--
+  이름, 회사, 프로젝트, 수치, 연락처는 모두 예시입니다. 본인 정보로 바꿔 쓰세요.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<script>
+  try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<style>
+/* ---------- tokens (design system "Clear") ---------- */
+:root {
+  --bg: #ffffff; --surface: #f8fafc; --sunk: #f1f5f9; --line: #e2e8f0; --line-strong: #cbd5e1;
+  --fg: #0f172a; --muted: #475569; --subtle: #64748b;
+  --accent: #1d4ed8; --accent-hover: #1e40af; --accent-fg: #ffffff; --accent-soft: #eff6ff;
+  --ok: #067647; --ok-soft: #ecfdf3;
+  --code-bg: #0f172a; --code-fg: #e2e8f0; --code-muted: #94a3b8; --code-line: #334155;
+  --code-key: #93c5fd; --code-str: #86efac; --code-type: #fcd34d;
+  --focus: #1d4ed8;
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-xs: 12px; --text-s: 14px; --text-m: 16px; --text-l: 18px;
+  --text-h3: 18px; --text-h2: 24px; --text-h1: clamp(30px, 4.4vw, 44px);
+  --leading: 1.7; --leading-tight: 1.3;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --radius-s: 6px; --radius-m: 8px; --radius-l: 10px;
+  --border: 1px solid var(--line);
+  --measure: 68ch; --page: 1040px;
+  --motion: 180ms ease-out;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+    --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+    --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+    --ok: #47cd89; --ok-soft: #16322a;
+    --code-bg: #111315; --code-fg: #e4e6e8; --code-muted: #8a9096; --code-line: #33373b;
+    --code-key: #9cc8ee; --code-str: #86e0b0; --code-type: #f5c45e;
+    --focus: #7cb7e8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+  --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+  --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+  --ok: #47cd89; --ok-soft: #16322a;
+  --code-bg: #111315; --code-fg: #e4e6e8; --code-muted: #8a9096; --code-line: #33373b;
+  --code-key: #9cc8ee; --code-str: #86e0b0; --code-type: #f5c45e;
+  --focus: #7cb7e8;
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--space-8); }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-sans); font-size: var(--text-m); line-height: var(--leading);
+  word-break: keep-all; overflow-wrap: anywhere;
+}
+h1, h2, h3 { line-height: var(--leading-tight); margin: 0; }
+h2 { font-size: var(--text-h2); font-weight: 700; }
+h3 { font-size: var(--text-h3); font-weight: 700; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-s); }
+code, pre { font-family: var(--font-mono); }
+.wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--space-4); }
+@media (min-width: 768px) { .wrap { padding: 0 var(--space-6); } }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: var(--space-4); top: var(--space-4); background: var(--bg); padding: var(--space-2) var(--space-3); z-index: 10; }
+
+/* ---------- header ---------- */
+.top { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: var(--border); }
+.top .wrap { display: flex; align-items: center; gap: var(--space-4); min-height: 56px; }
+.top .name { font-weight: 700; color: var(--fg); text-decoration: none; margin-right: auto; }
+.top nav { display: flex; gap: var(--space-1); }
+.top nav a {
+  display: none; color: var(--muted); text-decoration: none; font-size: var(--text-s);
+  padding: var(--space-2) var(--space-3); min-height: 44px; align-items: center;
+}
+.top nav a:hover { color: var(--fg); }
+@media (min-width: 768px) { .top nav a { display: inline-flex; } }
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border: var(--border); border-radius: var(--radius-m);
+  background: var(--bg); color: var(--muted); cursor: pointer;
+}
+.theme-toggle:hover { color: var(--fg); border-color: var(--line-strong); }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .moon { display: none; }
+:root[data-theme="dark"] .theme-toggle .sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .moon { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .sun { display: none; }
+  :root:not([data-theme="light"]) .theme-toggle .moon { display: block; }
+}
+
+/* ---------- intro ---------- */
+.intro { padding: var(--space-8) 0 var(--space-7); border-bottom: var(--border); }
+.intro-grid { display: grid; gap: var(--space-7); }
+@media (min-width: 1024px) { .intro-grid { grid-template-columns: 1.1fr 1fr; align-items: center; } }
+.intro .role { color: var(--muted); font-size: var(--text-s); margin-bottom: var(--space-3); }
+.intro h1 { font-size: var(--text-h1); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-5); }
+.intro .lede { color: var(--muted); font-size: var(--text-l); max-width: 36em; }
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
+.btn {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-5);
+  border-radius: var(--radius-m); border: 1px solid var(--line-strong);
+  color: var(--fg); background: var(--bg); text-decoration: none; font-weight: 500; font-size: var(--text-s);
+  transition: background var(--motion), border-color var(--motion);
+}
+.btn:hover { color: var(--fg); background: var(--surface); }
+.btn--primary { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-fg); }
+
+/* code sample */
+.code {
+  background: var(--code-bg); color: var(--code-fg); border-radius: var(--radius-l);
+  font-size: var(--text-s); line-height: 1.65; overflow: hidden;
+}
+.code-head {
+  display: flex; justify-content: space-between; gap: var(--space-3);
+  padding: var(--space-2) var(--space-4); border-bottom: 1px solid var(--code-line);
+  color: var(--code-muted); font-family: var(--font-mono); font-size: var(--text-xs);
+}
+.code pre { margin: 0; padding: var(--space-4); overflow-x: auto; word-break: normal; overflow-wrap: normal; }
+.code .k { color: var(--code-key); }
+.code .s { color: var(--code-str); }
+.code .t { color: var(--code-type); }
+.code .c { color: var(--code-muted); }
+
+/* ---------- sections ---------- */
+section { padding: var(--space-8) 0; }
+section + section { border-top: var(--border); }
+.sec-head { margin-bottom: var(--space-6); max-width: var(--measure); }
+.sec-head p { color: var(--muted); margin-top: var(--space-2); }
+
+/* about: two columns of prose + facts */
+.about { display: grid; gap: var(--space-6); }
+@media (min-width: 1024px) { .about { grid-template-columns: 1.4fr 1fr; gap: var(--space-8); } }
+.about .prose { display: grid; gap: var(--space-4); max-width: var(--measure); }
+.facts { margin: 0; display: grid; gap: 0; border-top: var(--border); align-self: start; }
+.facts div { display: grid; grid-template-columns: 7em 1fr; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: var(--border); }
+.facts dt { color: var(--subtle); font-size: var(--text-s); }
+.facts dd { margin: 0; font-size: var(--text-s); }
+
+/* featured project */
+.feature { border: var(--border); border-radius: var(--radius-l); overflow: hidden; }
+.feature-head { padding: var(--space-5); background: var(--surface); border-bottom: var(--border); }
+.feature-head h3 { font-size: var(--text-h2); margin: var(--space-2) 0; }
+.meta { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); color: var(--subtle); font-size: var(--text-s); }
+.feature-body { display: grid; gap: var(--space-6); padding: var(--space-5); }
+@media (min-width: 768px) { .feature-body { grid-template-columns: repeat(3, 1fr); padding: var(--space-6); } }
+.feature-body h4 { font-size: var(--text-s); color: var(--subtle); font-weight: 500; margin: 0 0 var(--space-2); }
+.feature-body p, .feature-body li { font-size: var(--text-m); }
+.feature-body ul { margin: 0; padding-left: 1.1em; display: grid; gap: var(--space-2); }
+
+.result { margin: 0; display: grid; gap: var(--space-3); }
+.result div { display: grid; gap: 2px; }
+.result dt { font-size: var(--text-s); color: var(--muted); }
+.result dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+.result .delta { color: var(--ok); font-weight: 500; font-size: var(--text-s); }
+
+/* other projects: plain list */
+.projects { list-style: none; margin: var(--space-7) 0 0; padding: 0; border-top: var(--border); }
+.projects li { display: grid; gap: var(--space-2); padding: var(--space-5) 0; border-bottom: var(--border); }
+@media (min-width: 768px) {
+  .projects li { grid-template-columns: 14em 1fr; gap: var(--space-6); }
+}
+.projects .p-title { font-weight: 700; }
+.projects .p-when { color: var(--subtle); font-size: var(--text-s); font-variant-numeric: tabular-nums; }
+.projects p { color: var(--muted); max-width: var(--measure); }
+.tags { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-top: var(--space-2); padding: 0; list-style: none; }
+.tag {
+  font-family: var(--font-mono); font-size: var(--text-xs); color: var(--muted);
+  background: var(--sunk); border-radius: 4px; padding: 2px var(--space-2);
+}
+
+/* career timeline */
+.career { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-6); max-width: 820px; }
+.career > li { display: grid; gap: var(--space-2); }
+@media (min-width: 768px) { .career > li { grid-template-columns: 11em 1fr; gap: var(--space-6); } }
+.career .when { color: var(--subtle); font-size: var(--text-s); font-variant-numeric: tabular-nums; padding-top: 2px; }
+.career h3 { margin-bottom: var(--space-1); }
+.career .team { color: var(--muted); font-size: var(--text-s); margin-bottom: var(--space-3); }
+.career ul { margin: 0; padding-left: 1.1em; display: grid; gap: var(--space-1); color: var(--fg); }
+
+/* skills table */
+.table-wrap { border: var(--border); border-radius: var(--radius-l); overflow: hidden; }
+table { width: 100%; border-collapse: collapse; font-size: var(--text-s); }
+th, td { text-align: left; vertical-align: top; padding: var(--space-3) var(--space-4); border-bottom: var(--border); }
+tr:last-child td { border-bottom: 0; }
+thead th { background: var(--surface); color: var(--muted); font-weight: 500; }
+tbody th { font-weight: 700; white-space: nowrap; }
+td.lv { color: var(--muted); white-space: nowrap; }
+@media (max-width: 640px) {
+  thead { display: none; }
+  table, tbody, tr, th, td { display: block; }
+  tr { padding: var(--space-3) var(--space-4); border-bottom: var(--border); }
+  tr:last-child { border-bottom: 0; }
+  th, td { padding: 0; border: 0; }
+  tbody th { margin-bottom: var(--space-1); }
+  td.lv { margin-top: var(--space-1); font-size: var(--text-xs); }
+}
+
+/* writing */
+.posts { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-1); max-width: 820px; }
+.posts a {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-1) var(--space-4);
+  padding: var(--space-3) 0; min-height: 44px; text-decoration: none; color: var(--fg); border-bottom: var(--border);
+}
+.posts a:hover .post-title { color: var(--accent); text-decoration: underline; }
+.posts .post-when { color: var(--subtle); font-size: var(--text-s); font-variant-numeric: tabular-nums; }
+
+/* contact */
+.contact { background: var(--surface); }
+.contact-grid { display: grid; gap: var(--space-6); }
+@media (min-width: 768px) { .contact-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+.contact h2 { font-size: var(--text-h2); margin-bottom: var(--space-3); }
+.contact p { color: var(--muted); max-width: 32em; }
+.links { margin: 0; display: grid; border-top: var(--border); }
+.links div { display: grid; grid-template-columns: 6em 1fr; gap: var(--space-3); align-items: center; border-bottom: var(--border); min-height: 48px; }
+.links dt { color: var(--subtle); font-size: var(--text-s); }
+.links dd { margin: 0; }
+.links a { display: inline-flex; align-items: center; min-height: 44px; }
+
+footer { padding: var(--space-5) 0; color: var(--subtle); font-size: var(--text-s); border-top: var(--border); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="name" href="#">김하늘</a>
+    <nav aria-label="섹션">
+      <a href="#about">소개</a>
+      <a href="#work">프로젝트</a>
+      <a href="#career">경력</a>
+      <a href="#skills">기술</a>
+      <a href="#contact">연락</a>
+    </nav>
+    <button type="button" class="theme-toggle" aria-label="다크 모드 전환">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="intro">
+    <div class="wrap intro-grid">
+      <div>
+        <p class="role">프론트엔드 개발자 · 5년차 · React, TypeScript</p>
+        <h1>결제 버튼까지 가는 길을<br>짧고 단단하게 만듭니다</h1>
+        <p class="lede">커머스 회사에서 상품 상세, 장바구니, 주문서를 5년 동안 만들었습니다. 화면이 빨리 뜨고, 주문 중에 상태가 꼬이지 않고, 다음 사람이 고치기 쉬운 코드를 씁니다.</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="mailto:hello@example.com">메일 보내기</a>
+          <a class="btn" href="#work">프로젝트 보기</a>
+        </div>
+      </div>
+      <figure class="code" style="margin:0" aria-label="주문서 상태를 타입으로 표현한 코드 예시">
+        <figcaption class="code-head"><span>checkout/state.ts</span><span>주문서 상태 모델</span></figcaption>
+<pre><code><span class="c">// 불가능한 상태는 타입에서 막는다</span>
+<span class="k">type</span> <span class="t">CheckoutState</span> =
+  | { status: <span class="s">'editing'</span>; cart: <span class="t">Cart</span> }
+  | { status: <span class="s">'paying'</span>; cart: <span class="t">Cart</span>; pgTxId: <span class="t">string</span> }
+  | { status: <span class="s">'failed'</span>; cart: <span class="t">Cart</span>; reason: <span class="t">PayError</span> }
+  | { status: <span class="s">'done'</span>; orderId: <span class="t">string</span> };
+
+<span class="k">function</span> <span class="t">canSubmit</span>(s: <span class="t">CheckoutState</span>) {
+  <span class="k">return</span> s.status === <span class="s">'editing'</span>
+    &amp;&amp; s.cart.items.length &gt; <span class="t">0</span>;
+}</code></pre>
+      </figure>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap about">
+      <div class="prose">
+        <h2>소개</h2>
+        <p>첫 2년은 에이전시에서 여러 브랜드몰을 만들었습니다. 이후 3년은 패션 커머스 플랫폼에서 구매 흐름을 맡았습니다. 하루 주문 수만 건이 지나가는 주문서를 리팩터링하면서 프론트엔드가 매출에 직접 닿는 일이라는 걸 배웠습니다.</p>
+        <p>일하는 방식은 단순합니다. 지표로 문제를 찾고, 작게 나눠 배포하고, 결과를 다시 숫자로 확인합니다. 디자이너, 기획자, 백엔드 개발자와 같은 화면을 보며 이야기하는 걸 좋아합니다.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>지금</dt><dd>○○커머스 구매경험팀 프론트엔드</dd></div>
+        <div><dt>주력</dt><dd>React, TypeScript, Next.js</dd></div>
+        <div><dt>관심</dt><dd>웹 성능, 디자인 시스템, 접근성</dd></div>
+        <div><dt>위치</dt><dd>서울 · 원격 근무 가능</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>프로젝트</h2>
+        <p>숫자는 배포 전후 4주 평균을 비교한 값입니다.</p>
+      </div>
+
+      <article class="feature">
+        <div class="feature-head">
+          <div class="meta"><span>○○커머스</span><span>2024.03 ~2024.09</span><span>프론트엔드 3명 중 리드</span></div>
+          <h3>주문서 전면 개편</h3>
+          <ul class="tags" aria-label="사용 기술">
+            <li class="tag">Next.js</li><li class="tag">TypeScript</li><li class="tag">TanStack Query</li><li class="tag">Zod</li><li class="tag">Playwright</li>
+          </ul>
+        </div>
+        <div class="feature-body">
+          <div>
+            <h4>문제</h4>
+            <p>쿠폰, 포인트, 배송지가 서로의 상태를 덮어쓰면서 결제 금액이 화면과 서버에서 다르게 계산되는 문의가 매주 들어왔습니다. 첫 화면이 뜨기까지 모바일에서 4초 넘게 걸렸습니다.</p>
+          </div>
+          <div>
+            <h4>한 일</h4>
+            <ul>
+              <li>주문서 상태를 판별 유니언 타입으로 다시 정의하고 금액 계산을 서버 응답 하나로 모았습니다.</li>
+              <li>결제수단 SDK를 필요할 때만 불러오도록 나눠 초기 JS를 줄였습니다.</li>
+              <li>주요 결제 시나리오 42개를 E2E 테스트로 묶어 배포 전에 돌렸습니다.</li>
+            </ul>
+          </div>
+          <div>
+            <h4>결과</h4>
+            <dl class="result">
+              <div><dt>모바일 LCP</dt><dd>4.2초 → 2.1초</dd></div>
+              <div><dt>주문서 이탈률</dt><dd>31% → 24% <span class="delta">7%p 감소</span></dd></div>
+              <div><dt>금액 불일치 문의</dt><dd>주 평균 18건 → 1건</dd></div>
+            </dl>
+          </div>
+        </div>
+      </article>
+
+      <ul class="projects">
+        <li>
+          <div>
+            <div class="p-title">사내 디자인 시스템</div>
+            <div class="p-when">2023.01 ~현재</div>
+          </div>
+          <div>
+            <p>흩어져 있던 버튼, 모달, 폼 컴포넌트 60여 개를 하나의 패키지로 정리했습니다. 디자인 토큰을 Figma 변수와 연결해서 색을 바꾸면 웹과 앱 웹뷰에 같이 반영됩니다. 사내 4개 팀이 씁니다.</p>
+            <ul class="tags" aria-label="사용 기술"><li class="tag">React</li><li class="tag">Storybook</li><li class="tag">Vanilla Extract</li><li class="tag">Changesets</li></ul>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="p-title">상품 상세 페이지 성능 개선</div>
+            <div class="p-when">2022.06 ~2022.10</div>
+          </div>
+          <div>
+            <p>CSR이던 상품 상세를 SSR로 바꾸고 이미지를 반응형으로 내려 보냈습니다. 검색 유입이 늘었습니다. 하단 리뷰 영역은 화면에 들어올 때 불러오도록 바꿨습니다.</p>
+            <ul class="tags" aria-label="사용 기술"><li class="tag">Next.js</li><li class="tag">Lighthouse CI</li><li class="tag">Web Vitals</li></ul>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="p-title">기획전 페이지 빌더</div>
+            <div class="p-when">2021.09 ~2022.02</div>
+          </div>
+          <div>
+            <p>MD가 개발 요청 없이 기획전을 만들 수 있도록 블록 조립형 편집기를 만들었습니다. 기획전 하나에 들던 개발 기간이 3일에서 반나절로 줄었습니다.</p>
+            <ul class="tags" aria-label="사용 기술"><li class="tag">React</li><li class="tag">dnd-kit</li><li class="tag">Zustand</li></ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="career">
+    <div class="wrap">
+      <div class="sec-head"><h2>경력</h2></div>
+      <ol class="career">
+        <li>
+          <div class="when">2022.03 ~현재</div>
+          <div>
+            <h3>○○커머스</h3>
+            <p class="team">구매경험팀 · 프론트엔드 개발자</p>
+            <ul>
+              <li>장바구니, 주문서, 주문 완료 화면 담당</li>
+              <li>디자인 시스템 메인테이너</li>
+              <li>프론트엔드 채용 면접관, 신규 입사자 온보딩 문서 작성</li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <div class="when">2020.01 ~2022.02</div>
+          <div>
+            <h3>△△디지털</h3>
+            <p class="team">웹 에이전시 · 프론트엔드 개발자</p>
+            <ul>
+              <li>패션, 뷰티 브랜드 자사몰 7곳 구축과 운영</li>
+              <li>jQuery 기반 레거시를 React와 TypeScript로 단계적으로 이전</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>기술</h2>
+        <p>실무에서 쓴 기간 기준입니다.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">분야</th><th scope="col">기술</th><th scope="col">경험</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">언어</th><td>TypeScript, JavaScript, HTML, CSS</td><td class="lv">5년</td></tr>
+            <tr><th scope="row">프레임워크</th><td>React, Next.js (Pages, App Router)</td><td class="lv">4년</td></tr>
+            <tr><th scope="row">상태와 데이터</th><td>TanStack Query, Zustand, Redux Toolkit, Zod</td><td class="lv">3년</td></tr>
+            <tr><th scope="row">스타일</th><td>Vanilla Extract, Emotion, Tailwind CSS</td><td class="lv">3년</td></tr>
+            <tr><th scope="row">테스트</th><td>Vitest, Testing Library, Playwright</td><td class="lv">2년</td></tr>
+            <tr><th scope="row">도구와 배포</th><td>Vite, Turborepo, GitHub Actions, Sentry, Datadog RUM</td><td class="lv">2년</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="writing">
+    <div class="wrap">
+      <div class="sec-head"><h2>글</h2></div>
+      <ul class="posts">
+        <li><a href="#"><span class="post-title">주문서 상태를 타입으로 모델링하기</span><span class="post-when">2024.10</span></a></li>
+        <li><a href="#"><span class="post-title">결제 SDK 지연 로딩으로 LCP 2초 줄인 기록</span><span class="post-when">2024.06</span></a></li>
+        <li><a href="#"><span class="post-title">디자인 토큰을 Figma 변수와 동기화한 방법</span><span class="post-when">2023.11</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <h2>연락</h2>
+        <p>커머스, 결제, 디자인 시스템 관련 포지션이라면 편하게 메일 주세요. 보통 하루 안에 답장합니다.</p>
+      </div>
+      <dl class="links">
+        <div><dt>메일</dt><dd><a href="mailto:hello@example.com">hello@example.com</a></dd></div>
+        <div><dt>GitHub</dt><dd><a href="https://github.com/">github.com/username</a></dd></div>
+        <div><dt>블로그</dt><dd><a href="#">blog.example.com</a></dd></div>
+        <div><dt>이력서</dt><dd><a href="#">PDF 내려받기</a></dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 김하늘</div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector(".theme-toggle");
+    function isDark() {
+      var t = root.dataset.theme;
+      if (t) return t === "dark";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    function sync() { btn.setAttribute("aria-pressed", String(isDark())); }
+    btn.addEventListener("click", function () {
+      var next = isDark() ? "light" : "dark";
+      root.dataset.theme = next;
+      try { localStorage.setItem("theme", next); } catch (e) {}
+      sync();
+    });
+    sync();
+  })();
+</script>
+</body>
+</html>

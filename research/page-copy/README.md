@@ -1,8 +1,11 @@
 # 페이지 문구의 비유와 슬로건 (1.7.0)
 
+<!-- style-ignore-start -->
 Claude Code에게 웹페이지나 문서를 만들게 하면 채팅에서는 쓰지 않는 광고 문구 말투가 나옵니다. "가장 짧은 길로
 잇습니다", "흘러가는 로그", "밀이 숨 쉬는 시간만큼 결이 생깁니다" 같은 표현입니다. 1.7.0의 규칙과 스킬은 이 폴더의
-조사와 측정으로 정했습니다. 결과 요약은 [docs/measurement.md](../../docs/measurement.md)에 있습니다.
+조사와 측정으로 정했습니다.
+<!-- style-ignore-end -->
+결과 요약은 [docs/measurement.md](../../docs/measurement.md)에 있습니다.
 
 | 파일 | 내용 |
 | --- | --- |
@@ -16,6 +19,9 @@ Claude Code에게 웹페이지나 문서를 만들게 하면 채팅에서는 쓰
 | `tools/totext.py`, `tools/survive.py` | 페이지에서 사람이 읽는 글을 뽑고, `tells.tsv`의 표현이 다듬은 뒤에 남았는지 셈 |
 | `tools/measure.py` | 후보 정규식이 사람 문서, AI 기술 문서, 생성한 페이지를 몇 개 보고하는지 셈 |
 | `tools/compare.py` | 두 버전의 검사기가 보고하는 문서 수 비교 |
+| `out/` | 플러그인 없이 만든 페이지와 문서 42개(주제 14개 × Opus, Sonnet, Haiku). 생성 결과를 고치지 않음(예시 API 키 문자열만 `sk_test_EXAMPLE`로 가림) |
+| `gen-1.6.1/`, `gen-1.7.0/` | 같은 요청을 플러그인을 켜고 Opus로 만든 결과 각 14개 |
+| `blind/` | 세 묶음의 Opus 결과를 라벨을 가려 섞은 글, 집계 결과(`blind-counts.tsv`)와 정답(`blind-key.json`) |
 
 ## 채택 기준
 

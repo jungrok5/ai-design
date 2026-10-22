@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 사내 해커톤</title>
+<meta name="description" content="11월 13일(금)–14일(토) 이틀 동안 AI로 내 업무를 자동화하는 사내 해커톤 안내">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* ── Tokens (design system "Clear") ── */
+:root {
+  --bg: #ffffff; --surface: #f8fafc; --sunk: #f1f5f9; --line: #e2e8f0; --line-strong: #cbd5e1;
+  --fg: #0f172a; --muted: #475569; --subtle: #64748b;
+  --accent: #1d4ed8; --accent-hover: #1e40af; --accent-fg: #ffffff; --accent-soft: #eff6ff;
+  --ok: #067647; --ok-soft: #ecfdf3; --warn: #b54708; --warn-soft: #fffaeb;
+  --focus: #1d4ed8;
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-xs: 12px; --text-s: 14px; --text-m: 16px; --text-l: 18px;
+  --text-h3: 18px; --text-h2: 24px; --text-h1: clamp(30px, 4.4vw, 44px);
+  --leading: 1.7; --leading-tight: 1.3;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --radius-s: 6px; --radius-m: 8px; --radius-l: 10px;
+  --border: 1px solid var(--line);
+  --measure: 68ch; --page: 1120px; --motion: 180ms ease-out;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+    --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+    --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+    --ok: #47cd89; --ok-soft: #16322a; --warn: #fdb022; --warn-soft: #3a2c12;
+    --focus: #7cb7e8;
+    color-scheme: dark;
+  }
+}
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-sans); font-size: var(--text-m); line-height: var(--leading);
+  word-break: keep-all; overflow-wrap: break-word;
+}
+h1, h2, h3 { margin: 0; line-height: var(--leading-tight); font-weight: 700; text-wrap: balance; }
+h1 { font-size: var(--text-h1); letter-spacing: -0.02em; }
+h2 { font-size: var(--text-h2); letter-spacing: -0.01em; }
+h3 { font-size: var(--text-h3); }
+p, ul, ol, dl, dd { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; overflow-wrap: anywhere; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* ── Components ── */
+.ds-page { max-width: var(--page); margin: 0 auto; padding: 0 var(--space-4); }
+@media (min-width: 720px) { .ds-page { padding-inline: var(--space-5); } }
+.ds-lede { font-size: var(--text-l); color: var(--muted); max-width: var(--measure); }
+.ds-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: 44px; padding: 0 var(--space-5); border-radius: var(--radius-m);
+  font: 700 var(--text-m) / 1 var(--font-sans); cursor: pointer; text-decoration: none;
+  background: var(--bg); color: var(--fg); border: 1px solid var(--line-strong);
+  transition: background-color var(--motion), border-color var(--motion);
+}
+.ds-btn:hover { border-color: var(--subtle); color: var(--fg); }
+.ds-btn--primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.ds-btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-fg); }
+.ds-panel { background: var(--bg); border: var(--border); border-radius: var(--radius-l); padding: var(--space-5); min-width: 0; }
+.ds-panel--sunk { background: var(--surface); }
+.ds-note { display: grid; gap: var(--space-1); background: var(--accent-soft); border-radius: var(--radius-m); padding: var(--space-3) var(--space-4); font-size: var(--text-s); }
+.ds-note--warn { background: var(--warn-soft); }
+.ds-badge {
+  display: inline-flex; align-items: center; min-height: 22px; padding: 0 var(--space-2); border-radius: 4px;
+  font-size: var(--text-xs); font-weight: 700; background: var(--sunk); color: var(--muted); white-space: nowrap;
+}
+.ds-badge--accent { background: var(--accent-soft); color: var(--accent); }
+.ds-badge--ok { background: var(--ok-soft); color: var(--ok); }
+.ds-steps { list-style: none; padding: 0; counter-reset: ds-step; }
+.ds-steps > li {
+  display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--space-3); align-items: start;
+  padding: var(--space-4) 0; border-bottom: var(--border);
+}
+.ds-steps > li:last-child { border-bottom: 0; }
+.ds-steps > li::before {
+  counter-increment: ds-step; content: counter(ds-step);
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--sunk); color: var(--fg); font: 700 13px / 1 var(--font-sans);
+}
+.ds-steps > li.is-now::before { background: var(--accent); color: var(--accent-fg); }
+.ds-steps h3 { font-size: var(--text-m); }
+.ds-steps p { font-size: var(--text-s); color: var(--muted); margin-top: 2px; }
+.ds-table-wrap { overflow-x: auto; }
+.ds-table { width: 100%; border-collapse: collapse; font-size: var(--text-s); font-variant-numeric: tabular-nums; }
+.ds-table th, .ds-table td { text-align: left; vertical-align: top; padding: 12px 16px 12px 0; border-bottom: var(--border); }
+.ds-table thead th { font-size: var(--text-xs); font-weight: 500; color: var(--subtle); border-bottom-color: var(--line-strong); }
+.ds-table tbody tr:last-child > * { border-bottom: 0; }
+.ds-details { border-bottom: var(--border); }
+.ds-details:first-of-type { border-top: var(--border); }
+.ds-details > summary { cursor: pointer; padding: var(--space-3) 0; min-height: 52px; display: flex; align-items: center;
+  gap: var(--space-3); font-weight: 500; list-style: none; }
+.ds-details > summary::-webkit-details-marker { display: none; }
+.ds-details > summary::before { content: ""; width: 7px; height: 7px; border-right: 1.5px solid var(--muted);
+  border-bottom: 1.5px solid var(--muted); transform: rotate(-45deg); transition: transform 150ms ease-out; flex: none; }
+.ds-details[open] > summary::before { transform: rotate(45deg); }
+.ds-details > p { padding: 0 0 var(--space-4) calc(7px + var(--space-3)); color: var(--muted); max-width: var(--measure); }
+
+/* ── Page ── */
+.topbar { border-bottom: var(--border); }
+.topbar .ds-page { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 60px; }
+.topbar strong { font-size: var(--text-s); }
+.topbar nav { display: flex; gap: var(--space-4); }
+.topbar nav a { color: var(--muted); text-decoration: none; font-size: var(--text-s); padding: var(--space-2) 0; }
+.topbar nav a:hover { color: var(--fg); }
+@media (max-width: 640px) { .topbar nav { display: none; } }
+
+.hero { padding: var(--space-7) 0 var(--space-8); display: grid; gap: var(--space-7); align-items: start; }
+@media (min-width: 960px) { .hero { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--space-8); padding-top: var(--space-8); } }
+.hero-text { display: grid; gap: var(--space-5); }
+.kicker { font-size: var(--text-s); font-weight: 700; color: var(--accent); }
+.facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: var(--space-2) var(--space-5);
+  padding: var(--space-4) 0; border-top: var(--border); border-bottom: var(--border); font-variant-numeric: tabular-nums; }
+.facts dt { color: var(--subtle); font-size: var(--text-s); padding-top: 1px; }
+.facts dd { font-weight: 500; }
+.cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-4); }
+.cta small { color: var(--muted); font-size: var(--text-s); }
+
+/* example: before / after of one real task */
+.example { display: grid; gap: var(--space-4); }
+.example-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3); flex-wrap: wrap; }
+.example-head h2 { font-size: var(--text-h3); }
+.example-head span { font-size: var(--text-xs); color: var(--subtle); }
+.flow { list-style: none; padding: 0; display: grid; gap: var(--space-2); font-size: var(--text-s); }
+.flow li { display: grid; grid-template-columns: 4.5em minmax(0, 1fr); gap: var(--space-3); }
+.flow time { color: var(--subtle); font-variant-numeric: tabular-nums; }
+.vs { display: grid; gap: var(--space-3); }
+@media (min-width: 480px) { .vs { grid-template-columns: 1fr 1fr; } }
+.vs > div { border: var(--border); border-radius: var(--radius-m); padding: var(--space-4); display: grid; gap: var(--space-2); align-content: start; }
+.vs .num { font-size: var(--text-h2); font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.vs p { font-size: var(--text-s); color: var(--muted); }
+
+section.block { padding: var(--space-8) 0; border-top: var(--border); }
+.block-head { display: grid; gap: var(--space-2); margin-bottom: var(--space-6); max-width: var(--measure); }
+.block-head p { color: var(--muted); }
+
+.topics { display: grid; gap: var(--space-6); }
+@media (min-width: 860px) { .topics { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-7); } }
+.idea-list { list-style: none; padding: 0; }
+.idea-list li { display: flex; justify-content: space-between; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: var(--border); }
+.idea-list li:first-child { border-top: var(--border); }
+.rules { display: grid; gap: var(--space-4); align-content: start; }
+.rules ul { padding-left: 1.2em; display: grid; gap: var(--space-2); }
+.rules h3 { font-size: var(--text-m); }
+
+.days { display: grid; gap: var(--space-5); }
+@media (min-width: 760px) { .days { grid-template-columns: 1fr 1fr; } }
+.day h3 { display: flex; align-items: baseline; gap: var(--space-3); margin-bottom: var(--space-4); }
+.day h3 span { font-size: var(--text-s); font-weight: 400; color: var(--subtle); }
+.timeline { display: grid; grid-template-columns: 3.4em minmax(0, 1fr); font-variant-numeric: tabular-nums; }
+.timeline dt, .timeline dd { padding: var(--space-2) 0; border-top: var(--border); }
+.timeline dt:first-of-type, .timeline dt:first-of-type + dd { border-top: 0; }
+.timeline dt { color: var(--subtle); font-size: var(--text-s); padding-top: calc(var(--space-2) + 2px); }
+.timeline dd.key { font-weight: 700; }
+.timeline dd small { display: block; font-size: var(--text-s); color: var(--muted); }
+
+.apply { display: grid; gap: var(--space-6); }
+@media (min-width: 860px) { .apply { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--space-7); } }
+.apply aside { display: grid; gap: var(--space-4); align-content: start; }
+.apply aside h3 { font-size: var(--text-m); }
+.apply aside ul { padding-left: 1.2em; display: grid; gap: var(--space-1); font-size: var(--text-s); color: var(--muted); }
+
+.judge { display: grid; gap: var(--space-6); }
+@media (min-width: 860px) { .judge { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--space-7); } }
+.weight { white-space: nowrap; font-weight: 700; }
+.ds-table td:first-child { white-space: nowrap; font-weight: 500; }
+@media (max-width: 520px) {
+  .ds-table thead { display: none; }
+  .ds-table tr { display: grid; grid-template-columns: 1fr auto; padding: var(--space-3) 0; border-bottom: var(--border); }
+  .ds-table tbody tr:last-child { border-bottom: 0; }
+  .ds-table th, .ds-table td { border: 0; padding: 0; }
+  .ds-table td:last-child { grid-column: 1 / -1; color: var(--muted); margin-top: var(--space-1); }
+}
+.prizes { list-style: none; padding: 0; }
+.prizes li { display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-3) 0; border-bottom: var(--border); font-variant-numeric: tabular-nums; }
+.prizes li:last-child { border-bottom: 0; }
+.prizes b { white-space: nowrap; }
+
+.faq { max-width: 800px; }
+footer { border-top: var(--border); padding: var(--space-6) 0 var(--space-7); color: var(--muted); font-size: var(--text-s); }
+footer .ds-page { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3); }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="ds-page">
+    <strong>2026 사내 해커톤</strong>
+    <nav aria-label="페이지 내 이동">
+      <a href="#topic">주제</a>
+      <a href="#schedule">일정</a>
+      <a href="#apply">신청</a>
+      <a href="#judging">심사·시상</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="ds-page">
+    <div class="hero">
+      <div class="hero-text">
+        <p class="kicker">2026 사내 해커톤 · AI로 업무 자동화</p>
+        <h1>매주 반복하는 그 일,<br>이틀 동안 AI에게 넘겨 보세요</h1>
+        <p class="ds-lede">내가 실제로 하고 있는 반복 업무 하나를 골라, 이틀 안에 돌아가는 자동화로 만듭니다. 개발자가 아니어도 됩니다. 업무를 가장 잘 아는 사람이 가장 좋은 주제를 갖고 있습니다.</p>
+        <dl class="facts">
+          <dt>일시</dt><dd>11월 13일(금) 09:30 – 14일(토) 18:00</dd>
+          <dt>장소</dt><dd>본사 10층 대회의실 (원격 참여 가능)</dd>
+          <dt>대상</dt><dd>전 직원, 1–4명 팀 또는 개인</dd>
+          <dt>신청 마감</dt><dd>11월 6일(금) 18:00 <span class="ds-badge ds-badge--accent" id="dday" hidden></span></dd>
+        </dl>
+        <div class="cta">
+          <a class="ds-btn ds-btn--primary" href="https://forms.example.com/hackathon-2026">참가 신청하기</a>
+          <small>팀원이 없어도 신청할 수 있습니다. 개인 신청자는 11월 10일에 팀을 이어 드립니다.</small>
+        </div>
+      </div>
+
+      <aside class="ds-panel ds-panel--sunk example" aria-labelledby="example-title">
+        <div class="example-head">
+          <h2 id="example-title">이런 걸 만들면 됩니다</h2>
+          <span>예시 · 영업지원팀 주간 보고</span>
+        </div>
+        <ol class="flow">
+          <li><time>월 09:00</time><span>CRM에서 지난주 거래 데이터를 자동으로 가져옴</span></li>
+          <li><time>월 09:02</time><span>AI가 팀별 실적과 특이사항을 요약해 보고서 초안 작성</span></li>
+          <li><time>월 09:03</time><span>팀장에게 메신저로 초안 링크 전송, 검토 후 확정</span></li>
+        </ol>
+        <div class="vs">
+          <div>
+            <span class="ds-badge">지금</span>
+            <span class="num">주 2시간</span>
+            <p>엑셀 3개를 합치고, 숫자를 옮기고, 문장을 씁니다.</p>
+          </div>
+          <div>
+            <span class="ds-badge ds-badge--ok">자동화 후</span>
+            <span class="num">주 10분</span>
+            <p>초안을 읽고 고칠 부분만 고칩니다.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <section class="block" id="topic" aria-labelledby="topic-title">
+    <div class="ds-page">
+      <div class="block-head">
+        <h2 id="topic-title">주제: AI로 업무 자동화</h2>
+        <p>거창한 신규 서비스보다 오늘 내 자리에서 시간을 잡아먹는 일이 더 좋은 주제입니다. 다음 주 월요일부터 실제로 쓸 수 있는지가 가장 중요합니다.</p>
+      </div>
+      <div class="topics">
+        <div>
+          <h3 style="margin-bottom: var(--space-3)">이런 주제를 환영합니다</h3>
+          <ul class="idea-list">
+            <li><span>회의록 정리와 할 일 배분</span><span class="ds-badge">전 부서</span></li>
+            <li><span>고객 문의 메일 분류와 답변 초안</span><span class="ds-badge">CS</span></li>
+            <li><span>계약서·견적서의 누락 항목 검토</span><span class="ds-badge">법무·영업</span></li>
+            <li><span>경비 증빙과 정산 내역 대조</span><span class="ds-badge">재무</span></li>
+            <li><span>채용 지원서 1차 요약</span><span class="ds-badge">인사</span></li>
+            <li><span>장애 알림 원인 1차 분석</span><span class="ds-badge">개발·운영</span></li>
+          </ul>
+        </div>
+        <div class="rules">
+          <h3>참가 규칙</h3>
+          <ul>
+            <li>지금 하고 있는 실제 업무에서 주제를 고릅니다.</li>
+            <li>코드, 노코드 도구, 스프레드시트 무엇이든 괜찮습니다.</li>
+            <li>미리 아이디어를 정리해 오는 건 좋지만, 만드는 일은 행사 당일에 시작합니다.</li>
+            <li>결과물은 사내 저장소에 공유해 다른 팀도 쓸 수 있게 합니다.</li>
+          </ul>
+          <div class="ds-note ds-note--warn" role="note">
+            <strong>데이터 사용 주의</strong>
+            <span>고객 개인정보와 대외비 문서는 외부 AI 서비스에 넣지 마세요. 행사용 사내 AI 계정과 가명 처리된 샘플 데이터를 드립니다.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="schedule" aria-labelledby="schedule-title">
+    <div class="ds-page">
+      <div class="block-head">
+        <h2 id="schedule-title">일정</h2>
+        <p>11월 10일(화) 점심에 30분짜리 온라인 사전 설명회가 있습니다. 사용할 수 있는 AI 도구와 샘플 데이터를 이때 소개합니다.</p>
+      </div>
+      <div class="days">
+        <div class="ds-panel day">
+          <h3>1일차 <span>11월 13일 금요일</span></h3>
+          <dl class="timeline">
+            <dt>09:30</dt><dd>체크인, 계정·자리 배정</dd>
+            <dt>10:00</dt><dd>오프닝, 주제와 규칙 안내</dd>
+            <dt>10:30</dt><dd class="key">만들기 시작</dd>
+            <dt>12:00</dt><dd>점심</dd>
+            <dt>15:00</dt><dd>멘토링 1차<small>팀별 15분, 방향 점검</small></dd>
+            <dt>18:00</dt><dd>저녁</dd>
+            <dt>21:00</dt><dd>1일차 종료<small>회의실은 22:00까지 열어 둡니다</small></dd>
+          </dl>
+        </div>
+        <div class="ds-panel day">
+          <h3>2일차 <span>11월 14일 토요일</span></h3>
+          <dl class="timeline">
+            <dt>09:00</dt><dd>만들기 재개</dd>
+            <dt>11:00</dt><dd>멘토링 2차<small>발표 리허설</small></dd>
+            <dt>12:00</dt><dd>점심</dd>
+            <dt>14:00</dt><dd class="key">결과물 제출 마감</dd>
+            <dt>14:30</dt><dd>팀별 발표<small>5분 발표, 3분 질의응답</small></dd>
+            <dt>17:00</dt><dd>심사 결과 발표와 시상</dd>
+            <dt>18:00</dt><dd>마무리</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="apply" aria-labelledby="apply-title">
+    <div class="ds-page">
+      <div class="block-head">
+        <h2 id="apply-title">참가 방법</h2>
+      </div>
+      <div class="apply">
+        <ol class="ds-steps">
+          <li class="is-now"><div><h3>신청서 제출 · 11월 6일(금)까지</h3><p>팀 이름, 팀원, 자동화하고 싶은 업무 한 줄을 적습니다. 개인은 업무만 적어도 됩니다.</p></div></li>
+          <li><div><h3>팀 확정 안내 · 11월 9일(월)</h3><p>개인 신청자는 비슷한 주제끼리 팀을 이어 드립니다. 팀장 승인 메일도 함께 보냅니다.</p></div></li>
+          <li><div><h3>사전 설명회 · 11월 10일(화) 12:30</h3><p>온라인 30분. 행사용 AI 계정과 샘플 데이터를 받습니다.</p></div></li>
+          <li><div><h3>행사 참가 · 11월 13일(금)–14일(토)</h3><p>노트북만 챙겨 오세요. 식사와 간식은 준비합니다.</p></div></li>
+        </ol>
+        <aside class="ds-panel ds-panel--sunk">
+          <h3>행사에서 드리는 것</h3>
+          <ul>
+            <li>사내 AI 도구 계정 (행사 기간 사용량 제한 없음)</li>
+            <li>가명 처리된 부서별 샘플 데이터</li>
+            <li>개발·데이터 멘토 6명 상주</li>
+            <li>이틀간 식사 4회와 간식</li>
+          </ul>
+          <a class="ds-btn" href="https://forms.example.com/hackathon-2026">신청서 열기</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="judging" aria-labelledby="judging-title">
+    <div class="ds-page">
+      <div class="block-head">
+        <h2 id="judging-title">심사와 시상</h2>
+        <p>임원 2명, 현업 팀장 2명, 개발 리드 1명이 심사합니다. 화려한 데모보다 실제로 줄어든 시간을 더 높게 봅니다.</p>
+      </div>
+      <div class="judge">
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <thead><tr><th scope="col">항목</th><th scope="col">비중</th><th scope="col">보는 것</th></tr></thead>
+            <tbody>
+              <tr><td>업무 효과</td><td class="weight">40%</td><td>줄어든 시간이나 실수를 숫자로 보여 주는가</td></tr>
+              <tr><td>완성도</td><td class="weight">25%</td><td>발표 자리에서 실제 데이터로 끝까지 돌아가는가</td></tr>
+              <tr><td>확산 가능성</td><td class="weight">20%</td><td>다른 팀도 조금만 고쳐서 쓸 수 있는가</td></tr>
+              <tr><td>발표</td><td class="weight">15%</td><td>문제와 결과를 5분 안에 분명하게 전달하는가</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ds-panel">
+          <ul class="prizes" aria-label="시상 내역">
+            <li><span>대상 · 1팀</span><b>300만 원</b></li>
+            <li><span>최우수상 · 1팀</span><b>150만 원</b></li>
+            <li><span>우수상 · 2팀</span><b>각 50만 원</b></li>
+            <li><span>참가자 투표상 · 1팀</span><b>30만 원</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="faq" aria-labelledby="faq-title">
+    <div class="ds-page">
+      <div class="block-head">
+        <h2 id="faq-title">자주 묻는 질문</h2>
+      </div>
+      <div class="faq">
+        <details class="ds-details">
+          <summary>코딩을 못해도 참가할 수 있습니까?</summary>
+          <p>네. 노코드 자동화 도구와 스프레드시트만으로도 충분히 좋은 결과물이 나옵니다. 팀 매칭 때 개발 경험이 있는 사람과 같은 팀이 되도록 조정합니다.</p>
+        </details>
+        <details class="ds-details">
+          <summary>토요일 참가는 근무로 인정됩니까?</summary>
+          <p>토요일에 참가한 시간은 근무로 인정하며, 12월 중 대체 휴무 1일을 쓸 수 있습니다.</p>
+        </details>
+        <details class="ds-details">
+          <summary>원격으로 참여해도 됩니까?</summary>
+          <p>됩니다. 팀원 일부만 원격이어도 괜찮습니다. 오프닝과 발표는 화상회의로 함께 중계합니다.</p>
+        </details>
+        <details class="ds-details">
+          <summary>만든 결과물은 어떻게 됩니까?</summary>
+          <p>사내 저장소에 공유됩니다. 수상팀 결과물은 12월부터 IT팀과 함께 실제 업무에 적용하는 후속 작업을 지원합니다.</p>
+        </details>
+        <details class="ds-details">
+          <summary>팀원을 신청 뒤에 바꿀 수 있습니까?</summary>
+          <p>11월 9일(월) 팀 확정 안내 전까지는 신청서를 수정하면 됩니다. 그 뒤에는 운영팀에 문의해 주세요.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="ds-page">
+    <span>주최 · 디지털혁신팀</span>
+    <span>문의 · <a href="mailto:hackathon@example.com">hackathon@example.com</a></span>
+  </div>
+</footer>
+
+<script>
+  // 신청 마감까지 남은 날 (KST 기준)
+  (function () {
+    var el = document.getElementById('dday');
+    var deadline = new Date('2026-11-06T18:00:00+09:00');
+    var ms = deadline - new Date();
+    if (ms <= 0) { el.textContent = '마감'; el.hidden = false; return; }
+    var days = Math.floor(ms / 86400000);
+    el.textContent = days === 0 ? '오늘 마감' : 'D-' + days;
+    el.hidden = false;
+  })();
+</script>
+</body>
+</html>

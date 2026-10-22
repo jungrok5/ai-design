@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>밀과결 · 성수동 천연 발효종 빵집</title>
+<meta name="description" content="성수동의 작은 빵집 밀과결. 직접 키운 발효종으로 반죽하고 하룻밤 저온 발효해 매일 아침 굽습니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;700&display=swap">
+<style>
+/* ── Tokens (Clear 구조, 밀과결 색) ── 아래 CSS는 이 변수만 씁니다. */
+:root {
+  --bg: #fbf8f3;
+  --surface: #f5efe6;
+  --sunk: #efe7da;
+  --line: #e4d9c7;
+  --line-strong: #cdbb9f;
+  --fg: #2a2017;
+  --muted: #5a4b3b;
+  --subtle: #74644f;
+  --accent: #8a4b1f;
+  --accent-hover: #6e3a16;
+  --accent-fg: #ffffff;
+  --accent-soft: #f4e6d6;
+  --crust: #b8733a;
+  --focus: #8a4b1f;
+
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-display: "Noto Serif KR", "AppleMyungjo", "Batang", serif;
+  --text-xs: 12px; --text-s: 14px; --text-m: 16px; --text-l: 18px;
+  --text-h3: 18px; --text-h2: 28px; --text-h1: clamp(32px, 5vw, 52px);
+  --leading: 1.75; --leading-tight: 1.3;
+
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --radius-s: 6px; --radius-m: 8px; --radius-l: 10px;
+  --border: 1px solid var(--line);
+  --measure: 62ch;
+  --page: 1120px;
+  --motion: 180ms ease-out;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1f1b17; --surface: #28231e; --sunk: #191612; --line: #3a322a; --line-strong: #52473b;
+    --fg: #ede6dc; --muted: #c6baab; --subtle: #a99c8c;
+    --accent: #e3ab76; --accent-hover: #f0c79f; --accent-fg: #1f1b17; --accent-soft: #3a2a1c;
+    --crust: #c98a52; --focus: #e3ab76;
+    color-scheme: dark;
+  }
+}
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--text-m);
+  line-height: var(--leading);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+h1, h2, h3 { margin: 0; line-height: var(--leading-tight); font-weight: 700; }
+h1, h2 { font-family: var(--font-display); }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: var(--radius-s); }
+.wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--space-5); }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: var(--space-4); top: var(--space-4); background: var(--bg); padding: var(--space-2) var(--space-4); z-index: 10; }
+
+/* ── Header ── */
+.site-head { border-bottom: var(--border); }
+.site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 64px; }
+.logo { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-display); font-weight: 700; font-size: var(--text-l); color: var(--fg); text-decoration: none; min-height: 44px; }
+.logo svg { color: var(--crust); }
+.nav { display: flex; gap: var(--space-1); }
+.nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-3); color: var(--muted); text-decoration: none; font-size: var(--text-s); }
+.nav a:hover { color: var(--fg); }
+
+/* ── Hero ── */
+.hero { padding: var(--space-8) 0 var(--space-9); }
+.hero .wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-8); align-items: start; }
+.hero h1 { font-size: var(--text-h1); letter-spacing: -0.01em; }
+.hero .lede { margin-top: var(--space-5); font-size: var(--text-l); color: var(--muted); max-width: 34em; }
+.hero .actions { margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 var(--space-5); border-radius: var(--radius-m); font-weight: 500; text-decoration: none; transition: background var(--motion); }
+.btn--primary { background: var(--accent); color: var(--accent-fg); }
+.btn--primary:hover { background: var(--accent-hover); color: var(--accent-fg); }
+.hero .note { font-size: var(--text-s); color: var(--subtle); }
+
+.oven { background: var(--surface); border: var(--border); border-radius: var(--radius-l); padding: var(--space-5) var(--space-5) var(--space-4); }
+.oven h2 { font-family: var(--font-sans); font-size: var(--text-m); }
+.oven .sub { font-size: var(--text-s); color: var(--subtle); margin-top: var(--space-1); }
+.oven ol { list-style: none; margin: var(--space-4) 0 0; padding: 0; }
+.oven li { display: grid; grid-template-columns: 4.5em 1fr; gap: var(--space-3); padding: var(--space-3) 0; border-top: var(--border); }
+.oven time { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--accent); }
+.oven li span { color: var(--fg); }
+
+/* ── Sections ── */
+section { scroll-margin-top: var(--space-4); }
+.block { padding: var(--space-9) 0; border-top: var(--border); }
+.block h2 { font-size: var(--text-h2); }
+.block .intro { margin-top: var(--space-3); color: var(--muted); max-width: var(--measure); }
+
+/* 빵 목록 */
+.breads { margin-top: var(--space-6); border-top: 1px solid var(--line-strong); }
+.bread { display: grid; grid-template-columns: 13em 1fr auto; gap: var(--space-2) var(--space-6); padding: var(--space-5) 0; border-bottom: var(--border); align-items: baseline; }
+.bread h3 { font-size: var(--text-h3); }
+.bread .when { display: block; margin-top: var(--space-1); font-size: var(--text-s); color: var(--subtle); font-weight: 400; font-variant-numeric: tabular-nums; }
+.bread p { color: var(--muted); max-width: 46ch; }
+.bread .price { font-variant-numeric: tabular-nums; font-weight: 500; white-space: nowrap; }
+.breads-foot { margin-top: var(--space-4); font-size: var(--text-s); color: var(--subtle); }
+
+/* 발효 과정 */
+.process .wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: var(--space-8); }
+.process { background: var(--surface); }
+.bar { display: flex; height: 12px; margin-top: var(--space-6); border-radius: var(--radius-s); overflow: hidden; gap: 2px; }
+.bar span { background: var(--line-strong); }
+.bar span.cold { background: var(--accent-soft); outline: 1px solid var(--line-strong); outline-offset: -1px; }
+.bar span.bake { background: var(--crust); }
+.bar-legend { display: flex; justify-content: space-between; margin-top: var(--space-2); font-size: var(--text-xs); color: var(--subtle); font-variant-numeric: tabular-nums; }
+.steps { list-style: none; margin: 0; padding: 0; }
+.steps li { display: grid; grid-template-columns: 6.5em 1fr; gap: var(--space-4); padding: var(--space-5) 0; border-top: var(--border); }
+.steps li:first-child { border-top: 0; padding-top: 0; }
+.steps time { font-variant-numeric: tabular-nums; color: var(--subtle); font-size: var(--text-s); padding-top: 2px; }
+.steps time b { display: block; color: var(--fg); font-size: var(--text-m); font-weight: 500; }
+.steps h3 { font-size: var(--text-h3); }
+.steps p { margin-top: var(--space-1); color: var(--muted); }
+
+/* 이름 */
+.name .wrap { max-width: var(--page); }
+.name blockquote { margin: 0; max-width: 30em; font-family: var(--font-display); font-size: clamp(22px, 3vw, 30px); line-height: 1.55; }
+.name blockquote em { font-style: normal; color: var(--accent); }
+.name p { margin-top: var(--space-5); color: var(--muted); max-width: var(--measure); }
+
+/* 방문 */
+.visit .wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: var(--space-8); }
+.info { margin: 0; display: grid; grid-template-columns: 6em 1fr; border-top: 1px solid var(--line-strong); }
+.info dt, .info dd { margin: 0; padding: var(--space-4) 0; border-bottom: var(--border); }
+.info dt { color: var(--subtle); font-size: var(--text-s); padding-top: calc(var(--space-4) + 2px); }
+.info dd { font-variant-numeric: tabular-nums; }
+.info dd small { display: block; color: var(--subtle); font-size: var(--text-s); }
+.visit .tip { margin-top: var(--space-5); padding: var(--space-4) var(--space-5); background: var(--accent-soft); border-radius: var(--radius-m); color: var(--fg); }
+
+/* Footer */
+.site-foot { border-top: var(--border); padding: var(--space-6) 0 var(--space-7); font-size: var(--text-s); color: var(--subtle); }
+.site-foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3); }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero .wrap, .process .wrap, .visit .wrap { grid-template-columns: 1fr; gap: var(--space-6); }
+  .bread { grid-template-columns: 1fr auto; }
+  .bread p { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (max-width: 560px) {
+  .wrap { padding: 0 var(--space-4); }
+  .nav a { padding: 0 var(--space-2); }
+  .hero { padding: var(--space-7) 0 var(--space-8); }
+  .block { padding: var(--space-8) 0; }
+  .steps li { grid-template-columns: 1fr; gap: var(--space-1); }
+  .steps time b { display: inline; margin-right: var(--space-2); }
+}
+@media (max-width: 400px) {
+  .logo span { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="밀과결 처음으로">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <ellipse cx="14" cy="15" rx="12" ry="9" stroke="currentColor" stroke-width="2"/>
+        <path d="M8 12.5c2 1 4 1 6 0M12 17c2 1 4 1 6 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span>밀과결</span>
+    </a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#breads">빵</a>
+      <a href="#process">굽는 과정</a>
+      <a href="#visit">찾아오기</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <h1>어제 아침 시작한 반죽을<br>오늘 아침에 굽습니다</h1>
+        <p class="lede">밀과결은 성수동의 작은 빵집입니다. 직접 키운 발효종으로 반죽하고, 냉장고에서 하룻밤 천천히 발효한 뒤 굽습니다. 상업용 이스트와 개량제는 넣지 않습니다.</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="#visit">위치와 영업시간</a>
+          <span class="note">화–일 08:00 – 19:00 영업</span>
+        </div>
+      </div>
+
+      <aside class="oven" aria-labelledby="oven-title">
+        <h2 id="oven-title">오븐에서 나오는 시간</h2>
+        <p class="sub">매일 같은 순서로 굽습니다. 다 팔리면 다음 판을 기다려 주세요.</p>
+        <ol>
+          <li><time>08:30</time><span>캄파뉴, 바게트</span></li>
+          <li><time>10:00</time><span>통밀 사워도우, 무화과 호밀</span></li>
+          <li><time>12:00</time><span>올리브 포카치아, 치아바타</span></li>
+          <li><time>15:00</time><span>바게트 두 번째 판</span></li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+
+  <section class="block" id="breads" aria-labelledby="breads-title">
+    <div class="wrap">
+      <h2 id="breads-title">매일 굽는 빵</h2>
+      <p class="intro">종류를 늘리기보다 여섯 가지를 매일 같은 맛으로 굽는 데 집중합니다. 모두 발효종 반죽입니다.</p>
+
+      <div class="breads">
+        <article class="bread">
+          <h3>캄파뉴<span class="when">08:30</span></h3>
+          <p>밀가루 90%에 호밀 10%. 껍질은 두껍고 속은 촉촉합니다. 가장 먼저 맛보길 권하는 빵.</p>
+          <span class="price">7,500원</span>
+        </article>
+        <article class="bread">
+          <h3>바게트<span class="when">08:30 · 15:00</span></h3>
+          <p>얇고 바삭한 껍질, 기공이 큰 속. 하루에 두 번 굽습니다.</p>
+          <span class="price">4,800원</span>
+        </article>
+        <article class="bread">
+          <h3>통밀 사워도우<span class="when">10:00</span></h3>
+          <p>통밀 50%. 신맛이 또렷하고 고소합니다. 얇게 썰어 구우면 일주일 내내 먹을 수 있어요.</p>
+          <span class="price">8,000원</span>
+        </article>
+        <article class="bread">
+          <h3>무화과 호밀<span class="when">10:00</span></h3>
+          <p>호밀 반죽에 반건조 무화과와 호두를 듬뿍. 치즈와 잘 어울립니다.</p>
+          <span class="price">9,500원</span>
+        </article>
+        <article class="bread">
+          <h3>올리브 포카치아<span class="when">12:00</span></h3>
+          <p>올리브유를 넉넉히 두른 납작한 빵. 그린 올리브와 로즈마리를 올립니다.</p>
+          <span class="price">5,500원</span>
+        </article>
+        <article class="bread">
+          <h3>치아바타<span class="when">12:00</span></h3>
+          <p>수분이 많은 반죽이라 속이 쫄깃합니다. 샌드위치용으로 많이 찾으세요.</p>
+          <span class="price">3,800원</span>
+        </article>
+      </div>
+      <p class="breads-foot">가격은 한 덩이 기준입니다. 원하시면 매장에서 썰어 드립니다.</p>
+    </div>
+  </section>
+
+  <section class="block process" id="process" aria-labelledby="process-title">
+    <div class="wrap">
+      <div>
+        <h2 id="process-title">빵 하나에 하루가 걸립니다</h2>
+        <p class="intro">발효종은 밀가루와 물만으로 키운 효모와 유산균입니다. 이스트보다 느리게 부풀지만, 그만큼 맛이 깊어지고 오래 두어도 쉽게 마르지 않습니다.</p>
+        <div class="bar" aria-hidden="true">
+          <span style="flex:4"></span>
+          <span style="flex:4"></span>
+          <span class="cold" style="flex:14"></span>
+          <span class="bake" style="flex:1.5"></span>
+        </div>
+        <div class="bar-legend" aria-hidden="true"><span>전날 09:00</span><span>당일 08:30</span></div>
+      </div>
+
+      <ol class="steps">
+        <li>
+          <time><b>09:00</b>전날</time>
+          <div>
+            <h3>발효종에 먹이 주기</h3>
+            <p>냉장고에서 쉬던 발효종에 밀가루와 물을 더해 네 시간 동안 깨웁니다.</p>
+          </div>
+        </li>
+        <li>
+          <time><b>13:00</b>전날</time>
+          <div>
+            <h3>반죽과 접기</h3>
+            <p>깨어난 발효종을 반죽에 섞고, 30분마다 네 번 접어 글루텐을 잡습니다.</p>
+          </div>
+        </li>
+        <li>
+          <time><b>17:00</b>전날</time>
+          <div>
+            <h3>성형 후 저온 발효</h3>
+            <p>모양을 잡아 4℃ 냉장고에서 14시간 재웁니다. 신맛과 단맛이 이때 만들어집니다.</p>
+          </div>
+        </li>
+        <li>
+          <time><b>07:00</b>당일</time>
+          <div>
+            <h3>굽기</h3>
+            <p>칼집을 넣고 230℃ 스팀 오븐에서 40분. 식힌 뒤 08:30에 진열합니다.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block name" aria-labelledby="name-title">
+    <div class="wrap">
+      <h2 id="name-title" class="skip">이름에 대하여</h2>
+      <blockquote>
+        <em>밀</em>은 재료, <em>결</em>은 빵을 갈랐을 때 보이는 속살의 무늬입니다.
+      </blockquote>
+      <p>좋은 밀을 쓰고 시간을 충분히 주면 결이 저절로 고와집니다. 매일 아침 첫 덩이를 잘라 결을 확인한 뒤에 진열합니다.</p>
+    </div>
+  </section>
+
+  <section class="block visit" id="visit" aria-labelledby="visit-title">
+    <div class="wrap">
+      <div>
+        <h2 id="visit-title">찾아오기</h2>
+        <p class="intro">성수역 3번 출구에서 걸어서 5분. 매장 안에 앉을 자리는 없고, 포장만 합니다.</p>
+      </div>
+      <div>
+        <!-- 주소·전화번호는 실제 정보로 바꿔 주세요 -->
+        <dl class="info">
+          <dt>주소</dt>
+          <dd>서울 성동구 성수동2가 ○○길 ○○, 1층</dd>
+          <dt>영업</dt>
+          <dd>화–일 08:00 – 19:00<small>빵이 다 팔리면 일찍 닫습니다</small></dd>
+          <dt>휴무</dt>
+          <dd>매주 월요일</dd>
+          <dt>문의</dt>
+          <dd><a href="tel:020000000">02-000-0000</a></dd>
+          <dt>예약</dt>
+          <dd>3개 이상은 하루 전 전화로 받습니다</dd>
+        </dl>
+        <p class="tip">바게트는 오후 3시에 한 번 더 나옵니다. 오전에 놓쳤다면 오후에 들러 주세요.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span>밀과결 · 성수동 천연 발효종 빵집</span>
+    <span>© 2026 밀과결</span>
+  </div>
+</footer>
+</body>
+</html>

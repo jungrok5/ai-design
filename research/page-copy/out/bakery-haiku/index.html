@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>밀과결 · 성수동 천연 발효빵</title>
+  <meta name="description" content="성수동 동네 수제 베이커리 밀과결. 천연 발효종으로 하루를 기다려 굽는 빵.">
+  <style>
+    :root {
+      --paper: #faf6ef;
+      --cream: #f1e8d8;
+      --crust: #c98a4b;
+      --crust-dark: #8a5a2b;
+      --ink: #2d2620;
+      --muted: #7a6d60;
+      --line: #e3d6c0;
+      --sage: #6f7f5e;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --paper: #1f1b17;
+        --cream: #2a241e;
+        --crust: #d89a5c;
+        --crust-dark: #f0c08a;
+        --ink: #f3ebdf;
+        --muted: #b3a593;
+        --line: #3d342b;
+        --sage: #9fb088;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --paper: #1f1b17;
+      --cream: #2a241e;
+      --crust: #d89a5c;
+      --crust-dark: #f0c08a;
+      --ink: #f3ebdf;
+      --muted: #b3a593;
+      --line: #3d342b;
+      --sage: #9fb088;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: color-mix(in srgb, var(--paper) 92%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    header .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+    .logo {
+      font-family: "Noto Serif KR", "Nanum Myeongjo", serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .logo span { color: var(--crust); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      text-decoration: none;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    nav a:hover { color: var(--ink); }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 72px;
+      background:
+        radial-gradient(circle at 85% 20%, color-mix(in srgb, var(--crust) 18%, transparent), transparent 55%),
+        var(--paper);
+    }
+    .hero .wrap {
+      display: grid;
+      gap: 32px;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+    }
+    .eyebrow {
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      color: var(--sage);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-family: "Noto Serif KR", "Nanum Myeongjo", serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+    .hero p.lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 32px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 13px 26px;
+      border-radius: 999px;
+      background: var(--crust-dark);
+      color: var(--paper);
+      text-decoration: none;
+      font-weight: 600;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+    .btn.ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .hero-art {
+      aspect-ratio: 4 / 5;
+      border-radius: 28px;
+      background: linear-gradient(160deg, var(--cream), color-mix(in srgb, var(--crust) 35%, var(--cream)));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-art svg { width: 62%; height: auto; }
+
+    /* Sections */
+    section.block { padding: 72px 0; }
+    section.block.alt { background: var(--cream); }
+    .section-title {
+      font-family: "Noto Serif KR", "Nanum Myeongjo", serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    /* Philosophy */
+    .philo {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px 24px;
+    }
+    .card .num {
+      font-family: "Noto Serif KR", serif;
+      color: var(--crust);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+
+    /* Menu */
+    .menu {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .menu-item {
+      border-bottom: 1px dashed var(--line);
+      padding-bottom: 18px;
+    }
+    .menu-item .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+    .menu-item h3 { font-size: 1.1rem; }
+    .price {
+      color: var(--crust-dark);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .menu-item p { color: var(--muted); font-size: 0.93rem; }
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: var(--sage);
+      border: 1px solid var(--sage);
+      border-radius: 999px;
+      padding: 1px 8px;
+      margin-top: 8px;
+    }
+    .menu-note {
+      margin-top: 36px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Visit */
+    .visit {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1fr 1fr;
+    }
+    .info-list {
+      list-style: none;
+    }
+    .info-list li {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .info-list strong { color: var(--sage); font-weight: 600; }
+    .map-box {
+      border-radius: 20px;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      text-align: center;
+      padding: 24px;
+    }
+
+    footer {
+      padding: 32px 0 48px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero .wrap { grid-template-columns: 1fr; }
+      .hero-art { aspect-ratio: 16 / 10; }
+      .philo, .menu { grid-template-columns: 1fr 1fr; }
+      .visit { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .hero { padding: 48px 0 52px; }
+      section.block { padding: 52px 0; }
+      .philo, .menu { grid-template-columns: 1fr; }
+      nav ul { gap: 14px; }
+      .info-list li { grid-template-columns: 76px 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap">
+      <a href="#top" class="logo">밀<span>과</span>결</a>
+      <nav aria-label="주요 메뉴">
+        <ul>
+          <li><a href="#philosophy">발효 이야기</a></li>
+          <li><a href="#menu">빵 메뉴</a></li>
+          <li><a href="#visit">찾아오는 길</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <p class="eyebrow">SEONGSU · NATURAL LEVAIN BAKERY</p>
+          <h1>밀가루와 시간,<br>그리고 결이 살아 있는 빵</h1>
+          <p class="lead">
+            성수동 골목에서 천연 발효종으로 빵을 굽습니다.<br>
+            하루의 온도를 살피며 반죽을 기다리고, 그 시간만큼 빵의 결이 깊어집니다.
+          </p>
+          <a class="btn" href="#menu">오늘의 빵 보기</a>
+          <a class="btn ghost" href="#visit">매장 안내</a>
+        </div>
+        <div class="hero-art" role="img" aria-label="갓 구운 호밀 사워도우 빵 일러스트">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <ellipse cx="100" cy="128" rx="78" ry="46" fill="#8a5a2b"/>
+            <path d="M34 120 Q100 40 166 120 Q100 96 34 120 Z" fill="#c98a4b"/>
+            <path d="M62 108 Q100 70 138 108" stroke="#f1e8d8" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M80 92 Q100 74 120 92" stroke="#f1e8d8" stroke-width="4" fill="none" stroke-linecap="round" opacity=".7"/>
+            <ellipse cx="100" cy="150" rx="60" ry="8" fill="#6f7f5e" opacity=".25"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="block alt" id="philosophy">
+      <div class="wrap">
+        <h2 class="section-title">우리가 빵을 굽는 방식</h2>
+        <p class="section-sub">빠르게 부풀리는 대신, 천천히 발효시키는 것을 택했습니다.</p>
+        <div class="philo">
+          <article class="card">
+            <div class="num">01</div>
+            <h3>매일 키우는 천연 발효종</h3>
+            <p>밀가루와 물만으로 매일 발효종을 돌봅니다. 공기 중의 효모와 유산균이 만든 맛이 빵마다 조금씩 다르게 깃듭니다.</p>
+          </article>
+          <article class="card">
+            <div class="num">02</div>
+            <h3>12시간 이상의 느린 발효</h3>
+            <p>반죽을 차갑게 재워 긴 시간 숙성합니다. 소화가 편하고, 겉은 바삭하고 속은 촉촉한 결이 생깁니다.</p>
+          </article>
+          <article class="card">
+            <div class="num">03</div>
+            <h3>가까운 곳의 좋은 밀가루</h3>
+            <p>국내 제분소의 통밀과 전통 밀가루를 씁니다. 첨가물은 넣지 않고, 재료의 맛이 그대로 드러나도록 굽습니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="menu">
+      <div class="wrap">
+        <h2 class="section-title">오늘의 빵</h2>
+        <p class="section-sub">그날그날 구운 만큼만 진열합니다. 일찍 가실수록 고르기 좋아요.</p>
+        <div class="menu">
+          <article class="menu-item">
+            <div class="row">
+              <h3>클래식 사워도우</h3>
+              <span class="price">6,500원</span>
+            </div>
+            <p>천연 발효종 100%로 만든 기본 식빵형 사워도우. 겉은 단단하고 속결은 쫄깃합니다.</p>
+            <span class="tag">시그니처</span>
+          </article>
+          <article class="menu-item">
+            <div class="row">
+              <h3>통밀 호밀빵</h3>
+              <span class="price">7,000원</span>
+            </div>
+            <p>호밀과 통밀을 넣어 구수하고 진한 풍미를 살렸습니다. 치즈와 함께 드시면 좋아요.</p>
+            <span class="tag">주말 한정</span>
+          </article>
+          <article class="menu-item">
+            <div class="row">
+              <h3>무화과 캄파뉴</h3>
+              <span class="price">8,500원</span>
+            </div>
+            <p>제철 무화과와 호두를 넣은 시골빵. 잼 없이도 달콤해 아침 식탁에 잘 어울립니다.</p>
+            <span class="tag">계절 메뉴</span>
+          </article>
+          <article class="menu-item">
+            <div class="row">
+              <h3>버터 크루아상</h3>
+              <span class="price">3,800원</span>
+            </div>
+            <p>유지를 겹겹이 접어 결을 살렸습니다. 발효종을 더해 향이 오래 남습니다.</p>
+          </article>
+          <article class="menu-item">
+            <div class="row">
+              <h3>올리브 포카차</h3>
+              <span class="price">5,000원</span>
+            </div>
+            <p>올리브오일과 바다소금을 올린 납작한 빵. 가볍게 뜯어 먹기 좋습니다.</p>
+          </article>
+          <article class="menu-item">
+            <div class="row">
+              <h3>발효버터 스콘</h3>
+              <span class="price">3,500원</span>
+            </div>
+            <p>겉은 바삭, 속은 부드럽게. 커피 한 잔과 함께 드시기 좋은 간식입니다.</p>
+          </article>
+        </div>
+        <p class="menu-note">* 가격과 메뉴는 매장 사정에 따라 달라질 수 있습니다. 알레르기 유발 재료는 매장에 문의해 주세요.</p>
+      </div>
+    </section>
+
+    <section class="block alt" id="visit">
+      <div class="wrap">
+        <h2 class="section-title">찾아오는 길</h2>
+        <p class="section-sub">성수동 골목, 빵 냄새를 따라오세요.</p>
+        <div class="visit">
+          <ul class="info-list">
+            <li><strong>주소</strong><span>서울특별시 성동구 성수동 ○○로 ○○ (매장 주소로 교체)</span></li>
+            <li><strong>영업시간</strong><span>화–일 08:00 – 19:00 · 월요일 휴무</span></li>
+            <li><strong>전화</strong><span>02-0000-0000</span></li>
+            <li><strong>인스타그램</strong><span>@milgwagyeol</span></li>
+            <li><strong>주차</strong><span>매장 앞 주차 불가. 성수역 도보 5분</span></li>
+          </ul>
+          <div class="map-box">
+            지도가 들어갈 자리입니다.<br>
+            (지도 서비스 임베드 코드를 여기에 넣어 주세요)
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 밀과결 · 성수동 천연 발효빵</span>
+      <span>빵이 다 팔리면 조기 마감합니다.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

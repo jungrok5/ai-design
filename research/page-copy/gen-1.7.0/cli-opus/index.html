@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>logpipe: 로그를 실시간으로 거르고 세는 CLI</title>
+<meta name="description" content="logpipe는 로그 파일을 따라가며 조건으로 거르고, 필드별로 묶어 일정 간격마다 집계해 보여주는 Go CLI입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* ---------- tokens (design system "Clear") ---------- */
+:root {
+  --bg: #ffffff; --surface: #f8fafc; --sunk: #f1f5f9; --line: #e2e8f0; --line-strong: #cbd5e1;
+  --fg: #0f172a; --muted: #475569; --subtle: #64748b;
+  --accent: #1d4ed8; --accent-hover: #1e40af; --accent-fg: #ffffff; --accent-soft: #eff6ff;
+  --ok: #067647; --ok-soft: #ecfdf3; --warn: #b54708; --warn-soft: #fffaeb; --danger: #b42318; --danger-soft: #fef3f2;
+  --code-bg: #0f172a; --code-fg: #e2e8f0; --code-muted: #94a3b8; --code-line: #334155;
+  --code-ok: #86efac; --code-warn: #fcd34d; --code-danger: #fca5a5; --code-accent: #93c5fd;
+  --focus: #1d4ed8;
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-xs: 12px; --text-s: 14px; --text-m: 16px; --text-l: 18px;
+  --text-h3: 18px; --text-h2: 24px; --text-h1: clamp(30px, 4.4vw, 44px);
+  --leading: 1.7; --leading-tight: 1.3;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --radius-s: 6px; --radius-m: 8px; --radius-l: 10px;
+  --border: 1px solid var(--line);
+  --measure: 72ch; --page: 1120px; --motion: 180ms ease-out;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+    --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+    --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+    --ok: #47cd89; --ok-soft: #16322a; --warn: #fdb022; --warn-soft: #3a2c12; --danger: #f97066; --danger-soft: #3b1f1d;
+    --code-bg: #111315; --code-fg: #e4e6e8; --code-muted: #8a9096; --code-line: #33373b;
+    --code-ok: #86e0b0; --code-warn: #f5c45e; --code-danger: #f6a19a; --code-accent: #9ccbf0; --focus: #7cb7e8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+  --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+  --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+  --ok: #47cd89; --ok-soft: #16322a; --warn: #fdb022; --warn-soft: #3a2c12; --danger: #f97066; --danger-soft: #3b1f1d;
+  --code-bg: #111315; --code-fg: #e4e6e8; --code-muted: #8a9096; --code-line: #33373b;
+  --code-ok: #86e0b0; --code-warn: #f5c45e; --code-danger: #f6a19a; --code-accent: #9ccbf0; --focus: #7cb7e8;
+  color-scheme: dark;
+}
+
+/* ---------- base + components ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-sans); font-size: var(--text-m); line-height: var(--leading);
+  word-break: keep-all; overflow-wrap: break-word;
+}
+h1, h2, h3 { margin: 0; line-height: var(--leading-tight); font-weight: 700; text-wrap: balance; }
+h1 { font-size: var(--text-h1); letter-spacing: -0.02em; }
+h2 { font-size: var(--text-h2); letter-spacing: -0.01em; }
+h3 { font-size: var(--text-h3); }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+code, pre { font-family: var(--font-mono); }
+:not(pre) > code {
+  font-size: 0.88em; background: var(--sunk); border: var(--border); border-radius: 4px;
+  padding: 0 4px; overflow-wrap: anywhere; word-break: normal;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+.ds-page { max-width: var(--page); margin: 0 auto; padding: 0 var(--space-4); }
+@media (min-width: 720px) { .ds-page { padding-inline: var(--space-5); } }
+.ds-stack { display: grid; gap: var(--space-4); }
+.ds-lede { font-size: var(--text-l); color: var(--muted); max-width: var(--measure); }
+.ds-muted { color: var(--muted); }
+
+.ds-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: 44px; padding: 0 var(--space-4); border-radius: var(--radius-m);
+  font: 700 var(--text-s) / 1 var(--font-sans); cursor: pointer; text-decoration: none;
+  background: var(--bg); color: var(--fg); border: 1px solid var(--line-strong);
+  transition: background-color var(--motion), border-color var(--motion);
+}
+.ds-btn:hover { border-color: var(--subtle); color: var(--fg); }
+.ds-btn--primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.ds-btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-fg); }
+
+.ds-cmd {
+  display: flex; align-items: center; gap: var(--space-2); min-width: 0;
+  background: var(--code-bg); color: var(--code-fg); border-radius: var(--radius-l);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+}
+.ds-cmd code, .ds-cmd pre {
+  flex: 1; min-width: 0; margin: 0; background: none; border: 0; padding: 0; color: inherit;
+  font-size: var(--text-s); line-height: 1.7; white-space: pre; overflow-x: auto;
+}
+.ds-cmd .ds-c { color: var(--code-muted); }
+.ds-cmd button {
+  align-self: flex-start; flex: none; min-height: 36px; padding: 0 var(--space-3); border-radius: var(--radius-s);
+  border: 1px solid var(--code-line); background: transparent; color: var(--code-fg);
+  font: 500 13px / 1 var(--font-sans); cursor: pointer;
+}
+.ds-cmd button:hover { border-color: var(--code-muted); }
+.ds-cmd button:focus-visible { outline-color: var(--code-fg); }
+@media (max-width: 600px) { .ds-cmd code, .ds-cmd pre { white-space: pre-wrap; overflow-wrap: anywhere; } }
+
+.ds-output {
+  margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: var(--radius-l);
+  padding: var(--space-4); font: var(--text-s) / 1.7 var(--font-mono); white-space: pre; overflow-x: auto;
+}
+.ds-output .ds-prompt { color: var(--code-muted); }
+.ds-output .ds-err { color: var(--code-danger); }
+.ds-output .ds-warn { color: var(--code-warn); }
+.ds-output .ds-ok { color: var(--code-ok); }
+.ds-output .ds-head { color: var(--code-accent); }
+
+.ds-table-wrap { overflow-x: auto; }
+.ds-table { width: 100%; border-collapse: collapse; font-size: 15px; font-variant-numeric: tabular-nums; }
+.ds-table th, .ds-table td { text-align: left; vertical-align: top; padding: 10px 16px 10px 0; border-bottom: var(--border); }
+.ds-table thead th { font-size: 13px; font-weight: 500; color: var(--subtle); border-bottom-color: var(--line-strong); }
+.ds-table tbody tr:last-child > * { border-bottom: 0; }
+
+.ds-badge {
+  display: inline-flex; align-items: center; min-height: 22px; padding: 0 var(--space-2); border-radius: 4px;
+  font-size: var(--text-xs); font-weight: 700; background: var(--sunk); color: var(--muted); white-space: nowrap;
+}
+
+/* ---------- page ---------- */
+.topbar { border-bottom: var(--border); }
+.topbar .ds-page { display: flex; align-items: center; gap: var(--space-5); min-height: 60px; }
+.wordmark { font: 500 var(--text-l) / 1 var(--font-mono); color: var(--fg); text-decoration: none; margin-right: auto; }
+.wordmark:hover { color: var(--fg); }
+.wordmark span { color: var(--subtle); }
+.topbar nav { display: flex; gap: var(--space-2); }
+.topbar nav a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-2);
+  color: var(--muted); text-decoration: none; font-size: var(--text-s);
+}
+.topbar nav a:hover { color: var(--fg); }
+@media (max-width: 480px) { .topbar nav a.hide-s { display: none; } }
+
+.hero { padding: var(--space-7) 0 var(--space-8); display: grid; gap: var(--space-6); align-items: start; }
+@media (min-width: 980px) { .hero { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--space-7); padding-top: var(--space-8); } }
+.hero-text { display: grid; gap: var(--space-5); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.hero-meta { font-size: var(--text-s); color: var(--subtle); }
+.hero-shot figcaption { font-size: 13px; color: var(--subtle); margin-top: var(--space-2); }
+
+section { padding: var(--space-8) 0; border-top: var(--border); }
+.section-head { display: grid; gap: var(--space-2); max-width: var(--measure); margin-bottom: var(--space-6); }
+
+/* use cases: command and its result next to the explanation */
+.case { display: grid; gap: var(--space-4); padding: var(--space-6) 0; border-bottom: var(--border); }
+.case:first-of-type { padding-top: 0; }
+.case:last-of-type { border-bottom: 0; padding-bottom: 0; }
+.case-text { display: grid; gap: var(--space-2); align-content: start; }
+.case-text p { color: var(--muted); }
+.case-code { display: grid; gap: var(--space-2); min-width: 0; }
+@media (min-width: 900px) { .case { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--space-6); } }
+
+/* install */
+.install { display: grid; gap: var(--space-6); }
+@media (min-width: 900px) { .install { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.install h3 { margin-bottom: var(--space-3); }
+.install p { color: var(--muted); margin-top: var(--space-3); font-size: 15px; }
+
+/* flags table stacks on narrow screens */
+@media (max-width: 640px) {
+  .flags thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .flags tr { display: grid; gap: var(--space-1); padding: var(--space-3) 0; border-bottom: var(--border); }
+  .flags tbody tr:last-child { border-bottom: 0; }
+  .flags td { padding: 0; border: 0; }
+}
+.flags td:first-child code { white-space: nowrap; }
+
+.contribute { max-width: var(--measure); }
+.contribute .hero-actions { margin-top: var(--space-2); }
+
+footer { border-top: var(--border); padding: var(--space-5) 0 var(--space-7); font-size: var(--text-s); color: var(--subtle); }
+footer .ds-page { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); justify-content: space-between; }
+footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- TODO: your-org/logpipe 저장소 주소, 명령 옵션, 출력 예시를 실제 값으로 바꿔 주세요. -->
+
+<header class="topbar">
+  <div class="ds-page">
+    <a class="wordmark" href="#top">logpipe<span>_</span></a>
+    <nav aria-label="주 메뉴">
+      <a href="#usage" class="hide-s">사용 예</a>
+      <a href="#install">설치</a>
+      <a href="https://github.com/your-org/logpipe">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="ds-page">
+    <div class="hero">
+      <div class="hero-text">
+        <h1>로그를 따라가며 거르고, 묶고, 센다</h1>
+        <p class="ds-lede">logpipe는 로그 파일을 tail 하면서 조건에 맞는 줄만 남기고, 원하는 필드로 묶어 몇 초마다 집계표를 다시 그립니다. <code>grep | awk | sort | uniq -c</code>를 매번 조립하던 일을 명령 하나로 줄입니다.</p>
+        <div class="ds-cmd"><code>go install github.com/your-org/logpipe@latest</code><button type="button">복사</button></div>
+        <div class="hero-actions">
+          <a class="ds-btn ds-btn--primary" href="https://github.com/your-org/logpipe">GitHub에서 보기</a>
+          <a class="ds-btn" href="#usage">사용 예 보기</a>
+        </div>
+        <p class="hero-meta">Go로 작성한 단일 바이너리 · Linux, macOS, Windows · MIT 라이선스</p>
+      </div>
+
+      <figure class="hero-shot" style="margin:0">
+<pre class="ds-output" aria-label="logpipe 실행 결과 예시"><span class="ds-prompt">$ logpipe tail /var/log/app/*.log \
+    --where 'level>=warn' --by service --every 10s</span>
+
+<span class="ds-head">14:02:30  창 10s  읽은 줄 18,204  일치 312</span>
+
+SERVICE      WARN   ERROR   마지막 메시지
+<span class="ds-err">checkout       41      12   payment timeout (pg-2)</span>
+<span class="ds-warn">search        150       9   slow query 1.8s</span>
+<span class="ds-warn">auth           97       3   token refresh retry</span>
+notifier        2       0   queue lag 4s
+
+<span class="ds-prompt">다음 갱신까지 7s · q 종료 · s 정렬 바꾸기</span></pre>
+        <figcaption>여러 서비스 로그에서 warn 이상만 골라 서비스별로 10초마다 다시 셉니다.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <section id="usage">
+    <div class="ds-page">
+      <div class="section-head">
+        <h2>이렇게 씁니다</h2>
+        <p class="ds-muted">JSON, logfmt, 일반 텍스트 로그를 자동으로 알아봅니다. 텍스트 로그는 정규식으로 필드를 뽑을 수 있습니다.</p>
+      </div>
+
+      <div class="case">
+        <div class="case-text">
+          <h3>필요한 줄만 남기기</h3>
+          <p>필드 조건은 <code>--where</code>로 겁니다. <code>and</code>, <code>or</code>, 비교 연산자, 정규식 매칭(<code>~</code>)을 쓸 수 있습니다.</p>
+        </div>
+        <div class="case-code">
+          <div class="ds-cmd"><code>logpipe tail app.log --where 'status>=500 and path~"^/api/"'</code><button type="button">복사</button></div>
+<pre class="ds-output"><span class="ds-err">14:05:11 ERROR status=502 path=/api/orders  upstream reset</span>
+<span class="ds-err">14:05:13 ERROR status=500 path=/api/cart    nil pointer in CartService</span>
+<span class="ds-err">14:05:13 ERROR status=503 path=/api/orders  circuit open</span></pre>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-text">
+          <h3>지난 로그를 한 번에 집계하기</h3>
+          <p><code>tail</code> 대신 <code>scan</code>을 쓰면 파일을 끝까지 읽고 결과를 한 번 출력합니다. 압축된 <code>.gz</code> 파일도 그대로 읽습니다.</p>
+        </div>
+        <div class="case-code">
+          <div class="ds-cmd"><code>logpipe scan access.log.gz --by path --count --top 5</code><button type="button">복사</button></div>
+<pre class="ds-output">PATH              COUNT
+/api/search      48,120
+/api/orders      19,877
+/api/cart        11,402
+/health           8,640
+/api/login        3,215</pre>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-text">
+          <h3>다른 도구로 넘기기</h3>
+          <p><code>--out json</code>을 주면 갱신마다 한 줄짜리 JSON을 내보냅니다. <code>jq</code>나 알림 스크립트에 바로 연결할 수 있습니다.</p>
+        </div>
+        <div class="case-code">
+          <div class="ds-cmd"><code>logpipe tail app.log --by level --every 1m --out json | jq .</code><button type="button">복사</button></div>
+<pre class="ds-output">{
+  "window": "1m",
+  "at": "2026-10-22T14:06:00+09:00",
+  "groups": { "info": 9812, "warn": 204, "error": 17 }
+}</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="ds-page">
+      <div class="section-head">
+        <h2>설치</h2>
+      </div>
+      <div class="install">
+        <div>
+          <h3>Go가 있다면</h3>
+          <div class="ds-cmd"><code>go install github.com/your-org/logpipe@latest</code><button type="button">복사</button></div>
+          <p>Go 1.22 이상이 필요합니다. 바이너리는 <code>$GOPATH/bin</code>에 설치됩니다.</p>
+        </div>
+        <div>
+          <h3>바이너리로 받기</h3>
+          <div class="ds-cmd"><code>curl -sSL https://github.com/your-org/logpipe/releases/latest/download/logpipe_linux_amd64.tar.gz | tar xz</code><button type="button">복사</button></div>
+          <p>macOS, Windows, ARM 빌드는 <a href="https://github.com/your-org/logpipe/releases">릴리스 페이지</a>에 있습니다.</p>
+        </div>
+      </div>
+
+      <h3 style="margin: var(--space-7) 0 var(--space-3)">자주 쓰는 옵션</h3>
+      <div class="ds-table-wrap">
+        <table class="ds-table flags">
+          <thead><tr><th scope="col">옵션</th><th scope="col">하는 일</th><th scope="col">예</th></tr></thead>
+          <tbody>
+            <tr><td><code>--where</code></td><td>조건에 맞는 줄만 남깁니다</td><td><code>'level=error'</code></td></tr>
+            <tr><td><code>--by</code></td><td>이 필드 값으로 묶습니다. 쉼표로 여러 개</td><td><code>service,host</code></td></tr>
+            <tr><td><code>--every</code></td><td>집계표를 다시 그리는 간격</td><td><code>10s</code>, <code>1m</code></td></tr>
+            <tr><td><code>--count</code> / <code>--sum</code> / <code>--p95</code></td><td>그룹마다 계산할 값</td><td><code>--p95 latency_ms</code></td></tr>
+            <tr><td><code>--parse</code></td><td>텍스트 로그에서 필드를 뽑을 정규식</td><td><code>'(?P&lt;level&gt;\w+) (?P&lt;msg&gt;.*)'</code></td></tr>
+            <tr><td><code>--out</code></td><td>출력 형식: <code>table</code>, <code>json</code>, <code>csv</code></td><td><code>json</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ds-muted" style="margin-top: var(--space-4); font-size: 15px">전체 옵션은 <code>logpipe help</code>나 <a href="https://github.com/your-org/logpipe#readme">README</a>에서 볼 수 있습니다.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="ds-page">
+      <div class="contribute ds-stack">
+        <h2>같이 만들어 주세요</h2>
+        <p>logpipe는 MIT 라이선스로 공개된 오픈소스입니다. 쓰다가 막힌 점, 지원했으면 하는 로그 형식, 버그는 이슈로 남겨 주세요. 처음 기여한다면 <span class="ds-badge">good first issue</span> 라벨이 붙은 이슈부터 보면 됩니다.</p>
+        <div class="hero-actions">
+          <a class="ds-btn" href="https://github.com/your-org/logpipe/issues">이슈 보기</a>
+          <a class="ds-btn" href="https://github.com/your-org/logpipe/blob/main/CONTRIBUTING.md">기여 가이드</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="ds-page">
+    <span>logpipe · MIT License</span>
+    <a href="https://github.com/your-org/logpipe">github.com/your-org/logpipe</a>
+  </div>
+</footer>
+
+<script>
+document.addEventListener("click", async (e) => {
+  const btn = e.target.closest(".ds-cmd button");
+  if (!btn) return;
+  const code = btn.parentElement.querySelector("code, pre");
+  const copy = code.cloneNode(true);
+  copy.querySelectorAll(".ds-c").forEach((n) => n.remove());
+  const text = copy.textContent.split("\n").map((l) => l.trimEnd()).filter(Boolean).join("\n");
+  const label = btn.textContent;
+  try { await navigator.clipboard.writeText(text); btn.textContent = "복사됨"; } catch { btn.textContent = "복사 실패"; }
+  setTimeout(() => { btn.textContent = label; }, 1500);
+});
+</script>
+</body>
+</html>
