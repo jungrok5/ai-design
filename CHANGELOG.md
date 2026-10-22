@@ -18,8 +18,12 @@
   - 새 영어 규칙 3개: `en-mannered`("earns its keep", "load-bearing"), `en-hero-formula`("X, reimagined"),
     `en-social-proof`("Join thousands of")
 - `ko-metaphor-noun`이 페이지의 "오시는 길", "찾아오는 길" 메뉴를 보고하던 오탐 수정
+- `ko-register-mix`: FAQ 질문의 "~나요?"를 해요체로 세지 않음. 사람이 쓴 합니다체 문서(ko.react.dev, MDN)의 약
+  20%가 이렇게 묻고, "~습니까?"로 바꾸는 것이 과교정
 - `polish-writing` 스킬: "Page copy: plain, not mannered" 절. 비유를 다른 비유로 바꾸지 않기, 경구와 조각 슬로건 대신
   사실 문장, 과교정(딱딱한 FAQ) 피하기
+- 측정: [docs/measurement.md](docs/measurement.md#페이지-문구-170). 같은 요청 14개를 플러그인을 켜고 만들었을 때 라벨을
+  가린 집계의 비유·경구·슬로건 수는 플러그인 없음 43, 1.6.1 9, 1.7.0 6. 다듬은 뒤 남은 표시 표현은 1.6.1 5/105, 1.7.0 1/105
 - 수정 직후 검사가 비유·슬로건을 보고할 때 다른 비유로 바꾸지 말고 사실 문장으로 다시 쓰라는 안내를 덧붙임
 <!-- style-ignore-end -->
 

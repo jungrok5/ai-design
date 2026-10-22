@@ -312,6 +312,14 @@ class StyleCheck(unittest.TestCase):
               "안정화까지의 로드맵을 공유합니다. 지도 위젯을 불러옵니다. 도어록을 확인하려고 문을 열었다가 닫습니다.\n")
         self.assertNotIn("ko-metaphor-noun", run("ok.md", ok).stdout)
 
+    def test_naya_question_is_not_a_register_mix(self):
+        """1.7.0: an FAQ in 합니다체 asks '~나요?' (ko.react.dev, MDN ko); only other 해요체 endings count."""
+        body = "# FAQ\n\n설치합니다. 설정합니다. 배포합니다. 확인합니다.\n\n참여할 수 있나요? 네, 참여할 수 있습니다.\n" \
+               "비용이 있나요? 없습니다.\n혼자 와도 되나요? 됩니다.\n"
+        self.assertNotIn("ko-register-mix", run("faq.md", body).stdout)
+        mixed = body + "값이 바뀌어요. 다시 해 봐요. 그럼 끝나요.\n"
+        self.assertIn("ko-register-mix", run("mix.md", mixed).stdout)
+
     def test_directions_heading_is_not_a_metaphor(self):
         """1.7.0: '오시는 길' and '찾아오는 길' are the standard directions label on a page, not a metaphor."""
         page = "<nav><a>오시는 길</a></nav><h2>오시는 길</h2><h2>찾아오는 길</h2><p>성수역에서 걸어서 5분입니다.</p>\n"

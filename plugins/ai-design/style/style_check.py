@@ -179,7 +179,9 @@ def check_text(path: Path, text: str, rules: list[Rule]) -> list[dict]:
 
 FORMAL = re.compile(r"(니다|니까)[.?!]")
 # "~하세요." / "~주세요." is the usual way to give an instruction inside 합니다체 docs, so it does not count as 해요체.
-POLITE = re.compile(r"[가-힣](?<!니)(?<!세)요[.?!]|세요\?")
+# Neither does a "~나요?" question ("참여할 수 있나요?"): about 1 in 5 합니다체 docs in ko.react.dev and MDN ko ask
+# questions this way, and the stiff "~습니까?" is the overcorrection.
+POLITE = re.compile(r"[가-힣](?<!니)(?<!세)요[.!]|[가-힣](?<!니)(?<!세)(?<!나)요\?|세요\?")
 PLAIN = re.compile(r"[가-힣](?<!니)다[.!]")
 REGISTERS = {"합니다체": FORMAL, "해요체": POLITE, "한다체": PLAIN}
 
