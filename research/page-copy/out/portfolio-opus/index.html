@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>홍길동 — Frontend Engineer</title>
+<meta name="description" content="React · TypeScript 기반 5년차 프론트엔드 개발자 홍길동의 포트폴리오. 커머스 서비스의 성능, 전환율, 개발 경험을 개선해 왔습니다." />
+<meta property="og:title" content="홍길동 — Frontend Engineer" />
+<meta property="og:description" content="React · TypeScript 5년차, 커머스 프론트엔드 개발자" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f6f5f1;
+    --surface: #ffffff;
+    --text: #17171a;
+    --muted: #6b6b72;
+    --line: #e3e1da;
+    --accent: #ff5a1f;
+    --accent-soft: #fff0e8;
+    --chip: #efede6;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05);
+    --sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f0f11; --surface: #17171b; --text: #ededf0; --muted: #9a9aa3;
+      --line: #26262c; --accent: #ff7a45; --accent-soft: #2a1a12; --chip: #1f1f24;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.3);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f0f11; --surface: #17171b; --text: #ededf0; --muted: #9a9aa3;
+    --line: #26262c; --accent: #ff7a45; --accent-soft: #2a1a12; --chip: #1f1f24;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.3);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    background: var(--bg); color: var(--text); font-family: var(--sans);
+    font-size: 16px; line-height: 1.7; letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased; word-break: keep-all; overflow-wrap: break-word;
+    transition: background .3s, color .3s;
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent); color: #fff; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+  .mono { font-family: var(--mono); }
+
+  /* Nav */
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: saturate(160%) blur(12px); -webkit-backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid transparent; transition: border-color .2s;
+  }
+  header.nav.scrolled { border-bottom-color: var(--line); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-family: var(--mono); font-weight: 500; font-size: 15px; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 4px; align-items: center; }
+  .nav-links a {
+    font-size: 14px; color: var(--muted); padding: 6px 12px; border-radius: 8px; transition: color .15s, background .15s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--chip); }
+  .theme-btn {
+    width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--surface); color: var(--text); cursor: pointer; display: grid; place-items: center; margin-left: 8px;
+  }
+  .theme-btn svg { width: 16px; height: 16px; }
+  .icon-sun { display: none; }
+  :root[data-theme="dark"] .icon-sun { display: block; }
+  :root[data-theme="dark"] .icon-moon { display: none; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .icon-sun { display: block; }
+    :root:not([data-theme="light"]) .icon-moon { display: none; }
+  }
+
+  /* Hero */
+  .hero { padding: 96px 0 80px; }
+  .status {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted);
+    border: 1px solid var(--line); background: var(--surface); padding: 6px 12px; border-radius: 999px; margin-bottom: 32px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 0 rgba(34,197,94,.6); animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,.5);} 70% { box-shadow: 0 0 0 8px rgba(34,197,94,0);} 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0);} }
+  .hero h1 {
+    font-size: clamp(36px, 6.4vw, 68px); line-height: 1.18; letter-spacing: -0.035em; font-weight: 700; max-width: 16ch;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p.lead { margin-top: 28px; font-size: clamp(17px, 2vw, 19px); color: var(--muted); max-width: 40em; }
+  .hero-cta { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 22px; border-radius: 12px;
+    font-weight: 600; font-size: 15px; transition: transform .15s, background .15s, border-color .15s;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--text); color: var(--bg); }
+  .btn-ghost { border: 1px solid var(--line); background: var(--surface); }
+  .btn-ghost:hover { border-color: var(--text); }
+
+  .stats { margin-top: 72px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+  .stat { padding: 24px 20px 0 0; }
+  .stat + .stat { padding-left: 20px; border-left: 1px solid var(--line); }
+  .stat b { display: block; font-size: clamp(28px, 4vw, 40px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+  .stat b small { font-size: .5em; color: var(--accent); margin-left: 2px; }
+  .stat span { font-size: 13px; color: var(--muted); }
+
+  /* Sections */
+  section.block { padding: 96px 0; border-top: 1px solid var(--line); }
+  .sec-head { display: grid; grid-template-columns: 200px 1fr; gap: 32px; margin-bottom: 48px; }
+  .sec-label { font-family: var(--mono); font-size: 13px; color: var(--accent); padding-top: 8px; }
+  .sec-title { font-size: clamp(26px, 3.4vw, 36px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.3; }
+  .sec-body { display: grid; grid-template-columns: 200px 1fr; gap: 32px; }
+  .sec-body > .spacer { display: block; }
+
+  /* About */
+  .about p { color: var(--muted); font-size: 17px; }
+  .about p + p { margin-top: 16px; }
+  .about strong { color: var(--text); font-weight: 600; }
+  .principles { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .principle { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+  .principle .n { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+  .principle h4 { font-size: 16px; margin: 8px 0 6px; letter-spacing: -0.02em; }
+  .principle p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* Experience */
+  .job { display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 32px 0; border-top: 1px solid var(--line); }
+  .job:first-child { border-top: 0; padding-top: 0; }
+  .job-period { font-family: var(--mono); font-size: 13px; color: var(--muted); padding-top: 4px; }
+  .job h3 { font-size: 20px; letter-spacing: -0.02em; }
+  .job .role { color: var(--muted); font-size: 15px; margin-top: 2px; }
+  .job ul { list-style: none; margin-top: 16px; display: grid; gap: 10px; }
+  .job li { position: relative; padding-left: 18px; font-size: 15px; }
+  .job li::before { content: ""; position: absolute; left: 0; top: .72em; width: 6px; height: 6px; border-radius: 2px; background: var(--accent); }
+  .job li b { font-weight: 600; }
+  .job li .num { color: var(--accent); font-weight: 700; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .tag { font-family: var(--mono); font-size: 12px; padding: 3px 10px; border-radius: 6px; background: var(--chip); color: var(--muted); }
+
+  /* Projects */
+  .projects { display: grid; gap: 20px; }
+  .project {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 32px;
+    display: grid; grid-template-columns: 1fr 260px; gap: 32px; transition: border-color .2s, transform .2s, box-shadow .2s;
+  }
+  .project:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); box-shadow: var(--shadow); transform: translateY(-2px); }
+  .project .kicker { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .project h3 { font-size: 22px; letter-spacing: -0.025em; margin: 6px 0 12px; line-height: 1.35; }
+  .project .desc { color: var(--muted); font-size: 15px; }
+  .psr { margin-top: 20px; display: grid; gap: 12px; }
+  .psr div { display: grid; grid-template-columns: 52px 1fr; gap: 12px; font-size: 14px; }
+  .psr dt { font-family: var(--mono); font-size: 12px; color: var(--accent); padding-top: 2px; }
+  .psr dd { color: var(--text); }
+  .metrics { display: grid; gap: 12px; align-content: start; }
+  .metric { background: var(--accent-soft); border-radius: 14px; padding: 16px 18px; }
+  .metric b { display: block; font-size: 28px; letter-spacing: -0.03em; line-height: 1.15; color: var(--accent); }
+  .metric span { font-size: 13px; color: var(--muted); }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .skill-group { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+  .skill-group h4 { font-size: 15px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: baseline; }
+  .skill-group h4 small { font-family: var(--mono); font-weight: 400; font-size: 12px; color: var(--muted); }
+  .skill-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill { font-size: 14px; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--line); }
+  .skill.main { border-color: var(--text); background: var(--text); color: var(--bg); font-weight: 600; }
+
+  /* Writing */
+  .posts { list-style: none; }
+  .posts a {
+    display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: baseline;
+    padding: 20px 0; border-bottom: 1px solid var(--line); transition: padding .2s;
+  }
+  .posts li:first-child a { border-top: 1px solid var(--line); }
+  .posts a:hover { padding-left: 8px; }
+  .posts a:hover .post-title { color: var(--accent); }
+  .post-title { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; transition: color .15s; }
+  .post-meta { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .post-date { font-family: var(--mono); font-size: 13px; color: var(--muted); white-space: nowrap; }
+
+  /* Contact */
+  .contact { padding: 120px 0 96px; border-top: 1px solid var(--line); text-align: center; }
+  .contact h2 { font-size: clamp(32px, 5.5vw, 56px); letter-spacing: -0.035em; line-height: 1.2; font-weight: 700; }
+  .contact p { color: var(--muted); margin-top: 16px; font-size: 17px; }
+  .email {
+    display: inline-flex; align-items: center; gap: 10px; margin-top: 36px; font-family: var(--mono);
+    font-size: clamp(16px, 2.6vw, 22px); padding: 14px 24px; border-radius: 14px; border: 1px solid var(--line);
+    background: var(--surface); cursor: pointer; color: var(--text); transition: border-color .2s;
+  }
+  .email:hover { border-color: var(--accent); }
+  .email .copy-hint { font-family: var(--sans); font-size: 12px; color: var(--muted); }
+  .socials { display: flex; justify-content: center; gap: 24px; margin-top: 32px; flex-wrap: wrap; }
+  .socials a { font-size: 15px; color: var(--muted); border-bottom: 1px solid transparent; transition: color .15s, border-color .15s; }
+  .socials a:hover { color: var(--text); border-color: var(--text); }
+  footer { padding: 32px 0 48px; font-size: 13px; color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 32px; transform: translate(-50%, 20px); opacity: 0;
+    background: var(--text); color: var(--bg); padding: 10px 18px; border-radius: 10px; font-size: 14px;
+    transition: opacity .2s, transform .2s; pointer-events: none; z-index: 100;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .dot { animation: none; }
+  }
+
+  /* Responsive */
+  @media (max-width: 860px) {
+    .sec-head, .sec-body, .job { grid-template-columns: 1fr; gap: 12px; }
+    .sec-body > .spacer { display: none; }
+    .project { grid-template-columns: 1fr; }
+    .metrics { grid-template-columns: repeat(3, 1fr); }
+    .principles { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 16px; }
+    .nav-links a:not(.keep) { display: none; }
+    .hero { padding: 64px 0 56px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(3) { padding-left: 0; border-left: 0; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--line); margin-top: 24px; }
+    section.block { padding: 72px 0; }
+    .project { padding: 22px; }
+    .metrics { grid-template-columns: 1fr; }
+    .skills { grid-template-columns: 1fr; }
+    .posts a { grid-template-columns: 1fr; gap: 4px; }
+    .email { font-size: 15px; padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo">gildong<span>.</span>dev</a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact" class="keep">Contact</a>
+      <button class="theme-btn" id="themeBtn" aria-label="다크 모드 전환">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="status reveal"><span class="dot"></span>새로운 기회에 열려 있어요</div>
+      <h1 class="reveal">구매 버튼까지 가는 길을 <em>더 빠르고 매끄럽게</em> 만듭니다.</h1>
+      <p class="lead reveal">
+        안녕하세요, 5년차 프론트엔드 개발자 홍길동입니다.
+        React와 TypeScript로 커머스 서비스를 만들어 왔고,
+        웹 성능·전환율·개발 생산성처럼 숫자로 확인할 수 있는 개선을 좋아합니다.
+      </p>
+      <div class="hero-cta reveal">
+        <a href="#projects" class="btn btn-primary">프로젝트 보기 →</a>
+        <a href="#" class="btn btn-ghost">이력서 PDF</a>
+      </div>
+
+      <div class="stats reveal">
+        <div class="stat"><b>5<small>년</small></b><span>프론트엔드 경력</span></div>
+        <div class="stat"><b>300<small>만+</small></b><span>월간 활성 사용자 서비스</span></div>
+        <div class="stat"><b>-48<small>%</small></b><span>상품 상세 LCP 개선</span></div>
+        <div class="stat"><b>+12<small>%</small></b><span>결제 전환율 향상</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-label">01 — About</div>
+        <h2 class="sec-title">사용자 경험과 비즈니스 지표 사이를<br />연결하는 개발자</h2>
+      </div>
+      <div class="sec-body about">
+        <div class="spacer"></div>
+        <div>
+          <p class="reveal">
+            커머스에서는 0.1초의 로딩, 한 번의 불필요한 클릭이 매출로 이어집니다.
+            그래서 저는 화면을 만들 때 <strong>“이 변경이 사용자의 구매 여정을 어떻게 바꾸는가”</strong>를 먼저 묻습니다.
+          </p>
+          <p class="reveal">
+            상품 목록·상세·장바구니·주문/결제까지 커머스 핵심 플로우 전반을 개발했고,
+            <strong>Next.js 마이그레이션, 디자인 시스템 구축, 웹 성능 최적화</strong>를 주도했습니다.
+            기획자·디자이너·백엔드 개발자와 긴밀하게 일하며, 실험(A/B 테스트) 결과로 의사결정하는 문화를 좋아합니다.
+          </p>
+
+          <div class="principles">
+            <div class="principle reveal">
+              <div class="n">01</div>
+              <h4>측정할 수 없으면 개선할 수 없다</h4>
+              <p>Core Web Vitals, 전환 퍼널, 에러율을 먼저 대시보드로 만들고 시작합니다.</p>
+            </div>
+            <div class="principle reveal">
+              <div class="n">02</div>
+              <h4>타입은 팀의 문서다</h4>
+              <p>API 스키마부터 컴포넌트 Props까지, 타입으로 의도를 전달합니다.</p>
+            </div>
+            <div class="principle reveal">
+              <div class="n">03</div>
+              <h4>함께 빨라지는 팀</h4>
+              <p>공통 컴포넌트, 코드 리뷰 가이드, 온보딩 문서로 팀 전체의 속도를 높입니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="block" id="experience">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-label">02 — Experience</div>
+        <h2 class="sec-title">경력</h2>
+      </div>
+
+      <div>
+        <div class="job reveal">
+          <div class="job-period">2022.03 — 현재</div>
+          <div>
+            <h3>○○커머스</h3>
+            <div class="role">Senior Frontend Engineer · 커머스 플랫폼팀</div>
+            <ul>
+              <li><b>Next.js App Router 마이그레이션</b> 리드 — CRA 기반 레거시를 점진적으로 전환, 상품 상세 LCP <span class="num">3.1s → 1.6s</span></li>
+              <li><b>주문/결제 플로우 리뉴얼</b> — 단계 축소와 폼 검증 개선으로 결제 전환율 <span class="num">+12%</span></li>
+              <li><b>사내 디자인 시스템</b> 설계·구축 — 60+ 컴포넌트, Storybook 문서화, 4개 서비스 팀 도입</li>
+              <li>프론트엔드 채용 면접관 및 신규 입사자 온보딩 프로그램 운영</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">TanStack Query</span>
+              <span class="tag">Zustand</span><span class="tag">Storybook</span><span class="tag">Vitest</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="job reveal">
+          <div class="job-period">2020.01 — 2022.02</div>
+          <div>
+            <h3>△△마켓</h3>
+            <div class="role">Frontend Engineer · 전시/검색팀</div>
+            <ul>
+              <li><b>상품 검색·필터 페이지</b> 개발 — 무한 스크롤 가상화로 저사양 기기 스크롤 프레임 드랍 해결</li>
+              <li><b>기획전 페이지 빌더</b> 개발 — MD가 직접 기획전을 구성, 페이지 제작 리드타임 <span class="num">3일 → 2시간</span></li>
+              <li>JavaScript → <b>TypeScript 전환</b> 주도, 런타임 에러 <span class="num">-35%</span></li>
+            </ul>
+            <div class="tags">
+              <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Redux Toolkit</span>
+              <span class="tag">styled-components</span><span class="tag">Jest</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="block" id="projects">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-label">03 — Projects</div>
+        <h2 class="sec-title">문제를 정의하고, 숫자로 증명한 일들</h2>
+      </div>
+
+      <div class="projects">
+        <article class="project reveal">
+          <div>
+            <div class="kicker">2023 · ○○커머스 · 리드</div>
+            <h3>상품 상세 페이지 성능 최적화 & Next.js 전환</h3>
+            <p class="desc">트래픽의 60%가 몰리는 상품 상세 페이지의 느린 첫 로딩이 이탈의 주요 원인이었습니다.</p>
+            <dl class="psr">
+              <div><dt>Problem</dt><dd>CSR 구조로 인해 모바일 LCP 3초 이상, 검색 유입 사용자의 이탈률 높음</dd></div>
+              <div><dt>Action</dt><dd>SSR·스트리밍 도입, 이미지 최적화 파이프라인 구축, 번들 분석으로 서드파티 스크립트 지연 로딩</dd></div>
+              <div><dt>Result</dt><dd>LCP 48% 감소, 상세 → 장바구니 전환율 7% 상승, 검색 유입 18% 증가</dd></div>
+            </dl>
+            <div class="tags">
+              <span class="tag">Next.js</span><span class="tag">React Server Components</span><span class="tag">Lighthouse CI</span>
+            </div>
+          </div>
+          <div class="metrics">
+            <div class="metric"><b>-48%</b><span>LCP</span></div>
+            <div class="metric"><b>+7%</b><span>장바구니 담기율</span></div>
+            <div class="metric"><b>-41%</b><span>JS 번들 크기</span></div>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div>
+            <div class="kicker">2022 · ○○커머스 · 프론트엔드 담당</div>
+            <h3>주문/결제 플로우 리뉴얼</h3>
+            <p class="desc">4단계로 나뉜 결제 과정에서 배송지·쿠폰 단계 이탈이 두드러졌습니다.</p>
+            <dl class="psr">
+              <div><dt>Problem</dt><dd>단계가 많고, 쿠폰 적용 결과가 늦게 보여 사용자가 혼란을 겪음</dd></div>
+              <div><dt>Action</dt><dd>원페이지 결제로 통합, 낙관적 업데이트로 쿠폰·포인트 즉시 반영, 폼 상태를 타입 안전한 상태 머신으로 재설계</dd></div>
+              <div><dt>Result</dt><dd>A/B 테스트 결과 결제 완료율 12% 상승, 결제 관련 CS 문의 30% 감소</dd></div>
+            </dl>
+            <div class="tags">
+              <span class="tag">React Hook Form</span><span class="tag">Zod</span><span class="tag">XState</span><span class="tag">A/B Test</span>
+            </div>
+          </div>
+          <div class="metrics">
+            <div class="metric"><b>+12%</b><span>결제 완료율</span></div>
+            <div class="metric"><b>-30%</b><span>결제 CS 문의</span></div>
+            <div class="metric"><b>4→1</b><span>결제 단계</span></div>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div>
+            <div class="kicker">2022 – 2023 · ○○커머스 · 설계 리드</div>
+            <h3>사내 디자인 시스템 구축</h3>
+            <p class="desc">서비스마다 버튼이 7종류였고, 같은 UI를 팀마다 새로 만들고 있었습니다.</p>
+            <dl class="psr">
+              <div><dt>Problem</dt><dd>UI 불일치, 중복 개발, 디자이너–개발자 간 커뮤니케이션 비용</dd></div>
+              <div><dt>Action</dt><dd>디자인 토큰 → Figma 자동 동기화, 접근성(WAI-ARIA)을 갖춘 헤드리스 컴포넌트, Storybook + 시각적 회귀 테스트</dd></div>
+              <div><dt>Result</dt><dd>4개 팀 도입, 신규 화면 개발 시간 약 35% 단축</dd></div>
+            </dl>
+            <div class="tags">
+              <span class="tag">Design Tokens</span><span class="tag">Storybook</span><span class="tag">Chromatic</span><span class="tag">Turborepo</span>
+            </div>
+          </div>
+          <div class="metrics">
+            <div class="metric"><b>60+</b><span>공통 컴포넌트</span></div>
+            <div class="metric"><b>4팀</b><span>도입 서비스</span></div>
+            <div class="metric"><b>-35%</b><span>화면 개발 시간</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="block" id="skills">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-label">04 — Skills</div>
+        <h2 class="sec-title">기술 스택</h2>
+      </div>
+      <div class="skills">
+        <div class="skill-group reveal">
+          <h4>Core <small>주력</small></h4>
+          <div class="skill-list">
+            <span class="skill main">React</span><span class="skill main">TypeScript</span><span class="skill main">Next.js</span>
+            <span class="skill">JavaScript (ES2023)</span><span class="skill">HTML / CSS</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h4>State & Data <small>상태·데이터</small></h4>
+          <div class="skill-list">
+            <span class="skill">TanStack Query</span><span class="skill">Zustand</span><span class="skill">Redux Toolkit</span>
+            <span class="skill">XState</span><span class="skill">GraphQL</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h4>Styling & UI <small>스타일·UI</small></h4>
+          <div class="skill-list">
+            <span class="skill">Tailwind CSS</span><span class="skill">Emotion</span><span class="skill">vanilla-extract</span>
+            <span class="skill">Storybook</span><span class="skill">Radix UI</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h4>Quality & Infra <small>품질·인프라</small></h4>
+          <div class="skill-list">
+            <span class="skill">Vitest</span><span class="skill">Playwright</span><span class="skill">Testing Library</span>
+            <span class="skill">GitHub Actions</span><span class="skill">Sentry</span><span class="skill">Vercel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Writing -->
+  <section class="block" id="writing">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-label">05 — Writing & Talks</div>
+        <h2 class="sec-title">기록하고 공유합니다</h2>
+      </div>
+      <ul class="posts">
+        <li class="reveal"><a href="#">
+          <div><div class="post-title">CRA에서 Next.js App Router로, 서비스 중단 없이 옮기기</div><div class="post-meta">기술 블로그 · 점진적 마이그레이션 전략</div></div>
+          <span class="post-date">2024.05</span>
+        </a></li>
+        <li class="reveal"><a href="#">
+          <div><div class="post-title">결제 페이지를 상태 머신으로 다시 짠 이유</div><div class="post-meta">사내 세미나 → 외부 컨퍼런스 발표</div></div>
+          <span class="post-date">2023.11</span>
+        </a></li>
+        <li class="reveal"><a href="#">
+          <div><div class="post-title">커머스 이미지, LCP를 지배하는 자</div><div class="post-meta">기술 블로그 · 이미지 최적화 파이프라인</div></div>
+          <span class="post-date">2023.06</span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2 class="reveal">함께 일할 이야기가 있다면<br />편하게 연락주세요.</h2>
+      <p class="reveal">보통 하루 안에 답장 드려요.</p>
+      <button class="email reveal" id="emailBtn" data-email="hello@gildong.dev">
+        hello@gildong.dev <span class="copy-hint">클릭해서 복사</span>
+      </button>
+      <div class="socials reveal">
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="#" target="_blank" rel="noopener">Blog ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> 홍길동. Built with plain HTML & CSS.</span>
+    <a href="#top">맨 위로 ↑</a>
+  </div>
+</footer>
+
+<div class="toast" id="toast">이메일 주소를 복사했어요</div>
+
+<script>
+  // Theme
+  (function () {
+    var root = document.documentElement;
+    try { var saved = localStorage.getItem('theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+    document.getElementById('themeBtn').addEventListener('click', function () {
+      var current = root.getAttribute('data-theme') ||
+        (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  })();
+
+  // Nav border on scroll
+  var nav = document.getElementById('nav');
+  addEventListener('scroll', function () { nav.classList.toggle('scrolled', scrollY > 8); }, { passive: true });
+
+  // Reveal on scroll
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+  // Active nav link
+  var links = document.querySelectorAll('.nav-links a[href^="#"]');
+  var spy = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id); });
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('section[id]').forEach(function (s) { spy.observe(s); });
+
+  // Copy email
+  var toast = document.getElementById('toast');
+  document.getElementById('emailBtn').addEventListener('click', function () {
+    var email = this.dataset.email;
+    var done = function () { toast.classList.add('show'); setTimeout(function () { toast.classList.remove('show'); }, 1800); };
+    if (navigator.clipboard) navigator.clipboard.writeText(email).then(done, function () { location.href = 'mailto:' + email; });
+    else location.href = 'mailto:' + email;
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

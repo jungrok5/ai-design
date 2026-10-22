@@ -1,0 +1,79 @@
+file	kind	expression
+about-A	S	쇼핑몰은 포장까지만 하면 됩니다. 나머지는 이음로지스가 맡습니다.
+about-B	M	작은 쇼핑몰과 고객 사이를 가장 짧은 길로 잇습니다
+about-B	M	이음로지스 작은 쇼핑몰과 고객을 가장 짧은 길로 잇습니다.
+about-B	M	"빠른 배송은 큰 회사만의 것"이라는 공식을 깨기 위해
+about-B	M	기존 당일 배송은 최소 물량, 장기 계약, 복잡한 연동이라는 벽에 막혀 있었습니다
+about-B	M	이음로지스는 이 벽을 없앴습니다
+about-B	M	셀러의 오늘을 지키는 세 가지 약속
+about-B	A	당일 배송의 가치는 '정시'에 있습니다.
+about-B	A	작은 쇼핑몰이 큰 플랫폼과 같은 출발선에 서는 것. 그게 이음이 하는 일입니다.
+about-B	S	셀러는 상품과 고객에만 집중하고, 배송은 저희가 잇습니다.
+about-B	S	작은 물량도 귀하게
+about-B	S	모든 과정을 투명하게
+about-C	S	판매자는 포장까지만 하고, 그다음은 저희가 맡습니다.
+adopt-A	S	한 번 버려진 아이에게 다시, 집을
+adopt-A	A	이사, 결혼, 출산, 이직이 있어도 아이는 가족입니다.
+adopt-B	A	이사, 결혼, 출산 같은 변화가 생겨도 함께하는 것이 입양입니다.
+adopt-C	NONE	-
+bakery-A	A	좋은 밀을 쓰고 시간을 충분히 주면 결이 저절로 고와집니다.
+bakery-B	NONE	-
+bakery-C	A	밀이 숨 쉬는 시간만큼 결이 생깁니다.
+blog-A	NONE	-
+blog-B	A	가장 강력한 도구가 아니라, 우리 팀이 유지보수할 수 있는 도구가 정답입니다.
+blog-B	A	모노레포는 만능이 아닙니다. 하지만 ... 분명히 좋은 선택이었습니다.
+blog-C	NONE	-
+cli-A	NONE	-
+cli-B	NONE	-
+cli-C	S	작고 빠르고, 파이프라인에 잘 맞게
+cli-C	S	를 명령 하나로.
+hackathon-A	A	업무를 가장 잘 아는 사람이 가장 좋은 아이디어를 냅니다.
+hackathon-A	A	"얼마나 화려한가"보다 "내일부터 실제로 쓸 수 있는가"를 중요하게 봅니다.
+hackathon-A	S	가장 귀찮은 일 하나, 이번에 끝내 봅시다.
+hackathon-B	A	업무를 가장 잘 아는 사람이 가장 좋은 주제를 갖고 있습니다.
+hackathon-C	NONE	-
+onboard-A	A	리뷰는 코드를 보는 일이지 사람을 평가하는 일이 아닙니다.
+onboard-B	A	첫 주 목표는 코드를 많이 짜는 것이 아니라, 로컬에서 서비스를 띄우고 작은 PR 하나를 머지하는 것입니다.
+onboard-B	A	그게 첫 기여입니다.
+onboard-B	A	리뷰는 코드를 평가하는 자리이지 사람을 평가하는 자리가 아닙니다.
+onboard-C	A	리뷰는 코드를 보는 일이지 사람을 평가하는 일이 아닙니다.
+onboard-C	A	질문도 리뷰입니다.
+payapi-A	NONE	-
+payapi-B	NONE	-
+payapi-C	NONE	-
+pipeline-A	NONE	-
+pipeline-B	NONE	-
+pipeline-C	NONE	-
+portfolio-A	M	결제 버튼까지 가는 길을 짧고 단단하게 만듭니다
+portfolio-A	M	프론트엔드가 매출에 직접 닿는 일이라는 걸 배웠습니다
+portfolio-B	NONE	-
+portfolio-C	M	구매 버튼까지 가는 길을 더 빠르고 매끄럽게 만듭니다.
+portfolio-C	M	사용자 경험과 비즈니스 지표 사이를 연결하는 개발자
+portfolio-C	M	이 변경이 사용자의 구매 여정을 어떻게 바꾸는가
+portfolio-C	M	커머스 이미지, LCP를 지배하는 자
+portfolio-C	A	측정할 수 없으면 개선할 수 없다
+portfolio-C	A	타입은 팀의 문서다
+portfolio-C	S	함께 빨라지는 팀
+portfolio-C	S	문제를 정의하고, 숫자로 증명한 일들
+readme-A	NONE	-
+readme-B	NONE	-
+readme-C	NONE	-
+release-A	S	기록은 더 적게, 돈 관리는 더 쉽게.
+release-A	S	카테고리 고르는 시간, 이제 0초.
+release-A	S	우리 집 살림, 한 가계부에서 함께.
+release-A	S	밤에 가계부 쓸 때도 눈이 편안하게.
+release-B	S	쓴 돈은 적기만 하세요. 나머지는 머니로그 2.0이 합니다
+release-B	S	생활비는 같이 쓰고, 기록도 같이 합니다
+release-C	NONE	-
+saas-A	NONE	-
+saas-B	S	회의록 작성은 이제 그만
+saas-B	S	녹음만 올리세요. 요약과 할 일은 노트메이트가 정리합니다.
+saas-B	S	세 단계면 회의록이 완성돼요
+saas-C	NONE	-
+study-A	A	주말 오전 세 시간, 같이 풀면 끝까지 풉니다
+study-B	S	규칙은 적게, 대신 지킵니다.
+study-C	M	문제를 보는 눈을 기르는 출발점
+study-C	A	질문은 부끄러운 게 아니라 스터디의 연료
+study-C	S	2시간 30분, 짧지만 밀도 있게.
+study-C	S	기초부터 차근차근, 한 달에 한 주제씩.
+study-C	S	오래 함께하기 위한 최소한의 규칙.

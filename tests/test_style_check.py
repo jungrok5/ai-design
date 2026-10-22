@@ -312,6 +312,73 @@ class StyleCheck(unittest.TestCase):
               "안정화까지의 로드맵을 공유합니다. 지도 위젯을 불러옵니다. 도어록을 확인하려고 문을 열었다가 닫습니다.\n")
         self.assertNotIn("ko-metaphor-noun", run("ok.md", ok).stdout)
 
+    def test_naya_question_is_not_a_register_mix(self):
+        """1.7.0: an FAQ in 합니다체 asks '~나요?' (ko.react.dev, MDN ko); only other 해요체 endings count."""
+        body = "# FAQ\n\n설치합니다. 설정합니다. 배포합니다. 확인합니다.\n\n참여할 수 있나요? 네, 참여할 수 있습니다.\n" \
+               "비용이 있나요? 없습니다.\n혼자 와도 되나요? 됩니다.\n"
+        self.assertNotIn("ko-register-mix", run("faq.md", body).stdout)
+        mixed = body + "값이 바뀌어요. 다시 해 봐요. 그럼 끝나요.\n"
+        self.assertIn("ko-register-mix", run("mix.md", mixed).stdout)
+
+    def test_directions_heading_is_not_a_metaphor(self):
+        """1.7.0: '오시는 길' and '찾아오는 길' are the standard directions label on a page, not a metaphor."""
+        page = "<nav><a>오시는 길</a></nav><h2>오시는 길</h2><h2>찾아오는 길</h2><p>성수역에서 걸어서 5분입니다.</p>\n"
+        self.assertNotIn("ko-metaphor-noun", run("p.html", page).stdout)
+        self.assertIn("ko-metaphor-noun", run("q.md", "# 소개\n\n결제로 가는 길\n").stdout)
+
+    def test_ornamental_page_copy(self):
+        """1.7.0: lines Claude Code wrote for Korean landing pages with no plugin (docs/measurement.md)."""
+        cases = {
+            "ko-ornamental-verb": ["판매자, 배송 파트너, 고객을 하나의 흐름으로 잇습니다.", "흘러가는 로그를 바로 거르고 셉니다.",
+                                   "토요일 오전은 이렇게 흘러갑니다.", "하루의 온도를 살피며 반죽을 기다리고, 그 시간만큼 빵의 결이 깊어집니다.",
+                                   "중소 쇼핑몰의 주문을 오늘 안에 닿게 합니다.", "작은 쇼핑몰과 고객 사이를 가장 짧은 길로 잇습니다.",
+                                   "로그는 흘러가게 두고, 필요한 것만 건져 올리세요.", "결제 버튼까지 가는 길을 짧고 단단하게 만듭니다."],
+            "ko-axis-metaphor": ["Suspense라는 두 축을 중심으로 동작합니다.", "속도와 비용, 두 축으로 비교합니다.",
+                                 "Actions를 축으로 데이터를 다룹니다."],
+            "ko-metaphor-noun": ["최소 물량, 장기 계약이라는 벽에 막혀 있었습니다.", "같은 출발선에 서게 합니다.",
+                                 "입양 문턱을 낮추었습니다.", "질문은 스터디의 연료입니다."],
+            "ko-reframe": ["모노레포는 목적이 아니라 수단입니다.", "필요한 건 동기가 아니라 규율입니다.",
+                           "재능도 아닙니다. 운도 아닙니다. 꾸준함입니다.",
+                           "리뷰는 코드를 보는 일이지 사람을 평가하는 일이 아닙니다."],
+            "ko-aphorism": ["기다리는 시간이 맛을 만듭니다.", "매주 같은 시간에 모입니다. 루틴이 실력을 만듭니다.", "지표로 말하기"],
+            "ko-reveal": ["작은 쇼핑몰이 같은 속도로 배송하는 것. 그게 이음이 하는 일입니다.",
+                          "문서가 틀리면 고쳐 주세요. 그게 첫 기여입니다."],
+            "ko-paired-slogan": ["속도만큼 신뢰를, 규모만큼 책임을 생각합니다.", "기록은 더 적게, 돈 관리는 더 쉽게.",
+                                 "구매 대신 입양을, 짧은 인연 대신 끝까지 함께하는 약속을.",
+                                 "회의는 녹음만 하세요. 정리는 노트메이트가 합니다."],
+            "ko-fragment-slogan": ["5분 안에 첫 집계까지.", "회의록 작성은 이제 그만", "세 단계면 회의록이 완성됩니다."],
+            "ko-count-runup": ["## 우리가 일하는 세 가지 원칙", "## 2.0에서 새로워진 세 가지"],
+            "ko-era-opener": ["급변하는 시장에서 살아남으려면 속도가 필요합니다."],
+            "ko-hook-formula": ["결론부터 말씀드리면 배포는 다음 주입니다.", "이유는 단순합니다."],
+        }
+        for rule, lines in cases.items():
+            for line in lines:
+                self.assertIn(rule, run("c.md", f"# 소개\n\n{line}\n").stdout, line)
+        # Literal uses from human docs and plain pages stay quiet.
+        ok = ("# 데이터 흐름\n\n컴포넌트를 연결해 데이터가 그 사이를 흘러가게 합니다. 작업 흐름에 맞게 묶습니다.\n"
+              "가로축에 시간, 세로축에 값을 둡니다. 실행 시간을 단축하고 이미지를 축소합니다.\n"
+              "Effect가 아니라 이벤트 핸들러에 넣으세요. 인수 객체는 배열과 닮은 것이지 배열이 아닙니다.\n"
+              "쌀가루를 섞어 결이 부드럽습니다. 요청이 서버에 닿으면 응답합니다.\n"
+              "설치부터 첫 집계까지 약 5분이 걸립니다. 변경은 PR 하나로 끝납니다.\n")
+        out = run("ok.md", ok).stdout
+        for rule in cases:
+            self.assertNotIn(rule, out)
+
+    def test_english_mannered_copy(self):
+        """1.7.0: Claude-era mannered prose and landing-page formulas; no hit in 985 human English docs."""
+        cases = {"en-mannered": ["This check earns its keep.", "A dial worth turning.", "The load-bearing piece of the design."],
+                 "en-hero-formula": ["Project management, reimagined.", "Where design meets code.", "Unlock new possibilities.",
+                                     "Effortless invoicing for freelancers."],
+                 "en-social-proof": ["Join thousands of happy customers.", "Trusted by 10,000+ of the best teams."],
+                 "en-buzz-metaphor": ["We look at it through the lens of cost."],
+                 "en-performed-candor": ["Honest caveat: the sync is slow."],
+                 "en-what-if-i-told-you": ["Imagine a world where your inbox sorts itself."]}
+        for rule, lines in cases.items():
+            for line in lines:
+                self.assertIn(rule, run("e.md", f"# Intro\n\n{line}\n").stdout, line)
+        ok = "# Intro\n\nThink of it as a regular state variable. Ask before embarking on large tasks.\n"
+        self.assertEqual(run("ok.md", ok).stdout.count("warning"), 0, run("ok.md", ok).stdout)
+
     def test_decorative_section_numbers(self):
         html = "".join(f'<section><span class="num">0{i}</span><h2>t</h2></section>' for i in range(1, 5))
         self.assertIn("ui-section-number", run("s.html", html).stdout)

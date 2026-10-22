@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>신입 개발자 온보딩</title>
+<meta name="description" content="입사 첫 주에 할 일, 개발 환경 세팅, 코드 리뷰 규칙">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* ── Tokens: design system "Clear" (ai-design) ───────────────────────── */
+:root {
+  --bg: #ffffff; --surface: #f8fafc; --sunk: #f1f5f9; --line: #e2e8f0; --line-strong: #cbd5e1;
+  --fg: #0f172a; --muted: #475569; --subtle: #64748b;
+  --accent: #1d4ed8; --accent-hover: #1e40af; --accent-fg: #ffffff; --accent-soft: #eff6ff;
+  --ok: #067647; --ok-soft: #ecfdf3; --warn: #b54708; --warn-soft: #fffaeb; --danger: #b42318; --danger-soft: #fef3f2;
+  --code-bg: #0f172a; --code-fg: #e2e8f0; --code-muted: #94a3b8; --code-line: #334155;
+  --focus: #1d4ed8;
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-xs: 12px; --text-s: 14px; --text-m: 16px; --text-l: 18px;
+  --text-h3: 18px; --text-h2: 24px; --text-h1: clamp(30px, 4.4vw, 44px);
+  --leading: 1.7; --leading-tight: 1.3;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --radius-s: 6px; --radius-m: 8px; --radius-l: 10px;
+  --border: 1px solid var(--line);
+  --measure: 72ch; --page: 1120px; --motion: 180ms ease-out;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+    --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+    --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+    --ok: #47cd89; --ok-soft: #16322a; --warn: #fdb022; --warn-soft: #3a2c12; --danger: #f97066; --danger-soft: #3b1f1d;
+    --code-bg: #111315; --code-fg: #e4e6e8; --code-muted: #8a9096; --code-line: #33373b; --focus: #7cb7e8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+  --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+  --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+  --ok: #47cd89; --ok-soft: #16322a; --warn: #fdb022; --warn-soft: #3a2c12; --danger: #f97066; --danger-soft: #3b1f1d;
+  --code-bg: #111315; --code-fg: #e4e6e8; --code-muted: #8a9096; --code-line: #33373b; --focus: #7cb7e8;
+  color-scheme: dark;
+}
+
+/* ── Base and components ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 76px; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-sans); font-size: var(--text-m); line-height: var(--leading);
+  word-break: keep-all; overflow-wrap: break-word;
+}
+h1, h2, h3 { margin: 0; line-height: var(--leading-tight); font-weight: 700; text-wrap: balance; }
+h1 { font-size: var(--text-h1); letter-spacing: -0.02em; }
+h2 { font-size: var(--text-h2); letter-spacing: -0.01em; }
+h3 { font-size: var(--text-h3); }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+code, pre { font-family: var(--font-mono); }
+:not(pre) > code {
+  font-size: 0.88em; background: var(--sunk); border: var(--border); border-radius: 4px;
+  padding: 0 4px; overflow-wrap: anywhere; word-break: normal;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+.ds-topbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; gap: var(--space-4); min-height: 60px;
+  padding: 0 var(--space-4); border-bottom: var(--border); background: var(--bg);
+  overflow-x: auto;
+}
+.ds-topbar strong { font-size: var(--text-s); white-space: nowrap; margin-right: auto; }
+.ds-topbar a {
+  color: var(--muted); text-decoration: none; font-size: var(--text-s); white-space: nowrap;
+  min-height: 44px; display: inline-flex; align-items: center;
+}
+.ds-topbar a:hover { color: var(--fg); }
+
+.ds-page { max-width: var(--page); margin: 0 auto; padding: var(--space-7) var(--space-4) var(--space-8); }
+@media (min-width: 720px) { .ds-page { padding-inline: var(--space-5); } }
+.ds-stack { display: grid; gap: var(--space-4); }
+.ds-lede { font-size: var(--text-l); color: var(--muted); max-width: var(--measure); }
+.ds-muted { color: var(--muted); }
+
+.ds-cmd {
+  display: flex; align-items: center; gap: var(--space-2); min-width: 0;
+  background: var(--code-bg); color: var(--code-fg); border-radius: var(--radius-l);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+}
+.ds-cmd code, .ds-cmd pre {
+  flex: 1; min-width: 0; margin: 0; background: none; border: 0; padding: 0; color: inherit;
+  font-size: var(--text-s); line-height: 1.7; white-space: pre; overflow-x: auto;
+}
+.ds-cmd .ds-c { color: var(--code-muted); }
+.ds-cmd button {
+  align-self: flex-start; flex: none; min-height: 36px; padding: 0 var(--space-3); border-radius: var(--radius-s);
+  border: 1px solid var(--code-line); background: transparent; color: var(--code-fg);
+  font: 500 13px / 1 var(--font-sans); cursor: pointer;
+}
+.ds-cmd button:hover { border-color: var(--code-muted); }
+.ds-cmd button:focus-visible { outline-color: var(--code-fg); }
+@media (max-width: 600px) { .ds-cmd code, .ds-cmd pre { white-space: pre-wrap; overflow-wrap: anywhere; } }
+
+.ds-steps { list-style: none; margin: 0; padding: 0; counter-reset: ds-step; }
+.ds-steps > li {
+  display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: var(--space-3); align-items: start;
+  padding: var(--space-4) 0; border-bottom: var(--border);
+}
+.ds-steps > li:last-child { border-bottom: 0; }
+.ds-steps > li::before {
+  counter-increment: ds-step; content: counter(ds-step);
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--sunk); color: var(--fg); font: 700 13px / 1 var(--font-sans);
+}
+.ds-steps > li.is-human::before { background: var(--accent); color: var(--accent-fg); }
+.ds-steps .ds-who { font-size: 13px; font-weight: 700; color: var(--accent); white-space: nowrap; padding-top: 3px; }
+.ds-steps h3 { font-size: var(--text-m); }
+.ds-steps p { font-size: 15px; color: var(--muted); margin-top: 2px; }
+.ds-steps .ds-cmd { margin-top: var(--space-3); }
+
+.ds-table-wrap { overflow-x: auto; }
+.ds-table { width: 100%; border-collapse: collapse; font-size: 15px; font-variant-numeric: tabular-nums; }
+.ds-table th, .ds-table td { text-align: left; vertical-align: top; padding: 12px 16px 12px 0; border-bottom: var(--border); }
+.ds-table thead th { font-size: 13px; font-weight: 500; color: var(--subtle); border-bottom-color: var(--line-strong); }
+.ds-table tbody tr:last-child > * { border-bottom: 0; }
+.ds-table tbody th { font-weight: 700; white-space: nowrap; }
+
+.ds-panel { background: var(--bg); border: var(--border); border-radius: var(--radius-l); padding: var(--space-5); min-width: 0; }
+.ds-panel--sunk { background: var(--surface); }
+
+.ds-note { display: grid; gap: var(--space-1); background: var(--accent-soft); border-radius: var(--radius-m); padding: var(--space-3) var(--space-4); font-size: 15px; }
+.ds-note--warn { background: var(--warn-soft); }
+
+.ds-badge {
+  display: inline-flex; align-items: center; min-height: 22px; padding: 0 var(--space-2); border-radius: 4px;
+  font-size: var(--text-xs); font-weight: 700; background: var(--sunk); color: var(--muted); white-space: nowrap;
+  font-family: var(--font-mono);
+}
+.ds-badge--accent { background: var(--accent-soft); color: var(--accent); }
+.ds-badge--ok { background: var(--ok-soft); color: var(--ok); }
+.ds-badge--danger { background: var(--danger-soft); color: var(--danger); }
+
+.ds-details { border-top: var(--border); border-bottom: var(--border); }
+.ds-details > summary { cursor: pointer; padding: var(--space-3) 0; min-height: 44px; display: flex; align-items: center;
+  gap: var(--space-2); color: var(--fg); font-weight: 500; list-style: none; }
+.ds-details > summary::-webkit-details-marker { display: none; }
+.ds-details > summary::before { content: ""; width: 7px; height: 7px; border-right: 1.5px solid var(--muted);
+  border-bottom: 1.5px solid var(--muted); transform: rotate(-45deg); transition: transform 150ms ease-out; flex: none; }
+.ds-details[open] > summary::before { transform: rotate(45deg); }
+.ds-details > :not(summary) { margin-bottom: var(--space-4); }
+
+/* ── Page ────────────────────────────────────────────────────────────── */
+.intro { display: grid; gap: var(--space-6); padding-bottom: var(--space-7); border-bottom: var(--border); }
+.intro-head { display: grid; gap: var(--space-4); }
+.intro-label { font-size: var(--text-s); font-weight: 700; color: var(--accent); }
+.facts { display: grid; gap: 0; margin: 0; max-width: 760px; }
+.facts > div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: var(--space-4); padding: var(--space-3) 0; border-top: var(--border); }
+.facts dt { color: var(--subtle); font-size: var(--text-s); padding-top: 1px; }
+.facts dd { margin: 0; }
+@media (max-width: 480px) { .facts > div { grid-template-columns: 1fr; gap: 0; } }
+
+section { padding-top: var(--space-7); }
+.sec-head { display: grid; gap: var(--space-2); margin-bottom: var(--space-5); max-width: var(--measure); }
+.sec-head p { color: var(--muted); }
+
+/* first week: progress + days */
+.progress { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-5); font-size: var(--text-s); color: var(--muted); }
+.progress-bar { flex: 1; max-width: 240px; height: 6px; background: var(--sunk); border-radius: 3px; overflow: hidden; }
+.progress-bar span { display: block; height: 100%; width: 0; background: var(--accent); transition: width var(--motion); }
+.progress output { font-variant-numeric: tabular-nums; color: var(--fg); font-weight: 700; }
+
+.week { display: grid; gap: var(--space-4); grid-template-columns: 1fr; }
+@media (min-width: 760px) { .week { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1080px) { .week { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.day { padding: var(--space-4) var(--space-5) var(--space-3); }
+.day h3 { display: flex; align-items: baseline; gap: var(--space-2); margin-bottom: var(--space-2); }
+.day h3 small { font-size: var(--text-s); font-weight: 500; color: var(--subtle); }
+.checks { list-style: none; margin: 0; padding: 0; }
+.checks label {
+  display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: var(--space-3); align-items: start;
+  min-height: 44px; padding: 10px 0; cursor: pointer; font-size: 15px;
+}
+.checks li + li label { border-top: var(--border); }
+.checks input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--accent); cursor: pointer; }
+.checks input:checked + span { color: var(--subtle); text-decoration: line-through; text-decoration-color: var(--line-strong); }
+.reset { margin-top: var(--space-4); }
+.linkbtn {
+  background: none; border: 0; padding: 0 var(--space-1); min-height: 44px; color: var(--muted);
+  font: 500 var(--text-s) / 1 var(--font-sans); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+.linkbtn:hover { color: var(--fg); }
+
+/* setup */
+.setup { display: grid; gap: var(--space-6); grid-template-columns: 1fr; }
+@media (min-width: 960px) { .setup { grid-template-columns: minmax(0, 1fr) 320px; align-items: start; } }
+.access { font-size: 15px; }
+.access h3 { font-size: var(--text-m); margin-bottom: var(--space-3); }
+.access ul { margin: 0; padding: 0; list-style: none; }
+.access li { display: flex; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) 0; border-top: var(--border); }
+.access li span:last-child { color: var(--subtle); font-size: var(--text-s); text-align: right; }
+.access .ds-note { margin-top: var(--space-4); }
+
+/* review */
+.review-rules { counter-reset: none; margin: 0 0 var(--space-6); padding: 0; list-style: none; max-width: var(--measure); }
+.review-rules li { padding: var(--space-3) 0; border-top: var(--border); }
+.review-rules li:last-child { border-bottom: var(--border); }
+.review-rules strong { display: block; }
+.review-rules span { color: var(--muted); font-size: 15px; }
+.review-cols { display: grid; gap: var(--space-6); grid-template-columns: 1fr; }
+@media (min-width: 960px) { .review-cols { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: start; } }
+.review-cols h3 { margin-bottom: var(--space-3); }
+.example { display: grid; gap: var(--space-3); font-size: 15px; }
+.example .ds-badge { margin-right: var(--space-2); }
+.comment { padding: var(--space-3) var(--space-4); border: var(--border); border-radius: var(--radius-m); background: var(--bg); }
+.comment p + p { margin-top: var(--space-1); color: var(--muted); }
+.comment .verdict { font-size: var(--text-s); color: var(--subtle); }
+.comment .verdict b { font-weight: 700; }
+.pr-template { margin-top: var(--space-6); }
+.template { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: var(--radius-l);
+  padding: var(--space-4); font: var(--text-s) / 1.7 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+
+footer { margin-top: var(--space-8); padding-top: var(--space-5); border-top: var(--border); color: var(--subtle); font-size: var(--text-s); }
+</style>
+</head>
+<body>
+
+<nav class="ds-topbar" aria-label="문서 안 이동">
+  <strong>개발팀 온보딩</strong>
+  <a href="#week">첫 주</a>
+  <a href="#setup">환경 세팅</a>
+  <a href="#review">코드 리뷰</a>
+</nav>
+
+<main class="ds-page">
+
+  <header class="intro">
+    <div class="intro-head">
+      <p class="intro-label">신입 개발자용</p>
+      <h1>신입 개발자 온보딩 가이드</h1>
+      <p class="ds-lede">첫 주에 할 일, 노트북 세팅 순서, 코드 리뷰 규칙을 모았습니다. 금요일까지 첫 PR을 머지하는 게 목표입니다. 막히면 30분 넘게 혼자 붙잡지 말고 버디에게 물어보세요.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>버디</dt><dd>팀에서 한 명이 첫 한 달 동안 붙습니다. 입사일 아침에 리드가 소개합니다.</dd></div>
+      <div><dt>질문 채널</dt><dd>Slack <code>#dev-onboarding</code> — 어떤 질문이든 괜찮습니다.</dd></div>
+      <div><dt>장애·보안</dt><dd>Slack <code>#incident</code>, 보안 관련은 <code>security@example.com</code></dd></div>
+      <div><dt>문서</dt><dd>사내 위키 <code>wiki.example.com/dev</code> — 아키텍처, 배포, 장애 대응 문서</dd></div>
+    </dl>
+  </header>
+
+  <!-- 1. 첫 주 -->
+  <section id="week" aria-labelledby="week-title">
+    <div class="sec-head">
+      <h2 id="week-title">첫 주에 할 일</h2>
+      <p>체크한 항목은 이 브라우저에 저장됩니다. 순서는 바뀌어도 되지만, 계정과 환경 세팅은 화요일 안에 끝내야 수요일부터 코드를 볼 수 있습니다.</p>
+    </div>
+
+    <div class="progress">
+      <span>진행</span>
+      <div class="progress-bar" aria-hidden="true"><span id="bar"></span></div>
+      <output id="count" aria-live="polite">0 / 0</output>
+    </div>
+
+    <div class="week">
+      <div class="ds-panel day">
+        <h3>월요일 <small>계정과 인사</small></h3>
+        <ul class="checks">
+          <li><label><input type="checkbox" data-k="mon-1"><span>노트북 수령, 사내 SSO 로그인과 2단계 인증 등록</span></label></li>
+          <li><label><input type="checkbox" data-k="mon-2"><span>Slack, 메일, 캘린더 접속 확인 후 프로필 사진 등록</span></label></li>
+          <li><label><input type="checkbox" data-k="mon-3"><span>팀 리드·버디와 30분 면담: 팀이 맡은 서비스와 이번 분기 목표 듣기</span></label></li>
+          <li><label><input type="checkbox" data-k="mon-4"><span>아래 <a href="#access">권한 목록</a>을 IT 헬프데스크에 신청</span></label></li>
+        </ul>
+      </div>
+
+      <div class="ds-panel day">
+        <h3>화요일 <small>환경 세팅</small></h3>
+        <ul class="checks">
+          <li><label><input type="checkbox" data-k="tue-1"><span><a href="#setup">개발 환경 세팅</a> 1–6단계 완료</span></label></li>
+          <li><label><input type="checkbox" data-k="tue-2"><span>로컬에서 서비스 실행하고 테스트 통과 확인</span></label></li>
+          <li><label><input type="checkbox" data-k="tue-3"><span>세팅 중 문서와 다른 부분을 메모해 두기 (첫 PR 후보)</span></label></li>
+        </ul>
+      </div>
+
+      <div class="ds-panel day">
+        <h3>수요일 <small>코드와 구조</small></h3>
+        <ul class="checks">
+          <li><label><input type="checkbox" data-k="wed-1"><span>위키의 아키텍처 문서 읽기: 서비스 간 호출 흐름과 데이터 저장소</span></label></li>
+          <li><label><input type="checkbox" data-k="wed-2"><span>버디와 함께 최근 머지된 PR 3개 읽고 왜 그렇게 바꿨는지 듣기</span></label></li>
+          <li><label><input type="checkbox" data-k="wed-3"><span>데일리 스탠드업 참석해 자기소개</span></label></li>
+        </ul>
+      </div>
+
+      <div class="ds-panel day">
+        <h3>목요일 <small>첫 작업</small></h3>
+        <ul class="checks">
+          <li><label><input type="checkbox" data-k="thu-1"><span><code>good-first-issue</code> 라벨이 붙은 이슈 하나 골라 버디와 범위 맞추기</span></label></li>
+          <li><label><input type="checkbox" data-k="thu-2"><span>브랜치 만들고 작업, 테스트 추가</span></label></li>
+          <li><label><input type="checkbox" data-k="thu-3"><span>다른 사람 PR 하나에 리뷰 코멘트 남기기 (질문이어도 됩니다)</span></label></li>
+        </ul>
+      </div>
+
+      <div class="ds-panel day">
+        <h3>금요일 <small>첫 PR 머지</small></h3>
+        <ul class="checks">
+          <li><label><input type="checkbox" data-k="fri-1"><span>PR 올리고 리뷰 반영해서 머지</span></label></li>
+          <li><label><input type="checkbox" data-k="fri-2"><span>스테이징 배포 확인</span></label></li>
+          <li><label><input type="checkbox" data-k="fri-3"><span>리드와 15분 회고: 막혔던 점, 문서에서 고칠 점</span></label></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="reset"><button type="button" class="linkbtn" id="reset">체크 모두 지우기</button></div>
+  </section>
+
+  <!-- 2. 환경 세팅 -->
+  <section id="setup" aria-labelledby="setup-title">
+    <div class="sec-head">
+      <h2 id="setup-title">개발 환경 세팅</h2>
+      <p>macOS 기준입니다. 순서대로 하면 1시간 정도 걸립니다. 명령은 오른쪽 <b>복사</b> 버튼으로 그대로 붙여 넣으세요.</p>
+    </div>
+
+    <div class="setup">
+      <ol class="ds-steps">
+        <li>
+          <div>
+            <h3>Homebrew와 기본 도구 설치</h3>
+            <p>Git, Node 버전 관리자, Docker를 한 번에 설치합니다.</p>
+            <div class="ds-cmd"><pre><span class="ds-c"># Homebrew가 없을 때만</span>
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install git fnm gh
+brew install --cask docker visual-studio-code</pre><button type="button">복사</button></div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Git 사용자 정보 설정</h3>
+            <p>커밋 작성자로 회사 메일을 씁니다. 개인 메일로 커밋하면 CI에서 막힙니다.</p>
+            <div class="ds-cmd"><pre>git config --global user.name "홍길동"
+git config --global user.email "gildong.hong@example.com"
+git config --global pull.rebase true</pre><button type="button">복사</button></div>
+          </div>
+        </li>
+        <li class="is-human">
+          <div>
+            <h3>SSH 키 만들고 GitHub에 등록</h3>
+            <p>공개키를 GitHub 설정의 SSH keys에 붙여 넣은 뒤, 조직 SSO 승인(Configure SSO)까지 눌러야 사내 저장소에 접근됩니다.</p>
+            <div class="ds-cmd"><pre>ssh-keygen -t ed25519 -C "gildong.hong@example.com"
+pbcopy &lt; ~/.ssh/id_ed25519.pub   <span class="ds-c"># 공개키가 클립보드에 복사됩니다</span></pre><button type="button">복사</button></div>
+          </div>
+          <span class="ds-who">직접 확인</span>
+        </li>
+        <li>
+          <div>
+            <h3>저장소 클론, 런타임 맞추기</h3>
+            <p>Node 버전은 저장소의 <code>.nvmrc</code>를 따릅니다.</p>
+            <div class="ds-cmd"><pre>git clone git@github.com:example-corp/main-service.git
+cd main-service
+fnm use --install-if-missing
+npm ci</pre><button type="button">복사</button></div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>환경 변수 파일 만들기</h3>
+            <p>예시 파일을 복사한 다음, 비어 있는 값은 사내 비밀번호 관리자의 “dev-local” 항목에서 채웁니다. <code>.env</code>는 절대 커밋하지 않습니다.</p>
+            <div class="ds-cmd"><pre>cp .env.example .env</pre><button type="button">복사</button></div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>로컬 실행과 테스트</h3>
+            <p>DB와 Redis는 Docker로 띄웁니다. 테스트가 모두 통과하고 브라우저에서 <code>localhost:3000</code>이 열리면 세팅이 완료된 것입니다.</p>
+            <div class="ds-cmd"><pre>docker compose up -d
+npm run db:migrate
+npm test
+npm run dev</pre><button type="button">복사</button></div>
+          </div>
+        </li>
+      </ol>
+
+      <aside class="ds-panel ds-panel--sunk access" id="access" aria-labelledby="access-title">
+        <h3 id="access-title">월요일에 신청할 권한</h3>
+        <ul>
+          <li><span>GitHub 조직</span><span>리드 승인</span></li>
+          <li><span>Jira·Confluence</span><span>자동</span></li>
+          <li><span>VPN</span><span>IT 헬프데스크</span></li>
+          <li><span>스테이징 AWS 콘솔</span><span>리드 승인</span></li>
+          <li><span>Sentry·Grafana</span><span>자동</span></li>
+          <li><span>비밀번호 관리자</span><span>IT 헬프데스크</span></li>
+        </ul>
+        <div class="ds-note ds-note--warn">
+          <p><b>운영 DB 권한은 신청하지 마세요.</b> 수습 기간이 끝난 뒤 리드가 따로 요청합니다.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 3. 코드 리뷰 -->
+  <section id="review" aria-labelledby="review-title">
+    <div class="sec-head">
+      <h2 id="review-title">코드 리뷰 규칙</h2>
+      <p>리뷰는 코드를 보는 일이지 사람을 평가하는 일이 아닙니다. 아래 다섯 가지만 지키면 됩니다.</p>
+    </div>
+
+    <ul class="review-rules">
+      <li><strong>PR은 작게, 400줄 이하로</strong><span>넘으면 나눕니다. 테스트와 자동 생성 파일은 줄 수에서 빼고 셉니다.</span></li>
+      <li><strong>승인 1명 이상, CI 통과 후 머지</strong><span>머지는 PR 작성자가 직접 합니다. 리뷰어가 대신 머지하지 않습니다.</span></li>
+      <li><strong>리뷰 요청을 받으면 영업일 기준 하루 안에 응답</strong><span>바로 못 보면 언제 볼 수 있는지라도 코멘트로 남깁니다.</span></li>
+      <li><strong>코멘트 앞에 말머리를 붙여 무게를 알리기</strong><span>꼭 고쳐야 하는 것과 취향을 구분해야 작성자가 덜 헤맵니다. 아래 표를 보세요.</span></li>
+      <li><strong>설명 없이 “별로예요”는 금지</strong><span>왜 문제인지, 어떻게 바꾸면 좋을지 함께 씁니다. 칭찬도 구체적으로 합니다.</span></li>
+    </ul>
+
+    <div class="review-cols">
+      <div>
+        <h3>코멘트 말머리</h3>
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <thead><tr><th scope="col">말머리</th><th scope="col">뜻</th><th scope="col">머지 전 반영</th></tr></thead>
+            <tbody>
+              <tr><th scope="row"><span class="ds-badge ds-badge--danger">[must]</span></th><td>버그, 보안, 데이터 손실 위험</td><td>필수</td></tr>
+              <tr><th scope="row"><span class="ds-badge ds-badge--accent">[suggest]</span></th><td>더 나은 방법 제안</td><td>작성자 판단</td></tr>
+              <tr><th scope="row"><span class="ds-badge">[question]</span></th><td>이해를 위한 질문</td><td>답변만 하면 됨</td></tr>
+              <tr><th scope="row"><span class="ds-badge">[nit]</span></th><td>사소한 스타일, 오타</td><td>선택</td></tr>
+              <tr><th scope="row"><span class="ds-badge ds-badge--ok">[praise]</span></th><td>잘된 부분</td><td>없음</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <h3>이렇게 씁니다</h3>
+        <div class="example">
+          <div class="comment">
+            <p><span class="ds-badge ds-badge--danger">[must]</span>여기서 <code>userId</code>가 없으면 전체 주문을 조회합니다.</p>
+            <p>빈 값일 때 400을 돌려주고, 그 경우 테스트를 하나 추가해 주세요.</p>
+          </div>
+          <div class="comment">
+            <p><span class="ds-badge">[nit]</span>변수명 <code>tmp</code> 대신 <code>pendingOrders</code>면 읽기 쉬울 것 같아요.</p>
+          </div>
+          <p class="comment verdict">✕ <b>피할 것:</b> “이건 좀 아닌 것 같은데요.” — 무엇이 왜 문제인지 없어서 작성자가 고칠 수 없습니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <details class="ds-details pr-template">
+      <summary>PR 설명 템플릿 보기</summary>
+      <pre class="template">## 무엇을 바꿨나
+-
+
+## 왜 바꿨나
+관련 이슈: #
+
+## 어떻게 확인했나
+- [ ] 단위 테스트 추가/수정
+- [ ] 로컬에서 직접 실행해 확인
+- [ ] 스크린샷 (화면 변경이 있을 때)
+
+## 리뷰어가 특히 봐 줬으면 하는 부분
+</pre>
+    </details>
+  </section>
+
+  <footer>
+    <p>이 문서가 틀렸거나 빠진 게 있으면 첫 PR로 고쳐 주세요. 다음 입사자가 고마워합니다.</p>
+  </footer>
+</main>
+
+<script>
+// 복사 버튼: .ds-c 주석은 빼고 복사합니다.
+document.addEventListener("click", async (e) => {
+  const btn = e.target.closest(".ds-cmd button");
+  if (!btn) return;
+  const copy = btn.parentElement.querySelector("code, pre").cloneNode(true);
+  copy.querySelectorAll(".ds-c").forEach((n) => n.remove());
+  const text = copy.textContent.split("\n").map((l) => l.trimEnd()).filter(Boolean).join("\n");
+  const label = btn.textContent;
+  try { await navigator.clipboard.writeText(text); btn.textContent = "복사됨"; } catch { btn.textContent = "복사 실패"; }
+  setTimeout(() => { btn.textContent = label; }, 1500);
+});
+
+// 첫 주 체크리스트: 브라우저에 저장, 저장이 막혀 있어도 페이지는 동작합니다.
+(() => {
+  const KEY = "onboarding-week1";
+  const boxes = [...document.querySelectorAll(".checks input")];
+  const bar = document.getElementById("bar");
+  const count = document.getElementById("count");
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch {}
+  boxes.forEach((b) => { b.checked = !!saved[b.dataset.k]; });
+
+  const render = () => {
+    const done = boxes.filter((b) => b.checked).length;
+    count.textContent = `${done} / ${boxes.length}`;
+    bar.style.width = `${(done / boxes.length) * 100}%`;
+  };
+  const save = () => {
+    const state = {};
+    boxes.forEach((b) => { if (b.checked) state[b.dataset.k] = true; });
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {}
+  };
+  boxes.forEach((b) => b.addEventListener("change", () => { save(); render(); }));
+  document.getElementById("reset").addEventListener("click", () => {
+    boxes.forEach((b) => { b.checked = false; });
+    save(); render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

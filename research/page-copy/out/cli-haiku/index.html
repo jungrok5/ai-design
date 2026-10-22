@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>logpipe — 실시간 로그 필터링 & 집계 CLI</title>
+<meta name="description" content="logpipe는 로그 스트림을 실시간으로 필터링하고 집계하는 가벼운 Go CLI 도구입니다.">
+<style>
+  :root {
+    --bg: #0b0f14;
+    --surface: #121821;
+    --surface-2: #18212c;
+    --border: #243040;
+    --text: #e6edf5;
+    --muted: #8b99ab;
+    --accent: #3ddc97;
+    --accent-2: #5ab0ff;
+    --warn: #ffb454;
+    --err: #ff6b6b;
+    --code-bg: #0e141c;
+    --radius: 12px;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f7f9fc;
+      --surface: #ffffff;
+      --surface-2: #eef2f7;
+      --border: #d9e1ec;
+      --text: #0f1722;
+      --muted: #5b6b7f;
+      --accent: #0f9d63;
+      --accent-2: #1d6fd8;
+      --warn: #b86e00;
+      --err: #c73a3a;
+      --code-bg: #0f1722;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f7f9fc;
+    --surface: #ffffff;
+    --surface-2: #eef2f7;
+    --border: #d9e1ec;
+    --text: #0f1722;
+    --muted: #5b6b7f;
+    --accent: #0f9d63;
+    --accent-2: #1d6fd8;
+    --warn: #b86e00;
+    --err: #c73a3a;
+    --code-bg: #0f1722;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent-2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, pre, .mono { font-family: var(--mono); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  section { padding: 72px 0; border-top: 1px solid var(--border); }
+  h1, h2, h3 { line-height: 1.2; margin: 0; letter-spacing: -0.01em; }
+  h2 { font-size: clamp(26px, 4vw, 34px); margin-bottom: 12px; }
+  .lead { color: var(--muted); font-size: 18px; max-width: 640px; }
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  /* nav */
+  header.nav {
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(10px);
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px; gap: 16px;
+  }
+  .brand { font-family: var(--mono); font-weight: 700; font-size: 18px; color: var(--text); }
+  .brand span { color: var(--accent); }
+  .nav-links { display: flex; gap: 20px; font-size: 15px; }
+  .nav-links a { color: var(--muted); }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+  @media (max-width: 640px) {
+    .nav-links a:not(.gh) { display: none; }
+  }
+
+  /* buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 20px; border-radius: 10px;
+    font-size: 15px; font-weight: 600;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+  }
+  .btn:hover { text-decoration: none; border-color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #05140c; }
+  .btn.primary:hover { filter: brightness(1.08); }
+  .btn.ghost { background: transparent; }
+
+  /* hero */
+  .hero { padding: 96px 0 72px; }
+  .hero h1 {
+    font-size: clamp(38px, 7vw, 68px);
+    font-weight: 800;
+    margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero .lead { font-size: 20px; margin-bottom: 32px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
+  .install {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    background: var(--code-bg);
+    color: #d6e2f0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    max-width: 560px;
+    font-family: var(--mono);
+    font-size: 15px;
+  }
+  .install .prompt { color: var(--accent); user-select: none; }
+  .copy {
+    background: var(--surface-2); color: var(--muted);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 6px 10px; font-size: 13px; cursor: pointer; font-family: var(--sans);
+    flex-shrink: 0;
+  }
+  .copy:hover { color: var(--text); }
+
+  /* terminal */
+  .term {
+    margin-top: 56px;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,.45);
+  }
+  .term-bar {
+    display: flex; gap: 7px; padding: 12px 14px;
+    background: #0a0e13; border-bottom: 1px solid #1c2633;
+  }
+  .term-bar i { width: 11px; height: 11px; border-radius: 50%; background: #2a3646; display: block; }
+  .term-body {
+    margin: 0; padding: 20px 22px;
+    color: #cfdbea; font-size: 14px; line-height: 1.75;
+    overflow-x: auto; white-space: pre;
+  }
+  .t-dim { color: #5b6b7f; }
+  .t-cmd { color: #e6edf5; }
+  .t-ok { color: var(--accent); }
+  .t-warn { color: #ffb454; }
+  .t-err { color: #ff6b6b; }
+  .t-info { color: #5ab0ff; }
+
+  /* features */
+  .grid {
+    display: grid; gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    margin-top: 40px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .card .ico {
+    width: 36px; height: 36px; border-radius: 9px;
+    display: grid; place-items: center;
+    background: var(--surface-2); color: var(--accent);
+    font-family: var(--mono); font-weight: 700; margin-bottom: 16px;
+  }
+  .card h3 { font-size: 18px; margin-bottom: 8px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  /* how it works */
+  .pipeline {
+    display: flex; flex-wrap: wrap; align-items: stretch; gap: 10px;
+    margin-top: 40px;
+  }
+  .stage {
+    flex: 1 1 180px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+  .stage b { display: block; font-family: var(--mono); color: var(--accent-2); margin-bottom: 6px; font-size: 14px; }
+  .stage span { color: var(--muted); font-size: 14px; }
+  .arrow {
+    align-self: center; color: var(--muted); font-family: var(--mono);
+  }
+  @media (max-width: 720px) {
+    .arrow { display: none; }
+    .stage { flex-basis: 100%; }
+  }
+
+  /* quickstart */
+  .steps { counter-reset: s; list-style: none; padding: 0; margin: 32px 0 0; display: grid; gap: 14px; }
+  .steps li {
+    counter-increment: s;
+    display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start;
+  }
+  .steps li::before {
+    content: counter(s);
+    width: 40px; height: 40px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--surface-2); border: 1px solid var(--border);
+    font-family: var(--mono); font-weight: 700; color: var(--accent);
+  }
+  .steps .body { padding-top: 6px; }
+  .steps .body p { margin: 0 0 10px; color: var(--muted); }
+  .codeblock {
+    background: var(--code-bg); color: #d6e2f0;
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; font-family: var(--mono); font-size: 14px;
+    overflow-x: auto; white-space: pre; margin: 0;
+  }
+
+  /* footer */
+  footer { border-top: 1px solid var(--border); padding: 36px 0; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+  @media (max-width: 640px) {
+    section { padding: 56px 0; }
+    .hero { padding: 64px 0 48px; }
+    .term-body { font-size: 12.5px; padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">log<span>pipe</span></a>
+    <nav class="nav-links">
+      <a href="#features">기능</a>
+      <a href="#how">동작 방식</a>
+      <a href="#start">시작하기</a>
+      <a class="gh" href="https://github.com/your-org/logpipe">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="wrap hero">
+    <span class="eyebrow">// open source · written in Go</span>
+    <h1>로그를 <em>흐르는 동안</em><br>필터링하고 집계하세요.</h1>
+    <p class="lead">
+      logpipe는 파일이나 표준 입력으로 들어오는 로그 스트림을 실시간으로 걸러내고,
+      원하는 기준으로 집계하는 단일 바이너리 CLI입니다. 로그를 디스크에 쌓아두고
+      나중에 뒤지는 대신, 흐르는 순간에 바로 답을 얻으세요.
+    </p>
+
+    <div class="cta">
+      <a class="btn primary" href="#start">시작하기 →</a>
+      <a class="btn" href="https://github.com/your-org/logpipe">GitHub에서 보기</a>
+    </div>
+
+    <div class="install" role="group" aria-label="설치 명령">
+      <span><span class="prompt">$ </span>go install github.com/your-org/logpipe@latest</span>
+      <button class="copy" type="button" data-copy="go install github.com/your-org/logpipe@latest">복사</button>
+    </div>
+
+    <div class="term" aria-label="logpipe 사용 예시">
+      <div class="term-bar"><i></i><i></i><i></i></div>
+<pre class="term-body"><span class="t-dim"># 실시간 에러 로그만 추적하고, 5초 단위로 상태 코드별 개수를 집계</span>
+<span class="t-cmd">$ tail -F /var/log/app/access.log \</span>
+<span class="t-cmd">    | logpipe filter --match "level=error" \</span>
+<span class="t-cmd">    | logpipe count --by status --every 5s</span>
+
+<span class="t-dim">[00:00:05]</span> <span class="t-err">500</span>  <span class="t-info">▇▇▇▇▇▇▇▇</span>  <span class="t-cmd">142</span>
+<span class="t-dim">[00:00:05]</span> <span class="t-warn">503</span>  <span class="t-info">▇▇▇</span>      <span class="t-cmd">38</span>
+<span class="t-dim">[00:00:10]</span> <span class="t-err">500</span>  <span class="t-info">▇▇▇▇▇▇▇▇▇</span>  <span class="t-cmd">171</span>
+<span class="t-dim">[00:00:10]</span> <span class="t-ok">200</span>  <span class="t-info">▇</span>        <span class="t-cmd">3</span></pre>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="wrap">
+      <span class="eyebrow">// features</span>
+      <h2>필요한 것만, 지금 이 순간에.</h2>
+      <p class="lead">logpipe는 로그를 저장소에 옮기기 전에 처리합니다. 파이프 하나로 끝나는 작업에 무거운 스택은 필요 없습니다.</p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="ico">~</div>
+          <h3>실시간 스트리밍</h3>
+          <p>파일 끝을 따라가거나 표준 입력을 읽으며 줄 단위로 즉시 처리합니다. 로그가 쌓이기를 기다리지 않습니다.</p>
+        </div>
+        <div class="card">
+          <div class="ico">?</div>
+          <h3>유연한 필터링</h3>
+          <p>문자열과 정규식 매칭, 필드 조건을 조합해 필요한 줄만 통과시킵니다. 조건은 셸 명령 한 줄로 표현됩니다.</p>
+        </div>
+        <div class="card">
+          <div class="ico">Σ</div>
+          <h3>윈도우 집계</h3>
+          <p>시간 구간 또는 개수 단위로 카운트, 합계, 분포를 계산합니다. 임계치를 넘으면 결과를 바로 보여줍니다.</p>
+        </div>
+        <div class="card">
+          <div class="ico">1</div>
+          <h3>단일 바이너리</h3>
+          <p>Go로 작성되어 런타임이나 의존성 없이 어떤 서버에든 복사해 바로 실행할 수 있습니다.</p>
+        </div>
+        <div class="card">
+          <div class="ico">{}</div>
+          <h3>JSON 로그 지원</h3>
+          <p>구조화된 JSON 로그를 기본으로 파싱합니다. 필드 이름으로 필터링하고 집계할 수 있습니다.</p>
+        </div>
+        <div class="card">
+          <div class="ico">⇄</div>
+          <h3>파이프 친화적</h3>
+          <p>stdout으로 결과를 내보내므로 <code>jq</code>, <code>sort</code>, <code>awk</code> 등 기존 도구와 자연스럽게 연결됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <span class="eyebrow">// how it works</span>
+      <h2>입력에서 결과까지, 한 줄의 파이프라인.</h2>
+      <p class="lead">logpipe의 각 단계는 독립된 명령입니다. 필요한 단계만 골라 연결하세요.</p>
+
+      <div class="pipeline">
+        <div class="stage"><b>source</b><span>파일 또는 stdin에서 줄을 읽습니다.</span></div>
+        <div class="arrow">→</div>
+        <div class="stage"><b>filter</b><span>조건에 맞는 줄만 다음 단계로 넘깁니다.</span></div>
+        <div class="arrow">→</div>
+        <div class="stage"><b>aggregate</b><span>시간 또는 개수 윈도우 안에서 값을 집계합니다.</span></div>
+        <div class="arrow">→</div>
+        <div class="stage"><b>emit</b><span>결과를 stdout 또는 알림 대상으로 내보냅니다.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="start">
+    <div class="wrap">
+      <span class="eyebrow">// quickstart</span>
+      <h2>5분 안에 첫 집계까지.</h2>
+      <p class="lead">설치 후 바로 실행해 볼 수 있는 최소 예시입니다.</p>
+
+      <ol class="steps">
+        <li>
+          <div class="body">
+            <p>Go 1.22 이상을 설치한 뒤 logpipe를 받아옵니다.</p>
+            <pre class="codeblock">go install github.com/your-org/logpipe@latest</pre>
+          </div>
+        </li>
+        <li>
+          <div class="body">
+            <p>로그 파일을 따라가며 조건에 맞는 줄만 출력해 봅니다.</p>
+            <pre class="codeblock">tail -F app.log | logpipe filter --match "level=warn"</pre>
+          </div>
+        </li>
+        <li>
+          <div class="body">
+            <p>같은 스트림을 10초 단위로 집계합니다.</p>
+            <pre class="codeblock">tail -F app.log | logpipe filter --match "level=warn" | logpipe count --every 10s</pre>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>logpipe — MIT License · © your team</span>
+    <span>
+      <a href="https://github.com/your-org/logpipe">GitHub</a> ·
+      <a href="https://github.com/your-org/logpipe/issues">Issues</a> ·
+      <a href="https://github.com/your-org/logpipe/blob/main/CONTRIBUTING.md">Contributing</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy');
+      var done = function () {
+        btn.textContent = '복사됨';
+        setTimeout(function () { btn.textContent = '복사'; }, 1500);
+      };
+      try {
+        navigator.clipboard.writeText(text).then(done, function () {});
+      } catch (e) { /* clipboard unavailable: ignore */ }
+    });
+  });
+</script>
+</body>
+</html>

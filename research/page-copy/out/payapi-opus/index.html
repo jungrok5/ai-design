@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paygrid 빠른 시작</title>
+<meta name="description" content="Paygrid 결제 API 빠른 시작: API 키 발급, 첫 결제 요청, 웹훅 설정">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fbfbf9;
+  --surface: #ffffff;
+  --surface-2: #f3f3ef;
+  --text: #1b1c1e;
+  --muted: #62656b;
+  --line: #e4e4de;
+  --accent: #2f5bea;
+  --accent-soft: #e9eefd;
+  --ok: #17804a;
+  --ok-soft: #e4f4ea;
+  --warn: #9a5b00;
+  --warn-soft: #fbf0dc;
+  --code-bg: #16181d;
+  --code-text: #e6e7ea;
+  --code-muted: #8a8f99;
+  --c-key: #8fb4ff;
+  --c-str: #a6d99a;
+  --c-num: #f0b56e;
+  --c-com: #6c7280;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111215; --surface: #17191d; --surface-2: #1e2025; --text: #e8e8e6; --muted: #9a9ca2;
+    --line: #2a2d33; --accent: #7d9cff; --accent-soft: #1d2540; --ok: #5fcf8e; --ok-soft: #15291e;
+    --warn: #f0b860; --warn-soft: #2c2213; --code-bg: #0b0c0f;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111215; --surface: #17191d; --surface-2: #1e2025; --text: #e8e8e6; --muted: #9a9ca2;
+  --line: #2a2d33; --accent: #7d9cff; --accent-soft: #1d2540; --ok: #5fcf8e; --ok-soft: #15291e;
+  --warn: #f0b860; --warn-soft: #2c2213; --code-bg: #0b0c0f;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.7 "Noto Sans KR", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased; word-break: keep-all;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code, pre { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+:not(pre) > code {
+  background: var(--surface-2); border: 1px solid var(--line);
+  padding: 1px 6px; border-radius: 5px; font-size: .86em; word-break: break-all;
+}
+
+/* Header */
+.topbar {
+  position: sticky; top: 0; z-index: 20; height: 60px;
+  display: flex; align-items: center; gap: 20px; padding: 0 24px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text); }
+.brand:hover { text-decoration: none; }
+.brand-mark { width: 26px; height: 26px; border-radius: 7px; background: var(--accent); display: grid; place-items: center; }
+.brand small { font-weight: 400; color: var(--muted); font-size: 14px; padding-left: 10px; border-left: 1px solid var(--line); }
+.topnav { display: flex; gap: 18px; font-size: 14px; margin-left: 12px; }
+.topnav a { color: var(--muted); }
+.topnav a.on { color: var(--text); font-weight: 500; }
+.spacer { flex: 1; }
+.icon-btn {
+  border: 1px solid var(--line); background: var(--surface); color: var(--text);
+  width: 34px; height: 34px; border-radius: 8px; cursor: pointer; display: grid; place-items: center;
+}
+.menu-btn { display: none; }
+
+/* Layout */
+.layout { display: grid; grid-template-columns: 240px minmax(0, 1fr) 200px; max-width: 1320px; margin: 0 auto; }
+.sidebar, .toc { position: sticky; top: 60px; height: calc(100vh - 60px); overflow-y: auto; padding: 28px 20px; font-size: 14px; }
+.sidebar { border-right: 1px solid var(--line); }
+.sidebar h4, .toc h4 { margin: 0 0 8px; font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .04em; }
+.sidebar ul, .toc ul { list-style: none; margin: 0 0 24px; padding: 0; }
+.sidebar li a { display: block; padding: 5px 10px; border-radius: 6px; color: var(--text); }
+.sidebar li a:hover { background: var(--surface-2); text-decoration: none; }
+.sidebar li a.on { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+.toc li a { display: block; padding: 4px 0 4px 12px; color: var(--muted); border-left: 2px solid var(--line); }
+.toc li a.on { color: var(--accent); border-left-color: var(--accent); }
+.toc li a:hover { text-decoration: none; color: var(--text); }
+
+main { padding: 40px 56px 96px; min-width: 0; }
+.crumb { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+h1 { font-size: 36px; line-height: 1.25; margin: 0 0 12px; letter-spacing: -.02em; }
+.lead { font-size: 18px; color: var(--muted); margin: 0 0 28px; max-width: 680px; }
+h2 { font-size: 24px; margin: 0 0 6px; letter-spacing: -.01em; }
+h3 { font-size: 17px; margin: 28px 0 8px; }
+p { margin: 0 0 14px; max-width: 720px; }
+
+.overview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+.overview a {
+  display: block; padding: 16px; border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); color: var(--text);
+}
+.overview a:hover { border-color: var(--accent); text-decoration: none; }
+.overview .n { font: 500 12px "IBM Plex Mono", monospace; color: var(--accent); }
+.overview b { display: block; margin: 2px 0; }
+.overview span { font-size: 13px; color: var(--muted); }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; color: var(--muted); margin-bottom: 40px; }
+.meta b { color: var(--text); font-weight: 500; }
+
+.step { position: relative; padding: 40px 0 8px 52px; border-top: 1px solid var(--line); }
+.step::before {
+  content: attr(data-step); position: absolute; left: 0; top: 40px;
+  width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+  font: 500 15px "IBM Plex Mono", monospace; background: var(--accent); color: #fff;
+}
+.step .time { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+
+ol.list { padding-left: 20px; margin: 0 0 16px; max-width: 720px; }
+ol.list li { margin-bottom: 6px; }
+
+/* Callouts */
+.note { border-radius: var(--radius); padding: 12px 16px; margin: 16px 0; font-size: 15px; max-width: 720px; border: 1px solid; }
+.note strong { display: block; margin-bottom: 2px; }
+.note.info { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 30%, transparent); }
+.note.warn { background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 30%, transparent); }
+.note.warn strong { color: var(--warn); }
+.note.ok { background: var(--ok-soft); border-color: color-mix(in srgb, var(--ok) 30%, transparent); }
+.note.ok strong { color: var(--ok); }
+
+/* Key table */
+table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0 18px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: var(--surface-2); font-weight: 500; color: var(--muted); font-size: 13px; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td code { white-space: nowrap; }
+.pill { font: 500 11px "IBM Plex Mono", monospace; padding: 2px 7px; border-radius: 999px; }
+.pill.req { background: var(--warn-soft); color: var(--warn); }
+.pill.opt { background: var(--surface-2); color: var(--muted); }
+
+/* Code */
+.code { background: var(--code-bg); border-radius: var(--radius); margin: 12px 0 20px; overflow: hidden; border: 1px solid #000; }
+.code-head { display: flex; align-items: center; border-bottom: 1px solid #262931; padding: 0 8px 0 4px; }
+.tabs { display: flex; overflow-x: auto; flex: 1; }
+.tab {
+  background: none; border: 0; color: var(--code-muted); font: 500 13px "IBM Plex Mono", monospace;
+  padding: 10px 12px; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap;
+}
+.tab.on { color: #fff; border-bottom-color: var(--accent); }
+.code-title { color: var(--code-muted); font: 13px "IBM Plex Mono", monospace; padding: 10px 12px; flex: 1; }
+.copy {
+  background: #22252c; border: 1px solid #30343d; color: var(--code-text); border-radius: 6px;
+  font: 12px "Noto Sans KR", sans-serif; padding: 4px 10px; cursor: pointer;
+}
+.copy:hover { background: #2b2f38; }
+pre { margin: 0; padding: 16px 18px; overflow-x: auto; color: var(--code-text); font-size: 13.5px; line-height: 1.65; }
+.panel[hidden] { display: none; }
+.k { color: var(--c-key); } .s { color: var(--c-str); } .n { color: var(--c-num); } .c { color: var(--c-com); font-style: italic; }
+
+/* Event list */
+.events { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 8px 0 20px; max-width: 760px; }
+.event { border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; background: var(--surface); font-size: 14px; }
+.event code { background: none; border: 0; padding: 0; font-size: 13px; color: var(--accent); }
+.event div { color: var(--muted); font-size: 13px; }
+
+.next { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
+.next a { padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--text); }
+.next a:hover { border-color: var(--accent); text-decoration: none; }
+.next b { display: block; }
+.next span { font-size: 14px; color: var(--muted); }
+
+.feedback { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+.feedback button { border: 1px solid var(--line); background: var(--surface); color: var(--text); padding: 5px 14px; border-radius: 999px; cursor: pointer; font: inherit; }
+.feedback button:hover { border-color: var(--accent); }
+
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 20px); opacity: 0;
+  background: var(--text); color: var(--bg); padding: 8px 16px; border-radius: 8px; font-size: 14px;
+  transition: .2s; pointer-events: none; z-index: 50;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 1180px) {
+  .layout { grid-template-columns: 220px minmax(0, 1fr); }
+  .toc { display: none; }
+  main { padding: 36px 40px 80px; }
+}
+@media (max-width: 820px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .menu-btn { display: grid; }
+  .topnav, .brand small { display: none; }
+  .topbar { padding: 0 16px; }
+  .sidebar {
+    position: fixed; top: 60px; left: 0; width: 280px; max-width: 85vw; z-index: 15;
+    background: var(--bg); transform: translateX(-100%); transition: transform .2s;
+  }
+  body.nav-open .sidebar { transform: none; box-shadow: 0 0 0 100vmax rgba(0,0,0,.35); }
+  main { padding: 28px 16px 64px; }
+  h1 { font-size: 28px; }
+  .lead { font-size: 16px; }
+  .overview, .events, .next { grid-template-columns: 1fr; }
+  .step { padding-left: 0; padding-top: 84px; }
+  .step::before { top: 36px; }
+  pre { font-size: 12.5px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <button class="icon-btn menu-btn" id="menuBtn" aria-label="메뉴 열기">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
+  </button>
+  <a class="brand" href="#">
+    <span class="brand-mark"><svg width="14" height="14" viewBox="0 0 14 14" fill="#fff"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="8" y="1" width="5" height="5" rx="1" opacity=".6"/><rect x="1" y="8" width="5" height="5" rx="1" opacity=".6"/><rect x="8" y="8" width="5" height="5" rx="1"/></svg></span>
+    Paygrid <small>개발자 문서</small>
+  </a>
+  <nav class="topnav">
+    <a class="on" href="#">가이드</a>
+    <a href="#">API 레퍼런스</a>
+    <a href="#">SDK</a>
+    <a href="#">변경 이력</a>
+  </nav>
+  <div class="spacer"></div>
+  <button class="icon-btn" id="themeBtn" aria-label="테마 전환">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 2a6 6 0 0 0 0 12z" fill="currentColor"/></svg>
+  </button>
+</header>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <h4>시작하기</h4>
+    <ul>
+      <li><a class="on" href="#">빠른 시작</a></li>
+      <li><a href="#">핵심 개념</a></li>
+      <li><a href="#">테스트 모드</a></li>
+    </ul>
+    <h4>결제</h4>
+    <ul>
+      <li><a href="#">결제 요청</a></li>
+      <li><a href="#">결제 승인과 취소</a></li>
+      <li><a href="#">정기 결제</a></li>
+      <li><a href="#">환불</a></li>
+    </ul>
+    <h4>연동</h4>
+    <ul>
+      <li><a href="#">인증</a></li>
+      <li><a href="#">웹훅</a></li>
+      <li><a href="#">멱등성</a></li>
+      <li><a href="#">오류 코드</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <div class="crumb">가이드 / 시작하기</div>
+    <h1>빠른 시작</h1>
+    <p class="lead">API 키를 발급받고, 테스트 결제를 한 건 만든 뒤, 결제 결과를 웹훅으로 받아보세요. 처음부터 끝까지 15분 정도 걸립니다.</p>
+
+    <div class="overview">
+      <a href="#api-key"><span class="n">01</span><b>API 키 발급</b><span>대시보드에서 테스트 키 받기</span></a>
+      <a href="#first-payment"><span class="n">02</span><b>첫 결제 요청</b><span>서버에서 결제 생성하고 승인</span></a>
+      <a href="#webhook"><span class="n">03</span><b>웹훅 설정</b><span>결제 결과를 실시간으로 받기</span></a>
+    </div>
+    <div class="meta">
+      <span>기본 URL <b><code>https://api.paygrid.dev/v1</code></b></span>
+      <span>형식 <b>JSON</b></span>
+      <span>인증 <b>Bearer 토큰</b></span>
+    </div>
+
+    <!-- STEP 1 -->
+    <section class="step" id="api-key" data-step="1">
+      <h2>API 키 발급</h2>
+      <div class="time">약 2분</div>
+      <ol class="list">
+        <li><a href="#">Paygrid 대시보드</a>에 로그인합니다. 계정이 없다면 이메일로 가입하세요. 가입 즉시 테스트 모드를 쓸 수 있습니다.</li>
+        <li>왼쪽 메뉴에서 <b>개발자 → API 키</b>로 이동합니다.</li>
+        <li><b>테스트 키 만들기</b>를 누르고, 화면에 한 번만 표시되는 시크릿 키를 복사해 둡니다.</li>
+      </ol>
+
+      <p>키는 두 종류이며, 접두사로 환경과 용도를 구분합니다.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>키</th><th>접두사</th><th>사용 위치</th></tr></thead>
+          <tbody>
+            <tr><td>시크릿 키</td><td><code>sk_test_</code> / <code>sk_live_</code></td><td>서버에서만 사용. 모든 API 호출 가능</td></tr>
+            <tr><td>퍼블리셔블 키</td><td><code>pk_test_</code> / <code>pk_live_</code></td><td>브라우저·앱에서 결제창 띄울 때 사용</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note warn">
+        <strong>시크릿 키는 서버에만 두세요</strong>
+        프런트엔드 코드나 Git 저장소에 시크릿 키를 넣지 마세요. 노출됐다면 대시보드에서 바로 키를 폐기하고 새로 발급하세요.
+      </div>
+
+      <p>키를 환경 변수로 저장한 뒤, 잘 동작하는지 확인합니다.</p>
+      <div class="code" data-tabs>
+        <div class="code-head">
+          <div class="tabs"><button class="tab on" data-lang="curl">cURL</button><button class="tab" data-lang="node">Node.js</button><button class="tab" data-lang="python">Python</button></div>
+          <button class="copy">복사</button>
+        </div>
+<pre class="panel" data-lang="curl"><span class="k">export</span> PAYGRID_SECRET_KEY=<span class="s">"sk_test_51Hx9..."</span>
+
+curl https://api.paygrid.dev/v1/account \
+  -H <span class="s">"Authorization: Bearer $PAYGRID_SECRET_KEY"</span></pre>
+<pre class="panel" data-lang="node" hidden><span class="c">// npm install @paygrid/node</span>
+<span class="k">import</span> Paygrid <span class="k">from</span> <span class="s">"@paygrid/node"</span>;
+
+<span class="k">const</span> paygrid = <span class="k">new</span> Paygrid(process.env.PAYGRID_SECRET_KEY);
+<span class="k">const</span> account = <span class="k">await</span> paygrid.account.retrieve();
+console.log(account.mode); <span class="c">// "test"</span></pre>
+<pre class="panel" data-lang="python" hidden><span class="c"># pip install paygrid</span>
+<span class="k">import</span> os, paygrid
+
+paygrid.api_key = os.environ[<span class="s">"PAYGRID_SECRET_KEY"</span>]
+account = paygrid.Account.retrieve()
+print(account.mode)  <span class="c"># "test"</span></pre>
+      </div>
+      <div class="note ok">
+        <strong>응답에 <code>"mode": "test"</code>가 보이면 준비 완료</strong>
+        테스트 모드에서는 실제 돈이 오가지 않습니다. 마음껏 실험하세요.
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="step" id="first-payment" data-step="2">
+      <h2>첫 결제 요청</h2>
+      <div class="time">약 5분</div>
+      <p>결제는 두 단계로 이뤄집니다. 서버에서 <b>결제를 생성</b>하고, 고객이 결제 수단을 입력하면 <b>승인</b>합니다. 여기서는 테스트 카드로 두 단계를 한 번에 진행합니다.</p>
+
+      <h3>결제 생성</h3>
+      <p><code>POST /v1/payments</code>로 결제를 만듭니다. 금액은 원 단위 정수로 보냅니다.</p>
+      <div class="code" data-tabs>
+        <div class="code-head">
+          <div class="tabs"><button class="tab on" data-lang="curl">cURL</button><button class="tab" data-lang="node">Node.js</button><button class="tab" data-lang="python">Python</button></div>
+          <button class="copy">복사</button>
+        </div>
+<pre class="panel" data-lang="curl">curl https://api.paygrid.dev/v1/payments \
+  -H <span class="s">"Authorization: Bearer $PAYGRID_SECRET_KEY"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -H <span class="s">"Idempotency-Key: order_1024_try1"</span> \
+  -d <span class="s">'{
+    "amount": 15000,
+    "currency": "KRW",
+    "order_id": "order_1024",
+    "order_name": "프리미엄 원두 200g",
+    "payment_method": "card_test_visa_success",
+    "confirm": true
+  }'</span></pre>
+<pre class="panel" data-lang="node" hidden><span class="k">const</span> payment = <span class="k">await</span> paygrid.payments.create(
+  {
+    amount: <span class="n">15000</span>,
+    currency: <span class="s">"KRW"</span>,
+    order_id: <span class="s">"order_1024"</span>,
+    order_name: <span class="s">"프리미엄 원두 200g"</span>,
+    payment_method: <span class="s">"card_test_visa_success"</span>,
+    confirm: <span class="k">true</span>,
+  },
+  { idempotencyKey: <span class="s">"order_1024_try1"</span> }
+);
+
+console.log(payment.id, payment.status); <span class="c">// pay_8Kd2... "succeeded"</span></pre>
+<pre class="panel" data-lang="python" hidden>payment = paygrid.Payment.create(
+    amount=<span class="n">15000</span>,
+    currency=<span class="s">"KRW"</span>,
+    order_id=<span class="s">"order_1024"</span>,
+    order_name=<span class="s">"프리미엄 원두 200g"</span>,
+    payment_method=<span class="s">"card_test_visa_success"</span>,
+    confirm=<span class="k">True</span>,
+    idempotency_key=<span class="s">"order_1024_try1"</span>,
+)
+
+print(payment.id, payment.status)  <span class="c"># pay_8Kd2... "succeeded"</span></pre>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>파라미터</th><th>타입</th><th></th><th>설명</th></tr></thead>
+          <tbody>
+            <tr><td><code>amount</code></td><td>integer</td><td><span class="pill req">필수</span></td><td>결제 금액. KRW는 원 단위(소수점 없음)</td></tr>
+            <tr><td><code>currency</code></td><td>string</td><td><span class="pill req">필수</span></td><td>ISO 4217 통화 코드. 예: <code>KRW</code>, <code>USD</code></td></tr>
+            <tr><td><code>order_id</code></td><td>string</td><td><span class="pill req">필수</span></td><td>가맹점 주문 번호. 6~64자, 가맹점 안에서 고유해야 함</td></tr>
+            <tr><td><code>order_name</code></td><td>string</td><td><span class="pill opt">선택</span></td><td>결제창과 영수증에 표시될 상품명</td></tr>
+            <tr><td><code>payment_method</code></td><td>string</td><td><span class="pill opt">선택</span></td><td>결제 수단 ID. 생략하면 결제창 URL이 반환됨</td></tr>
+            <tr><td><code>confirm</code></td><td>boolean</td><td><span class="pill opt">선택</span></td><td><code>true</code>면 생성과 동시에 승인 시도. 기본값 <code>false</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>응답 확인</h3>
+      <div class="code">
+        <div class="code-head"><span class="code-title">200 OK</span><button class="copy">복사</button></div>
+<pre class="panel">{
+  <span class="k">"id"</span>: <span class="s">"pay_8Kd2mQ7xLp"</span>,
+  <span class="k">"object"</span>: <span class="s">"payment"</span>,
+  <span class="k">"status"</span>: <span class="s">"succeeded"</span>,
+  <span class="k">"amount"</span>: <span class="n">15000</span>,
+  <span class="k">"currency"</span>: <span class="s">"KRW"</span>,
+  <span class="k">"order_id"</span>: <span class="s">"order_1024"</span>,
+  <span class="k">"method"</span>: { <span class="k">"type"</span>: <span class="s">"card"</span>, <span class="k">"brand"</span>: <span class="s">"visa"</span>, <span class="k">"last4"</span>: <span class="s">"4242"</span> },
+  <span class="k">"approved_at"</span>: <span class="s">"2026-10-22T10:14:03+09:00"</span>,
+  <span class="k">"mode"</span>: <span class="s">"test"</span>
+}</pre>
+      </div>
+
+      <h3>테스트 결제 수단</h3>
+      <p>아래 값을 <code>payment_method</code>에 넣으면 원하는 결과를 재현할 수 있습니다.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>결제 수단 ID</th><th>결과</th></tr></thead>
+          <tbody>
+            <tr><td><code>card_test_visa_success</code></td><td>승인 성공 (<code>succeeded</code>)</td></tr>
+            <tr><td><code>card_test_insufficient_funds</code></td><td>잔액 부족으로 실패 (<code>failed</code>)</td></tr>
+            <tr><td><code>card_test_3ds_required</code></td><td>추가 인증 필요 (<code>requires_action</code>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note info">
+        <strong>멱등성 키로 중복 결제를 막으세요</strong>
+        네트워크 오류로 재시도할 때 같은 <code>Idempotency-Key</code>를 보내면, 결제가 두 번 생성되지 않고 첫 번째 결과가 그대로 반환됩니다. 키는 24시간 동안 유효합니다.
+      </div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="step" id="webhook" data-step="3">
+      <h2>웹훅 설정</h2>
+      <div class="time">약 8분</div>
+      <p>결제 결과는 API 응답만 믿지 말고 웹훅으로 한 번 더 확인하세요. 고객이 결제 도중 창을 닫거나, 카드사 승인이 늦게 오는 경우에도 웹훅은 최종 상태를 알려줍니다.</p>
+
+      <h3>엔드포인트 등록</h3>
+      <ol class="list">
+        <li>대시보드에서 <b>개발자 → 웹훅 → 엔드포인트 추가</b>를 누릅니다.</li>
+        <li>이벤트를 받을 URL을 입력합니다. 예: <code>https://example.com/webhooks/paygrid</code></li>
+        <li>받을 이벤트를 고르고 저장합니다. 처음에는 <code>payment.succeeded</code>와 <code>payment.failed</code>면 충분합니다.</li>
+        <li>생성된 서명 시크릿(<code>whsec_</code>로 시작)을 복사해 환경 변수 <code>PAYGRID_WEBHOOK_SECRET</code>에 저장합니다.</li>
+      </ol>
+
+      <div class="events">
+        <div class="event"><code>payment.succeeded</code><div>결제 승인 완료</div></div>
+        <div class="event"><code>payment.failed</code><div>결제 승인 실패</div></div>
+        <div class="event"><code>payment.canceled</code><div>결제 취소 또는 전액 환불</div></div>
+        <div class="event"><code>refund.created</code><div>부분 환불 발생</div></div>
+      </div>
+
+      <h3>서명 검증하고 이벤트 처리하기</h3>
+      <p>모든 요청에는 <code>Paygrid-Signature</code> 헤더가 붙습니다. 원본 요청 본문(raw body)으로 서명을 검증한 뒤 처리하세요. 검증에 실패하면 <code>400</code>을 반환합니다.</p>
+      <div class="code" data-tabs>
+        <div class="code-head">
+          <div class="tabs"><button class="tab on" data-lang="node">Node.js</button><button class="tab" data-lang="python">Python</button></div>
+          <button class="copy">복사</button>
+        </div>
+<pre class="panel" data-lang="node"><span class="k">import</span> express <span class="k">from</span> <span class="s">"express"</span>;
+<span class="k">import</span> Paygrid <span class="k">from</span> <span class="s">"@paygrid/node"</span>;
+
+<span class="k">const</span> app = express();
+<span class="k">const</span> paygrid = <span class="k">new</span> Paygrid(process.env.PAYGRID_SECRET_KEY);
+
+<span class="c">// 서명 검증에는 파싱 전 원본 본문이 필요합니다</span>
+app.post(<span class="s">"/webhooks/paygrid"</span>, express.raw({ type: <span class="s">"application/json"</span> }), (req, res) => {
+  <span class="k">let</span> event;
+  <span class="k">try</span> {
+    event = paygrid.webhooks.verify(
+      req.body,
+      req.headers[<span class="s">"paygrid-signature"</span>],
+      process.env.PAYGRID_WEBHOOK_SECRET
+    );
+  } <span class="k">catch</span> (err) {
+    <span class="k">return</span> res.status(<span class="n">400</span>).send(<span class="s">"invalid signature"</span>);
+  }
+
+  <span class="k">switch</span> (event.type) {
+    <span class="k">case</span> <span class="s">"payment.succeeded"</span>:
+      markOrderPaid(event.data.order_id);   <span class="c">// 주문 상태 업데이트</span>
+      <span class="k">break</span>;
+    <span class="k">case</span> <span class="s">"payment.failed"</span>:
+      notifyCustomer(event.data.order_id);
+      <span class="k">break</span>;
+  }
+
+  res.sendStatus(<span class="n">200</span>);  <span class="c">// 10초 안에 2xx로 응답</span>
+});
+
+app.listen(<span class="n">3000</span>);</pre>
+<pre class="panel" data-lang="python" hidden><span class="k">import</span> os, paygrid
+<span class="k">from</span> flask <span class="k">import</span> Flask, request
+
+app = Flask(__name__)
+
+<span class="k">@app.post</span>(<span class="s">"/webhooks/paygrid"</span>)
+<span class="k">def</span> paygrid_webhook():
+    <span class="k">try</span>:
+        event = paygrid.Webhook.verify(
+            request.get_data(),  <span class="c"># 원본 본문</span>
+            request.headers[<span class="s">"Paygrid-Signature"</span>],
+            os.environ[<span class="s">"PAYGRID_WEBHOOK_SECRET"</span>],
+        )
+    <span class="k">except</span> paygrid.SignatureError:
+        <span class="k">return</span> <span class="s">"invalid signature"</span>, <span class="n">400</span>
+
+    <span class="k">if</span> event.type == <span class="s">"payment.succeeded"</span>:
+        mark_order_paid(event.data[<span class="s">"order_id"</span>])
+    <span class="k">elif</span> event.type == <span class="s">"payment.failed"</span>:
+        notify_customer(event.data[<span class="s">"order_id"</span>])
+
+    <span class="k">return</span> <span class="s">""</span>, <span class="n">200</span>  <span class="c"># 10초 안에 2xx로 응답</span></pre>
+      </div>
+
+      <h3>로컬에서 테스트하기</h3>
+      <p>Paygrid CLI로 로컬 서버에 이벤트를 전달하고, 테스트 이벤트를 직접 보낼 수 있습니다.</p>
+      <div class="code">
+        <div class="code-head"><span class="code-title">터미널</span><button class="copy">복사</button></div>
+<pre class="panel"><span class="c"># 1. 웹훅을 로컬 서버로 전달 (임시 서명 시크릿이 출력됩니다)</span>
+paygrid listen --forward-to localhost:3000/webhooks/paygrid
+
+<span class="c"># 2. 다른 터미널에서 테스트 이벤트 보내기</span>
+paygrid trigger payment.succeeded</pre>
+      </div>
+
+      <div class="note warn">
+        <strong>같은 이벤트가 두 번 올 수 있습니다</strong>
+        2xx 응답을 받지 못하면 Paygrid는 최대 3일 동안 지수 백오프로 재전송합니다. <code>event.id</code>를 저장해 두고, 이미 처리한 이벤트는 건너뛰세요.
+      </div>
+    </section>
+
+    <section class="step" id="next" data-step="✓">
+      <h2>다음 단계</h2>
+      <p>테스트 결제와 웹훅 연동을 마쳤습니다. 실서비스로 전환하기 전에 아래 내용을 확인하세요.</p>
+      <div class="next">
+        <a href="#"><b>결제창 연동</b><span>퍼블리셔블 키로 웹·앱에 결제창 띄우기</span></a>
+        <a href="#"><b>취소와 환불</b><span>전액·부분 환불 처리하기</span></a>
+        <a href="#"><b>오류 코드</b><span>실패 응답과 대응 방법</span></a>
+        <a href="#"><b>라이브 전환 체크리스트</b><span>심사, 라이브 키 발급, 운영 점검</span></a>
+      </div>
+
+      <div class="feedback">
+        이 문서가 도움이 되었나요?
+        <button data-fb>네</button><button data-fb>아니요</button>
+      </div>
+    </section>
+  </main>
+
+  <aside class="toc">
+    <h4>이 페이지에서</h4>
+    <ul id="toc">
+      <li><a href="#api-key">1. API 키 발급</a></li>
+      <li><a href="#first-payment">2. 첫 결제 요청</a></li>
+      <li><a href="#webhook">3. 웹훅 설정</a></li>
+      <li><a href="#next">다음 단계</a></li>
+    </ul>
+  </aside>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+
+  // 테마
+  var saved = store("pg-theme");
+  if (saved) root.dataset.theme = saved;
+  document.getElementById("themeBtn").onclick = function () {
+    var dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    store("pg-theme", root.dataset.theme);
+  };
+
+  // 모바일 메뉴
+  document.getElementById("menuBtn").onclick = function () { document.body.classList.toggle("nav-open"); };
+  document.addEventListener("click", function (e) {
+    if (document.body.classList.contains("nav-open") && !e.target.closest("#sidebar, #menuBtn")) document.body.classList.remove("nav-open");
+  });
+
+  // 언어 탭 (모든 코드 블록이 같은 언어로 맞춰짐)
+  function setLang(lang) {
+    document.querySelectorAll("[data-tabs]").forEach(function (block) {
+      if (!block.querySelector('.tab[data-lang="' + lang + '"]')) return;
+      block.querySelectorAll(".tab").forEach(function (t) { t.classList.toggle("on", t.dataset.lang === lang); });
+      block.querySelectorAll(".panel").forEach(function (p) { p.hidden = p.dataset.lang !== lang; });
+    });
+    store("pg-lang", lang);
+  }
+  document.querySelectorAll(".tab").forEach(function (t) { t.onclick = function () { setLang(t.dataset.lang); }; });
+  var savedLang = store("pg-lang");
+  if (savedLang) setLang(savedLang);
+
+  // 토스트
+  var toast = document.getElementById("toast"), timer;
+  function show(msg) {
+    toast.textContent = msg; toast.classList.add("show");
+    clearTimeout(timer); timer = setTimeout(function () { toast.classList.remove("show"); }, 1600);
+  }
+
+  // 복사
+  document.querySelectorAll(".copy").forEach(function (btn) {
+    btn.onclick = function () {
+      var pre = btn.closest(".code").querySelector(".panel:not([hidden])");
+      var text = pre.innerText;
+      var done = function () { btn.textContent = "복사됨"; show("코드를 복사했습니다"); setTimeout(function () { btn.textContent = "복사"; }, 1400); };
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+      function fallback() {
+        var ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy"); done(); } catch (e) {} ta.remove();
+      }
+    };
+  });
+
+  // 피드백
+  document.querySelectorAll("[data-fb]").forEach(function (b) { b.onclick = function () { show("의견 감사합니다"); }; });
+
+  // 목차 하이라이트
+  var links = document.querySelectorAll("#toc a");
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) links.forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "#" + en.target.id); });
+    });
+  }, { rootMargin: "-80px 0px -60% 0px" });
+  document.querySelectorAll(".step").forEach(function (s) { obs.observe(s); });
+})();
+</script>
+</body>
+</html>

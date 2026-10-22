@@ -179,7 +179,9 @@ def check_text(path: Path, text: str, rules: list[Rule]) -> list[dict]:
 
 FORMAL = re.compile(r"(니다|니까)[.?!]")
 # "~하세요." / "~주세요." is the usual way to give an instruction inside 합니다체 docs, so it does not count as 해요체.
-POLITE = re.compile(r"[가-힣](?<!니)(?<!세)요[.?!]|세요\?")
+# Neither does a "~나요?" question ("참여할 수 있나요?"): about 1 in 5 합니다체 docs in ko.react.dev and MDN ko ask
+# questions this way, and the stiff "~습니까?" is the overcorrection.
+POLITE = re.compile(r"[가-힣](?<!니)(?<!세)요[.!]|[가-힣](?<!니)(?<!세)(?<!나)요\?|세요\?")
 PLAIN = re.compile(r"[가-힣](?<!니)다[.!]")
 REGISTERS = {"합니다체": FORMAL, "해요체": POLITE, "한다체": PLAIN}
 
@@ -251,7 +253,8 @@ def hook_mode(rules: list[Rule]) -> int:
     context = ("ai-design style check (github.com/jungrok5/ai-design, docs/standard.md) found AI-tone/AI-look patterns in the "
                "lines you just wrote. Fix the ones that are real in this context, only in those lines (keep facts, names and "
                "code unchanged; do not rewrite text you were not asked to touch); leave deliberate quotes with a "
-               "`style-ignore` marker.\n" + "\n".join(lines))
+               "`style-ignore` marker. For a metaphor or slogan, rewrite the sentence as a plain statement of who does what "
+               "(with the number or condition if you have it) instead of swapping in another image.\n" + "\n".join(lines))
     print(json.dumps({"hookSpecificOutput": {"hookEventName": "PostToolUse", "additionalContext": context}}, ensure_ascii=False))
     return 0
 

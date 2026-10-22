@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>flowkit 문서</title>
+<meta name="description" content="flowkit은 배치 작업을 YAML 파일로 정의하고 스케줄러에 올리는 사내 데이터 파이프라인 도구입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* ---------- tokens (design system "Clear") ---------- */
+:root {
+  --bg: #ffffff; --surface: #f8fafc; --sunk: #f1f5f9; --line: #e2e8f0; --line-strong: #cbd5e1;
+  --fg: #0f172a; --muted: #475569; --subtle: #64748b;
+  --accent: #1d4ed8; --accent-hover: #1e40af; --accent-fg: #ffffff; --accent-soft: #eff6ff;
+  --ok: #067647; --ok-soft: #ecfdf3; --warn: #b54708; --warn-soft: #fffaeb; --danger: #b42318; --danger-soft: #fef3f2;
+  --code-bg: #0f172a; --code-fg: #e2e8f0; --code-muted: #94a3b8; --code-line: #334155;
+  --code-ok: #86efac; --code-warn: #fcd34d; --code-danger: #fca5a5; --code-key: #93c5fd;
+  --focus: #1d4ed8;
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-xs: 12px; --text-s: 14px; --text-m: 16px; --text-l: 18px;
+  --text-h3: 18px; --text-h2: 24px; --text-h1: clamp(30px, 4.4vw, 44px);
+  --leading: 1.7; --leading-tight: 1.3;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --radius-s: 6px; --radius-m: 8px; --radius-l: 10px;
+  --border: 1px solid var(--line);
+  --measure: 72ch; --page: 1120px; --motion: 180ms ease-out;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+    --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+    --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+    --ok: #47cd89; --ok-soft: #16322a; --warn: #fdb022; --warn-soft: #3a2c12; --danger: #f97066; --danger-soft: #3b1f1d;
+    --code-bg: #111315; --code-fg: #e4e6e8; --code-muted: #8a9096; --code-line: #33373b;
+    --code-ok: #86e0b0; --code-warn: #f5c45e; --code-danger: #f6a19a; --code-key: #9cc8ee; --focus: #7cb7e8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1e2124; --surface: #25292c; --sunk: #191b1e; --line: #33373b; --line-strong: #454b51;
+  --fg: #e4e6e8; --muted: #b4b9be; --subtle: #9ba1a6;
+  --accent: #7cb7e8; --accent-hover: #a9d0f0; --accent-fg: #10151a; --accent-soft: #233240;
+  --ok: #47cd89; --ok-soft: #16322a; --warn: #fdb022; --warn-soft: #3a2c12; --danger: #f97066; --danger-soft: #3b1f1d;
+  --code-bg: #111315; --code-fg: #e4e6e8; --code-muted: #8a9096; --code-line: #33373b;
+  --code-ok: #86e0b0; --code-warn: #f5c45e; --code-danger: #f6a19a; --code-key: #9cc8ee; --focus: #7cb7e8;
+  color-scheme: dark;
+}
+
+/* ---------- base and components ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-sans); font-size: var(--text-m); line-height: var(--leading);
+  word-break: keep-all; overflow-wrap: break-word;
+}
+h1, h2, h3 { margin: 0; line-height: var(--leading-tight); font-weight: 700; text-wrap: balance; }
+h1 { font-size: var(--text-h1); letter-spacing: -0.02em; }
+h2 { font-size: var(--text-h2); letter-spacing: -0.01em; }
+h3 { font-size: var(--text-h3); }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent-hover); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+code, pre { font-family: var(--font-mono); }
+:not(pre) > code {
+  font-size: 0.88em; background: var(--sunk); border: var(--border); border-radius: 4px;
+  padding: 0 4px; overflow-wrap: anywhere; word-break: normal;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+.ds-page { max-width: var(--page); margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-8); }
+@media (min-width: 720px) { .ds-page { padding-inline: var(--space-5); } }
+.ds-stack { display: grid; gap: var(--space-4); }
+.ds-lede { font-size: var(--text-l); color: var(--muted); max-width: var(--measure); }
+.ds-muted { color: var(--muted); }
+
+.ds-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: 44px; padding: 0 var(--space-4); border-radius: var(--radius-m);
+  font: 700 var(--text-s) / 1 var(--font-sans); cursor: pointer; text-decoration: none;
+  background: var(--bg); color: var(--fg); border: 1px solid var(--line-strong);
+  transition: background-color var(--motion), border-color var(--motion);
+}
+.ds-btn:hover { border-color: var(--subtle); color: var(--fg); }
+.ds-btn--primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.ds-btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-fg); }
+
+.ds-cmd {
+  display: flex; align-items: center; gap: var(--space-2); min-width: 0;
+  background: var(--code-bg); color: var(--code-fg); border-radius: var(--radius-l);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+}
+.ds-cmd code, .ds-cmd pre {
+  flex: 1; min-width: 0; margin: 0; background: none; border: 0; padding: 0; color: inherit;
+  font-size: var(--text-s); line-height: 1.7; white-space: pre; overflow-x: auto;
+}
+.ds-cmd .ds-c { color: var(--code-muted); }
+.ds-cmd button {
+  align-self: flex-start; flex: none; min-height: 36px; padding: 0 var(--space-3); border-radius: var(--radius-s);
+  border: 1px solid var(--code-line); background: transparent; color: var(--code-fg);
+  font: 500 13px / 1 var(--font-sans); cursor: pointer;
+}
+.ds-cmd button:hover { border-color: var(--code-muted); }
+.ds-cmd button:focus-visible { outline-color: var(--code-fg); }
+@media (max-width: 600px) { .ds-cmd code, .ds-cmd pre { white-space: pre-wrap; overflow-wrap: anywhere; } }
+
+.ds-output {
+  margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: var(--radius-l);
+  padding: var(--space-4); font: var(--text-s) / 1.7 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.ds-output .ds-prompt { color: var(--code-muted); }
+.ds-output .ds-warn { color: var(--code-warn); }
+.ds-output .ds-ok { color: var(--code-ok); }
+
+.ds-steps { list-style: none; margin: 0; padding: 0; counter-reset: ds-step; }
+.ds-steps > li {
+  display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--space-3); align-items: start;
+  padding: var(--space-4) 0; border-bottom: var(--border);
+}
+.ds-steps > li:last-child { border-bottom: 0; }
+.ds-steps > li::before {
+  counter-increment: ds-step; content: counter(ds-step);
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--sunk); color: var(--fg); font: 700 13px / 1 var(--font-sans);
+}
+.ds-steps h3 { font-size: var(--text-m); }
+.ds-steps p { font-size: 15px; color: var(--muted); margin-top: 2px; }
+
+.ds-table-wrap { overflow-x: auto; }
+.ds-table { width: 100%; border-collapse: collapse; font-size: 15px; font-variant-numeric: tabular-nums; }
+.ds-table th, .ds-table td { text-align: left; vertical-align: top; padding: 10px 16px 10px 0; border-bottom: var(--border); }
+.ds-table thead th { font-size: 13px; font-weight: 500; color: var(--subtle); border-bottom-color: var(--line-strong); }
+.ds-table tbody tr:last-child > * { border-bottom: 0; }
+
+.ds-panel { background: var(--bg); border: var(--border); border-radius: var(--radius-l); padding: var(--space-5); min-width: 0; }
+.ds-panel--sunk { background: var(--surface); }
+.ds-note { display: grid; gap: var(--space-1); background: var(--accent-soft); border-radius: var(--radius-m); padding: var(--space-3) var(--space-4); font-size: 15px; }
+.ds-badge {
+  display: inline-flex; align-items: center; min-height: 22px; padding: 0 var(--space-2); border-radius: 4px;
+  font-size: var(--text-xs); font-weight: 700; background: var(--sunk); color: var(--muted); white-space: nowrap;
+}
+.ds-badge--ok { background: var(--ok-soft); color: var(--ok); }
+
+/* ---------- page ---------- */
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: var(--space-4); top: var(--space-2); background: var(--bg); padding: var(--space-2) var(--space-3); z-index: 10; }
+
+.topbar { border-bottom: var(--border); background: var(--bg); }
+.topbar-in {
+  max-width: var(--page); margin: 0 auto; display: flex; align-items: center; gap: var(--space-5);
+  min-height: 60px; padding: 0 var(--space-4);
+}
+@media (min-width: 720px) { .topbar-in { padding-inline: var(--space-5); } }
+.brand { font: 700 var(--text-l) / 1 var(--font-mono); color: var(--fg); text-decoration: none; letter-spacing: -0.02em; }
+.brand:hover { color: var(--fg); }
+.topnav { display: flex; gap: var(--space-1); overflow-x: auto; margin-left: auto; }
+.topnav a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-2);
+  color: var(--muted); text-decoration: none; font-size: var(--text-s); white-space: nowrap;
+}
+.topnav a:hover { color: var(--fg); }
+.topnav a[aria-current="page"] { color: var(--fg); font-weight: 700; }
+@media (max-width: 600px) { .topnav .wide { display: none; } }
+
+section { padding-top: var(--space-8); }
+.hero { padding-top: var(--space-5); }
+.hero h1 { max-width: 20ch; }
+.hero .ds-lede { margin-top: var(--space-4); }
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-5); }
+
+.demo { display: grid; gap: var(--space-4); margin-top: var(--space-7); }
+@media (min-width: 960px) { .demo { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; } }
+.demo-label { font-size: 13px; color: var(--subtle); margin-bottom: var(--space-2); display: flex; gap: var(--space-2); align-items: center; }
+.demo-label code { font-size: 13px; }
+.yaml { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: var(--radius-l);
+  padding: var(--space-4); font: var(--text-s) / 1.7 var(--font-mono); overflow-x: auto; }
+.yaml .k { color: var(--code-key); }
+.yaml .s { color: var(--code-ok); }
+.yaml .c { color: var(--code-muted); }
+
+.head { display: grid; gap: var(--space-3); max-width: var(--measure); margin-bottom: var(--space-5); }
+.head p { color: var(--muted); }
+
+/* keys explained next to the file */
+.keys { display: grid; gap: 0; margin: 0; }
+.keys > div { display: grid; gap: var(--space-1); padding: var(--space-3) 0; border-bottom: var(--border); }
+.keys > div:last-child { border-bottom: 0; }
+@media (min-width: 720px) { .keys > div { grid-template-columns: 160px minmax(0, 1fr); gap: var(--space-4); } }
+.keys dt code { font-weight: 500; }
+.keys dd { margin: 0; color: var(--muted); }
+
+.quick { display: grid; gap: var(--space-6); }
+@media (min-width: 960px) { .quick { grid-template-columns: minmax(0, 1fr) 320px; align-items: start; } }
+.ds-steps .ds-cmd { margin-top: var(--space-3); }
+
+.table-sched td:first-child { white-space: nowrap; }
+.table-sched code { white-space: nowrap; }
+@media (max-width: 600px) {
+  .table-sched thead { display: none; }
+  .table-sched tr { display: grid; gap: var(--space-1); padding: var(--space-3) 0; border-bottom: var(--border); }
+  .table-sched tbody tr:last-child { border-bottom: 0; }
+  .table-sched td { padding: 0; border: 0; }
+}
+
+.ops { display: grid; gap: var(--space-5); }
+@media (min-width: 860px) { .ops { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ops h3 { margin-bottom: var(--space-2); }
+.ops p { color: var(--muted); font-size: 15px; margin-bottom: var(--space-3); }
+
+.next { list-style: none; margin: 0; padding: 0; border-top: var(--border); }
+.next li { border-bottom: var(--border); }
+.next a { display: grid; gap: 2px; padding: var(--space-4) 0; text-decoration: none; color: var(--fg); }
+@media (min-width: 720px) { .next a { grid-template-columns: 220px minmax(0, 1fr); gap: var(--space-4); } }
+.next a:hover strong { color: var(--accent); text-decoration: underline; }
+.next span { color: var(--muted); }
+
+footer { border-top: var(--border); margin-top: var(--space-8); }
+footer .ds-page { padding-block: var(--space-5); font-size: var(--text-s); color: var(--subtle); display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="./">flowkit</a>
+    <nav class="topnav" aria-label="문서">
+      <a href="./" aria-current="page">개요</a>
+      <a href="#quickstart">시작하기</a>
+      <a href="#reference">YAML 레퍼런스</a>
+      <a class="wide" href="#schedule">스케줄</a>
+      <a class="wide" href="#cli">CLI</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="ds-page">
+
+  <section class="hero" aria-labelledby="title">
+    <h1 id="title">배치 작업을 YAML 파일 하나로 정의하고 스케줄에 올립니다</h1>
+    <p class="ds-lede">flowkit은 사내 데이터 파이프라인 도구입니다. 무엇을 어떤 순서로, 언제 돌릴지를 파일 하나에 적으면 스케줄러가 그대로 실행하고, 실패하면 재시도한 뒤 알림을 보냅니다. 크론탭이나 개인 서버에 흩어진 스크립트를 한곳으로 모으는 것이 목적입니다.</p>
+    <div class="actions">
+      <a class="ds-btn ds-btn--primary" href="#quickstart">첫 작업 올리기</a>
+      <a class="ds-btn" href="#reference">YAML 레퍼런스 보기</a>
+    </div>
+
+    <div class="demo">
+      <div>
+        <p class="demo-label"><code>jobs/daily_orders.yaml</code></p>
+<pre class="yaml" aria-label="작업 정의 예시"><code><span class="c"># 매일 03시, 주문 데이터를 정리해 BigQuery에 적재</span>
+<span class="k">name:</span> daily_orders
+<span class="k">owner:</span> data-platform
+<span class="k">schedule:</span>
+  <span class="k">cron:</span> <span class="s">"0 3 * * *"</span>
+  <span class="k">timezone:</span> Asia/Seoul
+<span class="k">tasks:</span>
+  - <span class="k">id:</span> extract
+    <span class="k">run:</span> sql/extract_orders.sql
+    <span class="k">source:</span> mysql.orders
+  - <span class="k">id:</span> transform
+    <span class="k">run:</span> python transforms/clean_orders.py
+    <span class="k">needs:</span> [extract]
+  - <span class="k">id:</span> load
+    <span class="k">target:</span> bigquery.analytics.orders_daily
+    <span class="k">needs:</span> [transform]
+<span class="k">retry:</span>
+  <span class="k">attempts:</span> 3
+  <span class="k">backoff:</span> 10m
+<span class="k">notify:</span>
+  <span class="k">on_failure:</span> <span class="s">"#data-alerts"</span></code></pre>
+      </div>
+      <div>
+        <p class="demo-label">실행 결과 <span class="ds-badge ds-badge--ok">성공</span></p>
+<pre class="ds-output" aria-label="flowkit run 출력 예시"><span class="ds-prompt">$ flowkit run daily_orders --date 2026-10-21</span>
+daily_orders · 2026-10-21 · 수동 실행
+
+<span class="ds-ok">✓ extract</span>     12,480 rows   0:41
+<span class="ds-ok">✓ transform</span>   12,471 rows   1:12
+  <span class="ds-warn">! 9 rows dropped: order_id is null</span>
+<span class="ds-ok">✓ load</span>        12,471 rows   0:18
+
+완료 2분 11초
+다음 예약 실행 2026-10-23 03:00 KST</pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="reference" aria-labelledby="ref-title">
+    <div class="head">
+      <h2 id="ref-title">작업 파일에 적는 것</h2>
+      <p>위 예시의 최상위 키입니다. 필수는 <code>name</code>, <code>tasks</code> 두 개이고 나머지는 기본값이 있습니다.</p>
+    </div>
+    <dl class="keys">
+      <div><dt><code>name</code></dt><dd>작업 이름. 영문 소문자, 숫자, <code>_</code>만 씁니다. CLI와 알림에서 이 이름으로 찾습니다.</dd></div>
+      <div><dt><code>owner</code></dt><dd>책임 팀. 실패 알림과 대시보드의 담당자 칸에 표시됩니다.</dd></div>
+      <div><dt><code>schedule</code></dt><dd>언제 실행할지. <code>cron</code>, <code>every</code>, <code>after</code> 중 하나 이상을 씁니다. 없으면 수동 실행만 됩니다.</dd></div>
+      <div><dt><code>tasks</code></dt><dd>실행할 단계 목록. <code>needs</code>로 앞 단계를 지정하면 그 단계가 성공한 뒤에 시작하고, 의존 관계가 없는 단계는 동시에 돕니다.</dd></div>
+      <div><dt><code>retry</code></dt><dd>실패한 단계를 다시 시도하는 횟수와 간격. 기본값은 재시도 없음입니다.</dd></div>
+      <div><dt><code>notify</code></dt><dd>실패하거나 오래 걸릴 때 알림을 보낼 Slack 채널.</dd></div>
+    </dl>
+  </section>
+
+  <section id="quickstart" aria-labelledby="qs-title">
+    <div class="head">
+      <h2 id="qs-title">첫 작업 올리기</h2>
+      <p>로컬에서 파일을 만들고 한 번 돌려 본 뒤 스케줄러에 등록합니다.</p>
+    </div>
+    <div class="quick">
+      <ol class="ds-steps">
+        <li><div>
+          <h3>CLI 설치</h3>
+          <p>Python 3.10 이상이 필요합니다.</p>
+          <div class="ds-cmd"><code>pip install flowkit</code><button type="button">복사</button></div>
+        </div></li>
+        <li><div>
+          <h3>작업 파일 만들기</h3>
+          <p><code>jobs/daily_orders.yaml</code>이 기본 템플릿으로 생성됩니다.</p>
+          <div class="ds-cmd"><code>flowkit init daily_orders</code><button type="button">복사</button></div>
+        </div></li>
+        <li><div>
+          <h3>검사</h3>
+          <p>YAML 문법, 단계 사이의 순환 의존, 연결 이름(<code>mysql.orders</code> 같은)이 실제로 있는지 확인합니다.</p>
+          <div class="ds-cmd"><code>flowkit validate jobs/daily_orders.yaml</code><button type="button">복사</button></div>
+        </div></li>
+        <li><div>
+          <h3>로컬에서 한 번 실행</h3>
+          <p>날짜를 지정해 실행합니다. 스케줄에는 영향이 없습니다.</p>
+          <div class="ds-cmd"><code>flowkit run daily_orders --date 2026-10-21</code><button type="button">복사</button></div>
+        </div></li>
+        <li><div>
+          <h3>스케줄러에 등록</h3>
+          <p>등록이 끝나면 다음 예약 시각이 출력됩니다.</p>
+          <div class="ds-cmd"><code>flowkit deploy jobs/daily_orders.yaml</code><button type="button">복사</button></div>
+        </div></li>
+      </ol>
+      <aside class="ds-panel ds-panel--sunk ds-stack" aria-label="시작 전에 확인할 것">
+        <h3>시작 전에</h3>
+        <p class="ds-muted">DB와 BigQuery 접속 정보는 파일에 적지 않습니다. 데이터플랫폼팀에 연결 이름을 등록해 두고, YAML에는 그 이름만 씁니다.</p>
+        <p class="ds-muted">연결 목록은 <code>flowkit connections</code>로 볼 수 있습니다.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="schedule" aria-labelledby="sch-title">
+    <div class="head">
+      <h2 id="sch-title">스케줄 지정</h2>
+      <p>시각 기준, 간격 기준, 다른 작업 기준 세 가지가 있고 섞어 쓸 수 있습니다.</p>
+    </div>
+    <div class="ds-table-wrap">
+      <table class="ds-table table-sched">
+        <thead><tr><th scope="col">키</th><th scope="col">예</th><th scope="col">실행 시점</th></tr></thead>
+        <tbody>
+          <tr><td><code>cron</code></td><td><code>"0 3 * * *"</code></td><td>매일 03:00</td></tr>
+          <tr><td><code>every</code></td><td><code>15m</code></td><td>이전 실행이 끝나고 15분 뒤</td></tr>
+          <tr><td><code>after</code></td><td><code>[raw_orders]</code></td><td><code>raw_orders</code> 작업이 성공한 직후</td></tr>
+          <tr><td><code>cron</code> + <code>after</code></td><td><code>"0 3 * * *"</code>, <code>[raw_orders]</code></td><td>03:00 이후, <code>raw_orders</code>가 그날 성공했을 때</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ds-note" style="margin-top: var(--space-5); max-width: var(--measure);"><span><code>timezone</code>을 비워 두면 <code>cron</code>은 UTC로 해석됩니다. 한국 시각으로 돌리려면 <code>Asia/Seoul</code>을 적으세요.</span></p>
+  </section>
+
+  <section id="cli" aria-labelledby="ops-title">
+    <div class="head">
+      <h2 id="ops-title">등록한 뒤에 자주 쓰는 명령</h2>
+    </div>
+    <div class="ops">
+      <div>
+        <h3>상태 보기</h3>
+        <p>최근 실행 10건과 단계별 소요 시간을 보여 줍니다.</p>
+        <div class="ds-cmd"><code>flowkit status daily_orders</code><button type="button">복사</button></div>
+      </div>
+      <div>
+        <h3>지난 기간 다시 돌리기</h3>
+        <p>날짜마다 한 번씩, 순서대로 실행합니다.</p>
+        <div class="ds-cmd"><code>flowkit backfill daily_orders --from 2026-10-01 --to 2026-10-07</code><button type="button">복사</button></div>
+      </div>
+      <div>
+        <h3>잠시 멈추기</h3>
+        <p>예약 실행만 멈춥니다. <code>resume</code>으로 다시 켭니다.</p>
+        <div class="ds-cmd"><code>flowkit pause daily_orders</code><button type="button">복사</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="next-title">
+    <div class="head">
+      <h2 id="next-title">더 읽을 문서</h2>
+    </div>
+    <ul class="next">
+      <li><a href="#reference"><strong>YAML 레퍼런스</strong><span>모든 키와 기본값, 단계 유형별 옵션</span></a></li>
+      <li><a href="#schedule"><strong>스케줄과 의존 관계</strong><span>작업 사이의 순서, 늦게 끝난 실행 처리, 휴일 건너뛰기</span></a></li>
+      <li><a href="#cli"><strong>CLI 명령 전체</strong><span><code>run</code>, <code>backfill</code>, <code>logs</code> 등 명령별 옵션</span></a></li>
+      <li><a href="#quickstart"><strong>크론탭에서 옮겨 오기</strong><span>기존 셸 스크립트를 작업 파일로 바꾸는 순서</span></a></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="ds-page">
+    <span>flowkit 사내 문서</span>
+    <span>질문은 Slack <a href="#">#flowkit</a> 채널</span>
+    <span>데이터플랫폼팀 관리</span>
+  </div>
+</footer>
+
+<script>
+document.addEventListener("click", async (e) => {
+  const btn = e.target.closest(".ds-cmd button");
+  if (!btn) return;
+  const code = btn.parentElement.querySelector("code, pre");
+  const copy = code.cloneNode(true);
+  copy.querySelectorAll(".ds-c").forEach((n) => n.remove());
+  const text = copy.textContent.split("\n").map((l) => l.trimEnd()).filter(Boolean).join("\n");
+  const label = btn.textContent;
+  try { await navigator.clipboard.writeText(text); btn.textContent = "복사됨"; } catch { btn.textContent = "복사 실패"; }
+  setTimeout(() => { btn.textContent = label; }, 1500);
+});
+</script>
+</body>
+</html>

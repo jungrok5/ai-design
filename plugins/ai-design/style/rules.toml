@@ -129,8 +129,8 @@ suggest = "그 절이 실제로 담은 내용을 제목으로 (예: '체크리�
 id = "ko-count-runup"
 lang = "ko"
 severity = "warning"
-pattern = '[은는]\s(다음\s)?(두|세|네|다섯|여섯)\s?가지(입니다|예요|이다)'
-message = "개수를 먼저 예고하는 도입 ('변경은 세 가지입니다')"
+pattern = '[은는]\s(다음\s)?(두|세|네|다섯|여섯)\s?가지(입니다|예요|이다)|(?:새로워진|새로\s생긴|달라진|지키는|일하는)\s(?:세|네|다섯)\s가지|(?:세|네)\s가지\s(?:약속|원칙|비결|가치)'
+message = "개수를 먼저 예고하는 도입·제목 ('변경은 세 가지입니다', '우리가 일하는 세 가지 원칙')"
 suggest = "예고 없이 목록이나 첫 항목으로 시작"
 
 [[rule]]
@@ -318,9 +318,81 @@ max_per_file = 1
 id = "ko-metaphor-noun"
 lang = "ko"
 severity = "warning"
-pattern = '[가-힣]는\s?길(이\s?(있|없)|은\s|을\s?(따라|안내|보여|알려|제시|제공|찾아|살펴|정리|소개)|입니다|이다|이에요|도\s?(있|없)|만\s?(있|없)|(?=[ \t.:]*(\n|$)))|(의|가는|향하는|이르는|따라가는)\s?여정|여정을\s?(따라|떠나)|전체\s?지도|한\s?장의\s?지도|지도처럼|(?<![가-힣])문(을\s?(열어\s?(줍|주는|주고|줄|드립|둡)|엽니다|여는)|이\s?열립)|(가능성|기회)의\s?문(을|이|은|도|\s)|핵심\s?열쇠|열쇠를\s?쥐|(성공|해결|이해)의\s?열쇠|첫\s?걸음을\s?(내딛|뗍|떼|딛)|발판(을\s?마련|으로\s?삼|이\s?됩|이\s?되어\s?줍)|디딤돌|나침반|청사진(을\s?(제시|그리|그려|보여|펼)|입니다|이\s?됩)'
-message = "과정·연결을 비유 명사로 표현 ('가는 길', '여정', '전체 지도')"
+pattern = '(?![시오]는\s?길)[가-힣]는\s?길(이\s?(있|없)|은\s|을\s?(따라|안내|보여|알려|제시|제공|찾아|살펴|정리|소개)|입니다|이다|이에요|도\s?(있|없)|만\s?(있|없)|(?=[ \t.:]*(\n|$)))|(의|가는|향하는|이르는|따라가는)\s?여정|여정을\s?(따라|떠나)|전체\s?지도|한\s?장의\s?지도|지도처럼|(?<![가-힣])문(을\s?(열어\s?(줍|주는|주고|줄|드립|둡)|엽니다|여는)|이\s?열립)|(가능성|기회)의\s?문(을|이|은|도|\s)|핵심\s?열쇠|열쇠를\s?쥐|(성공|해결|이해)의\s?열쇠|첫\s?걸음을\s?(내딛|뗍|떼|딛)|발판(을\s?마련|으로\s?삼|이\s?됩|이\s?되어\s?줍)|디딤돌|나침반|청사진(을\s?(제시|그리|그려|보여|펼)|입니다|이\s?됩)|(?:라는|이라는)\s?벽(?:에|을|이)|벽을\s(?:없애|허물|넘)|출발선|간극을\s?메|문턱을\s?낮|공식을\s?깨|연료(?:입니다|다|예요)?(?=[.\s]|$)|(?<![가-힣])해자|방어선|태피스트리|신호탄|적신호|뿌리내리'
+message = "과정·연결·장애를 비유 명사로 표현 ('가는 길', '여정', '~라는 벽', '출발선', '문턱을 낮추다')"
 suggest = "실제 대상과 동작으로 (샘플 페이지로 가는 길이 있습니다 → 샘플 페이지 링크가 있습니다)"
+
+# 1.7.0: ornamental copy measured on 42 Korean pages and docs Claude Code wrote with no plugin (docs/measurement.md).
+# Each branch reported no document in 1,472 human Korean Markdown files (research/ai-vs-human/human). Single words
+# such as 흐름, 결, 잇다, 닿다 are ordinary Korean, so only the collocations that a page uses as decoration are listed.
+[[rule]]
+id = "ko-ornamental-verb"
+lang = "ko"
+severity = "warning"
+pattern = '(?:로그|시간|하루|오전|오후|일상|돈|마음)(?:은|는|가|이|를|을)?\s?(?:흘러가|흐르는|흐릅)|흘러가는\s(?:로그|시간|하루|일상)|이렇게\s흘러(?:가|갑|갔)|(?:오전|오후|하루)(?:은|는)\s(?:이렇게\s)?흘러(?:가|갑)|흐르는\s(?:순간|동안)|흘러가게\s두|(?:하루|일상|돈|마음|삶|일)의\s흐름|하나의\s흐름으로|(?:사이를|과|와)\s(?:가장\s)?(?:짧은\s길로|빠르게\s|하나로\s)?(?:잇습니다|잇는|이어요|이어\s?줍)|(?<![가-힣])잇습니다|짧은\s길로|마음을\s잇|다리를\s놓|결이\s(?:살아|깊어|생깁|생기)|(?:밀|재료|본연)의\s결|(?:하루|마음|일상|삶)의\s온도|온도를\s(?:살피|높|전하|담)|깃듭니다|깃든\s|숨\s?쉬는|숨을\s불어넣|스며들|(?<![가-힣])닿게\s(?:합니다|하는)|직접\s닿는|건져\s?올리|빚어\s?(?:낸|냅)|에서\s갈(?:린다|립니다)|떠받치|가는\s?길을\s*(?:더\s)?(?:짧|빠르|쉽|단단|매끄럽|편하)|단단하게\s(?:만듭|만드)'
+message = "감성 비유 동사·짝말 ('하나의 흐름으로 잇습니다', '결이 깊어집니다', '오늘 안에 닿게 합니다')"
+suggest = "실제 동작과 대상으로 (판매자와 고객을 잇습니다 → 주문을 받은 날 고객에게 배송합니다)"
+
+# "축" for a framing device ("두 축으로", "~를 축으로", "세 가지 핵심 축") was called out by three Korean sources and
+# the Threads post that prompted 1.7.0. Chart axes (가로축, x축) and 단축, 축소, 구축 are not matched.
+[[rule]]
+id = "ko-axis-metaphor"
+lang = "ko"
+severity = "warning"
+pattern = '(?<![가-힣])(?:두|세|네|핵심|새로운|중심|주요)\s?축(?:으로|을|이|입니다|에서|과)|(?:을|를)\s축으로|축을\s중심으로|라는\s(?:두|세)\s?축'
+message = "'두 축', '~를 축으로' 같은 구조 비유"
+suggest = "무엇을 기준으로 나눴는지 그대로 (두 축으로 봅니다 → 처리 속도와 비용을 비교합니다)"
+
+# The narrow "X는 A가 아니라 B입니다." forms only. Plain "A가 아니라 B" is a normal technical contrast in 8% of
+# human docs ("Effect가 아니라 이벤트 핸들러에 넣으세요"), so it is left to the skill.
+[[rule]]
+id = "ko-reframe"
+lang = "ko"
+severity = "warning"
+pattern = '(?:은|는)\s[가-힣]{1,6}(?:이|가)\s아니라\s[가-힣]{1,8}(?:입니다|이다|예요)\.|단순한\s[가-힣]{1,8}(?:이|가)\s(?:아니라|아닙니다)[^.\n]{0,20}(?:입니다|이다|예요)\.|(?:필요한|중요한)\s?(?:건|것은)\s[^.\n]{1,20}?(?:이|가)\s아니라|도\s(?:아니다|아닙니다|아니에요)\.\s+[^.\n]{1,20}?도\s아(?:니|닙)|(?:자리|일|것)이지\s[^.\n]{1,25}?(?:자리|일|것)(?:이|가)?\s?아닙니다'
+message = "반전 경구 ('모노레포는 목적이 아니라 수단입니다', '리뷰는 코드를 보는 일이지 사람을 평가하는 일이 아닙니다')"
+suggest = "부정 없이 사실로 (모노레포로 공용 코드 변경을 PR 하나로 끝냈습니다)"
+
+[[rule]]
+id = "ko-reveal"
+lang = "ko"
+severity = "warning"
+pattern = '(?:것|일)[.,]\s(?:그게|그것이)\s[^.\n]{1,25}?(?:입니다|이다|예요)|(?<=[.!?]\s)그게\s[^.\n]{1,12}(?:입니다|예요)\.'
+message = "조각 문장 뒤 '그게 ~입니다'로 의미를 공개"
+suggest = "앞 문장에 주어와 동사를 두고 한 번에 (이음로지스는 작은 쇼핑몰에 당일 배송을 제공합니다)"
+
+[[rule]]
+id = "ko-paired-slogan"
+lang = "ko"
+severity = "warning"
+pattern = '[가-힣]+만큼\s[가-힣]+(?:을|를),\s[가-힣]+만큼|[가-힣]+\s대신\s[가-힣 ]{1,10}(?:을|를),\s[가-힣 ]{1,12}대신|(?:은|는)\s(?:더\s)?[가-힣]{1,4}(?:게|고),\s[가-힣 ]{1,10}(?:은|는)\s(?:더\s)?[가-힣]{1,4}(?:게|고)(?=[.\s]|$)|(?:만|까지만)\s[가-힣]{1,6}세요\.\s+(?:나머지는|정리는|그다음은|[가-힣]{1,6}(?:은|는))\s[^\n]{1,20}?(?:가|이)\s*(?:합니다|맡습니다|해요|맡아요)|(?:은|는)\s[가-힣 ]{1,12}(?:가|이)\.(?=\s|$)'
+message = "대칭·역할 분담 슬로건 ('속도만큼 신뢰를, 규모만큼 책임을', '요약과 할 일은 노트메이트가.')"
+suggest = "실제로 바뀌는 것 하나를 문장으로 (결제 내역을 가맹점 이름으로 자동 분류합니다)"
+
+# A sentence that ends on an adverb or particle ("돈 관리는 더 쉽게.", "5분 안에 첫 집계까지.") is a slogan fragment.
+[[rule]]
+id = "ko-fragment-slogan"
+lang = "ko"
+severity = "warning"
+pattern = '(?<=[가-힣])(?:게|까지)\.(?=\s|$)|이제\s?그만(?=[.\s]|$)|이제\s0초|(?:두|세|네|[2-5])\s?(?:단계|걸음)(?:이)?면(?=[\s,])'
+message = "조각 슬로건 ('돈 관리는 더 쉽게.', '5분 안에 첫 집계까지.', '세 단계면', '이제 그만')"
+suggest = "주어와 동사가 있는 문장 (설치부터 첫 집계까지 약 5분이 걸립니다)"
+
+[[rule]]
+id = "ko-era-opener"
+lang = "ko"
+severity = "warning"
+pattern = '급변하는\s|빠르게\s변화하는\s(?:시대|환경|세상)|바야흐로|현대\s사회에서'
+message = "시대 도입 상투구 ('급변하는 시대', '바야흐로')"
+suggest = "삭제하고 바로 내용으로"
+
+[[rule]]
+id = "ko-hook-formula"
+lang = "ko"
+severity = "warning"
+pattern = '가장\s좋은\s점은\?|(?:불편한\s)?진실은\?|결론부터\s말(?:씀드리|하)|이유는\s(?:단순|간단)(?:합니다|하다)'
+message = "훅 공식 ('결론부터 말씀드리면', '이유는 단순합니다', '진실은?')"
+suggest = "예고 없이 결론이나 이유를 바로"
 
 [[rule]]
 id = "ko-universal-claim"
@@ -539,8 +611,8 @@ suggest = "무슨 일이 언제 있었는지만 서술 (1987년에 개관했다)
 id = "ko-promo-vocab"
 lang = "ko"
 severity = "warning"
-pattern = '(?:을|를)\s?자랑(?:한다|합니다|하는|하며|해\s?왔)|명실상부(?:한|하게)|자락에\s?(?:자리한|자리\s?잡은|위치한)|꼭\s?가\s?봐야\s?할|빼어난\s|손꼽히는\s'
-message = "홍보성 수식 ('~를 자랑하는', '명실상부한', '빼어난')"
+pattern = '(?:을|를)\s?자랑(?:한다|합니다|하는|하며|해\s?왔)|명실상부(?:한|하게)|자락에\s?(?:자리한|자리\s?잡은|위치한)|꼭\s?가\s?봐야\s?할|빼어난\s|손꼽히는\s|혁명적|차원이\s다른|선사(?:합|하는|해)|발돋움|무한한\s가능성|한\s차원\s높은'
+message = "홍보성 수식 ('~를 자랑하는', '명실상부한', '차원이 다른', '선사합니다')"
 suggest = "무엇이 있는지 사실로 (전시실은 네 개다)"
 
 [[rule]]
@@ -571,8 +643,8 @@ suggest = "구체적인 동작으로 (함께 쓰면 빌드가 20% 빨라진다)"
 id = "ko-copula-avoidance"
 lang = "ko"
 severity = "warning"
-pattern = '(?:으로|로)\s?자리\s?잡고\s?있|역할을\s?수행(?:하고\s?있|한다|합니다|해\s?왔)|(?:으로|로)\s?기능하고\s?있|(?:으로|로)\s?평가받고\s?있'
-message = "'~이다' 회피 서술어 ('~로 자리잡고 있다', '역할을 수행하고 있다')"
+pattern = '(?:으로|로)\s?자리\s?잡고\s?있|역할을\s?수행(?:하고\s?있|한다|합니다|해\s?왔)|(?:으로|로)\s?기능하고\s?있|(?:으로|로)\s?평가받고\s?있|(?:로|으로)\s기능(?:합니다|한다)(?=[.\s])'
+message = "'~이다' 회피 서술어 ('~로 자리잡고 있다', '역할을 수행하고 있다', '~로 기능합니다')"
 suggest = "~이다 / ~이 있다 (협회의 전시 공간이다)"
 
 [[rule]]
@@ -619,8 +691,8 @@ suggest = "삭제하고 주장만"
 id = "ko-aphorism"
 lang = "ko"
 severity = "warning"
-pattern = '[가-힣A-Za-z]+(?:은|는)\s[가-힣A-Za-z]+의\s(?:언어|통화|문법|건축학|화폐)(?:다|이다|입니다)[.]|(?:도구|수단)가\s?아니라\s(?:거울|태도|철학|언어|문화)(?:다|이다|입니다)'
-message = "경구 공식 ('X는 Y의 언어다')"
+pattern = '[가-힣A-Za-z]+(?:은|는)\s[가-힣A-Za-z]+의\s(?:언어|통화|문법|건축학|화폐)(?:다|이다|입니다)[.]|(?:도구|수단)가\s?아니라\s(?:거울|태도|철학|언어|문화)(?:다|이다|입니다)|(?:시간|루틴|습관|기다림|꾸준함|디테일|작은\s차이|반복)(?:이|가)\s[가-힣]{1,6}(?:을|를)\s만듭니다|(?:지표|숫자|데이터|코드|결과)(?:로|으로)\s말(?:하기|합니다|하는)|의\s다른\s이름(?:이다|입니다|일\s것)|이제\s시작(?:이다|입니다)[.]'
+message = "경구 공식 ('X는 Y의 언어다', '시간이 맛을 만듭니다', '지표로 말하기')"
 suggest = "공식이 가리키던 구체적 주장으로"
 
 [[rule]]
@@ -897,7 +969,7 @@ suggest = "state the fact"
 id = "en-performed-candor"
 lang = "en"
 severity = "warning"
-pattern = "(?m)(?:^\\s*|(?<=[.!?]\\s))(?:honestly|frankly|candidly)\\s*[,?]|\\blet(?: me|['’]s) be (?:clear|honest|direct|blunt|frank|real)\\b|\\bi['’]ll be (?:honest|direct|blunt|frank)\\b|\\bto be (?:perfectly |brutally |completely |totally )?(?:honest|frank)\\b|\\bin all honesty\\b|\\bif i['’]m being (?:honest|frank)\\b|\\btruth be told\\b|\\breal talk\\b|\\bquite (?:frankly|honestly)\\b"
+pattern = "(?m)(?:^\\s*|(?<=[.!?]\\s))(?:honestly|frankly|candidly)\\s*[,?]|\\blet(?: me|['’]s) be (?:clear|honest|direct|blunt|frank|real)\\b|\\bi['’]ll be (?:honest|direct|blunt|frank)\\b|\\bto be (?:perfectly |brutally |completely |totally )?(?:honest|frank)\\b|\\bin all honesty\\b|\\bif i['’]m being (?:honest|frank)\\b|\\btruth be told\\b|\\breal talk\\b|\\bquite (?:frankly|honestly)\\b|\\bhonest (?:caveat|take|answer|assessment)\\b"
 message = "Performed candor"
 suggest = "cut; state the claim"
 
@@ -1014,8 +1086,8 @@ suggest = "name who decides or acts"
 id = "en-buzz-metaphor"
 lang = "en"
 severity = "warning"
-pattern = '\bvirtuous (?:cycle|circle)\b|\b(?:growth|data|content|virtuous|self-?reinforcing) flywheel\b|\bflywheel effect\b|\b(?:competitive|economic|defensible|durable) moats?\b|\b(?:our|your|a|their) north star\b|\bnorth[- ]star metric\b|\bharness(?:es|ed|ing)? the (?:full )?(?:power|potential|capabilities)\b|\bthought[- ]leader(?:s|ship)?\b|\bresonat(?:e|es|ed|ing) (?:deeply |strongly )?with\b|\bpoised (?:to|for)\b'
-message = "Strategy-deck metaphor or buzz phrase (flywheel, north star, harness the power, resonates with, poised to)"
+pattern = '\bvirtuous (?:cycle|circle)\b|\b(?:growth|data|content|virtuous|self-?reinforcing) flywheel\b|\bflywheel effect\b|\b(?:competitive|economic|defensible|durable) moats?\b|\b(?:our|your|a|their) north star\b|\bnorth[- ]star metric\b|\bharness(?:es|ed|ing)? the (?:full )?(?:power|potential|capabilities)\b|\bthought[- ]leader(?:s|ship)?\b|\bresonat(?:e|es|ed|ing) (?:deeply |strongly )?with\b|\bpoised (?:to|for)\b|\ba symphony of\b|\bthrough (?:the|a|this) (?:new )?lens of\b|\b(?:beacon|cornerstone|bedrock|mosaic) of\b'
+message = "Strategy-deck metaphor or buzz phrase (flywheel, north star, harness the power, through the lens of, a symphony of)"
 suggest = "say the literal mechanism or effect"
 
 [[rule]]
@@ -1086,8 +1158,8 @@ suggest = "start from the real subject (The cache makes this work)"
 id = "en-what-if-i-told-you"
 lang = "en"
 severity = "warning"
-pattern = '\bwhat if i told you\b'
-message = "Rhetorical set-up ('What if I told you …')"
+pattern = '\bwhat if i told you\b|\bimagine a world (?:where|in which)\b|\bstops? being\b[^.\n]{1,40}\bstarts? being\b'
+message = "Rhetorical set-up ('What if I told you …', 'Imagine a world where …', 'stops being X and starts being Y')"
 suggest = "make the claim directly"
 
 [[rule]]
@@ -1276,3 +1348,29 @@ severity = "warning"
 pattern = 'table[^{}]*\{[^}]*min-width:\s*([4-9]\d{2}|\d{4,})px'
 message = "Table with a fixed min-width wider than a phone screen"
 suggest = "turn a two-column table into a list (<dl>), or let it wrap; never wider than 375 px by force"
+
+# 1.7.0: Claude-era mannered prose. Anthropic's own guide names "earns its keep" and "a dial worth turning";
+# "load-bearing" in prose is reported by seven independent sources. No hit in 985 human English docs.
+[[rule]]
+id = "en-mannered"
+lang = "en"
+severity = "warning"
+pattern = '\bearn(?:s|ed|ing)? (?:its|their) (?:keep|place)\b|\b(?:dial|lever|knob)s? worth (?:turning|pulling)\b|\bload[- ]bearing\b'
+message = "Mannered metaphor ('earns its keep', 'a dial worth turning', 'load-bearing')"
+suggest = "say what it does or why it matters, literally"
+
+[[rule]]
+id = "en-hero-formula"
+lang = "en"
+severity = "warning"
+pattern = ',\s*reimagined\b|\bwhere [\w ]{2,20} meets [\w ]{2,20}\b|\bexperience the (?:difference|power of)\b|\bunlock(?:s|ing)? (?:new |your |the )?(?:possibilit|growth|insight|value|productivity)|\beffortless(?:ly)?\b|\bfrictionless\b|\btransformative\b|\bunparalleled\b|\blimitless possibilit'
+message = "Stock landing-page formula ('X, reimagined', 'Where X meets Y', 'unlock new possibilities', 'effortless')"
+suggest = "a headline that names what the product does for whom"
+
+[[rule]]
+id = "en-social-proof"
+lang = "en"
+severity = "warning"
+pattern = '\b(?:join|trusted by|loved by) (?:over )?(?:[\d,.]+k?\+?|thousands|millions) of\b'
+message = "Social proof in copy ('Join thousands of …', 'Trusted by 10,000+ …')"
+suggest = "a real, sourced number or customer name, or nothing"

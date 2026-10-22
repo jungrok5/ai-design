@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>flowkit 문서</title>
+<meta name="description" content="flowkit: YAML로 배치 작업을 정의하고 스케줄링하는 사내 데이터 파이프라인 도구">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f6f7f9;
+    --text: #1f2328;
+    --text-muted: #59636e;
+    --border: #d8dde3;
+    --accent: #0b6bcb;
+    --accent-soft: #e7f1fb;
+    --code-bg: #0f1419;
+    --code-text: #e6edf3;
+    --code-key: #7ee787;
+    --code-str: #a5d6ff;
+    --code-com: #7d8590;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d1117;
+      --bg-soft: #161b22;
+      --text: #e6edf3;
+      --text-muted: #9198a1;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent-soft: #132238;
+      --code-bg: #010409;
+      --code-text: #e6edf3;
+      --code-key: #7ee787;
+      --code-str: #a5d6ff;
+      --code-com: #7d8590;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d1117;
+    --bg-soft: #161b22;
+    --text: #e6edf3;
+    --text-muted: #9198a1;
+    --border: #30363d;
+    --accent: #58a6ff;
+    --accent-soft: #132238;
+    --code-bg: #010409;
+    --code-text: #e6edf3;
+    --code-key: #7ee787;
+    --code-str: #a5d6ff;
+    --code-com: #7d8590;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  code {
+    font-size: 0.9em;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.1em 0.35em;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+  /* Header */
+  header.site {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  header.site .wrap {
+    display: flex; align-items: center; gap: 24px;
+    height: 56px;
+  }
+  .logo { font-weight: 700; font-size: 18px; color: var(--text); letter-spacing: -0.02em; }
+  .logo span { color: var(--accent); }
+  nav.main { display: flex; gap: 18px; flex: 1; overflow-x: auto; white-space: nowrap; }
+  nav.main a { color: var(--text-muted); font-size: 14px; }
+  nav.main a:hover { color: var(--text); text-decoration: none; }
+  .theme-btn {
+    background: none; border: 1px solid var(--border); color: var(--text-muted);
+    border-radius: 6px; padding: 4px 10px; font-size: 13px; cursor: pointer;
+  }
+
+  /* Hero */
+  .hero { padding: 72px 0 56px; }
+  .eyebrow {
+    display: inline-block; font-size: 13px; color: var(--accent);
+    background: var(--accent-soft); border-radius: 999px; padding: 3px 12px; margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(30px, 5vw, 46px); line-height: 1.2;
+    letter-spacing: -0.03em; margin: 0 0 16px;
+  }
+  .hero p.lead { font-size: 18px; color: var(--text-muted); max-width: 680px; margin: 0 0 28px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-block; padding: 10px 18px; border-radius: 8px;
+    font-size: 15px; font-weight: 600; border: 1px solid var(--border);
+    color: var(--text); background: var(--bg);
+  }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn:hover { text-decoration: none; filter: brightness(0.97); }
+
+  section { padding: 48px 0; border-top: 1px solid var(--border); }
+  section h2 { font-size: 26px; letter-spacing: -0.02em; margin: 0 0 12px; }
+  section > .wrap > p { color: var(--text-muted); margin: 0 0 20px; max-width: 720px; }
+
+  /* Feature cards */
+  .cards {
+    display: grid; gap: 14px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
+  .card {
+    background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px;
+  }
+  .card h3 { margin: 0 0 6px; font-size: 16px; }
+  .card p { margin: 0; color: var(--text-muted); font-size: 14px; }
+
+  /* Code blocks */
+  .codebox { position: relative; margin: 0 0 20px; }
+  pre {
+    background: var(--code-bg); color: var(--code-text);
+    border-radius: 10px; padding: 18px 20px; margin: 0;
+    overflow-x: auto; font-size: 14px; line-height: 1.6;
+  }
+  pre .k { color: var(--code-key); }
+  pre .s { color: var(--code-str); }
+  pre .c { color: var(--code-com); }
+  .copy {
+    position: absolute; top: 10px; right: 10px;
+    background: var(--bg-soft); color: var(--text-muted);
+    border: 1px solid var(--border); border-radius: 6px;
+    font-size: 12px; padding: 3px 9px; cursor: pointer;
+  }
+
+  /* Two column: steps + side notes */
+  .two {
+    display: grid; gap: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    align-items: start;
+  }
+  ol.steps { padding-left: 0; list-style: none; counter-reset: s; margin: 0; }
+  ol.steps li {
+    counter-increment: s; position: relative;
+    padding: 0 0 18px 42px; color: var(--text-muted);
+  }
+  ol.steps li::before {
+    content: counter(s);
+    position: absolute; left: 0; top: 0;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent);
+    font-weight: 700; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  ol.steps li strong { color: var(--text); display: block; }
+
+  /* Schedule table */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--text-muted); font-weight: 600; background: var(--bg-soft); }
+  td code { white-space: nowrap; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  .table-wrap table { border: 0; }
+
+  .note {
+    border-left: 3px solid var(--accent); background: var(--accent-soft);
+    padding: 12px 16px; border-radius: 6px; font-size: 14px; margin: 0 0 20px;
+  }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 28px 0; color: var(--text-muted); font-size: 13px;
+  }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; }
+
+  @media (max-width: 720px) {
+    nav.main { display: none; }
+    .hero { padding: 48px 0 40px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="#top">flow<span>kit</span></a>
+    <nav class="main">
+      <a href="#start">시작하기</a>
+      <a href="#yaml">YAML 정의</a>
+      <a href="#schedule">스케줄링</a>
+      <a href="#cli">CLI</a>
+      <a href="#features">기능</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="테마 전환">다크 모드</button>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">사내 데이터 파이프라인 도구</span>
+      <h1>배치 작업을 YAML로 정의하고<br>스케줄에 맡기세요.</h1>
+      <p class="lead">
+        flowkit은 데이터 수집, 변환, 적재 작업을 선언형 YAML 파일로 작성하고,
+        cron 표현식으로 실행 주기를 지정하는 배치 파이프라인 도구입니다.
+        코드를 줄이고, 실행 이력은 한곳에서 확인하세요.
+      </p>
+      <div class="btns">
+        <a class="btn primary" href="#start">빠른 시작</a>
+        <a class="btn" href="#yaml">YAML 예제 보기</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="start">
+    <div class="wrap">
+      <h2>시작하기</h2>
+      <p>사내 패키지 저장소에서 CLI를 설치하고, 첫 작업 파일을 검증한 뒤 실행해 보세요.</p>
+      <div class="two">
+        <ol class="steps">
+          <li>
+            <strong>CLI 설치</strong>
+            사내 패키지 인덱스에서 flowkit을 설치합니다.
+          </li>
+          <li>
+            <strong>작업 파일 작성</strong>
+            <code>jobs/</code> 디렉터리에 YAML 파일을 만듭니다.
+          </li>
+          <li>
+            <strong>검증 후 실행</strong>
+            <code>validate</code>로 문법을 확인하고 <code>run</code>으로 한 번 실행합니다.
+          </li>
+          <li>
+            <strong>스케줄 등록</strong>
+            <code>schedule</code> 명령으로 주기 실행을 등록합니다.
+          </li>
+        </ol>
+        <div>
+          <div class="codebox">
+<pre><span class="c"># 설치 (사내 패키지 인덱스)</span>
+pip install flowkit
+
+<span class="c"># 작업 파일 검증</span>
+flowkit validate jobs/daily_sales.yaml
+
+<span class="c"># 한 번 실행</span>
+flowkit run jobs/daily_sales.yaml</pre>
+            <button class="copy" type="button">복사</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="yaml">
+    <div class="wrap">
+      <h2>YAML로 작업 정의</h2>
+      <p>
+        하나의 파일이 하나의 배치 작업입니다. 작업 이름, 실행 주기, 재시도 정책, 단계(step)와
+        단계 사이의 의존 관계를 한 파일에 선언합니다.
+      </p>
+      <div class="codebox">
+<pre><span class="k">name</span>: daily_sales
+<span class="k">description</span>: <span class="s">"일별 매출 집계 및 적재"</span>
+<span class="k">owner</span>: <span class="s">data-platform</span>
+
+<span class="k">schedule</span>:
+  <span class="k">cron</span>: <span class="s">"0 2 * * *"</span>      <span class="c"># 매일 02:00</span>
+  <span class="k">timezone</span>: <span class="s">Asia/Seoul</span>
+
+<span class="k">retry</span>:
+  <span class="k">max_attempts</span>: <span class="s">3</span>
+  <span class="k">backoff_seconds</span>: <span class="s">60</span>
+<span class="k">timeout_minutes</span>: <span class="s">90</span>
+
+<span class="k">steps</span>:
+  - <span class="k">id</span>: extract_orders
+    <span class="k">type</span>: sql
+    <span class="k">connection</span>: warehouse
+    <span class="k">query</span>: <span class="s">"SELECT * FROM orders WHERE dt = {{ ds }}"</span>
+
+  - <span class="k">id</span>: aggregate
+    <span class="k">type</span>: python
+    <span class="k">entry</span>: <span class="s">transforms/sales.py:aggregate</span>
+    <span class="k">depends_on</span>: [extract_orders]
+
+  - <span class="k">id</span>: load_mart
+    <span class="k">type</span>: sql
+    <span class="k">connection</span>: mart
+    <span class="k">query</span>: <span class="s">"INSERT INTO sales_daily SELECT * FROM staging_sales"</span>
+    <span class="k">depends_on</span>: [aggregate]
+
+<span class="k">alerts</span>:
+  <span class="k">on_failure</span>: [<span class="s">"#data-alerts"</span>]</pre>
+        <button class="copy" type="button">복사</button>
+      </div>
+      <p class="note">
+        <code>depends_on</code>으로 단계 간 순서를 정하면 flowkit이 방향 비순환 그래프(DAG)로 해석해
+        독립적인 단계는 병렬로 실행합니다. <code>{{ ds }}</code> 같은 템플릿 변수는 실행 날짜로 치환됩니다.
+      </p>
+    </div>
+  </section>
+
+  <section id="schedule">
+    <div class="wrap">
+      <h2>스케줄링</h2>
+      <p>
+        <code>schedule.cron</code>에 표준 cron 표현식을 쓰거나 아래 별칭을 사용합니다.
+        시간대를 지정하지 않으면 사내 기본 시간대(Asia/Seoul)로 해석됩니다.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>표현식</th><th>의미</th><th>비고</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>0 2 * * *</code></td><td>매일 02:00</td><td>일 단위 배치의 기본형</td></tr>
+            <tr><td><code>*/15 * * * *</code></td><td>15분마다</td><td>준실시간 적재</td></tr>
+            <tr><td><code>0 9 * * 1-5</code></td><td>평일 09:00</td><td>영업일 리포트</td></tr>
+            <tr><td><code>0 1 1 * *</code></td><td>매월 1일 01:00</td><td>월간 집계</td></tr>
+            <tr><td><code>@hourly</code></td><td>매시 정각</td><td><code>0 * * * *</code>과 동일</td></tr>
+            <tr><td><code>@daily</code></td><td>매일 자정</td><td><code>0 0 * * *</code>과 동일</td></tr>
+            <tr><td><code>manual</code></td><td>자동 실행 없음</td><td>CLI 또는 API로만 실행</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:20px"></p>
+      <div class="codebox">
+<pre><span class="c"># 스케줄 등록: 파일의 schedule 설정을 읽어 주기 실행을 시작</span>
+flowkit schedule jobs/daily_sales.yaml
+
+<span class="c"># 등록된 스케줄 목록과 다음 실행 시각</span>
+flowkit schedule list
+
+<span class="c"># 일시 중지 / 재개</span>
+flowkit schedule pause daily_sales
+flowkit schedule resume daily_sales</pre>
+        <button class="copy" type="button">복사</button>
+      </div>
+      <p class="note">
+        같은 작업의 이전 실행이 끝나지 않았다면 기본적으로 새 실행을 건너뜁니다(<code>overlap: skip</code>).
+        겹쳐 실행해야 하는 경우에만 <code>overlap: allow</code>를 지정하세요.
+      </p>
+    </div>
+  </section>
+
+  <section id="cli">
+    <div class="wrap">
+      <h2>CLI 요약</h2>
+      <p>자주 쓰는 명령어만 모았습니다. 전체 옵션은 <code>flowkit --help</code>로 확인할 수 있습니다.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>명령</th><th>설명</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>flowkit validate &lt;file&gt;</code></td><td>YAML 스키마와 DAG 순환 여부를 검사합니다.</td></tr>
+            <tr><td><code>flowkit run &lt;file&gt;</code></td><td>작업을 즉시 한 번 실행합니다. <code>--date</code>로 기준 날짜를 지정합니다.</td></tr>
+            <tr><td><code>flowkit schedule &lt;file&gt;</code></td><td>스케줄을 등록합니다.</td></tr>
+            <tr><td><code>flowkit logs &lt;job&gt;</code></td><td>최근 실행 이력과 단계별 로그를 조회합니다.</td></tr>
+            <tr><td><code>flowkit retry &lt;job&gt; --run-id &lt;id&gt;</code></td><td>실패한 실행을 실패 단계부터 다시 시작합니다.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <h2>주요 기능</h2>
+      <p>작업 정의와 운영에 필요한 기능을 한 도구에 담았습니다.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>선언형 YAML</h3>
+          <p>로직은 단계 스크립트에, 흐름과 설정은 YAML에 둡니다. 코드 리뷰 대상이 명확해집니다.</p>
+        </div>
+        <div class="card">
+          <h3>의존성 그래프</h3>
+          <p><code>depends_on</code>으로 DAG를 구성하고, 독립 단계는 자동으로 병렬 실행합니다.</p>
+        </div>
+        <div class="card">
+          <h3>cron 스케줄링</h3>
+          <p>표준 cron 표현식과 시간대 지정을 지원합니다. 일시 중지와 재개가 가능합니다.</p>
+        </div>
+        <div class="card">
+          <h3>재시도와 타임아웃</h3>
+          <p>단계별 재시도 횟수와 백오프, 작업 단위 타임아웃을 설정할 수 있습니다.</p>
+        </div>
+        <div class="card">
+          <h3>실행 이력과 알림</h3>
+          <p>실행 결과와 단계별 로그를 보관하고, 실패 시 지정한 채널로 알림을 보냅니다.</p>
+        </div>
+        <div class="card">
+          <h3>템플릿 변수</h3>
+          <p><code>{{ ds }}</code> 같은 변수로 실행 날짜와 파라미터를 쿼리와 스크립트에 주입합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>flowkit 문서 · 내부 사용 전용</span>
+    <span>문의: <a href="#top">data-platform</a> 팀</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById("themeBtn");
+
+    function currentIsDark() {
+      var explicit = root.getAttribute("data-theme");
+      if (explicit) return explicit === "dark";
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+
+    function syncLabel() {
+      btn.textContent = currentIsDark() ? "라이트 모드" : "다크 모드";
+    }
+
+    btn.addEventListener("click", function () {
+      root.setAttribute("data-theme", currentIsDark() ? "light" : "dark");
+      syncLabel();
+    });
+
+    document.querySelectorAll(".codebox .copy").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var text = b.parentElement.querySelector("pre").innerText;
+        var done = function () {
+          b.textContent = "복사됨";
+          setTimeout(function () { b.textContent = "복사"; }, 1500);
+        };
+        try {
+          navigator.clipboard.writeText(text).then(done, function () {});
+        } catch (e) {
+          /* 클립보드 접근이 막힌 환경에서는 아무 동작도 하지 않습니다 */
+        }
+      });
+    });
+
+    syncLabel();
+  })();
+</script>
+</body>
+</html>

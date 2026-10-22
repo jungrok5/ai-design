@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>flowkit 문서</title>
+<meta name="description" content="flowkit — YAML로 배치 작업을 정의하고 스케줄링하는 사내 데이터 파이프라인 도구">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --surface-2: #efede6;
+    --text: #1c1d1f;
+    --muted: #5d6066;
+    --line: #dedbd2;
+    --accent: #1f6f5c;
+    --accent-soft: #dcefe8;
+    --code-bg: #16181b;
+    --code-text: #e6e4dd;
+    --tok-key: #8fd3be;
+    --tok-str: #e9c584;
+    --tok-com: #7d828a;
+    --tok-num: #d9a0e0;
+    --warn: #a35a12;
+    --radius: 10px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121315;
+      --surface: #1a1c1f;
+      --surface-2: #22252a;
+      --text: #e8e6e1;
+      --muted: #9a9ea6;
+      --line: #2e3237;
+      --accent: #6cc7ab;
+      --accent-soft: #1d3530;
+      --code-bg: #0c0d0f;
+      --warn: #e0a15e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121315;
+    --surface: #1a1c1f;
+    --surface-2: #22252a;
+    --text: #e8e6e1;
+    --muted: #9a9ea6;
+    --line: #2e3237;
+    --accent: #6cc7ab;
+    --accent-soft: #1d3530;
+    --code-bg: #0c0d0f;
+    --warn: #e0a15e;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans KR", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, pre { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+  :not(pre) > code {
+    font-size: .88em;
+    background: var(--surface-2);
+    padding: .1em .4em;
+    border-radius: 5px;
+  }
+
+  /* ---------- 상단 바 ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner {
+    max-width: 1180px; margin: 0 auto; padding: 0 16px;
+    height: 56px; display: flex; align-items: center; gap: 24px;
+  }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--text); font-size: 17px; }
+  .logo:hover { text-decoration: none; }
+  .logo svg { color: var(--accent); }
+  .logo .ver {
+    font: 500 11px "IBM Plex Mono", monospace; color: var(--muted);
+    border: 1px solid var(--line); padding: 1px 6px; border-radius: 20px;
+  }
+  .topnav { display: flex; gap: 20px; font-size: 14px; }
+  .topnav a { color: var(--muted); }
+  .topnav a:hover, .topnav a.on { color: var(--text); text-decoration: none; }
+  .spacer { flex: 1; }
+  .search {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 8px; padding: 6px 10px; width: 220px;
+    color: var(--muted); font-size: 13px;
+  }
+  .search input { border: 0; background: transparent; outline: 0; color: var(--text); font: inherit; width: 100%; }
+  .search kbd { font: 11px "IBM Plex Mono", monospace; border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; }
+  .theme-btn {
+    background: none; border: 1px solid var(--line); color: var(--muted);
+    width: 34px; height: 34px; border-radius: 8px; cursor: pointer; display: grid; place-items: center;
+  }
+  .theme-btn:hover { color: var(--text); }
+
+  /* ---------- 레이아웃 ---------- */
+  .layout {
+    max-width: 1180px; margin: 0 auto; padding: 0 16px;
+    display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 48px;
+  }
+  .sidebar {
+    position: sticky; top: 56px; align-self: start;
+    height: calc(100vh - 56px); overflow-y: auto; padding: 32px 0;
+    font-size: 14px;
+  }
+  .sidebar h4 {
+    margin: 22px 0 6px; font-size: 12px; font-weight: 600;
+    color: var(--muted); letter-spacing: .04em;
+  }
+  .sidebar h4:first-child { margin-top: 0; }
+  .sidebar a { display: block; padding: 4px 10px; margin-left: -10px; border-radius: 6px; color: var(--text); }
+  .sidebar a:hover { background: var(--surface-2); text-decoration: none; }
+  .sidebar a.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+
+  main { padding: 48px 0 96px; min-width: 0; }
+
+  /* ---------- 히어로 ---------- */
+  .eyebrow { font: 500 13px "IBM Plex Mono", monospace; color: var(--accent); margin: 0 0 12px; }
+  h1 {
+    font-size: clamp(30px, 5vw, 44px); line-height: 1.2; margin: 0 0 16px;
+    letter-spacing: -.02em; font-weight: 700; text-wrap: balance;
+  }
+  .lead { font-size: 18px; color: var(--muted); max-width: 640px; margin: 0 0 28px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 15px;
+    border: 1px solid var(--line); color: var(--text); background: var(--surface);
+  }
+  .btn:hover { text-decoration: none; border-color: var(--muted); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .btn.primary:hover { filter: brightness(1.08); }
+
+  /* ---------- 코드 블록 ---------- */
+  .code {
+    background: var(--code-bg); color: var(--code-text);
+    border-radius: var(--radius); overflow: hidden; margin: 0 0 24px;
+    border: 1px solid color-mix(in srgb, var(--line) 40%, transparent);
+  }
+  .code-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 14px; font: 12px "IBM Plex Mono", monospace; color: #8b9098;
+    border-bottom: 1px solid #262a2f;
+  }
+  .copy {
+    background: none; border: 1px solid #33373d; color: #b5b9bf;
+    font: 12px "IBM Plex Mono", monospace; padding: 2px 8px; border-radius: 5px; cursor: pointer;
+  }
+  .copy:hover { color: #fff; border-color: #555; }
+  .code pre { margin: 0; padding: 16px; overflow-x: auto; font-size: 13.5px; line-height: 1.65; }
+  .k { color: var(--tok-key); }
+  .s { color: var(--tok-str); }
+  .c { color: var(--tok-com); font-style: italic; }
+  .n { color: var(--tok-num); }
+  .p { color: #8b9098; user-select: none; }
+
+  /* ---------- 섹션 ---------- */
+  section { margin-top: 64px; scroll-margin-top: 80px; }
+  h2 { font-size: 24px; margin: 0 0 8px; letter-spacing: -.01em; }
+  h2 + .sub { color: var(--muted); margin: 0 0 24px; }
+  h3 { font-size: 17px; margin: 0 0 6px; }
+
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 20px;
+  }
+  .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  .card .ic {
+    width: 34px; height: 34px; border-radius: 8px; background: var(--accent-soft); color: var(--accent);
+    display: grid; place-items: center; margin-bottom: 12px;
+  }
+
+  .steps { counter-reset: step; list-style: none; padding: 0; margin: 0; }
+  .steps > li { position: relative; padding-left: 44px; margin-bottom: 28px; }
+  .steps > li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: 0;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--surface); border: 1px solid var(--line);
+    font: 600 13px "IBM Plex Mono", monospace; display: grid; place-items: center;
+  }
+  .steps p { margin: 0 0 12px; color: var(--muted); }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12.5px; color: var(--muted); font-weight: 600; background: var(--surface-2); }
+  tr:last-child td { border-bottom: 0; }
+  td code { white-space: nowrap; }
+
+  .note {
+    border-left: 3px solid var(--warn); background: var(--surface);
+    padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 14.5px; color: var(--muted);
+    margin-top: 16px;
+  }
+  .note strong { color: var(--text); }
+
+  .next { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .next a.card { color: var(--text); display: block; transition: border-color .15s; }
+  .next a.card:hover { border-color: var(--accent); text-decoration: none; }
+  .next a.card span { font-size: 13px; color: var(--accent); font-weight: 600; }
+
+  footer {
+    border-top: 1px solid var(--line); margin-top: 80px; padding-top: 24px;
+    font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between;
+  }
+
+  /* ---------- 반응형 ---------- */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; gap: 0; }
+    .sidebar { display: none; }
+    .search { display: none; }
+    .split { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .topnav { display: none; }
+    main { padding-top: 32px; }
+    .lead { font-size: 16.5px; }
+    .code pre { font-size: 12.5px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="logo" href="#">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="5" cy="6" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="12" r="2.5"/>
+        <path d="M7.5 6h3a3 3 0 0 1 3 3v0a3 3 0 0 0 3 3M7.5 18h3a3 3 0 0 0 3-3v0a3 3 0 0 1 3-3"/>
+      </svg>
+      flowkit <span class="ver">v2.4</span>
+    </a>
+    <nav class="topnav">
+      <a class="on" href="#">문서</a>
+      <a href="#reference">레퍼런스</a>
+      <a href="#cli">CLI</a>
+      <a href="#next">변경 이력</a>
+    </nav>
+    <div class="spacer"></div>
+    <label class="search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" placeholder="문서 검색" aria-label="문서 검색">
+      <kbd>/</kbd>
+    </label>
+    <button class="theme-btn" id="themeBtn" aria-label="테마 전환" title="테마 전환">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar" aria-label="문서 목차">
+    <h4>시작하기</h4>
+    <a class="on" href="#">소개</a>
+    <a href="#quickstart">빠른 시작</a>
+    <a href="#concepts">핵심 개념</a>
+    <h4>작업 정의</h4>
+    <a href="#reference">YAML 레퍼런스</a>
+    <a href="#schedule">스케줄 문법</a>
+    <a href="#">의존성과 DAG</a>
+    <a href="#">재시도와 타임아웃</a>
+    <a href="#">시크릿 사용</a>
+    <h4>운영</h4>
+    <a href="#cli">CLI 명령어</a>
+    <a href="#">모니터링과 알림</a>
+    <a href="#">백필(backfill)</a>
+    <a href="#">문제 해결</a>
+  </aside>
+
+  <main>
+    <p class="eyebrow">flowkit 문서</p>
+    <h1>배치 작업을 YAML로 정의하고,<br>정해진 시간에 실행하세요.</h1>
+    <p class="lead">flowkit은 사내 데이터 파이프라인 도구입니다. 작업과 의존 관계, 실행 주기를 YAML 파일 하나에 적으면 스케줄링, 재시도, 실패 알림은 flowkit이 처리합니다.</p>
+    <div class="cta">
+      <a class="btn primary" href="#quickstart">빠른 시작 →</a>
+      <a class="btn" href="#reference">YAML 레퍼런스</a>
+    </div>
+
+    <div class="code">
+      <div class="code-head"><span>pipelines/daily_sales.yaml</span><button class="copy" data-copy="yaml-hero">복사</button></div>
+<pre id="yaml-hero"><span class="k">name</span>: <span class="s">daily_sales</span>
+<span class="k">owner</span>: <span class="s">data-platform</span>
+<span class="k">schedule</span>: <span class="s">"0 6 * * *"</span>        <span class="c"># 매일 오전 6시 (KST)</span>
+<span class="k">retries</span>: <span class="n">3</span>
+<span class="k">notify</span>:
+  <span class="k">on_failure</span>: <span class="s">"#data-alerts"</span>
+
+<span class="k">jobs</span>:
+  <span class="k">extract_orders</span>:
+    <span class="k">run</span>: <span class="s">python extract.py --date {{ ds }}</span>
+  <span class="k">transform</span>:
+    <span class="k">needs</span>: [<span class="s">extract_orders</span>]
+    <span class="k">run</span>: <span class="s">sql transform/sales.sql</span>
+  <span class="k">load_warehouse</span>:
+    <span class="k">needs</span>: [<span class="s">transform</span>]
+    <span class="k">run</span>: <span class="s">python load.py --table sales_daily</span>
+    <span class="k">timeout</span>: <span class="s">30m</span></pre>
+    </div>
+
+    <!-- 특징 -->
+    <section id="concepts">
+      <h2>핵심 개념</h2>
+      <p class="sub">flowkit이 알아서 해 주는 것들입니다.</p>
+      <div class="features">
+        <div class="card">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg></div>
+          <h3>YAML 하나로 정의</h3>
+          <p>파이프라인 하나가 파일 하나입니다. Git으로 리뷰하고 버전을 관리하세요.</p>
+        </div>
+        <div class="card">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3>cron 스케줄링</h3>
+          <p>cron 표현식이나 <code>@daily</code> 같은 별칭으로 주기를 정합니다. 기본 시간대는 KST입니다.</p>
+        </div>
+        <div class="card">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="6" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="12" r="2"/><path d="M8 6h2a4 4 0 0 1 4 4v0M8 18h2a4 4 0 0 0 4-4v0M14 12h2"/></svg></div>
+          <h3>의존성 기반 실행</h3>
+          <p><code>needs</code>로 순서를 적으면 DAG를 만들어, 독립적인 작업은 병렬로 실행합니다.</p>
+        </div>
+        <div class="card">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.3L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.3L3 16"/><path d="M3 21v-5h5"/></svg></div>
+          <h3>재시도와 알림</h3>
+          <p>실패하면 지수 백오프로 재시도하고, 끝내 실패하면 Slack 채널로 알립니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 빠른 시작 -->
+    <section id="quickstart">
+      <h2>빠른 시작</h2>
+      <p class="sub">설치부터 첫 실행까지 5분이면 됩니다.</p>
+      <ol class="steps">
+        <li>
+          <h3>CLI 설치</h3>
+          <p>사내 패키지 저장소에서 설치합니다. Python 3.10 이상이 필요합니다.</p>
+          <div class="code">
+            <div class="code-head"><span>터미널</span><button class="copy" data-copy="s1">복사</button></div>
+<pre id="s1"><span class="p">$ </span>pip install flowkit --index-url https://pypi.internal/simple
+<span class="p">$ </span>flowkit login</pre>
+          </div>
+        </li>
+        <li>
+          <h3>파이프라인 만들기</h3>
+          <p>템플릿으로 YAML 파일을 생성하고 <code>jobs</code>를 채웁니다.</p>
+          <div class="code">
+            <div class="code-head"><span>터미널</span><button class="copy" data-copy="s2">복사</button></div>
+<pre id="s2"><span class="p">$ </span>flowkit init daily_sales
+<span class="c">  ✓ pipelines/daily_sales.yaml 생성됨</span></pre>
+          </div>
+        </li>
+        <li>
+          <h3>검증 후 로컬에서 실행</h3>
+          <p>문법과 의존성을 검사한 뒤 특정 날짜로 한 번 돌려 봅니다.</p>
+          <div class="code">
+            <div class="code-head"><span>터미널</span><button class="copy" data-copy="s3">복사</button></div>
+<pre id="s3"><span class="p">$ </span>flowkit validate pipelines/daily_sales.yaml
+<span class="p">$ </span>flowkit run daily_sales --date 2026-10-21 --local</pre>
+          </div>
+        </li>
+        <li>
+          <h3>배포</h3>
+          <p>배포하면 스케줄러에 등록되어 다음 주기부터 자동으로 실행됩니다.</p>
+          <div class="code">
+            <div class="code-head"><span>터미널</span><button class="copy" data-copy="s4">복사</button></div>
+<pre id="s4"><span class="p">$ </span>flowkit deploy pipelines/daily_sales.yaml
+<span class="c">  ✓ daily_sales 등록됨 · 다음 실행 2026-10-23 06:00 KST</span></pre>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 레퍼런스 -->
+    <section id="reference">
+      <h2>주요 필드</h2>
+      <p class="sub">자주 쓰는 필드만 모았습니다. 전체 목록은 YAML 레퍼런스를 보세요.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>필드</th><th>위치</th><th>설명</th></tr></thead>
+          <tbody>
+            <tr><td><code>name</code></td><td>최상위</td><td>파이프라인 고유 이름. 영문 소문자, 숫자, <code>_</code>만 씁니다.</td></tr>
+            <tr><td><code>schedule</code></td><td>최상위</td><td>cron 표현식 또는 별칭. 생략하면 수동 실행만 됩니다.</td></tr>
+            <tr><td><code>timezone</code></td><td>최상위</td><td>스케줄 기준 시간대. 기본값 <code>Asia/Seoul</code>.</td></tr>
+            <tr><td><code>retries</code></td><td>최상위 · 작업</td><td>실패 시 재시도 횟수. 작업에 적으면 그 값이 우선합니다.</td></tr>
+            <tr><td><code>run</code></td><td>작업</td><td>실행할 명령. <code>{{ ds }}</code>는 실행 기준 날짜로 바뀝니다.</td></tr>
+            <tr><td><code>needs</code></td><td>작업</td><td>먼저 성공해야 하는 작업 목록.</td></tr>
+            <tr><td><code>timeout</code></td><td>작업</td><td>최대 실행 시간 (<code>45s</code>, <code>30m</code>, <code>2h</code>).</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 스케줄 -->
+    <section id="schedule">
+      <h2>스케줄 문법</h2>
+      <p class="sub">표준 5필드 cron(분 시 일 월 요일)과 별칭을 지원합니다.</p>
+      <div class="split">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>값</th><th>의미</th></tr></thead>
+            <tbody>
+              <tr><td><code>@hourly</code></td><td>매시 정각</td></tr>
+              <tr><td><code>@daily</code></td><td>매일 00:00</td></tr>
+              <tr><td><code>"0 6 * * *"</code></td><td>매일 06:00</td></tr>
+              <tr><td><code>"*/15 * * * *"</code></td><td>15분마다</td></tr>
+              <tr><td><code>"0 9 * * 1-5"</code></td><td>평일 09:00</td></tr>
+              <tr><td><code>"0 2 1 * *"</code></td><td>매월 1일 02:00</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="code" style="margin-bottom:0">
+            <div class="code-head"><span>스케줄 미리보기</span><button class="copy" data-copy="s5">복사</button></div>
+<pre id="s5"><span class="p">$ </span>flowkit schedule "0 9 * * 1-5" -n 3
+<span class="c">  2026-10-23 (목) 09:00 KST
+  2026-10-26 (월) 09:00 KST
+  2026-10-27 (화) 09:00 KST</span></pre>
+          </div>
+          <p class="note"><strong>참고:</strong> cron 값은 <code>*</code>로 시작하면 YAML이 다르게 해석할 수 있으니 항상 따옴표로 감싸세요.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLI -->
+    <section id="cli">
+      <h2>자주 쓰는 명령어</h2>
+      <p class="sub"><code>flowkit --help</code>로 전체 명령을 볼 수 있습니다.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>명령</th><th>설명</th></tr></thead>
+          <tbody>
+            <tr><td><code>flowkit validate &lt;file&gt;</code></td><td>YAML 문법, 순환 의존성, 스케줄 값을 검사합니다.</td></tr>
+            <tr><td><code>flowkit run &lt;name&gt;</code></td><td>지금 바로 한 번 실행합니다. <code>--local</code>은 내 PC에서 실행합니다.</td></tr>
+            <tr><td><code>flowkit deploy &lt;file&gt;</code></td><td>스케줄러에 등록하거나 갱신합니다.</td></tr>
+            <tr><td><code>flowkit status &lt;name&gt;</code></td><td>최근 실행 결과와 다음 실행 시각을 보여 줍니다.</td></tr>
+            <tr><td><code>flowkit logs &lt;name&gt; --job &lt;job&gt;</code></td><td>특정 작업의 로그를 봅니다.</td></tr>
+            <tr><td><code>flowkit backfill &lt;name&gt; --from --to</code></td><td>지난 기간을 날짜별로 다시 실행합니다.</td></tr>
+            <tr><td><code>flowkit pause &lt;name&gt;</code></td><td>스케줄 실행을 멈춥니다. <code>resume</code>으로 다시 켭니다.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 다음 단계 -->
+    <section id="next">
+      <h2>다음 단계</h2>
+      <p class="sub">기본을 익혔다면 이어서 읽어 보세요.</p>
+      <div class="next">
+        <a class="card" href="#"><h3>의존성과 DAG</h3><p>조건부 실행, 팬아웃/팬인 패턴.</p><br><span>읽기 →</span></a>
+        <a class="card" href="#"><h3>시크릿 사용</h3><p>DB 비밀번호와 API 키를 안전하게 넘기는 법.</p><br><span>읽기 →</span></a>
+        <a class="card" href="#"><h3>문제 해결</h3><p>자주 보는 에러와 해결 방법.</p><br><span>읽기 →</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <span>flowkit · 데이터플랫폼팀</span>
+      <span>문의 <a href="#">#flowkit-help</a> · <a href="#">이 페이지 수정하기</a></span>
+    </footer>
+  </main>
+</div>
+
+<script>
+  // 코드 복사
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var el = document.getElementById(btn.dataset.copy);
+      var text = Array.from(el.childNodes).map(function (n) {
+        return (n.classList && n.classList.contains('p')) ? '' : n.textContent;
+      }).join('');
+      var done = function () {
+        btn.textContent = '복사됨';
+        setTimeout(function () { btn.textContent = '복사'; }, 1400);
+      };
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, function () {});
+    });
+  });
+
+  // 테마 전환
+  (function () {
+    var root = document.documentElement;
+    try { var saved = localStorage.getItem('flowkit-theme'); if (saved) root.dataset.theme = saved; } catch (e) {}
+    document.getElementById('themeBtn').addEventListener('click', function () {
+      var isDark = root.dataset.theme
+        ? root.dataset.theme === 'dark'
+        : matchMedia('(prefers-color-scheme: dark)').matches;
+      root.dataset.theme = isDark ? 'light' : 'dark';
+      try { localStorage.setItem('flowkit-theme', root.dataset.theme); } catch (e) {}
+    });
+  })();
+
+  // "/" 키로 검색창 포커스
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+      var input = document.querySelector('.search input');
+      if (input && input.offsetParent) { e.preventDefault(); input.focus(); }
+    }
+  });
+</script>
+</body>
+</html>
