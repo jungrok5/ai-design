@@ -101,7 +101,8 @@ pages (API quick start, README) had little. Write page copy the way you would an
   `밀이 숨 쉬는 시간만큼 결이 생깁니다` → `반죽을 4℃에서 14시간 발효한 뒤 굽습니다`. If the metaphor hid that you
   have no fact, leave `[숫자 필요]` instead of a softer metaphor.
 - **Do not trade one image for another.** `흐름`, `결`, `온도`, `숨`, `닿다`, `잇다`, `스며들다`, `빚다`, `축`, `벽`,
-  `문턱`, `출발선`, `연료`, `한 판`, `단단하게`, `흔들리지 않는`, English `journey`, `lens`, `load-bearing`,
+  `문턱`, `출발선`, `연료`, `한 판`, `단단하게`, `흔들리지 않는`, `가르다`(원인을 가르는 로그 → 판별할 수 있는
+  로그), `자리`(렉이 생기는 자리 → 렉이 발생할 수 있는 위치), English `journey`, `lens`, `load-bearing`,
   `earns its keep`: replacing one with another of the list is the same tell. Keep a word when it is the literal term
   (`빵의 결` as the crumb, `작업 흐름` for a workflow, `오시는 길` for directions, `x축`).
 - **No aphorism, reframe or reveal.** Lines that sound like a motto carry no information: `기다리는 시간이 맛을
